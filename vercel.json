@@ -1,4 +1,10 @@
 {
+  "builds": [
+    {
+      "src": "api/send-email.cts",
+      "use": "@vercel/node"
+    }
+  ],
   "rewrites": [
     {
       "source": "/:path((?!api/|.*\\..*).*)",
