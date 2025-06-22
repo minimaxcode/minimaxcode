@@ -1,0 +1,423 @@
+{
+  "nav": {
+    "home": "Home",
+    "service": "Services",
+    "pricing": "Pricing",
+    "flow": "Process",
+    "about": "About",
+    "quote": "Quote",
+    "contact": "Contact",
+    "privacy": "Privacy Policy",
+    "terms": "Terms of Service",
+    "works": "Our Works"
+  },
+  "language": {
+    "ja": "日本語",
+    "en": "English"
+  },
+  "home": {
+    "title": "MiniMaxCode",
+    "slogan": "Maximum Result, Minimum Cost.",
+    "hero": {
+      "subtitle": "Lightweight Development Service for the Japanese Market",
+      "description": "We create high-quality websites in as little as 2 days with overwhelmingly reasonable pricing that startups and SMEs can afford without strain.",
+      "cta": "Start Free Quote",
+      "contact": "Contact Us"
+    },
+    "features": {
+      "title": "3 Key Features",
+      "lowPrice": {
+        "title": "Overwhelmingly Low Prices",
+        "description": "AI utilization and global talent achieve overwhelmingly reasonable prices compared to competitors. Final quality is guaranteed by Japanese PMs."
+      },
+      "speed": {
+        "title": "Super Fast - From 2 Days",
+        "description": "Ultra-fast production through AI-assisted work efficiency and 24-hour support system leveraging global engineer networks."
+      },
+      "transparency": {
+        "title": "Complete Transparency",
+        "description": "All infrastructure costs including domains, servers, and APIs are transparently presented at actual cost. No hidden fees whatsoever."
+      }
+    },
+    "pricing": {
+      "title": "Pricing Example",
+      "subtitle": "High-quality websites at half the price of competitors",
+      "marketPriceLabel": "Typical Agency",
+      "ourPriceLabel": "MiniMaxCode",
+      "brandSite": {
+        "title": "Brand Site",
+        "description": "15 pages + contact form included",
+        "marketPrice": "¥400,000 - ¥1,400,000",
+        "ourPrice": "¥200,000 - ¥700,000",
+        "discount": "Up to 50% off"
+      },
+      "lp": {
+        "title": "Landing Page (LP)",
+        "description": "Effective 1-page site + optimization",
+        "marketPrice": "¥150,000 - ¥500,000",
+        "ourPrice": "¥50,000 - ¥250,000",
+        "discount": "Up to 67% off"
+      },
+      "campaign": {
+        "title": "Half Price of Competitor's Quote",
+        "description": "Provide an official quote from a competitor, and we will complete the project for 50% of the listed price. Applicability will be confirmed after we review the quote to ensure the scope of work matches our service offerings."
+      }
+    },
+    "flow": {
+      "title": "Production Process",
+      "subtitle": "Simple and clear 6-step process"
+    },
+    "works": {
+      "cta": "View All Works"
+    },
+    "cta": {
+      "title": "Ready to Get Started?",
+      "subtitle": "Zero initial cost. Safe payment after delivery completion.",
+      "button": "Start Free Quote",
+      "note": "Payment after delivery completion meeting agreed requirements at contract"
+    }
+  },
+  "service": {
+    "title": "Our Services",
+    "subtitle": "Website creation that achieves maximum results with minimum cost",
+    "types": {
+      "title": "Development Capabilities",
+      "corporate": {
+        "title": "Corporate & Brand Sites",
+        "description": "We create high-quality corporate and brand sites that enhance your company's credibility."
+      },
+      "landing": {
+        "title": "Landing Pages (LP)",
+        "description": "We create effective landing pages designed to maximize conversion rates."
+      }
+    },
+    "included": {
+      "title": "Included Services",
+      "basic": {
+        "title": "Contracts ¥250,000+",
+        "items": [
+          "Basic SEO optimization",
+          "Google Analytics (GA4) setup",
+          "Google Search Console setup",
+          "Favicon & web icon installation",
+          "Responsive design (mobile, tablet, PC)"
+        ]
+      },
+      "premium": {
+        "title": "Contracts ¥500,000+",
+        "items": [
+          "OGP settings for social media sharing",
+          "Sitemap (sitemap.xml) creation & submission",
+          "Landing page (LP) creation"
+        ]
+      }
+    },
+    "policy": {
+      "title": "Project Selection Policy",
+      "minAmount": "Minimum contract amount: Generally 5 pages or more for ¥170,000+",
+      "scope": "Scope: Static websites, brand sites, LPs, etc.",
+      "nonScope": "Non-supported: E-commerce sites, membership functions, large-scale CMS, 50+ page structures",
+      "timeline": "Timeline: Quote within 2 business days / Delivery in 2-10 business days"
+    }
+  },
+  "pricing": {
+    "title": "Pricing Plans",
+    "subtitle": "Transparent and clear pricing for peace of mind",
+    "comparison": {
+      "title": "Price Comparison",
+      "description": "Overwhelmingly low prices compared to typical development companies"
+    },
+    "campaigns": {
+      "title": "Campaign Information",
+      "noInitialCost": {
+        "title": "Zero Initial Cost",
+        "description": "Payment after delivery completion meeting agreed requirements at contract. Judged based on agreed content, not satisfaction."
+      },
+      "halfPrice": {
+        "title": "Limited Campaign",
+        "description": "Present us with a formal quote from another company, and we'll provide service at half that price (subject to content review)"
+      }
+    },
+    "transparency": {
+      "title": "Complete Transparency in Maintenance Costs",
+      "description": "All infrastructure costs including domains, servers, APIs, and email are transparently presented and settled at actual cost.",
+      "examples": {
+        "domain": "Domain: ¥200/month",
+        "server": "Server: ¥2,400/month",
+        "workspace": "Google Workspace: ¥800/month"
+      },
+      "note": "We counter the industry's common business model of 'showing low initial costs and charging high maintenance fees' by eliminating opaque profit structures."
+    }
+  },
+  "works": {
+    "title": "Our Works",
+    "description": "Here are some of the websites we have created.",
+    "daisoubus": {
+      "title": "Daiso Kanko Bus",
+      "description": "A bilingual (Japanese/English) corporate site aimed at enhancing brand image and credibility.",
+      "features": [
+        "Online auto-quote calculator",
+        "Automated email dispatch for inquiry forms",
+        "Bilingual support (Japanese/English)"
+      ]
+    },
+    "mononest": {
+      "title": "MONONEST E-commerce Brand Site",
+      "description": "An official e-commerce brand site that expresses the brand's worldview and maximizes the appeal of its products.",
+      "features": [
+        "Product list & detail pages",
+        "Inquiry form for products",
+        "Simple, on-brand design"
+      ]
+    },
+    "visitSite": "Visit Site",
+    "pageCount": "{{count}} pages",
+    "price": "¥{{price}}"
+  },
+  "flow": {
+    "title": "Production Process",
+    "subtitle": "How It Works",
+    "steps": {
+      "step1": {
+        "title": "Inquiry & Consultation",
+        "description": "Please feel free to contact us via form or email. We'll conduct a hearing about your desired content, budget, and timeline."
+      },
+      "step2": {
+        "title": "Proposal & Quote",
+        "description": "Based on the hearing, we'll submit a structural plan and quote. If you have quotes from other companies, we'll also advise on campaign applicability."
+      },
+      "step3": {
+        "title": "Contract & Production Start",
+        "description": "Once you're satisfied with the content, we'll conclude a formal contract and begin production."
+      },
+      "step4": {
+        "title": "Design/Development & Review",
+        "description": "We proceed in order: Top page design confirmation → Sub-page design → Coding → Testing."
+      },
+      "step5": {
+        "title": "Delivery & Billing",
+        "description": "After final confirmation and ensuring agreed requirements are met, we deliver. Invoice issued after delivery completion."
+      },
+      "step6": {
+        "title": "Operation & Support (as needed)",
+        "description": "We provide ongoing support for infrastructure setup and minor updates as desired. Separate consultation for maintenance contracts."
+      }
+    }
+  },
+  "about": {
+    "title": "About Us",
+    "subtitle": "About MiniMaxCode",
+    "positioning": {
+      "title": "Positioning",
+      "description": "MiniMaxCode is a lightweight development service brand for the Japanese market."
+    },
+    "values": {
+      "title": "Core Values",
+      "resultOriented": {
+        "title": "Result-Oriented",
+        "description": "Big results with small investments. Pursuing reliable and speedy results with minimum cost."
+      },
+      "aiUtilization": {
+        "title": "AI Utilization",
+        "description": "Fast and smart creation with AI × expert teams. Streamlining operations with AI assistance and collaborating with global talent."
+      },
+      "phaseSupport": {
+        "title": "Phase-Based Approach",
+        "description": "Optimal start for your current scale. Begin small with necessary functions and expand as you grow."
+      }
+    },
+    "target": {
+      "title": "Target Customers",
+      "items": [
+        "SMEs and individual business owners in Japan",
+        "Individuals and teams starting businesses or side projects",
+        "Former Rakuten/Amazon employees challenging independent sites",
+        "Companies seeking static, simple web presence"
+      ]
+    }
+  },
+  "quote": {
+    "title": "Online Quote",
+    "subtitle": "Select your project details to see estimated pricing",
+    "form": {
+      "websiteType": {
+        "label": "Website Type",
+        "options": {
+          "corporate": "Corporate/Brand Site"
+        }
+      },
+      "pageCount": {
+        "label": "Number of Pages (5-50 pages)"
+      },
+      "features": {
+        "label": "Required Features (multiple selection)",
+        "options": {
+          "contactForm": "Contact Form",
+          "blog": "Blog Function",
+          "multilingual": "Multilingual Support",
+          "cms": "CMS (Update Function)",
+          "ecommerce": "E-commerce Function",
+          "membership": "Membership Function"
+        }
+      },
+      "design": {
+        "label": "Design Complexity",
+        "options": {
+          "simple": "Simple",
+          "standard": "Standard",
+          "complex": "Complex/Original"
+        }
+      },
+      "timeline": {
+        "label": "Desired Timeline",
+        "options": {
+          "rush": "2-3 days (Express)",
+          "normal": "1-2 weeks",
+          "flexible": "1+ month"
+        }
+      }
+    },
+    "result": {
+      "title": "Estimated Quote Result",
+      "basePrice": "Base Price",
+      "additionalFeatures": "Additional Features",
+      "designComplexity": "Design Fee",
+      "timeline": "Timeline Adjustment",
+      "total": "Total Estimated Amount",
+      "range": "¥{{min}} 〜 ¥{{max}}",
+      "note": "※ This is an estimate. Accurate quotes will be provided after detailed consultation.",
+      "nextStep": "Contact us with this quote"
+    }
+  },
+  "contact": {
+    "title": "Contact Us",
+    "subtitle": "Feel free to reach out",
+    "form": {
+      "name": {
+        "label": "Name",
+        "placeholder": "Taro Tanaka"
+      },
+      "email": {
+        "label": "Email Address",
+        "placeholder": "tanaka@example.com"
+      },
+      "company": {
+        "label": "Company Name",
+        "placeholder": "ABC Inc."
+      },
+      "phone": {
+        "label": "Phone Number",
+        "placeholder": "090-1234-5678"
+      },
+      "subject": {
+        "label": "Subject",
+        "placeholder": "Inquiry about website creation"
+      },
+      "message": {
+        "label": "Message",
+        "placeholder": "Please let us know your inquiry"
+      },
+      "submit": "Send"
+    },
+    "validation": {
+      "required": "This field is required",
+      "email": "Please enter a valid email address",
+      "phone": "Please enter a valid phone number"
+    },
+    "success": {
+      "title": "Message Sent",
+      "message": "Your inquiry has been received. We will respond within 2 business days."
+    },
+    "error": {
+      "title": "Sending Error",
+      "message": "Failed to send the message. Please try again later."
+    }
+  },
+  "privacy": {
+    "title": "Privacy Policy",
+    "lastUpdated": "Last Updated: June 22, 2025",
+    "sections": {
+      "overview": {
+        "title": "Overview",
+        "content": "MiniMaxCode (hereinafter referred to as \"the Company\") recognizes the protection of customer's personal information as a significant responsibility, complies with the Personal Information Protection Act and other relevant laws, and handles customers' personal information appropriately."
+      },
+      "collection": {
+        "title": "Collection of Personal Information",
+        "content": "The Company may collect personal information in the following cases:\n• When entered in the contact form\n• When applying for services\n• During email correspondence\n• Other times when using the Company's services"
+      },
+      "usage": {
+        "title": "Purpose of Use of Personal Information",
+        "content": "Collected personal information will be used for the following purposes:\n• To respond to inquiries\n• To provide services and fulfill contracts\n• For after-sales support\n• To send important notices"
+      },
+      "protection": {
+        "title": "Protection of Personal Information",
+        "content": "The Company will implement appropriate security measures to prevent leakage, loss, or damage of personal information."
+      },
+      "disclosure": {
+        "title": "Disclosure to Third Parties",
+        "content": "The Company will not disclose personal information to third parties without the customer's consent, except as required by law."
+      },
+      "contact": {
+        "title": "Inquiries",
+        "content": "For inquiries regarding the handling of personal information, please contact us via the contact form."
+      }
+    }
+  },
+  "terms": {
+    "title": "Terms of Service",
+    "lastUpdated": "Last Updated: June 22, 2025",
+    "sections": {
+      "overview": {
+        "title": "Overview",
+        "content": "These Terms of Service (hereinafter referred to as \"these Terms\") establish the terms of use for the services provided by MiniMaxCode (hereinafter referred to as \"the Company\")."
+      },
+      "service": {
+        "title": "Service Content",
+        "content": "The Company provides website creation and related services. Specific service details will be determined by individual contracts."
+      },
+      "contract": {
+        "title": "Formation of Contract",
+        "content": "A contract shall be formed when the customer expresses their acceptance of the quotation provided by the Company."
+      },
+      "payment": {
+        "title": "Fees and Payment",
+        "content": "The fee shall be the amount stipulated at the time of the contract, and an invoice will be issued upon completion of delivery. Payment is requested within 30 days of the invoice date."
+      },
+      "delivery": {
+        "title": "Delivery Date and Delivery",
+        "content": "The delivery date will be as stipulated at the time of the contract, and the Company will strive to adhere to the delivery date with the due care of a good manager."
+      },
+      "warranty": {
+        "title": "Warranty and Liability",
+        "content": "The Company will perform minor corrections on the deliverables free of charge for 30 days after delivery. However, corrections involving changes to specifications may incur additional charges."
+      },
+      "intellectual": {
+        "title": "Intellectual Property Rights",
+        "content": "The copyright of the deliverables shall belong to the customer upon full payment of the fee. However, programs and templates independently developed by the Company shall remain the property of the Company."
+      },
+      "prohibited": {
+        "title": "Prohibited Acts",
+        "content": "The following acts are prohibited:\n• Acts that violate laws and regulations\n• Acts that infringe upon the rights of third parties\n• Acts that damage the credibility of the Company\n• Other acts that the Company deems inappropriate"
+      },
+      "termination": {
+        "title": "Termination of Contract",
+        "content": "If the customer violates these Terms, the Company may terminate the contract without notice."
+      },
+      "changes": {
+        "title": "Changes to the Terms",
+        "content": "The Company may change these Terms as necessary. The revised terms will take effect once they are posted on this site."
+      }
+    }
+  },
+  "footer": {
+    "company": "MiniMaxCode",
+    "domain": "minimaxcode.com",
+    "slogan": "Maximum Result, Minimum Cost.",
+    "links": {
+      "services": "Services",
+      "company": "Company",
+      "legal": "Legal"
+    },
+    "copyright": "© 2025 MiniMaxCode. All rights reserved."
+  }
+}
