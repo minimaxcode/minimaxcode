@@ -403,46 +403,6 @@ ${t('quote.summary.footer')}
           </motion.div>
         </div>
       </section>
-
-      {/* Info Section */}
-      <section className="py-20 bg-gray-900/30">
-        <div className="max-w-4xl mx-auto px-4 sm:px-6 lg:px-8 text-center">
-          <motion.div
-            initial={{ opacity: 0, y: 30 }}
-            whileInView={{ opacity: 1, y: 0 }}
-            transition={{ duration: 0.8 }}
-            viewport={{ once: true }}
-          >
-            <h2 className="text-3xl md:text-4xl font-bold mb-6 text-white">
-              次のステップ
-            </h2>
-            <p className="text-xl text-gray-300 mb-8">
-              概算をご確認いただけましたら、詳細なご相談のためお問い合わせください
-            </p>
-            <div className="flex flex-col sm:flex-row gap-4 justify-center">
-              {/* [MODIFIED] ボタンのonClickを新しいハンドラに変更 */}
-              {/* [MODIFIED] Changed button's onClick to the new handler */}
-              <motion.button
-                whileHover={{ scale: 1.05 }}
-                whileTap={{ scale: 0.95 }}
-                onClick={handleGoToContact}
-                className="px-8 py-4 bg-[#50FA7B] text-black font-bold text-lg rounded-xl hover:bg-[#50FA7B]/90 transition-colors duration-200 flex items-center justify-center space-x-2"
-              >
-                <span>お問い合わせ</span>
-                <ArrowRight className="w-5 h-5" />
-              </motion.button>
-              <motion.button
-                whileHover={{ scale: 1.05 }}
-                whileTap={{ scale: 0.95 }}
-                onClick={() => onPageChange('flow')}
-                className="px-8 py-4 border-2 border-[#3F87F5] text-[#3F87F5] font-bold text-lg rounded-xl hover:bg-[#3F87F5] hover:text-white transition-colors duration-200"
-              >
-                制作フローを見る
-              </motion.button>
-            </div>
-          </motion.div>
-        </div>
-      </section>
     </div>
   );
 };

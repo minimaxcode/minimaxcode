@@ -1,6 +1,6 @@
 {
   "functions": {
-    "api/send-email.ts": {
+    "api/send-email.cts": {
       "memory": 128,
       "maxDuration": 10
     }

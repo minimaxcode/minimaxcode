@@ -175,11 +175,6 @@
         }
       },
       "note": "We counter the industry's common business model of 'showing low initial costs and charging high maintenance fees' by eliminating opaque profit structures."
-    },
-    "cta": {
-      "title": "Ready to Get Started?",
-      "subtitle": "No initial cost. Safe payment after delivery.",
-      "button": "Start Free Quote"
     }
   },
   "works": {
@@ -307,15 +302,15 @@
       "transparentAccounting": "Transparent Accounting"
     },
     "outline": {
-      "title": "Company Outline",
+      "title": "Company Outline & Access",
       "name": "Company Name",
-      "nameValue": "MiniMaxCode",
-      "address": "Address",
-      "addressValue": "Shibuya, Tokyo, Japan (Detailed address provided upon contract)",
+      "nameValue": "MONONEST",
+      "location": "Location",
+      "locationValue": "301 Mitsumoto Bldg, 4-15-5 Asakusabashi, Taito City, Tokyo 111-0053",
+      "contact": "Contact",
+      "contactValue": "contact@minimaxcode.com",
       "phone": "Phone",
-      "phoneValue": "To be provided upon contract (communication via chat/email)",
-      "business": "Business Content",
-      "businessValue": "Website production and related digital services"
+      "phoneValue": "080-8916-5438"
     },
     "values": {
       "title": "Core Values",
@@ -333,7 +328,7 @@
       }
     },
     "cta": {
-      "title": "Ready to get started?",
+      "title": "Learn More About Us",
       "button": "View Our Works"
     }
   },
@@ -384,12 +379,11 @@
       "title": "Estimated Price Range",
       "priceRange": "¥{min} - ¥{max}",
       "note": "This is an approximate estimate. The final price may vary depending on detailed requirements.",
-      "contact": "Proceed to Contact Form",
-      "recalculate": "Recalculate"
+      "contact_button": "Proceed to Detailed Consultation"
     },
     "summary": {
       "subject": "Inquiry regarding website creation estimate",
-      "header": "An estimate was created with the following details.\nI would like to inquire further.",
+      "header": "Quote Details",
       "separator": "---------------------------------",
       "pageLabel": "pages",
       "none": "  - None",

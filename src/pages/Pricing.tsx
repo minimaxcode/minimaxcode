@@ -261,34 +261,6 @@ export const Pricing = ({ onPageChange }: PricingProps) => {
           </motion.div>
         </div>
       </section>
-
-      {/* CTA Section */}
-      <section className="py-20 bg-gray-900/30">
-        <div className="max-w-4xl mx-auto px-4 sm:px-6 lg:px-8 text-center">
-          <motion.div
-            initial={{ opacity: 0, y: 30 }}
-            whileInView={{ opacity: 1, y: 0 }}
-            transition={{ duration: 0.8 }}
-            viewport={{ once: true }}
-          >
-            <h2 className="text-4xl md:text-5xl font-bold mb-6 text-white">
-              {t('pricing.cta.title')}
-            </h2>
-            <p className="text-xl text-gray-300 mb-8">
-              {t('pricing.cta.subtitle')}
-            </p>
-            <motion.button
-              whileHover={{ scale: 1.05 }}
-              whileTap={{ scale: 0.95 }}
-              onClick={() => onPageChange('quote')}
-              className="px-8 py-4 bg-[#50FA7B] text-black font-bold text-lg rounded-xl hover:bg-[#50FA7B]/90 transition-colors duration-200 flex items-center justify-center space-x-2"
-            >
-              <span>{t('pricing.cta.button')}</span>
-              <ArrowRight className="w-5 h-5" />
-            </motion.button>
-          </motion.div>
-        </div>
-      </section>
     </div>
   );
 };

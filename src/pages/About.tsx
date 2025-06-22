@@ -1,7 +1,7 @@
 import { useTranslation } from 'react-i18next';
 import { motion } from 'framer-motion';
 // [修正] 会社概要セクションで使用するアイコンを追加
-import { Target, Zap, Users, TrendingUp, Globe, ArrowRight, Building, MapPin, Phone } from 'lucide-react';
+import { Target, Zap, Users, TrendingUp, Globe, ArrowRight, Building, MapPin, Phone, Mail } from 'lucide-react';
 // [追加] 作成した地図コンポーネントをインポート
 import { MapComponent } from '../components/Map';
 
@@ -102,15 +102,15 @@ export const About = ({ onPageChange }: AboutProps) => {
             </p>
             <div className="grid grid-cols-1 md:grid-cols-3 gap-6">
               <div className="bg-gray-800/50 rounded-xl p-6 text-center">
-                <h4 className="text-lg font-semibold text-[#50FA7B] mb-2">Low Cost</h4>
+                <h4 className="text-lg font-semibold text-[#50FA7B] mb-2">{t('about.positioning.lowCostTitle')}</h4>
                 <p className="text-gray-300 text-sm">{t('about.positioning.lowCost')}</p>
               </div>
               <div className="bg-gray-800/50 rounded-xl p-6 text-center">
-                <h4 className="text-lg font-semibold text-[#32E2C4] mb-2">High Speed</h4>
+                <h4 className="text-lg font-semibold text-[#32E2C4] mb-2">{t('about.positioning.highSpeedTitle')}</h4>
                 <p className="text-gray-300 text-sm">{t('about.positioning.highSpeed')}</p>
               </div>
               <div className="bg-gray-800/50 rounded-xl p-6 text-center">
-                <h4 className="text-lg font-semibold text-[#3F87F5] mb-2">Quality Assured</h4>
+                <h4 className="text-lg font-semibold text-[#3F87F5] mb-2">{t('about.positioning.qualityAssuredTitle')}</h4>
                 <p className="text-gray-300 text-sm">{t('about.positioning.qualityAssured')}</p>
               </div>
             </div>
@@ -248,14 +248,8 @@ export const About = ({ onPageChange }: AboutProps) => {
           </motion.div>
 
           <div className="grid grid-cols-1 lg:grid-cols-2 gap-12">
-            {/* Outline */}
-            <motion.div
-              initial={{ opacity: 0, x: -30 }}
-              whileInView={{ opacity: 1, x: 0 }}
-              transition={{ duration: 0.8 }}
-              viewport={{ once: true }}
-              className="bg-gray-900/50 backdrop-blur-sm border border-gray-800 rounded-2xl p-8"
-            >
+            {/* Company Outline */}
+            <div className="bg-gray-900/50 backdrop-blur-sm border border-gray-800 rounded-2xl p-8">
               <ul className="space-y-6">
                 <li className="flex items-start space-x-4">
                   <Building className="w-6 h-6 text-[#3F87F5] mt-1 flex-shrink-0" />
@@ -267,26 +261,26 @@ export const About = ({ onPageChange }: AboutProps) => {
                 <li className="flex items-start space-x-4">
                   <MapPin className="w-6 h-6 text-[#32E2C4] mt-1 flex-shrink-0" />
                   <div>
-                    <p className="text-sm text-gray-400">{t('about.outline.address')}</p>
-                    <p className="text-lg text-white font-semibold">{t('about.outline.addressValue')}</p>
+                    <p className="text-sm text-gray-400">{t('about.outline.location')}</p>
+                    <p className="text-lg text-white font-semibold">{t('about.outline.locationValue')}</p>
                   </div>
                 </li>
                 <li className="flex items-start space-x-4">
-                  <Phone className="w-6 h-6 text-[#50FA7B] mt-1 flex-shrink-0" />
+                  <Mail className="w-6 h-6 text-[#50FA7B] mt-1 flex-shrink-0" />
+                  <div>
+                    <p className="text-sm text-gray-400">{t('about.outline.contact')}</p>
+                    <p className="text-lg text-white font-semibold">{t('about.outline.contactValue')}</p>
+                  </div>
+                </li>
+                <li className="flex items-start space-x-4">
+                  <Phone className="w-6 h-6 text-[#FBBF24] mt-1 flex-shrink-0" />
                   <div>
                     <p className="text-sm text-gray-400">{t('about.outline.phone')}</p>
                     <p className="text-lg text-white font-semibold">{t('about.outline.phoneValue')}</p>
                   </div>
                 </li>
-                 <li className="flex items-start space-x-4">
-                  <Zap className="w-6 h-6 text-[#3F87F5] mt-1 flex-shrink-0" />
-                  <div>
-                    <p className="text-sm text-gray-400">{t('about.outline.business')}</p>
-                    <p className="text-lg text-white font-semibold">{t('about.outline.businessValue')}</p>
-                  </div>
-                </li>
               </ul>
-            </motion.div>
+            </div>
             
             {/* Map */}
             <motion.div
