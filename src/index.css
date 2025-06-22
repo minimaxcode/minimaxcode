@@ -99,6 +99,24 @@
   .glow-green {
     box-shadow: 0 0 20px rgba(80, 250, 123, 0.3);
   }
+
+  /* Pulsating glow effect */
+  @keyframes pulsate-glow {
+    0% {
+      box-shadow: 0 0 10px rgba(192, 132, 252, 0.3), 0 0 20px rgba(192, 132, 252, 0.2);
+    }
+    50% {
+      box-shadow: 0 0 20px rgba(192, 132, 252, 0.6), 0 0 30px rgba(192, 132, 252, 0.4);
+    }
+    100% {
+      box-shadow: 0 0 10px rgba(192, 132, 252, 0.3), 0 0 20px rgba(192, 132, 252, 0.2);
+    }
+  }
+
+  .logo-glow {
+    border-radius: 9999px; /* Ensure glow is circular */
+    animation: pulsate-glow 4s ease-in-out infinite;
+  }
 }
 
 img {

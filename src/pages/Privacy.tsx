@@ -7,16 +7,10 @@ interface PrivacyProps {
 }
 
 export const Privacy = ({ onPageChange }: PrivacyProps) => {
-  const { t } = useTranslation();
+  const { t } = useTranslation('common');
 
-  const sections = [
-    'overview',
-    'collection',
-    'usage',
-    'protection',
-    'disclosure',
-    'contact',
-  ];
+  const articles = (t('privacy.articles', { returnObjects: true }) || []) as { title: string; content: string }[];
+  const overview = t('privacy.overview');
 
   return (
     <div className="min-h-screen bg-[#0D0D0D] text-white pt-24">
@@ -54,7 +48,7 @@ export const Privacy = ({ onPageChange }: PrivacyProps) => {
             className="flex items-center space-x-2 text-gray-400 hover:text-[#32E2C4] transition-colors duration-200 mb-8"
           >
             <ArrowLeft className="w-5 h-5" />
-            <span>ホームに戻る</span>
+            <span>{t('privacy.backToHome')}</span>
           </motion.button>
         </div>
       </section>
@@ -69,10 +63,13 @@ export const Privacy = ({ onPageChange }: PrivacyProps) => {
             viewport={{ once: true }}
             className="bg-gray-900/50 backdrop-blur-sm border border-gray-800 rounded-2xl p-8 md:p-12"
           >
+            <div className="prose prose-invert prose-lg max-w-none mb-12">
+              <p>{overview}</p>
+            </div>
             <div className="space-y-12">
-              {sections.map((section, index) => (
+              {articles.map((article, index) => (
                 <motion.div
-                  key={section}
+                  key={index}
                   initial={{ opacity: 0, y: 20 }}
                   whileInView={{ opacity: 1, y: 0 }}
                   transition={{ duration: 0.6, delay: index * 0.1 }}
@@ -85,10 +82,10 @@ export const Privacy = ({ onPageChange }: PrivacyProps) => {
                     </div>
                     <div className="flex-1">
                       <h2 className="text-2xl font-bold text-white mb-4">
-                        {t(`privacy.sections.${section}.title`)}
+                        {article.title}
                       </h2>
                       <div className="text-gray-300 leading-relaxed whitespace-pre-line">
-                        {t(`privacy.sections.${section}.content`)}
+                        {article.content}
                       </div>
                     </div>
                   </div>
@@ -109,10 +106,10 @@ export const Privacy = ({ onPageChange }: PrivacyProps) => {
             viewport={{ once: true }}
           >
             <h2 className="text-3xl md:text-4xl font-bold mb-6 text-white">
-              プライバシーに関するご質問
+              {t('privacy.contact.title')}
             </h2>
             <p className="text-xl text-gray-300 mb-8">
-              個人情報の取り扱いについてご不明な点がございましたら、お気軽にお問い合わせください
+              {t('privacy.contact.description')}
             </p>
             <motion.button
               whileHover={{ scale: 1.05 }}
@@ -120,7 +117,7 @@ export const Privacy = ({ onPageChange }: PrivacyProps) => {
               onClick={() => onPageChange('contact')}
               className="px-8 py-4 bg-[#32E2C4] text-black font-bold text-lg rounded-xl hover:bg-[#32E2C4]/90 transition-colors duration-200"
             >
-              お問い合わせ
+              {t('privacy.contact.button')}
             </motion.button>
           </motion.div>
         </div>

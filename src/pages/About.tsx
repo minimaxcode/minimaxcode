@@ -12,8 +12,8 @@ interface AboutProps {
 
 export const About = ({ onPageChange }: AboutProps) => {
   const { t } = useTranslation();
-  // [追加] Google Maps APIキーを定義
-  const apiKey = 'AIzaSyBZYXUDpvhK127_UcCbWVnrGGlywkMXwhc';
+  // [追加] Google Maps APIキーを環境変数から取得
+  const apiKey = import.meta.env.VITE_GOOGLE_MAPS_API_KEY;
 
   const values = [
     {
@@ -103,15 +103,15 @@ export const About = ({ onPageChange }: AboutProps) => {
             <div className="grid grid-cols-1 md:grid-cols-3 gap-6">
               <div className="bg-gray-800/50 rounded-xl p-6 text-center">
                 <h4 className="text-lg font-semibold text-[#50FA7B] mb-2">Low Cost</h4>
-                <p className="text-gray-300 text-sm">最小コストでの提供</p>
+                <p className="text-gray-300 text-sm">{t('about.positioning.lowCost')}</p>
               </div>
               <div className="bg-gray-800/50 rounded-xl p-6 text-center">
                 <h4 className="text-lg font-semibold text-[#32E2C4] mb-2">High Speed</h4>
-                <p className="text-gray-300 text-sm">最短2日での納品</p>
+                <p className="text-gray-300 text-sm">{t('about.positioning.highSpeed')}</p>
               </div>
               <div className="bg-gray-800/50 rounded-xl p-6 text-center">
                 <h4 className="text-lg font-semibold text-[#3F87F5] mb-2">Quality Assured</h4>
-                <p className="text-gray-300 text-sm">日本人PMによる品質保証</p>
+                <p className="text-gray-300 text-sm">{t('about.positioning.qualityAssured')}</p>
               </div>
             </div>
           </motion.div>
@@ -204,29 +204,27 @@ export const About = ({ onPageChange }: AboutProps) => {
             viewport={{ once: true }}
           >
             <h2 className="text-4xl md:text-5xl font-bold mb-8 text-white">
-              私たちのミッション
+              {t('about.mission.title')}
             </h2>
             <div className="bg-gray-900/50 backdrop-blur-sm border border-gray-800 rounded-2xl p-8 md:p-12">
               <p className="text-2xl text-[#32E2C4] font-semibold mb-6">
-                「最大の成果を、最小のコストで。」
+                {t('about.mission.quote')}
               </p>
               <p className="text-lg text-gray-300 leading-relaxed mb-8">
-                私たちは、質の高いWebサイト制作を、誰もが手の届く価格で提供することを使命としています。
-                AI技術とグローバルな人材を活用することで、従来の半額以下でも高品質なサービスを実現。
-                すべての企業・個人が、デジタル時代で成功するためのWebプレゼンスを構築できる世界を目指しています。
+                {t('about.mission.description')}
               </p>
               <div className="grid grid-cols-1 md:grid-cols-3 gap-6 text-center">
                 <div>
                   <p className="text-3xl font-bold text-[#50FA7B] mb-2">50%</p>
-                  <p className="text-gray-300">コスト削減</p>
+                  <p className="text-gray-300">{t('about.mission.costReduction')}</p>
                 </div>
                 <div>
-                  <p className="text-3xl font-bold text-[#32E2C4] mb-2">2日</p>
-                  <p className="text-gray-300">最短納期</p>
+                  <p className="text-3xl font-bold text-[#32E2C4] mb-2">2-Day</p>
+                  <p className="text-gray-300">{t('about.mission.fastestDelivery')}</p>
                 </div>
                 <div>
                   <p className="text-3xl font-bold text-[#3F87F5] mb-2">100%</p>
-                  <p className="text-gray-300">透明会計</p>
+                  <p className="text-gray-300">{t('about.mission.transparentAccounting')}</p>
                 </div>
               </div>
             </div>
@@ -234,7 +232,7 @@ export const About = ({ onPageChange }: AboutProps) => {
         </div>
       </section>
 
-      {/* ▼▼▼ [ここから追加] 会社概要 & アクセス Section ▼▼▼ */}
+      {/* Company Outline & Access Section */}
       <section className="py-20">
         <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
           <motion.div
@@ -245,63 +243,73 @@ export const About = ({ onPageChange }: AboutProps) => {
             className="text-center mb-16"
           >
             <h2 className="text-4xl md:text-5xl font-bold mb-6 text-white">
-              会社概要
+              {t('about.outline.title')}
             </h2>
           </motion.div>
 
-          <motion.div
-            initial={{ opacity: 0, y: 30 }}
-            whileInView={{ opacity: 1, y: 0 }}
-            transition={{ duration: 0.8, delay: 0.2 }}
-            viewport={{ once: true }}
-            className="grid grid-cols-1 lg:grid-cols-2 gap-8 md:gap-12 items-center"
-          >
-            {/* 会社情報カード */}
-            <div className="bg-gray-900/50 backdrop-blur-sm border border-gray-800 rounded-2xl p-8 h-full flex flex-col justify-center">
-              <h3 className="text-3xl font-bold text-white mb-8">MiniMaxCode</h3>
-              <div className="space-y-6 text-left">
-                <div className="flex items-start space-x-4">
-                  <div className="p-2 bg-gradient-to-r from-[#3F87F5] to-[#32E2C4] rounded-lg flex-shrink-0">
-                    <Building className="w-5 h-5 text-white" />
-                  </div>
+          <div className="grid grid-cols-1 lg:grid-cols-2 gap-12">
+            {/* Outline */}
+            <motion.div
+              initial={{ opacity: 0, x: -30 }}
+              whileInView={{ opacity: 1, x: 0 }}
+              transition={{ duration: 0.8 }}
+              viewport={{ once: true }}
+              className="bg-gray-900/50 backdrop-blur-sm border border-gray-800 rounded-2xl p-8"
+            >
+              <ul className="space-y-6">
+                <li className="flex items-start space-x-4">
+                  <Building className="w-6 h-6 text-[#3F87F5] mt-1 flex-shrink-0" />
                   <div>
-                    <p className="text-sm text-gray-400">運営会社</p>
-                    <p className="text-lg text-white font-medium">モノネスト</p>
+                    <p className="text-sm text-gray-400">{t('about.outline.name')}</p>
+                    <p className="text-lg text-white font-semibold">{t('about.outline.nameValue')}</p>
                   </div>
-                </div>
-                <div className="flex items-start space-x-4">
-                  <div className="p-2 bg-gradient-to-r from-[#32E2C4] to-[#50FA7B] rounded-lg flex-shrink-0">
-                    <MapPin className="w-5 h-5 text-white" />
-                  </div>
+                </li>
+                <li className="flex items-start space-x-4">
+                  <MapPin className="w-6 h-6 text-[#32E2C4] mt-1 flex-shrink-0" />
                   <div>
-                    <p className="text-sm text-gray-400">住所</p>
-                    <p className="text-lg text-white font-medium">〒111-0053 東京都台東区浅草橋4丁目15−5 三基ビル301</p>
+                    <p className="text-sm text-gray-400">{t('about.outline.address')}</p>
+                    <p className="text-lg text-white font-semibold">{t('about.outline.addressValue')}</p>
                   </div>
-                </div>
-                <div className="flex items-start space-x-4">
-                  <div className="p-2 bg-gradient-to-r from-[#50FA7B] to-[#3F87F5] rounded-lg flex-shrink-0">
-                    <Phone className="w-5 h-5 text-white" />
-                  </div>
+                </li>
+                <li className="flex items-start space-x-4">
+                  <Phone className="w-6 h-6 text-[#50FA7B] mt-1 flex-shrink-0" />
                   <div>
-                    <p className="text-sm text-gray-400">電話番号</p>
-                    <p className="text-lg text-white font-medium">080-8916-5438</p>
+                    <p className="text-sm text-gray-400">{t('about.outline.phone')}</p>
+                    <p className="text-lg text-white font-semibold">{t('about.outline.phoneValue')}</p>
                   </div>
+                </li>
+                 <li className="flex items-start space-x-4">
+                  <Zap className="w-6 h-6 text-[#3F87F5] mt-1 flex-shrink-0" />
+                  <div>
+                    <p className="text-sm text-gray-400">{t('about.outline.business')}</p>
+                    <p className="text-lg text-white font-semibold">{t('about.outline.businessValue')}</p>
+                  </div>
+                </li>
+              </ul>
+            </motion.div>
+            
+            {/* Map */}
+            <motion.div
+              initial={{ opacity: 0, x: 30 }}
+              whileInView={{ opacity: 1, x: 0 }}
+              transition={{ duration: 0.8 }}
+              viewport={{ once: true }}
+              className="h-96 bg-gray-900/50 rounded-2xl border border-gray-800 overflow-hidden"
+            >
+              {apiKey ? (
+                <MapComponent apiKey={apiKey} />
+              ) : (
+                <div className="w-full h-full flex items-center justify-center">
+                  <p className="text-gray-500">Google Maps API Key is missing.</p>
                 </div>
-              </div>
-            </div>
-
-            {/* Googleマップカード */}
-            <div className="bg-gray-900/50 backdrop-blur-sm border border-gray-800 rounded-2xl p-4 h-full">
-              <MapComponent apiKey={apiKey} />
-            </div>
-          </motion.div>
+              )}
+            </motion.div>
+          </div>
         </div>
       </section>
-      {/* ▲▲▲ [ここまで追加] 会社概要 & アクセス Section ▲▲▲ */}
-
 
       {/* CTA Section */}
-      <section className="py-20">
+      <section className="py-20 bg-gray-900/30">
         <div className="max-w-4xl mx-auto px-4 sm:px-6 lg:px-8 text-center">
           <motion.div
             initial={{ opacity: 0, y: 30 }}
@@ -309,31 +317,18 @@ export const About = ({ onPageChange }: AboutProps) => {
             transition={{ duration: 0.8 }}
             viewport={{ once: true }}
           >
-            <h2 className="text-4xl md:text-5xl font-bold mb-6 text-white">
-              一緒に成果を創りませんか？
+            <h2 className="text-4xl md:text-5xl font-bold mb-8 text-white">
+              {t('about.cta.title')}
             </h2>
-            <p className="text-xl text-gray-300 mb-8">
-              MiniMaxCodeが、あなたのビジネスの成長を全力でサポートいたします
-            </p>
-            <div className="flex flex-col sm:flex-row gap-4 justify-center">
-              <motion.button
-                whileHover={{ scale: 1.05 }}
-                whileTap={{ scale: 0.95 }}
-                onClick={() => onPageChange('contact')}
-                className="px-8 py-4 bg-[#50FA7B] text-black font-bold text-lg rounded-xl hover:bg-[#50FA7B]/90 transition-colors duration-200 flex items-center justify-center space-x-2"
-              >
-                <span>お問い合わせ</span>
-                <ArrowRight className="w-5 h-5" />
-              </motion.button>
-              <motion.button
-                whileHover={{ scale: 1.05 }}
-                whileTap={{ scale: 0.95 }}
-                onClick={() => onPageChange('service')}
-                className="px-8 py-4 border-2 border-[#3F87F5] text-[#3F87F5] font-bold text-lg rounded-xl hover:bg-[#3F87F5] hover:text-white transition-colors duration-200"
-              >
-                サービス詳細を見る
-              </motion.button>
-            </div>
+            <motion.button
+              whileHover={{ scale: 1.05 }}
+              whileTap={{ scale: 0.95 }}
+              onClick={() => onPageChange('works')}
+              className="px-8 py-4 bg-gradient-to-r from-[#32E2C4] to-[#50FA7B] text-black font-bold text-lg rounded-xl hover:opacity-90 transition-opacity duration-200 flex items-center justify-center space-x-2 mx-auto"
+            >
+              <span>{t('about.cta.button')}</span>
+              <ArrowRight className="w-5 h-5" />
+            </motion.button>
           </motion.div>
         </div>
       </section>

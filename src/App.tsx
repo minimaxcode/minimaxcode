@@ -1,4 +1,4 @@
-import { useState } from 'react';
+import { useState, useEffect } from 'react';
 import { Header } from './components/Header';
 import { Footer } from './components/Footer';
 import { Home } from './pages/Home';
@@ -12,11 +12,32 @@ import { Privacy } from './pages/Privacy';
 import { Terms } from './pages/Terms';
 import { Works } from './pages/Works';
 
+// TypeScript a window objectにgtagが存在することを知らせる
+declare global {
+  interface Window {
+    gtag: (
+      command: 'config' | 'event',
+      targetId: string,
+      config?: { page_path?: string }
+    ) => void;
+  }
+}
+
 function App() {
   const [currentPage, setCurrentPage] = useState('home');
   
   // [修正点 1] QuoteページからContactページへデータを渡すための中継用Stateを追加
   const [quoteDetailsForContact, setQuoteDetailsForContact] = useState(null);
+
+  // Google Analytics page view tracking
+  useEffect(() => {
+    if (window.gtag) {
+      const pagePath = `/${currentPage === 'home' ? '' : currentPage}`;
+      window.gtag('config', 'G-S5F5M4ZVB3', {
+        page_path: pagePath,
+      });
+    }
+  }, [currentPage]);
 
   // [修正点 2] handlePageChange関数が、オプションでデータ(data)を受け取れるように変更
   const handlePageChange = (page: string, data: any = null) => {

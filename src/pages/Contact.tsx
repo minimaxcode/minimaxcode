@@ -55,17 +55,25 @@ export const Contact = ({ onPageChange, quoteDetails }: ContactProps) => {
 
   const onSubmit = async (data: ContactFormData) => {
     setIsSubmitting(true);
+    setSubmitStatus('idle');
     
     try {
-      // Simulate API call
-      await new Promise(resolve => setTimeout(resolve, 2000));
-      
-      // Here you would typically send data to your backend
-      console.log('Form data:', data);
+      const response = await fetch('/api/send-email', {
+        method: 'POST',
+        headers: {
+          'Content-Type': 'application/json',
+        },
+        body: JSON.stringify(data),
+      });
+
+      if (!response.ok) {
+        throw new Error('Network response was not ok');
+      }
       
       setSubmitStatus('success');
       reset();
     } catch (error) {
+      console.error('Failed to send email:', error);
       setSubmitStatus('error');
     } finally {
       setIsSubmitting(false);
@@ -162,7 +170,7 @@ export const Contact = ({ onPageChange, quoteDetails }: ContactProps) => {
                 onClick={() => setSubmitStatus('idle')}
                 className="px-8 py-3 bg-[#50FA7B] text-black font-bold rounded-xl hover:bg-[#50FA7B]/90 transition-colors duration-200"
               >
-                新しいお問い合わせ
+                {t('contact.success.newInquiry')}
               </motion.button>
             </motion.div>
           ) : (
@@ -250,7 +258,7 @@ export const Contact = ({ onPageChange, quoteDetails }: ContactProps) => {
                     {isSubmitting ? (
                       <>
                         <div className="w-5 h-5 border-2 border-black border-t-transparent rounded-full animate-spin" />
-                        <span>送信中...</span>
+                        <span>{t('contact.form.submitting')}</span>
                       </>
                     ) : (
                       <>
@@ -277,29 +285,29 @@ export const Contact = ({ onPageChange, quoteDetails }: ContactProps) => {
             className="text-center"
           >
             <h2 className="text-3xl md:text-4xl font-bold mb-6 text-white">
-              お問い合わせ後の流れ
+              {t('contact.flow.title')}
             </h2>
             <div className="grid grid-cols-1 md:grid-cols-3 gap-8">
               <div className="bg-gray-900/50 backdrop-blur-sm border border-gray-800 rounded-xl p-6">
                 <div className="w-12 h-12 bg-gradient-to-r from-[#3F87F5] to-[#32E2C4] rounded-lg flex items-center justify-center mx-auto mb-4">
                   <span className="text-white font-bold">1</span>
                 </div>
-                <h3 className="text-lg font-semibold text-white mb-2">自動返信</h3>
-                <p className="text-gray-300 text-sm">お問い合わせ受付の自動返信メールをお送りします</p>
+                <h3 className="text-lg font-semibold text-white mb-2">{t('contact.flow.step1.title')}</h3>
+                <p className="text-gray-300 text-sm">{t('contact.flow.step1.description')}</p>
               </div>
               <div className="bg-gray-900/50 backdrop-blur-sm border border-gray-800 rounded-xl p-6">
                 <div className="w-12 h-12 bg-gradient-to-r from-[#32E2C4] to-[#50FA7B] rounded-lg flex items-center justify-center mx-auto mb-4">
                   <span className="text-white font-bold">2</span>
                 </div>
-                <h3 className="text-lg font-semibold text-white mb-2">担当者からの連絡</h3>
-                <p className="text-gray-300 text-sm">2営業日以内に担当者から詳細をご連絡いたします</p>
+                <h3 className="text-lg font-semibold text-white mb-2">{t('contact.flow.step2.title')}</h3>
+                <p className="text-gray-300 text-sm">{t('contact.flow.step2.description')}</p>
               </div>
               <div className="bg-gray-900/50 backdrop-blur-sm border border-gray-800 rounded-xl p-6">
                 <div className="w-12 h-12 bg-gradient-to-r from-[#50FA7B] to-[#3F87F5] rounded-lg flex items-center justify-center mx-auto mb-4">
                   <span className="text-white font-bold">3</span>
                 </div>
-                <h3 className="text-lg font-semibold text-white mb-2">詳細ヒアリング</h3>
-                <p className="text-gray-300 text-sm">ご要望を詳しくお聞きし、最適なご提案をいたします</p>
+                <h3 className="text-lg font-semibold text-white mb-2">{t('contact.flow.step3.title')}</h3>
+                <p className="text-gray-300 text-sm">{t('contact.flow.step3.description')}</p>
               </div>
             </div>
             
@@ -310,7 +318,7 @@ export const Contact = ({ onPageChange, quoteDetails }: ContactProps) => {
                 onClick={() => onPageChange('quote')}
                 className="px-8 py-3 border-2 border-[#32E2C4] text-[#32E2C4] font-bold rounded-xl hover:bg-[#32E2C4] hover:text-black transition-colors duration-200"
               >
-                見積もりツールを試す
+                {t('contact.tryQuote')}
               </motion.button>
             </div>
           </motion.div>

@@ -15,42 +15,42 @@ export const Flow = ({ onPageChange }: FlowProps) => {
       title: t('flow.steps.step1.title'),
       description: t('flow.steps.step1.description'),
       gradient: 'from-[#3F87F5] to-[#32E2C4]',
-      duration: '即日',
+      duration: t('flow.steps.step1.duration'),
     },
     {
       icon: FileText,
       title: t('flow.steps.step2.title'),
       description: t('flow.steps.step2.description'),
       gradient: 'from-[#32E2C4] to-[#50FA7B]',
-      duration: '2営業日',
+      duration: t('flow.steps.step2.duration'),
     },
     {
       icon: Handshake,
       title: t('flow.steps.step3.title'),
       description: t('flow.steps.step3.description'),
       gradient: 'from-[#50FA7B] to-[#3F87F5]',
-      duration: '1営業日',
+      duration: t('flow.steps.step3.duration'),
     },
     {
       icon: Code,
       title: t('flow.steps.step4.title'),
       description: t('flow.steps.step4.description'),
       gradient: 'from-[#3F87F5] to-[#32E2C4]',
-      duration: '2-7営業日',
+      duration: t('flow.steps.step4.duration'),
     },
     {
       icon: Package,
       title: t('flow.steps.step5.title'),
       description: t('flow.steps.step5.description'),
       gradient: 'from-[#32E2C4] to-[#50FA7B]',
-      duration: '1営業日',
+      duration: t('flow.steps.step5.duration'),
     },
     {
       icon: Headphones,
       title: t('flow.steps.step6.title'),
       description: t('flow.steps.step6.description'),
       gradient: 'from-[#50FA7B] to-[#3F87F5]',
-      duration: '継続',
+      duration: t('flow.steps.step6.duration'),
     },
   ];
 
@@ -139,9 +139,9 @@ export const Flow = ({ onPageChange }: FlowProps) => {
             className="text-center mb-16"
           >
             <h2 className="text-4xl md:text-5xl font-bold mb-6 text-white">
-              全体スケジュール
+              {t('flow.timeline.title')}
             </h2>
-            <p className="text-xl text-gray-300">最短2日から最長2週間で完成</p>
+            <p className="text-xl text-gray-300">{t('flow.timeline.subtitle')}</p>
           </motion.div>
 
           <div className="grid grid-cols-1 md:grid-cols-3 gap-8">
@@ -152,9 +152,9 @@ export const Flow = ({ onPageChange }: FlowProps) => {
               viewport={{ once: true }}
               className="bg-gradient-to-r from-[#50FA7B]/10 to-[#32E2C4]/10 border border-[#50FA7B]/30 rounded-2xl p-8 text-center"
             >
-              <h3 className="text-2xl font-bold text-[#50FA7B] mb-4">特急コース</h3>
-              <p className="text-4xl font-bold text-white mb-4">2-3日</p>
-              <p className="text-gray-300">シンプルなLP・小規模サイト</p>
+              <h3 className="text-2xl font-bold text-[#50FA7B] mb-4">{t('flow.timeline.express.title')}</h3>
+              <p className="text-4xl font-bold text-white mb-4">{t('flow.timeline.express.duration')}</p>
+              <p className="text-gray-300">{t('flow.timeline.express.description')}</p>
             </motion.div>
 
             <motion.div
@@ -164,9 +164,9 @@ export const Flow = ({ onPageChange }: FlowProps) => {
               viewport={{ once: true }}
               className="bg-gradient-to-r from-[#32E2C4]/10 to-[#3F87F5]/10 border border-[#32E2C4]/30 rounded-2xl p-8 text-center"
             >
-              <h3 className="text-2xl font-bold text-[#32E2C4] mb-4">標準コース</h3>
-              <p className="text-4xl font-bold text-white mb-4">1-2週間</p>
-              <p className="text-gray-300">企業サイト・中規模プロジェクト</p>
+              <h3 className="text-2xl font-bold text-[#32E2C4] mb-4">{t('flow.timeline.standard.title')}</h3>
+              <p className="text-4xl font-bold text-white mb-4">{t('flow.timeline.standard.duration')}</p>
+              <p className="text-gray-300">{t('flow.timeline.standard.description')}</p>
             </motion.div>
 
             <motion.div
@@ -176,9 +176,9 @@ export const Flow = ({ onPageChange }: FlowProps) => {
               viewport={{ once: true }}
               className="bg-gradient-to-r from-[#3F87F5]/10 to-[#50FA7B]/10 border border-[#3F87F5]/30 rounded-2xl p-8 text-center"
             >
-              <h3 className="text-2xl font-bold text-[#3F87F5] mb-4">じっくりコース</h3>
-              <p className="text-4xl font-bold text-white mb-4">3-4週間</p>
-              <p className="text-gray-300">大規模サイト・複雑な機能</p>
+              <h3 className="text-2xl font-bold text-[#3F87F5] mb-4">{t('flow.timeline.relaxed.title')}</h3>
+              <p className="text-4xl font-bold text-white mb-4">{t('flow.timeline.relaxed.duration')}</p>
+              <p className="text-gray-300">{t('flow.timeline.relaxed.description')}</p>
             </motion.div>
           </div>
         </div>
@@ -195,7 +195,7 @@ export const Flow = ({ onPageChange }: FlowProps) => {
             className="text-center mb-16"
           >
             <h2 className="text-4xl md:text-5xl font-bold mb-6 text-white">
-              制作の特徴
+              {t('flow.features.title')}
             </h2>
           </motion.div>
 
@@ -210,8 +210,8 @@ export const Flow = ({ onPageChange }: FlowProps) => {
               <div className="w-12 h-12 bg-gradient-to-r from-[#3F87F5] to-[#32E2C4] rounded-lg flex items-center justify-center mb-4">
                 <MessageSquare className="w-6 h-6 text-white" />
               </div>
-              <h3 className="text-xl font-bold text-white mb-2">密なコミュニケーション</h3>
-              <p className="text-gray-300">各段階で細かく確認を取りながら進行します</p>
+              <h3 className="text-xl font-bold text-white mb-2">{t('flow.features.communication.title')}</h3>
+              <p className="text-gray-300">{t('flow.features.communication.description')}</p>
             </motion.div>
 
             <motion.div
@@ -224,8 +224,8 @@ export const Flow = ({ onPageChange }: FlowProps) => {
               <div className="w-12 h-12 bg-gradient-to-r from-[#32E2C4] to-[#50FA7B] rounded-lg flex items-center justify-center mb-4">
                 <Code className="w-6 h-6 text-white" />
               </div>
-              <h3 className="text-xl font-bold text-white mb-2">AI補助による高速開発</h3>
-              <p className="text-gray-300">AI技術を活用して効率的に制作を進めます</p>
+              <h3 className="text-xl font-bold text-white mb-2">{t('flow.features.development.title')}</h3>
+              <p className="text-gray-300">{t('flow.features.development.description')}</p>
             </motion.div>
 
             <motion.div
@@ -238,8 +238,8 @@ export const Flow = ({ onPageChange }: FlowProps) => {
               <div className="w-12 h-12 bg-gradient-to-r from-[#50FA7B] to-[#3F87F5] rounded-lg flex items-center justify-center mb-4">
                 <Headphones className="w-6 h-6 text-white" />
               </div>
-              <h3 className="text-xl font-bold text-white mb-2">充実のアフターサポート</h3>
-              <p className="text-gray-300">納品後も安心のサポート体制をご用意</p>
+              <h3 className="text-xl font-bold text-white mb-2">{t('flow.features.support.title')}</h3>
+              <p className="text-gray-300">{t('flow.features.support.description')}</p>
             </motion.div>
           </div>
         </div>
@@ -255,28 +255,27 @@ export const Flow = ({ onPageChange }: FlowProps) => {
             viewport={{ once: true }}
           >
             <h2 className="text-4xl md:text-5xl font-bold mb-6 text-white">
-              プロジェクトを始めませんか？
+              {t('flow.cta.title')}
             </h2>
             <p className="text-xl text-gray-300 mb-8">
-              まずはお気軽にお問い合わせください。詳細なスケジュールをご提案いたします。
+              {t('flow.cta.subtitle')}
             </p>
             <div className="flex flex-col sm:flex-row gap-4 justify-center">
               <motion.button
                 whileHover={{ scale: 1.05 }}
                 whileTap={{ scale: 0.95 }}
                 onClick={() => onPageChange('contact')}
-                className="px-8 py-4 bg-[#50FA7B] text-black font-bold text-lg rounded-xl hover:bg-[#50FA7B]/90 transition-colors duration-200 flex items-center justify-center space-x-2"
+                className="px-8 py-4 bg-[#50FA7B] text-black font-bold text-lg rounded-xl hover:bg-[#50FA7B]/90 transition-colors duration-200"
               >
-                <span>お問い合わせ</span>
-                <ArrowRight className="w-5 h-5" />
+                {t('flow.cta.contact')}
               </motion.button>
               <motion.button
                 whileHover={{ scale: 1.05 }}
                 whileTap={{ scale: 0.95 }}
                 onClick={() => onPageChange('quote')}
-                className="px-8 py-4 border-2 border-[#32E2C4] text-[#32E2C4] font-bold text-lg rounded-xl hover:bg-[#32E2C4] hover:text-black transition-colors duration-200"
+                className="px-8 py-4 border-2 border-[#3F87F5] text-[#3F87F5] font-bold text-lg rounded-xl hover:bg-[#3F87F5] hover:text-white transition-colors duration-200"
               >
-                見積もりを取る
+                {t('flow.cta.quote')}
               </motion.button>
             </div>
           </motion.div>

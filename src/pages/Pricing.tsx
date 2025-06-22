@@ -149,8 +149,8 @@ export const Pricing = ({ onPageChange }: PricingProps) => {
                 {t('pricing.campaigns.noInitialCost.description')}
               </p>
               <div className="bg-[#50FA7B]/10 border border-[#50FA7B]/20 rounded-xl p-4">
-                <p className="text-[#50FA7B] font-semibold">✓ 完全成果報酬型</p>
-                <p className="text-gray-300 text-sm mt-1">合意内容を満たした納品完了後のお支払い</p>
+                <p className="text-[#50FA7B] font-semibold">{t('pricing.campaigns.noInitialCost.feature')}</p>
+                <p className="text-gray-300 text-sm mt-1">{t('pricing.campaigns.noInitialCost.detail')}</p>
               </div>
             </motion.div>
 
@@ -170,8 +170,8 @@ export const Pricing = ({ onPageChange }: PricingProps) => {
                 {t('pricing.campaigns.halfPrice.description')}
               </p>
               <div className="bg-[#3F87F5]/10 border border-[#3F87F5]/20 rounded-xl p-4">
-                <p className="text-[#3F87F5] font-semibold">✓ 他社見積もりの半額</p>
-                <p className="text-gray-300 text-sm mt-1">正式見積書をご提示いただくだけ</p>
+                <p className="text-[#3F87F5] font-semibold">{t('pricing.campaigns.halfPrice.feature')}</p>
+                <p className="text-gray-300 text-sm mt-1">{t('pricing.campaigns.halfPrice.detail')}</p>
               </div>
             </motion.div>
           </div>
@@ -207,7 +207,7 @@ export const Pricing = ({ onPageChange }: PricingProps) => {
             >
               <div className="flex items-center mb-6">
                 <Gift className="w-8 h-8 text-[#32E2C4] mr-3" />
-                <h3 className="text-2xl font-bold text-white">実費明朗会計</h3>
+                <h3 className="text-2xl font-bold text-white">{t('pricing.transparency.feature')}</h3>
               </div>
               <ul className="space-y-4">
                 {transparencyItems.map((item, index) => (
@@ -218,7 +218,7 @@ export const Pricing = ({ onPageChange }: PricingProps) => {
                 ))}
               </ul>
               <div className="mt-6 bg-[#32E2C4]/10 border border-[#32E2C4]/20 rounded-xl p-4">
-                <p className="text-[#32E2C4] font-semibold text-sm">隠れた料金は一切ありません</p>
+                <p className="text-[#32E2C4] font-semibold text-sm">{t('pricing.transparency.noHiddenFees')}</p>
               </div>
             </motion.div>
 
@@ -230,19 +230,19 @@ export const Pricing = ({ onPageChange }: PricingProps) => {
               viewport={{ once: true }}
               className="bg-gradient-to-r from-red-500/10 to-orange-500/10 border border-red-500/30 rounded-2xl p-8"
             >
-              <h3 className="text-2xl font-bold text-white mb-4">業界の問題点</h3>
+              <h3 className="text-2xl font-bold text-white mb-4">{t('pricing.transparency.industryProblems.title')}</h3>
               <div className="space-y-4">
                 <div className="bg-red-500/10 border border-red-500/20 rounded-xl p-4">
-                  <p className="text-red-400 font-semibold text-sm mb-2">❌ 一般的な制作会社</p>
-                  <p className="text-gray-300 text-sm">「初期費用安く見せて、メンテナンスで高額請求」</p>
+                  <p className="text-red-400 font-semibold text-sm mb-2">{t('pricing.transparency.industryProblems.typicalAgency.title')}</p>
+                  <p className="text-gray-300 text-sm">{t('pricing.transparency.industryProblems.typicalAgency.description')}</p>
                 </div>
                 <div className="bg-orange-500/10 border border-orange-500/20 rounded-xl p-4">
-                  <p className="text-orange-400 font-semibold text-sm mb-2">❌ 不透明な利益構造</p>
-                  <p className="text-gray-300 text-sm">「サーバー代月額15,000円」などの過剰請求</p>
+                  <p className="text-orange-400 font-semibold text-sm mb-2">{t('pricing.transparency.industryProblems.opaqueStructure.title')}</p>
+                  <p className="text-gray-300 text-sm">{t('pricing.transparency.industryProblems.opaqueStructure.description')}</p>
                 </div>
                 <div className="bg-[#50FA7B]/10 border border-[#50FA7B]/20 rounded-xl p-4">
-                  <p className="text-[#50FA7B] font-semibold text-sm mb-2">✓ MiniMaxCode</p>
-                  <p className="text-gray-300 text-sm">完全透明化で安心の継続運用</p>
+                  <p className="text-[#50FA7B] font-semibold text-sm mb-2">{t('pricing.transparency.industryProblems.ourApproach.title')}</p>
+                  <p className="text-gray-300 text-sm">{t('pricing.transparency.industryProblems.ourApproach.description')}</p>
                 </div>
               </div>
             </motion.div>
@@ -263,7 +263,7 @@ export const Pricing = ({ onPageChange }: PricingProps) => {
       </section>
 
       {/* CTA Section */}
-      <section className="py-20 bg-gradient-to-r from-[#3F87F5]/20 via-[#32E2C4]/20 to-[#50FA7B]/20">
+      <section className="py-20 bg-gray-900/30">
         <div className="max-w-4xl mx-auto px-4 sm:px-6 lg:px-8 text-center">
           <motion.div
             initial={{ opacity: 0, y: 30 }}
@@ -272,30 +272,20 @@ export const Pricing = ({ onPageChange }: PricingProps) => {
             viewport={{ once: true }}
           >
             <h2 className="text-4xl md:text-5xl font-bold mb-6 text-white">
-              お得な料金で始めませんか？
+              {t('pricing.cta.title')}
             </h2>
             <p className="text-xl text-gray-300 mb-8">
-              他社見積もりをお持ちの方は、ぜひ比較してください
+              {t('pricing.cta.subtitle')}
             </p>
-            <div className="flex flex-col sm:flex-row gap-4 justify-center">
-              <motion.button
-                whileHover={{ scale: 1.05 }}
-                whileTap={{ scale: 0.95 }}
-                onClick={() => onPageChange('quote')}
-                className="px-8 py-4 bg-[#50FA7B] text-black font-bold text-lg rounded-xl hover:bg-[#50FA7B]/90 transition-colors duration-200 flex items-center justify-center space-x-2"
-              >
-                <span>無料見積もりを開始</span>
-                <ArrowRight className="w-5 h-5" />
-              </motion.button>
-              <motion.button
-                whileHover={{ scale: 1.05 }}
-                whileTap={{ scale: 0.95 }}
-                onClick={() => onPageChange('contact')}
-                className="px-8 py-4 border-2 border-[#3F87F5] text-[#3F87F5] font-bold text-lg rounded-xl hover:bg-[#3F87F5] hover:text-white transition-colors duration-200"
-              >
-                詳細相談する
-              </motion.button>
-            </div>
+            <motion.button
+              whileHover={{ scale: 1.05 }}
+              whileTap={{ scale: 0.95 }}
+              onClick={() => onPageChange('quote')}
+              className="px-8 py-4 bg-[#50FA7B] text-black font-bold text-lg rounded-xl hover:bg-[#50FA7B]/90 transition-colors duration-200 flex items-center justify-center space-x-2"
+            >
+              <span>{t('pricing.cta.button')}</span>
+              <ArrowRight className="w-5 h-5" />
+            </motion.button>
           </motion.div>
         </div>
       </section>

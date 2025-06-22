@@ -157,26 +157,25 @@ export const Quote = ({ onPageChange }: QuoteProps) => {
     const timelineLabel = timelineOptions.find(t => t.value === quoteData.timeline)?.label || '';
 
     // Generate the message body
-    const summary = `以下の内容で見積もりを行いました。
-詳細についてお問い合わせします。
----------------------------------
+    const summary = `${t('quote.summary.header')}
+${t('quote.summary.separator')}
 ■ ${t('quote.form.websiteType.label')}: ${t('quote.form.websiteType.options.corporate')}
-■ ${t('quote.form.pageCount.label')}: ${quoteData.pageCount}ページ
+■ ${t('quote.form.pageCount.label')}: ${quoteData.pageCount} ${t('quote.summary.pageLabel')}
 ■ ${t('quote.form.features.label')}:
-${selectedFeatures || '  - なし'}
+${selectedFeatures || t('quote.summary.none')}
 ■ ${t('quote.form.design.label')}: ${designLabel}
 ■ ${t('quote.form.timeline.label')}: ${timelineLabel}
----------------------------------
-■ ${t('quote.result.title')}: ¥${priceRange.min.toLocaleString()} 〜 ¥${priceRange.max.toLocaleString()}
----------------------------------
+${t('quote.summary.separator')}
+■ ${t('quote.result.title')}: ${t('quote.result.priceRange', { min: priceRange.min.toLocaleString(), max: priceRange.max.toLocaleString() })}
+${t('quote.summary.separator')}
 
-[具体的なご要望・ご質問などをご記入ください]
+${t('quote.summary.footer')}
 `;
 
     // Pass page change and quote data to parent component
     onPageChange('contact', {
       quoteSummary: summary,
-      quoteSubject: 'ウェブサイト制作の見積もりについて'
+      quoteSubject: t('quote.summary.subject')
     });
   };
 

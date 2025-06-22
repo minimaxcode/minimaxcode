@@ -109,7 +109,8 @@
           "OGP settings for social media sharing",
           "Sitemap (sitemap.xml) creation & submission",
           "Landing page (LP) creation"
-        ]
+        ],
+        "plus": "All Basic features, plus:"
       }
     },
     "policy": {
@@ -118,6 +119,12 @@
       "scope": "Scope: Static websites, brand sites, LPs, etc.",
       "nonScope": "Non-supported: E-commerce sites, membership functions, large-scale CMS, 50+ page structures",
       "timeline": "Timeline: Quote within 2 business days / Delivery in 2-10 business days"
+    },
+    "cta": {
+      "title": "Explore Our Service Details",
+      "subtitle": "We propose the optimal plan tailored to your needs.",
+      "quote": "Start Free Quote",
+      "pricing": "View Pricing Plans"
     }
   },
   "pricing": {
@@ -131,22 +138,48 @@
       "title": "Campaign Information",
       "noInitialCost": {
         "title": "Zero Initial Cost",
-        "description": "Payment after delivery completion meeting agreed requirements at contract. Judged based on agreed content, not satisfaction."
+        "description": "Payment after delivery completion meeting agreed requirements at contract. Judged based on agreed content, not satisfaction.",
+        "feature": "✓ Purely Performance-Based",
+        "detail": "Payment is made after delivery that meets the agreed terms."
       },
       "halfPrice": {
         "title": "Limited Campaign",
-        "description": "Present us with a formal quote from another company, and we'll provide service at half that price (subject to content review)"
+        "description": "Present us with a formal quote from another company, and we'll provide service at half that price (subject to content review)",
+        "feature": "✓ Half Price of Competitor's Quote",
+        "detail": "Just provide us with their formal quote."
       }
     },
     "transparency": {
       "title": "Complete Transparency in Maintenance Costs",
       "description": "All infrastructure costs including domains, servers, APIs, and email are transparently presented and settled at actual cost.",
+      "feature": "Clear, At-Cost Accounting",
+      "noHiddenFees": "Absolutely no hidden fees.",
       "examples": {
         "domain": "Domain: ¥200/month",
         "server": "Server: ¥2,400/month",
         "workspace": "Google Workspace: ¥800/month"
       },
+      "industryProblems": {
+        "title": "Industry Problems",
+        "typicalAgency": {
+          "title": "❌ Typical Agencies",
+          "description": "\"Low initial cost, high maintenance fees later.\""
+        },
+        "opaqueStructure": {
+          "title": "❌ Opaque Profit Structures",
+          "description": "Overcharging with items like \"Server fee: ¥15,000/month\"."
+        },
+        "ourApproach": {
+          "title": "✓ MiniMaxCode",
+          "description": "Complete transparency for reliable ongoing operation."
+        }
+      },
       "note": "We counter the industry's common business model of 'showing low initial costs and charging high maintenance fees' by eliminating opaque profit structures."
+    },
+    "cta": {
+      "title": "Ready to Get Started?",
+      "subtitle": "No initial cost. Safe payment after delivery.",
+      "button": "Start Free Quote"
     }
   },
   "works": {
@@ -196,20 +229,93 @@
       },
       "step5": {
         "title": "Delivery & Billing",
-        "description": "After final confirmation and ensuring agreed requirements are met, we deliver. Invoice issued after delivery completion."
+        "description": "After final confirmation and ensuring agreed requirements are met, we deliver. Invoice issued after delivery completion.",
+        "duration": "1 business day"
       },
       "step6": {
         "title": "Operation & Support (as needed)",
-        "description": "We provide ongoing support for infrastructure setup and minor updates as desired. Separate consultation for maintenance contracts."
+        "description": "We provide ongoing support for infrastructure setup and minor updates as desired. Separate consultation for maintenance contracts.",
+        "duration": "Ongoing"
       }
+    },
+    "timeline": {
+      "title": "Overall Schedule",
+      "subtitle": "Completion from as fast as 2 days to 2 weeks",
+      "express": {
+        "title": "Express Course",
+        "duration": "2-3 Days",
+        "description": "Simple LPs & small-scale sites"
+      },
+      "standard": {
+        "title": "Standard Course",
+        "duration": "1-2 Weeks",
+        "description": "Corporate sites & medium-scale projects"
+      },
+      "relaxed": {
+        "title": "Relaxed Course",
+        "duration": "3-4 Weeks",
+        "description": "Large-scale sites & complex functions"
+      }
+    },
+    "features": {
+      "title": "Our Process Features",
+      "communication": {
+        "title": "Close Communication",
+        "description": "We proceed with detailed confirmation at each stage."
+      },
+      "development": {
+        "title": "High-Speed Development with AI",
+        "description": "We utilize AI technology to advance production efficiently."
+      },
+      "support": {
+        "title": "Full After-Sales Support",
+        "description": "A reliable support system is available even after delivery."
+      }
+    },
+    "cta": {
+      "title": "Ready to bring your vision to life?",
+      "subtitle": "Let's discuss your project. Contact us for a free consultation.",
+      "contact": "Contact Us",
+      "quote": "Get a Free Quote"
     }
   },
   "about": {
     "title": "About Us",
     "subtitle": "About MiniMaxCode",
+    "target": {
+      "title": "Target Customers",
+      "items": [
+        "SMEs and individual business owners in Japan",
+        "Individuals and teams starting businesses or side projects",
+        "Former Rakuten/Amazon employees challenging independent sites",
+        "Companies seeking static, simple web presence"
+      ]
+    },
     "positioning": {
       "title": "Positioning",
-      "description": "MiniMaxCode is a lightweight development service brand for the Japanese market."
+      "description": "MiniMaxCode is a lightweight development service brand for the Japanese market.",
+      "lowCost": "Provided at minimum cost",
+      "highSpeed": "Delivery from as fast as 2 days",
+      "qualityAssured": "Quality assured by Japanese PMs"
+    },
+    "mission": {
+      "title": "Our Mission",
+      "quote": "\"Maximum Result, Minimum Cost.\"",
+      "description": "Our mission is to provide high-quality website production at a price everyone can afford. By leveraging AI technology and global talent, we achieve high-quality services at less than half the conventional price. We aim for a world where every company and individual can build a web presence to succeed in the digital age.",
+      "costReduction": "Cost Reduction",
+      "fastestDelivery": "Fastest Delivery",
+      "transparentAccounting": "Transparent Accounting"
+    },
+    "outline": {
+      "title": "Company Outline",
+      "name": "Company Name",
+      "nameValue": "MiniMaxCode",
+      "address": "Address",
+      "addressValue": "Shibuya, Tokyo, Japan (Detailed address provided upon contract)",
+      "phone": "Phone",
+      "phoneValue": "To be provided upon contract (communication via chat/email)",
+      "business": "Business Content",
+      "businessValue": "Website production and related digital services"
     },
     "values": {
       "title": "Core Values",
@@ -226,14 +332,9 @@
         "description": "Optimal start for your current scale. Begin small with necessary functions and expand as you grow."
       }
     },
-    "target": {
-      "title": "Target Customers",
-      "items": [
-        "SMEs and individual business owners in Japan",
-        "Individuals and teams starting businesses or side projects",
-        "Former Rakuten/Amazon employees challenging independent sites",
-        "Companies seeking static, simple web presence"
-      ]
+    "cta": {
+      "title": "Ready to get started?",
+      "button": "View Our Works"
     }
   },
   "quote": {
@@ -250,14 +351,14 @@
         "label": "Number of Pages (5-50 pages)"
       },
       "features": {
-        "label": "Required Features (multiple selection)",
+        "label": "Additional Features",
         "options": {
           "contactForm": "Contact Form",
-          "blog": "Blog Function",
+          "blog": "Blog Functionality",
           "multilingual": "Multilingual Support",
-          "cms": "CMS (Update Function)",
-          "ecommerce": "E-commerce Function",
-          "membership": "Membership Function"
+          "cms": "CMS (Content Management)",
+          "ecommerce": "E-commerce Functionality",
+          "membership": "Membership System"
         }
       },
       "design": {
@@ -265,159 +366,229 @@
         "options": {
           "simple": "Simple",
           "standard": "Standard",
-          "complex": "Complex/Original"
+          "complex": "Complex / High-end"
         }
       },
       "timeline": {
         "label": "Desired Timeline",
         "options": {
-          "rush": "2-3 days (Express)",
-          "normal": "1-2 weeks",
-          "flexible": "1+ month"
+          "rush": "Rush (within 1 week)",
+          "normal": "Normal (2-4 weeks)",
+          "flexible": "Flexible (1 month+)"
         }
-      }
+      },
+      "calculate": "Calculate Estimate",
+      "incomplete": "Please select all options."
     },
     "result": {
-      "title": "Estimated Quote Result",
-      "basePrice": "Base Price",
-      "additionalFeatures": "Additional Features",
-      "designComplexity": "Design Fee",
-      "timeline": "Timeline Adjustment",
-      "total": "Total Estimated Amount",
-      "range": "¥{{min}} 〜 ¥{{max}}",
-      "note": "※ This is an estimate. Accurate quotes will be provided after detailed consultation.",
-      "nextStep": "Contact us with this quote"
+      "title": "Estimated Price Range",
+      "priceRange": "¥{min} - ¥{max}",
+      "note": "This is an approximate estimate. The final price may vary depending on detailed requirements.",
+      "contact": "Proceed to Contact Form",
+      "recalculate": "Recalculate"
+    },
+    "summary": {
+      "subject": "Inquiry regarding website creation estimate",
+      "header": "An estimate was created with the following details.\nI would like to inquire further.",
+      "separator": "---------------------------------",
+      "pageLabel": "pages",
+      "none": "  - None",
+      "footer": "[Please enter your specific requests or questions here]"
     }
   },
   "contact": {
     "title": "Contact Us",
-    "subtitle": "Feel free to reach out",
+    "subtitle": "Have questions or want to start a project? We'd love to hear from you.",
     "form": {
       "name": {
         "label": "Name",
-        "placeholder": "Taro Tanaka"
+        "placeholder": "Your Name"
       },
       "email": {
-        "label": "Email Address",
-        "placeholder": "tanaka@example.com"
+        "label": "Email",
+        "placeholder": "your.email@example.com"
       },
       "company": {
-        "label": "Company Name",
-        "placeholder": "ABC Inc."
+        "label": "Company",
+        "placeholder": "Your Company Name"
       },
       "phone": {
         "label": "Phone Number",
-        "placeholder": "090-1234-5678"
+        "placeholder": "Your Phone Number"
       },
       "subject": {
         "label": "Subject",
-        "placeholder": "Inquiry about website creation"
+        "placeholder": "e.g., Request for Brand Website"
       },
       "message": {
         "label": "Message",
-        "placeholder": "Please let us know your inquiry"
+        "placeholder": "Please describe your inquiry."
       },
-      "submit": "Send"
+      "submit": "Send Message",
+      "submitting": "Sending..."
     },
     "validation": {
-      "required": "This field is required",
-      "email": "Please enter a valid email address",
-      "phone": "Please enter a valid phone number"
+      "required": "This field is required.",
+      "email": "Please enter a valid email address."
     },
     "success": {
-      "title": "Message Sent",
-      "message": "Your inquiry has been received. We will respond within 2 business days."
+      "title": "Message Sent!",
+      "message": "Thank you for your inquiry. We will get back to you within 2 business days.",
+      "newInquiry": "New Inquiry"
     },
     "error": {
-      "title": "Sending Error",
-      "message": "Failed to send the message. Please try again later."
-    }
+      "title": "An Error Occurred",
+      "message": "Failed to send the message. Please try again later or contact us directly by email."
+    },
+    "flow": {
+      "title": "What Happens Next?",
+      "step1": {
+        "title": "Auto-Reply",
+        "description": "You'll receive an automated confirmation email."
+      },
+      "step2": {
+        "title": "Reply from Us",
+        "description": "Our team will contact you within 2 business days."
+      },
+      "step3": {
+        "title": "Detailed Hearing",
+        "description": "We'll listen to your needs to provide the best proposal."
+      }
+    },
+    "tryQuote": "Try Our Quote Tool"
   },
   "privacy": {
     "title": "Privacy Policy",
-    "lastUpdated": "Last Updated: June 22, 2025",
-    "sections": {
-      "overview": {
-        "title": "Overview",
-        "content": "MiniMaxCode (hereinafter referred to as \"the Company\") recognizes the protection of customer's personal information as a significant responsibility, complies with the Personal Information Protection Act and other relevant laws, and handles customers' personal information appropriately."
+    "lastUpdated": "Last Updated: July 25, 2024",
+    "overview": "MiniMaxCode (hereinafter referred to as \"the Company\") properly protects customers' personal information and handles it based on the following policy.",
+    "articles": [
+      {
+        "title": "Article 1 (Definition of Personal Information)",
+        "content": "\"Personal information\" in this privacy policy refers to information about a living individual that can identify a specific individual, such as name, address, telephone number, and email address."
       },
-      "collection": {
-        "title": "Collection of Personal Information",
-        "content": "The Company may collect personal information in the following cases:\n• When entered in the contact form\n• When applying for services\n• During email correspondence\n• Other times when using the Company's services"
+      {
+        "title": "Article 2 (How We Collect Personal Information)",
+        "content": "The Company may acquire the following information when receiving inquiries, quote requests, or requests for materials from customers:\n\t•\tName\n\t•\tCompany name/title\n\t•\tEmail address\n\t•\tPhone number\n\t•\tOther information necessary for contact and contracts\n\nAdditionally, to understand website usage, we may collect information using tools such as cookies, access logs, and Google Analytics."
       },
-      "usage": {
-        "title": "Purpose of Use of Personal Information",
-        "content": "Collected personal information will be used for the following purposes:\n• To respond to inquiries\n• To provide services and fulfill contracts\n• For after-sales support\n• To send important notices"
+      {
+        "title": "Article 3 (Purpose of Use of Personal Information)",
+        "content": "The Company will use the acquired personal information for the following purposes:\n\t•\tResponding to inquiries and communication\n\t•\tProviding services and fulfilling contracts\n\t•\tIssuing quotations and invoices\n\t•\tProviding after-sales support\n\t•\tImproving the website and analyzing access\n\t•\tProviding information and guidance about our services"
       },
-      "protection": {
-        "title": "Protection of Personal Information",
-        "content": "The Company will implement appropriate security measures to prevent leakage, loss, or damage of personal information."
+      {
+        "title": "Article 4 (Provision of Personal Information to Third Parties)",
+        "content": "The Company will not provide personal information to a third party without the prior consent of the individual, except as required by law."
       },
-      "disclosure": {
-        "title": "Disclosure to Third Parties",
-        "content": "The Company will not disclose personal information to third parties without the customer's consent, except as required by law."
+      {
+        "title": "Article 5 (Management of Personal Information)",
+        "content": "The Company will take appropriate security measures to prevent the leakage, loss, or damage of personal information. Personal information that is no longer needed will be promptly discarded or deleted."
       },
-      "contact": {
-        "title": "Inquiries",
-        "content": "For inquiries regarding the handling of personal information, please contact us via the contact form."
+      {
+        "title": "Article 6 (Disclosure, Correction, and Deletion of Personal Information)",
+        "content": "If a request for disclosure, correction, or deletion of personal information is made by the individual, we will respond promptly after verifying their identity. Please contact the inquiry desk below for such requests."
+      },
+      {
+        "title": "Article 7 (Use of External Services and Tools)",
+        "content": "Our website may use the following external tools for purposes such as access analysis:\n\t•\tGoogle Analytics (Google Inc.)\nData collected by these services is managed according to the privacy policies of each service provider."
+      },
+      {
+        "title": "Article 8 (Changes to the Privacy Policy)",
+        "content": "The content of this policy may be changed without notice due to legal revisions or Company policy. The revised privacy policy will take effect at the time it is posted on this website."
+      },
+      {
+        "title": "Article 9 (Contact Information)",
+        "content": "For inquiries, consultations, or requests regarding personal information related to this policy, please contact us at the following:\n\nMiniMaxCode\nEmail: contact@minimaxcode.com\nHours: Weekdays 10:00 AM - 6:00 PM (JST)"
       }
-    }
+    ],
+    "contact": {
+      "title": "Questions About Privacy",
+      "description": "If you have any questions about our handling of personal information, please feel free to contact us.",
+      "button": "Contact Us"
+    },
+    "backToHome": "Back to Home"
   },
   "terms": {
     "title": "Terms of Service",
-    "lastUpdated": "Last Updated: June 22, 2025",
-    "sections": {
-      "overview": {
-        "title": "Overview",
-        "content": "These Terms of Service (hereinafter referred to as \"these Terms\") establish the terms of use for the services provided by MiniMaxCode (hereinafter referred to as \"the Company\")."
+    "articles": [
+      {
+        "title": "Article 1 (Application)",
+        "content": "These terms and conditions shall apply to all relationships concerning the use of the website production service (hereinafter referred to as \"the Service\") provided by MiniMaxCode (hereinafter referred to as \"the Company\")."
       },
-      "service": {
-        "title": "Service Content",
-        "content": "The Company provides website creation and related services. Specific service details will be determined by individual contracts."
+      {
+        "title": "Article 2 (Contract Formation)",
+        "content": "A contract shall be formed when the Client agrees to the quotation issued by the Company and these terms, and expresses their intent to accept by email or other means."
       },
+      {
+        "title": "Article 3 (Fees and Payment Method)",
+        "content": "The Client shall pay the fees separately determined by the Company for the Service, by the method specified by the Company. The full fee shall be paid after the completion of the deliverables that meet the requirements agreed upon at the time of the contract."
+      },
+      {
+        "title": "Article 4 (Copyright)",
+        "content": "The copyright of the website produced by the Company shall be transferred to the Client upon full payment of the fee. However, the copyright for some programs or materials created by the Company may be retained by the Company or a third party."
+      },
+      {
+        "title": "Article 5 (Quality Assurance)",
+        "content": "The Company guarantees the quality of the Service for 30 days after delivery. Minor typographical errors or display issues found within this period will be corrected free of charge. However, specification changes or implementation of additional features at the Client's convenience will incur separate charges."
+      },
+      {
+        "title": "Article 6 (Service Modification and Discontinuation)",
+        "content": "The Company may, at its own discretion, change the content of the Service or discontinue its provision. The Company shall not be liable for any damages incurred by the Client as a result of this."
+      },
+      {
+        "title": "Article 7 (Disclaimer)",
+        "content": "The Company shall not be liable for any damages incurred by the Client or a third party through the use of the Service, except in cases of willful misconduct or gross negligence by the Company."
+      },
+      {
+        "title": "Article 8 (Governing Law and Jurisdiction)",
+        "content": "The interpretation of these terms shall be governed by the laws of Japan. In the event of a dispute concerning the Service, the Tokyo District Court shall be the exclusive jurisdictional court of the first instance."
+      }
+    ],
+    "summary": {
+      "title": "Summary",
+      "items": [
+        "These terms apply to the website production service provided by MiniMaxCode.",
+        "A contract is formed when the client accepts the quotation.",
+        "The full fee is due upon completion of delivery.",
+        "Copyright is transferred to the client upon full payment.",
+        "A 30-day quality assurance period is provided after delivery.",
+        "The Company reserves the right to change or discontinue the service without notice.",
+        "These terms are governed by Japanese law, with the Tokyo District Court as the exclusive jurisdiction."
+      ]
+    },
+    "backToHome": "Back to Home",
+    "importantNotice": {
+      "title": "Important Notice",
       "contract": {
-        "title": "Formation of Contract",
-        "content": "A contract shall be formed when the customer expresses their acceptance of the quotation provided by the Company."
+        "title": "Contract Formation:",
+        "content": "A contract is formed when the client accepts the quotation from our company."
       },
       "payment": {
-        "title": "Fees and Payment",
-        "content": "The fee shall be the amount stipulated at the time of the contract, and an invoice will be issued upon completion of delivery. Payment is requested within 30 days of the invoice date."
+        "title": "Regarding Payment:",
+        "content": "Payment is due after the completion of delivery. There are no initial costs."
       },
-      "delivery": {
-        "title": "Delivery Date and Delivery",
-        "content": "The delivery date will be as stipulated at the time of the contract, and the Company will strive to adhere to the delivery date with the due care of a good manager."
-      },
-      "warranty": {
-        "title": "Warranty and Liability",
-        "content": "The Company will perform minor corrections on the deliverables free of charge for 30 days after delivery. However, corrections involving changes to specifications may incur additional charges."
-      },
-      "intellectual": {
-        "title": "Intellectual Property Rights",
-        "content": "The copyright of the deliverables shall belong to the customer upon full payment of the fee. However, programs and templates independently developed by the Company shall remain the property of the Company."
-      },
-      "prohibited": {
-        "title": "Prohibited Acts",
-        "content": "The following acts are prohibited:\n• Acts that violate laws and regulations\n• Acts that infringe upon the rights of third parties\n• Acts that damage the credibility of the Company\n• Other acts that the Company deems inappropriate"
-      },
-      "termination": {
-        "title": "Termination of Contract",
-        "content": "If the customer violates these Terms, the Company may terminate the contract without notice."
-      },
-      "changes": {
-        "title": "Changes to the Terms",
-        "content": "The Company may change these Terms as necessary. The revised terms will take effect once they are posted on this site."
+      "qualityAssurance": {
+        "title": "Quality Assurance:",
+        "content": "We offer free support for minor corrections for 30 days after delivery."
       }
+    },
+    "questions": {
+      "title": "Questions About the Terms?",
+      "description": "If you have any questions regarding the terms of service, please feel free to contact us.",
+      "contactButton": "Contact Us",
+      "serviceButton": "View Service Details"
     }
   },
   "footer": {
     "company": "MiniMaxCode",
-    "domain": "minimaxcode.com",
     "slogan": "Maximum Result, Minimum Cost.",
+    "description": "High-quality websites at overwhelmingly reasonable prices for startups and SMEs. We offer ultra-fast production, from as little as two days.",
     "links": {
       "services": "Services",
       "company": "Company",
-      "legal": "Legal"
+      "actions": "Actions"
     },
-    "copyright": "© 2025 MiniMaxCode. All rights reserved."
+    "sitemap": "Sitemap",
+    "quote": "Quote",
+    "contact": "Contact",
+    "copyright": "© 2024 MiniMaxCode. All rights reserved."
   }
 }

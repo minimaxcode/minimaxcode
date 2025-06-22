@@ -20,8 +20,6 @@ export const Header = ({ currentPage, onPageChange }: HeaderProps) => {
     { key: 'pricing', label: t('nav.pricing') },
     { key: 'flow', label: t('nav.flow') },
     { key: 'about', label: t('nav.about') },
-    { key: 'quote', label: t('nav.quote') },
-    { key: 'contact', label: t('nav.contact') },
   ];
 
   const handleNavClick = (page: string) => {
@@ -39,7 +37,7 @@ export const Header = ({ currentPage, onPageChange }: HeaderProps) => {
             onClick={() => handleNavClick('home')}
           >
             {/* [修正] アイコン部分をimgタグに変更 */}
-            <img src="/images/logo_nomoji.svg" alt="MiniMaxCode Logo" className="w-8 h-8" />
+            <img src="/images/logo_nomoji.svg" alt="MiniMaxCode Logo" className="w-8 h-8 logo-glow" />
             <span className="text-xl font-bold text-white">MiniMaxCode</span>
           </div>
 
@@ -64,10 +62,16 @@ export const Header = ({ currentPage, onPageChange }: HeaderProps) => {
           <div className="hidden md:flex items-center space-x-4">
             <LanguageSwitcher />
             <button
-              onClick={() => handleNavClick('quote')}
-              className="px-4 py-2 bg-[#50FA7B] text-black font-medium rounded-lg hover:bg-[#50FA7B]/90 transition-colors duration-200"
+              onClick={() => handleNavClick('contact')}
+              className="px-4 py-2 border-2 border-[#3F87F5] text-[#3F87F5] font-medium rounded-lg hover:bg-[#3F87F5] hover:text-white transition-colors duration-200 text-sm"
             >
-              {t('home.hero.cta')}
+              {t('nav.contact')}
+            </button>
+            <button
+              onClick={() => handleNavClick('quote')}
+              className="px-4 py-2 bg-[#50FA7B] text-black font-medium rounded-lg hover:bg-[#50FA7B]/90 transition-colors duration-200 text-sm"
+            >
+              {t('nav.quote')}
             </button>
           </div>
 
@@ -100,12 +104,20 @@ export const Header = ({ currentPage, onPageChange }: HeaderProps) => {
               <div className="pt-3 border-t border-gray-800">
                 <div className="flex items-center justify-between">
                   <LanguageSwitcher />
-                  <button
-                    onClick={() => handleNavClick('quote')}
-                    className="px-4 py-2 bg-[#50FA7B] text-black font-medium rounded-lg hover:bg-[#50FA7B]/90 transition-colors duration-200"
-                  >
-                    {t('home.hero.cta')}
-                  </button>
+                  <div className="flex items-center space-x-2">
+                    <button
+                      onClick={() => handleNavClick('contact')}
+                      className="px-4 py-2 border-2 border-[#3F87F5] text-[#3F87F5] font-medium rounded-lg hover:bg-[#3F87F5] hover:text-white transition-colors duration-200 text-sm"
+                    >
+                      {t('nav.contact')}
+                    </button>
+                    <button
+                      onClick={() => handleNavClick('quote')}
+                      className="px-4 py-2 bg-[#50FA7B] text-black font-medium rounded-lg hover:bg-[#50FA7B]/90 transition-colors duration-200 text-sm"
+                    >
+                      {t('nav.quote')}
+                    </button>
+                  </div>
                 </div>
               </div>
             </div>

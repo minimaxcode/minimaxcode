@@ -163,7 +163,7 @@ export const Service = ({ onPageChange }: ServiceProps) => {
                 <h3 className="text-2xl font-bold text-white">{t('service.included.premium.title')}</h3>
               </div>
               <p className="text-gray-400 mb-4 text-sm">
-                {t('service.included.basic.title')} + 以下の項目
+                {t('service.included.premium.plus')}
               </p>
               <ul className="space-y-4">
                 {premiumItems.map((item, index) => (
@@ -225,10 +225,10 @@ export const Service = ({ onPageChange }: ServiceProps) => {
             viewport={{ once: true }}
           >
             <h2 className="text-4xl md:text-5xl font-bold mb-6 text-white">
-              サービス詳細をご確認ください
+              {t('service.cta.title')}
             </h2>
             <p className="text-xl text-gray-300 mb-8">
-              お客様のニーズに合わせた最適なプランをご提案いたします
+              {t('service.cta.subtitle')}
             </p>
             <div className="flex flex-col sm:flex-row gap-4 justify-center">
               <motion.button
@@ -237,7 +237,7 @@ export const Service = ({ onPageChange }: ServiceProps) => {
                 onClick={() => onPageChange('quote')}
                 className="px-8 py-4 bg-[#50FA7B] text-black font-bold text-lg rounded-xl hover:bg-[#50FA7B]/90 transition-colors duration-200"
               >
-                無料見積もりを開始
+                {t('service.cta.quote')}
               </motion.button>
               <motion.button
                 whileHover={{ scale: 1.05 }}
@@ -245,7 +245,7 @@ export const Service = ({ onPageChange }: ServiceProps) => {
                 onClick={() => onPageChange('pricing')}
                 className="px-8 py-4 border-2 border-[#3F87F5] text-[#3F87F5] font-bold text-lg rounded-xl hover:bg-[#3F87F5] hover:text-white transition-colors duration-200"
               >
-                料金プランを見る
+                {t('service.cta.pricing')}
               </motion.button>
             </div>
           </motion.div>
