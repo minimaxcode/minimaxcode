@@ -1,18 +1,7 @@
 {
-  "builds": [
-    {
-      "src": "api/**/*.ts",
-      "use": "@vercel/node",
-      "config": {
-        "typescript": true,
-        "tsconfig": "tsconfig.node.json"
+    "functions": {
+      "api/**/*.ts": {
+        "runtime": "nodejs18.x"
       }
     }
-  ],
-  "rewrites": [
-    {
-      "source": "/((?!api/|@|.*\\.).*)",
-      "destination": "/index.html"
-    }
-  ]
-} 
+  }
