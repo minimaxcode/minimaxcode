@@ -199,7 +199,10 @@
       ]
     },
     "visitSite": "Visit Site",
-    "pageCount": "{{count}} Pages"
+    "pageCount": "{{count}} Pages",
+    "price": "¥{{price}}",
+    "pagesLabel": "Pages",
+    "priceLabel": "Price"
   },
   "flow": {
     "title": "Production Process",
@@ -303,7 +306,7 @@
     "outline": {
       "title": "Company Outline & Access",
       "name": "Company Name",
-      "nameValue": "MONONEST",
+      "nameValue": "MiniMaxCode",
       "location": "Location",
       "locationValue": "301 Mitsumoto Bldg, 4-15-5 Asakusabashi, Taito City, Tokyo 111-0053",
       "contact": "Contact",
@@ -375,13 +378,15 @@
       "incomplete": "Please select all options."
     },
     "result": {
-      "title": "Estimated Price Range",
-      "priceRange": "¥{min} - ¥{max}",
-      "note": "This is an approximate estimate. The final price may vary depending on detailed requirements.",
-      "contact_button": "Proceed to Detailed Consultation"
+      "title": "Estimated Quote",
+      "priceRange": "¥{{min}} - ¥{{max}}",
+      "note": "This is an estimate. The final price will be determined after a detailed consultation.",
+      "nextStep": "For a more precise quote, please contact us using the button below.",
+      "contact_button": "Inquire with this content",
+      "selectOptionsPrompt": "Select options to see an estimate"
     },
     "summary": {
-      "subject": "Inquiry regarding website creation estimate",
+      "subject": "Inquiry regarding website production estimate",
       "header": "Quote Details",
       "separator": "---------------------------------",
       "pageLabel": "pages",

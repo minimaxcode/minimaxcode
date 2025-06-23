@@ -200,7 +200,9 @@
     },
     "visitSite": "サイトを見る",
     "pageCount": "{{count}}ページ",
-    "price": "¥{{price}}"
+    "price": "¥{{price}}",
+    "pagesLabel": "ページ",
+    "priceLabel": "価格"
   },
   "flow": {
     "title": "制作プロセス",
@@ -379,13 +381,15 @@
       "incomplete": "すべてのオプションを選択してください。"
     },
     "result": {
-      "title": "概算見積もり結果",
-      "priceRange": "¥{min} - ¥{max}",
-      "note": "※ これは概算です。正確なお見積もりは詳細ヒアリング後に提示いたします。",
-      "contact_button": "この内容で詳細相談に進む"
+      "title": "概算お見積もり",
+      "priceRange": "¥{{min}} 〜 ¥{{max}}",
+      "note": "これは概算であり、正式な金額はヒアリング後に確定します。",
+      "nextStep": "より正確なお見積もりをご希望の場合は、以下のボタンからお問い合わせください。",
+      "contact_button": "この内容で問い合わせる",
+      "selectOptionsPrompt": "項目を選択すると概算が表示されます"
     },
     "summary": {
-      "subject": "ウェブサイト制作の見積もりに関するお問い合わせ",
+      "subject": "ウェブサイト制作のお見積もり依頼",
       "header": "見積もり内容",
       "separator": "---------------------------------",
       "pageLabel": "ページ",

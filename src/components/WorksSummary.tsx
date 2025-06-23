@@ -40,28 +40,34 @@ export const WorksSummary = ({ onPageChange }: WorksSummaryProps) => {
               onClick={() => onPageChange('works')}
               className="cursor-pointer group flex flex-col bg-gray-900/50 backdrop-blur-sm border border-gray-800 rounded-2xl overflow-hidden hover:border-gray-700 transition-colors duration-300"
             >
-              <div className="aspect-[4/3] bg-gray-800 overflow-hidden">
+              <div className="aspect-[4/3] bg-gray-800 overflow-y-auto">
                 <img
                   src={project.image}
                   alt={t(project.titleKey)}
-                  className="w-full h-full object-cover object-top transition-transform duration-300 group-hover:scale-105"
+                  className="w-full h-auto object-cover object-top"
                 />
               </div>
               <div className="p-6 flex flex-col flex-grow">
                 <h3 className="text-2xl font-bold text-white mb-4">{t(project.titleKey)}</h3>
                 
-                <div className="grid grid-cols-2 gap-4 text-sm mb-4">
-                  <div className="flex items-center text-gray-300 bg-gray-900/70 rounded-lg p-2 justify-center">
-                    <FileText className="w-4 h-4 mr-2 text-[#3F87F5]" />
-                    <span>{t('works.pageCount', { count: project.pageCount })}</span>
+                <div className="grid grid-cols-2 gap-4 text-lg mb-6">
+                  <div className="flex flex-col items-center justify-center text-white bg-gray-900/70 rounded-lg p-3">
+                    <div className="flex items-center text-sm text-gray-400 mb-1">
+                      <FileText className="w-4 h-4 mr-2 text-[#3F87F5]" />
+                      <span>{t('works.pagesLabel')}</span>
+                    </div>
+                    <span className="font-bold text-xl">{project.pageCount}</span>
                   </div>
-                  <div className="flex items-center text-gray-300 bg-gray-900/70 rounded-lg p-2 justify-center">
-                    <JapaneseYen className="w-4 h-4 mr-2 text-[#50FA7B]" />
-                    <span>{project.price.toLocaleString()}</span>
+                  <div className="flex flex-col items-center justify-center text-white bg-gray-900/70 rounded-lg p-3">
+                    <div className="flex items-center text-sm text-gray-400 mb-1">
+                        <JapaneseYen className="w-4 h-4 mr-2 text-[#50FA7B]" />
+                        <span>{t('works.priceLabel')}</span>
+                    </div>
+                    <span className="font-bold text-xl">{project.price.toLocaleString()}</span>
                   </div>
                 </div>
 
-                <div className="space-y-2 mt-2 flex-grow">
+                <div className="space-y-2 mt-auto flex-grow">
                   {project.features.map((feature, fIndex) => (
                     <div key={fIndex} className="flex items-start text-sm text-gray-300">
                       <CheckCircle className="w-4 h-4 mr-2 mt-0.5 text-[#32E2C4] flex-shrink-0" />

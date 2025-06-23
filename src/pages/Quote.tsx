@@ -393,7 +393,7 @@ ${t('quote.summary.footer')}
                     </div>
                   ) : (
                     <div className="text-center">
-                      <p className="text-gray-400 mb-4">項目を選択すると概算が表示されます</p>
+                      <p className="text-gray-400 mb-4">{t('quote.result.selectOptionsPrompt')}</p>
                       <div className="text-2xl font-bold text-gray-600">¥--- 〜 ¥---</div>
                     </div>
                   )}
