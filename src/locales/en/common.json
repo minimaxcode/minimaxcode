@@ -291,8 +291,11 @@
     "positioning": {
       "title": "Positioning",
       "description": "MiniMaxCode is a lightweight development service brand for the Japanese market.",
+      "lowCostTitle": "Low Cost",
       "lowCost": "Provided at minimum cost",
+      "highSpeedTitle": "High-Speed Delivery",
       "highSpeed": "Delivery from as fast as 2 days",
+      "qualityAssuredTitle": "Quality Assurance",
       "qualityAssured": "Quality assured by Japanese PMs"
     },
     "mission": {
