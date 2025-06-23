@@ -2,12 +2,11 @@
   "name": "react_repo",
   "private": true,
   "version": "0.0.0",
-  "type": "module",
-"scripts": {
-  "dev": "vite",
-  "build": "tsc -b && vite build && cp -r api dist/",
-  "lint": "eslint .",
-  "preview": "vite preview"
+  "scripts": {
+    "dev": "vite",
+    "build": "tsc -b && vite build",
+    "lint": "eslint .",
+    "preview": "vite preview"
   },
   "dependencies": {
     "@hookform/resolvers": "^3.10.0",
