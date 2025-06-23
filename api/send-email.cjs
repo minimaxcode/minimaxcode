@@ -1,12 +1,10 @@
-import type { VercelRequest, VercelResponse } from '@vercel/node';
-import { Resend } from 'resend';
+// 使用 require 导入模块
+const { Resend } = require('resend');
 
 const resend = new Resend(process.env.RESEND_API_KEY);
 
-export default async function handler(
-  req: VercelRequest,
-  res: VercelResponse
-) {
+// 使用 module.exports 导出函数
+module.exports = async (req, res) => {
   if (req.method !== 'POST') {
     return res.status(405).json({ message: 'Method Not Allowed' });
   }
@@ -83,4 +81,4 @@ export default async function handler(
       .status(500)
       .json({ message: 'An unexpected error occurred' });
   }
-} 
+};
