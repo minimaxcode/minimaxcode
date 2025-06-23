@@ -1,5 +1,5 @@
 import { useTranslation } from 'react-i18next';
-import { useState } from 'react';
+import { useState, useEffect } from 'react';
 import { motion } from 'framer-motion';
 import { Calculator, ArrowRight, CheckCircle, MessageSquare } from 'lucide-react';
 
@@ -29,6 +29,10 @@ export const Quote = ({ onPageChange }: QuoteProps) => {
   });
 
   const [showResult, setShowResult] = useState(false);
+
+  useEffect(() => {
+    window.scrollTo(0, 0);
+  }, []);
 
   // Pricing calculation logic
   const calculatePrice = () => {
