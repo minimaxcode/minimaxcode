@@ -388,7 +388,7 @@ ${t('quote.summary.footer')}
                         className="w-full px-6 py-3 bg-[#50FA7B] text-black font-bold rounded-xl hover:bg-[#50FA7B]/90 transition-colors duration-200 flex items-center justify-center space-x-2"
                       >
                         <MessageSquare className="w-5 h-5" />
-                        <span>{t('quote.result.nextStep')}</span>
+                        <span>{t('quote.result.contact_button')}</span>
                       </motion.button>
                     </div>
                   ) : (

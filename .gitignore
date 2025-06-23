@@ -14,7 +14,7 @@ build/
 *.swo
 
 # 本地配置文件
-.env
+.envgi t
 .env.*.local
 .vscode/
 .idea/
@@ -36,3 +36,4 @@ build/
 
 # 忽略环境变量文件
 .env*
+.vercel

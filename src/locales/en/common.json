@@ -179,28 +179,27 @@
   },
   "works": {
     "title": "Our Works",
-    "description": "Here are some of the websites we have created.",
+    "description": "We create websites that accelerate our clients' business with the latest technology and sophisticated design.",
     "daisoubus": {
-      "title": "Daiso Kanko Bus",
-      "description": "A bilingual (Japanese/English) corporate site aimed at enhancing brand image and credibility.",
+      "title": "Daisoubus Inc. Corporate Site",
+      "description": "The official website for a charter bus service company in Tokyo. It combines a modern design with an easy-to-use reservation function.",
       "features": [
-        "Online auto-quote calculator",
-        "Automated email dispatch for inquiry forms",
-        "Bilingual support (Japanese/English)"
+        "CMS construction using WordPress",
+        "Responsive design support",
+        "Security enhancement with SSL support"
       ]
     },
     "mononest": {
-      "title": "MONONEST E-commerce Brand Site",
-      "description": "An official e-commerce brand site that expresses the brand's worldview and maximizes the appeal of its products.",
+      "title": "Mononest Brand Site",
+      "description": "The official brand website for a company selling innovative gadgets. A visually-focused design that maximizes the appeal of the products.",
       "features": [
-        "Product list & detail pages",
-        "Inquiry form for products",
-        "Simple, on-brand design"
+        "E-commerce site construction using Shopify",
+        "Embedding of video content",
+        "Multilingual support (Japanese/English)"
       ]
     },
     "visitSite": "Visit Site",
-    "pageCount": "{{count}} pages",
-    "price": "¥{{price}}"
+    "pageCount": "{{count}} Pages"
   },
   "flow": {
     "title": "Production Process",
@@ -584,5 +583,12 @@
     "quote": "Quote",
     "contact": "Contact",
     "copyright": "© 2024 MiniMaxCode. All rights reserved."
+  },
+  "works.visitSite": "Visit Site",
+  "works.pageCount": "{{count}} Pages",
+  "cta": {
+    "title": "Ready to Start Your Project?",
+    "description": "Let us provide you with a free, no-obligation quote. We'll help you realize your vision with the best performance and price.",
+    "button": "Get a Free Quote"
   }
 }

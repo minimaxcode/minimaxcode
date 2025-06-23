@@ -1,4 +1,5 @@
 import { useState, useEffect } from 'react';
+import { Routes, Route, useNavigate, useLocation } from 'react-router-dom';
 import { Header } from './components/Header';
 import { Footer } from './components/Footer';
 import { Home } from './pages/Home';
@@ -24,67 +25,46 @@ declare global {
 }
 
 function App() {
-  const [currentPage, setCurrentPage] = useState('home');
-  
-  // [修正点 1] QuoteページからContactページへデータを渡すための中継用Stateを追加
+  const navigate = useNavigate();
+  const location = useLocation();
   const [quoteDetailsForContact, setQuoteDetailsForContact] = useState(null);
 
-  // Google Analytics page view tracking
+  const currentPage = location.pathname.substring(1) || 'home';
+
   useEffect(() => {
     if (window.gtag) {
-      const pagePath = `/${currentPage === 'home' ? '' : currentPage}`;
       window.gtag('config', 'G-S5F5M4ZVB3', {
-        page_path: pagePath,
+        page_path: location.pathname,
       });
     }
-  }, [currentPage]);
+  }, [location]);
 
-  // [修正点 2] handlePageChange関数が、オプションでデータ(data)を受け取れるように変更
   const handlePageChange = (page: string, data: any = null) => {
-    // 渡されたデータ（なければnull）を常にStateにセットする
-    // これにより、Quoteページから遷移した時だけデータがセットされ、
-    // 他のページからContactに遷移した場合はnullになり、フォームは空になる
     setQuoteDetailsForContact(data);
-    
-    setCurrentPage(page);
+    navigate(`/${page === 'home' ? '' : page}`);
     window.scrollTo(0, 0);
   };
 
-  const renderPage = () => {
-    // onPageChangeは更新されたものを渡すので、pagePropsの定義は変更なし
-    const pageProps = { onPageChange: handlePageChange };
-
-    switch (currentPage) {
-      case 'home':
-        return <Home {...pageProps} />;
-      case 'service':
-        return <Service {...pageProps} />;
-      case 'pricing':
-        return <Pricing {...pageProps} />;
-      case 'flow':
-        return <Flow {...pageProps} />;
-      case 'about':
-        return <About {...pageProps} />;
-      case 'quote':
-        return <Quote {...pageProps} />;
-      case 'contact':
-        // [修正点 3] Contactコンポーネントをレンダリングする際に、保持していた見積もりデータをpropsとして渡す
-        return <Contact {...pageProps} quoteDetails={quoteDetailsForContact} />;
-      case 'privacy':
-        return <Privacy {...pageProps} />;
-      case 'terms':
-        return <Terms {...pageProps} />;
-      case 'works':
-        return <Works {...pageProps} />;
-      default:
-        return <Home {...pageProps} />;
-    }
-  };
+  const pageProps = { onPageChange: handlePageChange };
 
   return (
     <div className="min-h-screen bg-[#0D0D0D]">
       <Header currentPage={currentPage} onPageChange={handlePageChange} />
-      <main>{renderPage()}</main>
+      <main>
+        <Routes>
+          <Route path="/" element={<Home {...pageProps} />} />
+          <Route path="/service" element={<Service {...pageProps} />} />
+          <Route path="/pricing" element={<Pricing {...pageProps} />} />
+          <Route path="/flow" element={<Flow {...pageProps} />} />
+          <Route path="/about" element={<About {...pageProps} />} />
+          <Route path="/quote" element={<Quote {...pageProps} />} />
+          <Route path="/contact" element={<Contact {...pageProps} quoteDetails={quoteDetailsForContact} />} />
+          <Route path="/privacy" element={<Privacy {...pageProps} />} />
+          <Route path="/terms" element={<Terms {...pageProps} />} />
+          <Route path="/works" element={<Works {...pageProps} />} />
+          <Route path="*" element={<Home {...pageProps} />} /> {/* Fallback route */}
+        </Routes>
+      </main>
       <Footer onPageChange={handlePageChange} />
     </div>
   );

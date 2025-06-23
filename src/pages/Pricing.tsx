@@ -1,6 +1,8 @@
 import { useTranslation } from 'react-i18next';
 import { motion } from 'framer-motion';
 import { DollarSign, Gift, Shield, Percent, ArrowRight, CheckCircle } from 'lucide-react';
+import { CTA } from '../components/CTA';
+import { useEffect } from 'react';
 
 interface PricingProps {
   onPageChange: (page: string) => void;
@@ -8,6 +10,10 @@ interface PricingProps {
 
 export const Pricing = ({ onPageChange }: PricingProps) => {
   const { t } = useTranslation();
+
+  useEffect(() => {
+    window.scrollTo(0, 0);
+  }, []);
 
   const transparencyItems = [
     t('pricing.transparency.examples.domain'),
@@ -261,6 +267,8 @@ export const Pricing = ({ onPageChange }: PricingProps) => {
           </motion.div>
         </div>
       </section>
+
+      <CTA onCTAClick={() => onPageChange('quote')} />
     </div>
   );
 };

@@ -71,9 +71,9 @@
       "cta": "制作実績をすべて見る"
     },
     "cta": {
-      "title": "今すぐ始めませんか？",
-      "subtitle": "初期費用ゼロ。納品完了後のお支払いで安心です。",
-      "button": "無料見積もりを開始",
+      "title": "プロジェクトを始めませんか？",
+      "subtitle": "まずはお気軽にご相談ください。最高の性能と価格で、あなたのビジョンを実現するお手伝いをします。",
+      "button": "無料でお見積もり",
       "note": "契約時に合意した要件を満たした納品完了後にお支払い"
     }
   },
@@ -105,6 +105,7 @@
       },
       "premium": {
         "title": "契約金額50万円以上",
+        "plus": "ベーシックの全機能に加え：",
         "items": [
           "SNS共有用 OGP設定",
           "サイトマップ（sitemap.xml）作成・送信",
@@ -198,7 +199,7 @@
       ]
     },
     "visitSite": "サイトを見る",
-    "pageCount": "{{count}} ページ",
+    "pageCount": "{{count}}ページ",
     "price": "¥{{price}}"
   },
   "flow": {
@@ -223,11 +224,13 @@
       },
       "step5": {
         "title": "納品・ご請求",
-        "description": "最終確認後、合意した要件を満たしていることをご確認いただき納品となります。納品完了後に請求書を発行いたします。"
+        "description": "最終確認後、合意した要件を満たしていることをご確認いただき納品となります。納品完了後に請求書を発行いたします。",
+        "duration": "1営業日"
       },
       "step6": {
         "title": "運用・サポート（ご希望に応じて）",
-        "description": "インフラ設定や軽微な更新作業など、ご希望に応じて継続的なサポートも可能です。メンテナンス契約は別途ご相談ください。"
+        "description": "インフラ設定や軽微な更新作業など、ご希望に応じて継続的なサポートも可能です。メンテナンス契約は別途ご相談ください。",
+        "duration": "継続"
       }
     },
     "timeline": {
@@ -293,6 +296,25 @@
       "qualityAssuredTitle": "品質保証",
       "qualityAssured": "日本人PMによる品質保証"
     },
+    "mission": {
+      "title": "私たちのミッション",
+      "quote": "「最大の成果を、最小のコストで。」",
+      "description": "私たちの使命は、誰もが手の届く価格で高品質なウェブサイト制作を提供することです。AI技術とグローバルな人材を活用することで、従来の半額以下で高品質なサービスを実現します。すべての企業や個人がウェブでの存在感を確立し、デジタル時代で成功できる世界を目指します。",
+      "costReduction": "コスト削減",
+      "fastestDelivery": "最速納品",
+      "transparentAccounting": "透明な会計"
+    },
+    "outline": {
+      "title": "会社概要とアクセス",
+      "name": "会社名",
+      "nameValue": "MiniMaxCode",
+      "location": "所在地",
+      "locationValue": "〒111-0053 東京都台東区浅草橋4-15-5-301",
+      "contact": "連絡先",
+      "contactValue": "contact@minimaxcode.com",
+      "phone": "電話番号",
+      "phoneValue": "080-8916-5438"
+    },
     "values": {
       "title": "私たちの価値観",
       "resultOriented": {
@@ -307,25 +329,6 @@
         "title": "段階的アプローチ",
         "description": "現在の規模に最適なスタートを。必要な機能から小さく始め、成長に応じて拡張できます。"
       }
-    },
-    "mission": {
-      "title": "私たちのミッション",
-      "quote": "「最大の成果を、最小のコストで。」",
-      "description": "私たちの使命は、誰もが手の届く価格で高品質なウェブサイト制作を提供することです。AI技術とグローバルな人材を活用することで、従来の半額以下で高品質なサービスを実現します。すべての企業や個人がウェブでの存在感を確立し、デジタル時代で成功できる世界を目指します。",
-      "costReduction": "コスト削減",
-      "fastestDelivery": "最速納品",
-      "transparentAccounting": "透明な会計"
-    },
-    "outline": {
-      "title": "会社概要とアクセス",
-      "name": "会社名",
-      "nameValue": "MONONEST",
-      "location": "所在地",
-      "locationValue": "〒111-0053 東京都台東区浅草橋4-15-5-301",
-      "contact": "連絡先",
-      "contactValue": "contact@minimaxcode.com",
-      "phone": "電話番号",
-      "phoneValue": "080-8916-5438"
     },
     "cta": {
       "title": "もっと詳しく知る",
@@ -371,23 +374,28 @@
           "normal": "1-2週間",
           "flexible": "1ヶ月以上"
         }
-      }
+      },
+      "calculate": "概算を計算",
+      "incomplete": "すべてのオプションを選択してください。"
     },
     "result": {
       "title": "概算見積もり結果",
-      "basePrice": "基本料金",
-      "additionalFeatures": "追加機能",
-      "designComplexity": "デザイン料金",
-      "timeline": "納期調整",
-      "total": "合計概算金額",
-      "range": "¥{{min}} 〜 ¥{{max}}",
+      "priceRange": "¥{min} - ¥{max}",
       "note": "※ これは概算です。正確なお見積もりは詳細ヒアリング後に提示いたします。",
-      "nextStep": "この見積もりでお問い合わせする"
+      "contact_button": "この内容で詳細相談に進む"
+    },
+    "summary": {
+      "subject": "ウェブサイト制作の見積もりに関するお問い合わせ",
+      "header": "見積もり内容",
+      "separator": "---------------------------------",
+      "pageLabel": "ページ",
+      "none": "  - なし",
+      "footer": "[ここに具体的なご要望やご質問をご記入ください]"
     }
   },
   "contact": {
     "title": "お問い合わせ",
-    "subtitle": "お気軽にご相談ください",
+    "subtitle": "ご質問やプロジェクトのご相談など、お気軽にご連絡ください。",
     "form": {
       "name": {
         "label": "お名前",
@@ -413,34 +421,35 @@
         "label": "お問い合わせ内容",
         "placeholder": "ご相談内容をお聞かせください"
       },
-      "submit": "送信する"
+      "submit": "送信する",
+      "submitting": "送信中..."
     },
     "validation": {
       "required": "この項目は必須です",
-      "email": "正しいメールアドレスを入力してください",
-      "phone": "正しい電話番号を入力してください"
+      "email": "正しいメールアドレスを入力してください"
     },
     "success": {
-      "title": "送信完了",
-      "message": "お問い合わせを受け付けました。2営業日以内にご回答いたします。"
+      "title": "送信完了しました！",
+      "message": "お問い合わせありがとうございます。2営業日以内にご回答いたします。",
+      "newInquiry": "新たにお問い合わせ"
     },
     "error": {
-      "title": "送信に失敗しました",
-      "message": "送信中にエラーが発生しました。時間をおいて再度お試しください。"
+      "title": "エラーが発生しました",
+      "message": "メッセージの送信に失敗しました。時間をおいて再度お試しいただくか、直接メールにてご連絡ください。"
     },
     "flow": {
-      "title": "ご利用の流れ",
+      "title": "お問い合わせ後の流れ",
       "step1": {
-        "title": "お問い合わせ",
-        "description": "フォームからご質問やご相談内容を送信ください。"
+        "title": "自動返信メール",
+        "description": "ご入力いただいたメールアドレスに確認メールが届きます。"
       },
       "step2": {
-        "title": "ヒアリング",
-        "description": "2営業日以内にご返信し、詳細なヒアリングの日程を調整します。"
+        "title": "担当者から連絡",
+        "description": "2営業日以内に担当者からご連絡いたします。"
       },
       "step3": {
-        "title": "ご提案",
-        "description": "ご要望に基づき、最適な提案とお見積もりを提示します。"
+        "title": "詳細ヒアリング",
+        "description": "最適なご提案のため、ご要望を詳しくお伺いします。"
       }
     },
     "tryQuote": "無料でお見積もりを試す"
@@ -489,7 +498,7 @@
     ],
     "contact": {
       "title": "プライバシーに関するご質問",
-      "description": "個人情報の取り扱いについてご不明な点がございましたら、お気軽にお問い合わせください",
+      "description": "個人情報の取り扱いについてご不明な点がございましたら、お気軽にお問い合わせください。",
       "button": "お問い合わせ"
     },
     "backToHome": "ホームに戻る"
@@ -560,7 +569,7 @@
     },
     "questions": {
       "title": "利用規約に関するご質問",
-      "description": "サービス利用に関してご不明な点がございましたら、お気軽にお問い合わせください",
+      "description": "サービス利用に関してご不明な点がございましたら、お気軽にお問い合わせください。",
       "contactButton": "お問い合わせ",
       "serviceButton": "サービス詳細を見る"
     }
@@ -569,13 +578,19 @@
     "company": "MiniMaxCode",
     "slogan": "最大の成果を、最小のコストで。",
     "description": "スタートアップや中小企業向けに、高品質なウェブサイトを圧倒的な低価格で提供。最短2日からの超高速制作を実現します。",
-    "domain": "minimaxcode.com",
     "links": {
       "services": "サービス",
       "company": "会社情報",
       "actions": "お問合せ"
     },
-    "copyright": "© 2024 MiniMaxCode. All Rights Reserved."
+    "sitemap": "サイトマップ",
+    "quote": "見積もり",
+    "contact": "お問い合わせ",
+    "copyright": "© 2024 MiniMaxCode. All rights reserved."
   },
-  "tryQuote": "無料でお見積もりを試す"
+  "cta": {
+    "title": "プロジェクトを始めませんか？",
+    "description": "まずはお気軽にご相談ください。最高の性能と価格で、あなたのビジョンを実現するお手伝いをします。",
+    "button": "無料でお見積もり"
+  }
 }

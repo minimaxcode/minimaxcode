@@ -167,3 +167,7 @@ img {
     animation-play-state: running;
   }
 }
+
+.leaflet-container {
+  border-radius: 1rem;
+}

@@ -2,6 +2,8 @@ import { useTranslation } from 'react-i18next';
 import { motion } from 'framer-motion';
 import { ExternalLink, CheckCircle, FileText, JapaneseYen } from 'lucide-react';
 import { worksData } from '../data/works';
+import { useEffect } from 'react';
+import { CTA } from '../components/CTA';
 
 interface WorksProps {
   onPageChange: (page: string) => void;
@@ -9,6 +11,10 @@ interface WorksProps {
 
 export const Works = ({ onPageChange }: WorksProps) => {
   const { t } = useTranslation('common');
+
+  useEffect(() => {
+    window.scrollTo(0, 0);
+  }, []);
 
   return (
     <div className="min-h-screen bg-[#0D0D0D] text-white pt-24">
@@ -40,11 +46,11 @@ export const Works = ({ onPageChange }: WorksProps) => {
             >
               <div className="md:w-1/2 w-full">
                 <a href={project.url} target="_blank" rel="noopener noreferrer" className="block group">
-                  <div className="aspect-[4/3] bg-gray-800 overflow-hidden rounded-2xl shadow-lg">
+                  <div className="aspect-[4/3] bg-gray-800 overflow-y-auto rounded-2xl shadow-lg">
                     <img
                       src={project.image}
                       alt={t(project.titleKey)}
-                      className="w-full h-full object-cover object-top scroll-animation"
+                      className="w-full object-top transition-transform duration-300 group-hover:scale-105"
                     />
                   </div>
                 </a>
@@ -85,6 +91,7 @@ export const Works = ({ onPageChange }: WorksProps) => {
           ))}
         </div>
       </div>
+      <CTA onCTAClick={() => onPageChange('quote')} />
     </div>
   );
 }; 
