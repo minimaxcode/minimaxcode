@@ -54,22 +54,22 @@ export const Quote = ({ onPageChange }: QuoteProps) => {
     quoteData.features.forEach(feature => {
       switch (feature) {
         case 'contactForm':
-          featureCost += 30000;
+          featureCost += 50000;  // ¥50,000
           break;
         case 'blog':
-          featureCost += 80000;
+          featureCost += 100000; // ¥100,000
           break;
         case 'multilingual':
-          featureCost += 120000;
+          featureCost += 100000; // ¥100,000
           break;
         case 'cms':
-          featureCost += 150000;
+          featureCost += 150000; // ¥150,000
           break;
         case 'ecommerce':
-          featureCost += 300000;
+          featureCost += 500000; // ¥500,000
           break;
         case 'membership':
-          featureCost += 250000;
+          featureCost += 300000; // ¥300,000
           break;
       }
     });
