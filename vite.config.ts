@@ -4,11 +4,6 @@ import { defineConfig } from "vite"
 
 export default defineConfig({
   plugins: [react()],
-  server: {
-    proxy: {
-      '/api': 'http://localhost:3001'
-    }
-  },
   resolve: {
     alias: {
       "@": path.resolve(__dirname, "./src"),
@@ -18,4 +13,3 @@ export default defineConfig({
     chunkSizeWarningLimit: 1600,
   },
 })
-
