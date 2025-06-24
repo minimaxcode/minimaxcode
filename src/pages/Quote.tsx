@@ -1,7 +1,7 @@
 import { useTranslation } from 'react-i18next';
 import { useState, useEffect } from 'react';
 import { motion } from 'framer-motion';
-import { Calculator, ArrowRight, CheckCircle, MessageSquare } from 'lucide-react';
+import { Calculator, ArrowRight, CheckCircle, MessageSquare, FileCode } from 'lucide-react';
 
 // [MODIFIED] onPageChangeプロパティの型を、データペイロードを受け取れるように変更
 // [MODIFIED] Changed the onPageChange prop type to accept a data payload
@@ -15,6 +15,7 @@ interface QuoteData {
   features: string[];
   design: string;
   timeline: string;
+  sourceCode: boolean;
 }
 
 export const Quote = ({ onPageChange }: QuoteProps) => {
@@ -26,6 +27,7 @@ export const Quote = ({ onPageChange }: QuoteProps) => {
     features: [],
     design: '',
     timeline: '',
+    sourceCode: false,
   });
 
   const [showResult, setShowResult] = useState(false);
@@ -98,8 +100,14 @@ export const Quote = ({ onPageChange }: QuoteProps) => {
       maxMultiplier *= 1.0;
     }
 
-    const minPrice = Math.round((basePrice * minMultiplier + featureCost) / 10000) * 10000;
-    const maxPrice = Math.round((basePrice * maxMultiplier + featureCost) / 10000) * 10000;
+    let minPrice = Math.round((basePrice * minMultiplier + featureCost) / 10000) * 10000;
+    let maxPrice = Math.round((basePrice * maxMultiplier + featureCost) / 10000) * 10000;
+
+    // Source code delivery (+20%)
+    if (quoteData.sourceCode) {
+      minPrice = Math.round(minPrice * 1.2 / 10000) * 10000;
+      maxPrice = Math.round(maxPrice * 1.2 / 10000) * 10000;
+    }
 
     return { min: minPrice, max: maxPrice };
   };
@@ -159,6 +167,7 @@ export const Quote = ({ onPageChange }: QuoteProps) => {
 
     const designLabel = designOptions.find(d => d.value === quoteData.design)?.label || '';
     const timelineLabel = timelineOptions.find(t => t.value === quoteData.timeline)?.label || '';
+    const sourceCodeLabel = quoteData.sourceCode ? t('quote.form.sourceCode.label') : '';
 
     // Generate the message body
     const summary = `${t('quote.summary.header')}
@@ -169,6 +178,7 @@ ${t('quote.summary.separator')}
 ${selectedFeatures || t('quote.summary.none')}
 ■ ${t('quote.form.design.label')}: ${designLabel}
 ■ ${t('quote.form.timeline.label')}: ${timelineLabel}
+${sourceCodeLabel ? `■ ${t('quote.form.sourceCode.label')}: ${sourceCodeLabel}` : ''}
 ${t('quote.summary.separator')}
 ■ ${t('quote.result.title')}: ${t('quote.result.priceRange', { min: priceRange.min.toLocaleString(), max: priceRange.max.toLocaleString() })}
 ${t('quote.summary.separator')}
@@ -363,6 +373,26 @@ ${t('quote.summary.footer')}
                       </motion.button>
                     ))}
                   </div>
+                </div>
+
+                {/* Source Code Option */}
+                <div className="space-y-4">
+                  <div className="flex items-center space-x-3">
+                    <input
+                      type="checkbox"
+                      id="sourceCode"
+                      checked={quoteData.sourceCode}
+                      onChange={(e) => setQuoteData(prev => ({ ...prev, sourceCode: e.target.checked }))}
+                      className="w-5 h-5 text-[#50FA7B] bg-gray-800 border-gray-600 rounded focus:ring-[#50FA7B] focus:ring-2"
+                    />
+                    <label htmlFor="sourceCode" className="text-lg font-semibold text-white flex items-center space-x-2">
+                      <FileCode className="w-5 h-5 text-[#FF6B6B]" />
+                      <span>{t('quote.form.sourceCode.label')}</span>
+                    </label>
+                  </div>
+                  <p className="text-gray-400 text-sm ml-8">
+                    {t('quote.form.sourceCode.description')}
+                  </p>
                 </div>
               </div>
 

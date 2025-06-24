@@ -1,6 +1,6 @@
 import { useTranslation } from 'react-i18next';
 import { motion } from 'framer-motion';
-import { Zap, Shield, Eye, ArrowRight, Star, CheckCircle } from 'lucide-react';
+import { Zap, Shield, Eye, ArrowRight, Star, CheckCircle, Code } from 'lucide-react';
 import { WorksSummary } from '../components/WorksSummary';
 
 interface HomeProps {
@@ -28,6 +28,12 @@ export const Home = ({ onPageChange }: HomeProps) => {
       title: t('home.features.transparency.title'),
       description: t('home.features.transparency.description'),
       gradient: 'from-[#50FA7B] to-[#3F87F5]',
+    },
+    {
+      icon: Code,
+      title: t('home.features.sourceCode.title'),
+      description: t('home.features.sourceCode.description'),
+      gradient: 'from-[#FF6B6B] to-[#4ECDC4]',
     },
   ];
 
@@ -109,7 +115,7 @@ export const Home = ({ onPageChange }: HomeProps) => {
             </h2>
           </motion.div>
 
-          <div className="grid grid-cols-1 md:grid-cols-3 gap-8">
+          <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-4 gap-8">
             {features.map((feature, index) => (
               <motion.div
                 key={index}

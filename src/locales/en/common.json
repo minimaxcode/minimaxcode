@@ -25,7 +25,7 @@
       "contact": "Contact Us"
     },
     "features": {
-      "title": "3 Key Features",
+      "title": "4 Key Features",
       "lowPrice": {
         "title": "Overwhelmingly Low Prices",
         "description": "AI utilization and global talent achieve overwhelmingly reasonable prices compared to competitors. Final quality is guaranteed by Japanese PMs."
@@ -36,7 +36,15 @@
       },
       "transparency": {
         "title": "Complete Transparency",
-        "description": "All infrastructure costs including domains, servers, and APIs are transparently presented at actual cost. No hidden fees whatsoever."
+        "description": "All infrastructure costs including domains, servers, and APIs are transparently presented at actual cost. No hidden fees whatsoever.",
+        "sourceCode": {
+          "title": "Source Code Delivery",
+          "description": "Get complete source code for +20% of total cost. Full ownership and freedom to modify and extend as needed."
+        }
+      },
+      "sourceCode": {
+        "title": "Source Code Delivery",
+        "description": "Get complete source code for +20% of total cost. Full ownership and freedom to modify and extend as needed."
       }
     },
     "pricing": {
@@ -154,6 +162,7 @@
       "description": "All infrastructure costs including domains, servers, APIs, and email are transparently presented and settled at actual cost.",
       "feature": "Clear, At-Cost Accounting",
       "noHiddenFees": "Absolutely no hidden fees.",
+      "sourceCode": "Source Code Delivery (+20%): Project source code packaged for delivery, convenient for future expansion",
       "examples": {
         "domain": "Domain: ¥200/month",
         "server": "Server: ¥2,400/month",
@@ -181,21 +190,21 @@
     "title": "Our Works",
     "description": "We create websites that accelerate our clients' business with the latest technology and sophisticated design.",
     "daisoubus": {
-      "title": "Daisoubus Inc. Corporate Site",
-      "description": "The official website for a charter bus service company in Tokyo. It combines a modern design with an easy-to-use reservation function.",
+      "title": "Daisoubus",
+      "description": "A corporate website with Japanese/English bilingual support, designed for corporate branding and credibility enhancement.",
       "features": [
-        "CMS construction using WordPress",
-        "Responsive design support",
-        "Security enhancement with SSL support"
+        "Online automatic quote calculation function",
+        "Contact form automatic email delivery function",
+        "Japanese/English bilingual support"
       ]
     },
     "mononest": {
-      "title": "Mononest Brand Site",
-      "description": "The official brand website for a company selling innovative gadgets. A visually-focused design that maximizes the appeal of the products.",
+      "title": "MONONEST E-commerce Brand Site",
+      "description": "The official E-commerce brand website that expresses the brand's worldview and maximizes the appeal of products.",
       "features": [
-        "E-commerce site construction using Shopify",
-        "Embedding of video content",
-        "Multilingual support (Japanese/English)"
+        "Product listing and product detail pages",
+        "Product inquiry contact form function",
+        "Simple design with brand appeal"
       ]
     },
     "visitSite": "Visit Site",
@@ -376,6 +385,10 @@
           "normal": "Normal (2-4 weeks)",
           "flexible": "Flexible (1 month+)"
         }
+      },
+      "sourceCode": {
+        "label": "Add Source Code Delivery (+20%)",
+        "description": "Get complete project source code for future self-management and development"
       },
       "calculate": "Calculate Estimate",
       "incomplete": "Please select all options."

@@ -1,6 +1,6 @@
 import { useTranslation } from 'react-i18next';
 import { motion } from 'framer-motion';
-import { DollarSign, Gift, Shield, Percent, ArrowRight, CheckCircle } from 'lucide-react';
+import { DollarSign, Gift, Shield, Percent, ArrowRight, CheckCircle, FileCode } from 'lucide-react';
 import { CTA } from '../components/CTA';
 import { useEffect } from 'react';
 
@@ -265,6 +265,13 @@ export const Pricing = ({ onPageChange }: PricingProps) => {
               {t('pricing.transparency.note')}
             </p>
           </motion.div>
+
+          <div className="mt-4 p-4 bg-gray-800/50 rounded-lg border border-gray-700">
+            <div className="flex items-center space-x-2">
+              <FileCode className="w-5 h-5 text-[#FF6B6B]" />
+              <span className="text-sm text-gray-300">{t('pricing.transparency.sourceCode')}</span>
+            </div>
+          </div>
         </div>
       </section>
 
