@@ -1,0 +1,39 @@
+# 依赖文件夹
+node_modules/
+.pnp/
+.pnp.js
+
+# 构建产物
+dist/
+build/
+
+# 临时文件
+*.log
+*.tmp
+*.swp
+*.swo
+
+# 本地配置文件
+.envgi t
+.env.*.local
+.vscode/
+.idea/
+
+# macOS系统文件
+.DS_Store
+
+# VS Code运行缓存
+*.code-workspace
+
+# TypeScript编译输出（如有）
+*.tsbuildinfo
+
+# pnpm 的缓存/元数据（可选）
+.pnpm-debug.log
+
+# 其他可选
+*.local
+
+# 忽略环境变量文件
+.env*
+.vercel
