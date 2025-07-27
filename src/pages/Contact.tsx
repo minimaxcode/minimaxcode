@@ -46,10 +46,10 @@ export const Contact = ({ onPageChange, quoteDetails }: ContactProps) => {
   useEffect(() => {
     if (quoteDetails && quoteDetails.source === 'quote') {
       // 見積もりデータから件名とメッセージを生成
-      const subject = '【見積もり依頼】ウェブサイト制作について';
+      const subject = t('contact.quote.subject');
       
       // 見積もり詳細をメッセージに含める
-      let message = '以下の内容で見積もりをお願いいたします。\n\n';
+      let message = t('contact.quote.message');
       
       if (quoteDetails.quoteData) {
         const { quoteData, pricing } = quoteDetails;
@@ -61,83 +61,83 @@ export const Contact = ({ onPageChange, quoteDetails }: ContactProps) => {
         
         if (selectedPlan) {
           const planNames = {
-            'template': 'テンプレートプラン',
-            'basic-5': 'ベーシックプラン（5P）',
-            'basic-10': 'ベーシックプラン（10P）',
-            'standard-5': 'スタンダードプラン（5P）',
-            'standard-10': 'スタンダードプラン（10P）',
-            'customize': 'カスタマイズプラン',
-            'premium': 'プレミアムプラン'
+            'template': t('pricing.plans.basic.name'),
+            'basic-5': t('pricing.plans.basic.name') + '（5P）',
+            'basic-10': t('pricing.plans.basic.name') + '（10P）',
+            'standard-5': t('pricing.plans.standard.name') + '（5P）',
+            'standard-10': t('pricing.plans.standard.name') + '（10P）',
+            'customize': t('pricing.plans.customize.name'),
+            'premium': t('pricing.plans.premium.name')
           };
-          message += `【WEB制作プラン】\n${planNames[selectedPlan]}\n`;
+          message += `${t('contact.quote.webPlan')}\n${planNames[selectedPlan]}\n`;
         }
         
         // ページ数
-        message += `【ページ数】\n${quoteData.pageCount}ページ\n\n`;
+        message += `${t('contact.quote.pageCount')}\n${quoteData.pageCount}ページ\n\n`;
         
         // オプション
         if (quoteData.options && quoteData.options.length > 0) {
           const optionNames = {
-            'cms': 'CMS管理システム',
-            'mobile': 'スマホ対応',
-            'product': '商品展示機能',
-            'news': '情報掲示機能',
-            'content': '原稿お任せ',
-            'contact': 'お問い合わせフォーム',
-            'seo': 'SEO対策',
-            'shop': 'ネットショップ機能',
-            'meo': 'MEO対策',
-            'recaptcha': 'reCAPTCHA導入',
-            'ssl': 'SSL化',
-            'blog': 'ブログ機能'
+            'cms': t('pricing.table.features.cms'),
+            'mobile': t('pricing.table.features.mobile'),
+            'product': t('pricing.table.features.product'),
+            'news': t('pricing.table.features.news.name'),
+            'content': t('pricing.table.features.content'),
+            'contact': t('pricing.table.features.contact'),
+            'seo': t('pricing.table.features.seo'),
+            'shop': t('pricing.table.features.shop'),
+            'meo': t('pricing.table.features.meo'),
+            'recaptcha': t('pricing.table.features.recaptcha.name'),
+            'ssl': t('pricing.table.features.ssl'),
+            'blog': t('pricing.table.features.blog.name')
           };
-          message += `【選択オプション】\n${quoteData.options.map(id => optionNames[id] || id).join('\n')}\n\n`;
+          message += `${t('contact.quote.options')}\n${quoteData.options.map(id => optionNames[id] || id).join('\n')}\n\n`;
         }
         
                   // 保守
           if (quoteData.maintenance && quoteData.maintenance.length > 0) {
             const maintenanceNames = {
-              'server': 'サーバー保守',
-              'email': '企業メール',
-              'update': 'サイト更新'
+              'server': t('pricing.table.features.server.name'),
+              'email': t('pricing.table.features.email.name'),
+              'update': t('pricing.table.features.update.name')
             };
-            message += `【保守項目】\n${quoteData.maintenance.map(id => maintenanceNames[id] || id).join('\n')}\n\n`;
+            message += `${t('contact.quote.maintenance')}\n${quoteData.maintenance.map(id => maintenanceNames[id] || id).join('\n')}\n\n`;
           }
         
         // 希望納期
         if (quoteData.timeline) {
-          message += `【希望納期】\n${quoteData.timeline}\n\n`;
+          message += `${t('contact.quote.timeline')}\n${quoteData.timeline}\n\n`;
         }
         
         // ウェブサイト言語
         if (quoteData.languages && quoteData.languages.length > 0) {
           const languageNames = {
-            'ja': '日本語',
-            'en': '英語',
-            'zh': '中国語',
-            'ko': '韓国語'
+            'ja': t('quote.form.languages.japanese'),
+            'en': t('quote.form.languages.english'),
+            'zh': t('quote.form.languages.chinese'),
+            'ko': t('quote.form.languages.korean')
           };
-          message += `【ウェブサイト言語】\n${quoteData.languages.map(id => languageNames[id] || id).join('\n')}\n\n`;
+          message += `${t('contact.quote.languages')}\n${quoteData.languages.map(id => languageNames[id] || id).join('\n')}\n\n`;
         }
         
         // ソースコード納品
         if (quoteData.sourceCode) {
-          message += `【ソースコード納品】\n選択済み\n\n`;
+          message += `${t('contact.quote.sourceCode')}\n選択済み\n\n`;
         }
         
         // 価格情報
         if (pricing) {
-          message += `【概算価格】\n`;
+          message += `${t('contact.quote.total')}\n`;
           if (pricing.hasVariableOptions) {
-            message += `ウェブサイト制作費用: ¥${pricing.websiteTotal.toLocaleString()} ~ ¥${pricing.websiteTotalMax.toLocaleString()}\n`;
+            message += `${t('contact.quote.websiteCost')}: ¥${pricing.websiteTotal.toLocaleString()} ~ ¥${pricing.websiteTotalMax.toLocaleString()}\n`;
           } else {
-            message += `ウェブサイト制作費用: ¥${pricing.websiteTotal.toLocaleString()}\n`;
+            message += `${t('contact.quote.websiteCost')}: ¥${pricing.websiteTotal.toLocaleString()}\n`;
           }
-          message += `保守料金: ¥${pricing.maintenanceTotal.toLocaleString()}/月\n\n`;
+          message += `${t('contact.quote.maintenanceCost')}: ¥${pricing.maintenanceTotal.toLocaleString()}/月\n\n`;
         }
       }
       
-      message += 'ご検討のほど、よろしくお願いいたします。';
+      message += t('contact.quote.closing');
       
       setValue('subject', subject);
       setValue('message', message);
@@ -217,43 +217,43 @@ export const Contact = ({ onPageChange, quoteDetails }: ContactProps) => {
   // FAQ数据
   const faqs = [
     {
-      q: 'Q. 既に原稿や構成があるのですが、そこから作ってもらえますか？',
-      a: 'A: はい、可能です。初回お打ち合わせ時にご用意された原稿と構成の共有をお願いします。',
+      q: t('contact.faq.faq1.q'),
+      a: t('contact.faq.faq1.a'),
     },
     {
-      q: 'Q. アイコン・画像について追加料金は本当に発生しないですか？',
-      a: 'A: はい、有償含めた数千以上の素材から弊社がページに適した画像とアイコンを追加料金なしでご提案させていただきます。簡単なロゴやバナー作成も追加料金なしで制作可能です。どうしてもバナーやアイコンにこだわりたい場合や、オリジナルのアイコン作成やイラスト・図表作成が必要な場合は、別途費用かけて対応することも可能です。その場合、着手前に必ず事前にご相談させていただきます。',
+      q: t('contact.faq.faq2.q'),
+      a: t('contact.faq.faq2.a'),
     },
     {
-      q: 'Q. ドメイン取得も含めてお願いできますか？',
-      a: 'A: 対応可能です。お気軽にご相談ください。',
+      q: t('contact.faq.faq3.q'),
+      a: t('contact.faq.faq3.a'),
     },
     {
-      q: 'Q. サイトの構成や文章作成もお願いできますか？',
-      a: 'A: もちろん対応可能です。似たようなサイトや競合サイト等を当社で検索し、差し支えない範囲で参考にしつつ文章作成を行わせていただきます。公開前に、お客様側で当社の文章や制作した掲載内容をチェックいただき、修正箇所をご指摘いただければ修正させていただきます。最終確認後、問題なければ、公開作業を進めさせていただく流れとなります。',
+      q: t('contact.faq.faq4.q'),
+      a: t('contact.faq.faq4.a'),
     },
     {
-      q: 'Q. 海外（日本国外）からもサービスに申し込めますか？',
-      a: 'A: 対応可能です。クレジットカード決済のみの対応となっていますが、海外で発行されたクレジットカードにも対応しておりますので、日本国外からでもお気軽にお申し込みください。',
+      q: t('contact.faq.faq5.q'),
+      a: t('contact.faq.faq5.a'),
     },
   ];
   // 其余FAQ保持原顺序
   const extraFaqs = [
     {
-      q: 'Q：ドメインを持っているのですが、ホームページ制作に使用してもらうことはできますか？',
-      a: 'A：はい。お客様がすでにお持ちのドメインをご利用頂けます。その際には、お客様がお持ちのドメイン名・レジストラ情報を教えていただき、こちらでサーバーの手配を行わせて頂きます。',
+      q: t('contact.faq.faq6.q'),
+      a: t('contact.faq.faq6.a'),
     },
     {
-      q: 'Q：月額費用はいつから発生するのでしょうか？',
-      a: 'A：ご契約書を締結し、ホームページ制作に取り掛かった初月から費用が発生します。※ホームページの制作には4～8週ほどかかります。',
+      q: t('contact.faq.faq7.q'),
+      a: t('contact.faq.faq7.a'),
     },
     {
-      q: 'Q：契約期間の縛りはありますか？',
-      a: 'A：最低契約期間を6か月とさせて頂いております。6か月後は、お好きなタイミングでホームページのご解約/休止を判断頂けます。ご解約はメール・LINEでご一報頂ければ手続き完了となります。違約金も一切ございません。※最終支払い月の月末を以って、ホームページは非公開となります。',
+      q: t('contact.faq.faq8.q'),
+      a: t('contact.faq.faq8.a'),
     },
     {
-      q: 'Q：契約プランはどの基準で選べばよいですか？',
-      a: 'A：お客様の訴求したい情報量によります。1ページ（BASICプラン）のホームページであっても十分に情報訴求は可能です。ただし、「会社情報や採用情報は別ページで訴求したい」「複数事業があるので、事業別にページを用意したい」という場合は複数ページのプランを推奨させて頂きます。こちらの制作実績もご参考にください。',
+      q: t('contact.faq.faq9.q'),
+      a: t('contact.faq.faq9.a'),
     },
   ];
   // 随机打乱前五个FAQ
@@ -431,8 +431,8 @@ export const Contact = ({ onPageChange, quoteDetails }: ContactProps) => {
       <section className="py-20">
         <div className="max-w-4xl mx-auto px-4 sm:px-6 lg:px-8">
           <div className="text-center mb-12">
-            <h2 className="text-3xl md:text-4xl font-bold mb-4 text-gray-900">よくいただくご質問</h2>
-            <p className="text-lg text-gray-600">ご不明点があればお気軽にお問い合わせください。</p>
+            <h2 className="text-3xl md:text-4xl font-bold mb-4 text-gray-900">{t('contact.faq.title')}</h2>
+            <p className="text-lg text-gray-600">{t('contact.faq.subtitle')}</p>
           </div>
           <div className="space-y-8">
             {shuffle(faqs).map((faq, idx) => (

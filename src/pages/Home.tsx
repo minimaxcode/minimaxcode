@@ -17,13 +17,13 @@ export const Home = ({ onPageChange }: HomeProps) => {
       description: t('home.features.lowPrice.description'),
       color: 'teal',
       competitors: {
-        title: '一般的な制作会社',
+        title: t('home.features.lowPrice.competitors.title'),
         price: '¥300,000～500,000',
       },
       ourService: {
-        title: 'MiniMaxCode',
-        price: '¥30,000～150,000',
-        highlight: '業界最安値！追加費用なし'
+        title: t('home.features.lowPrice.ourService.title'),
+        price: t('home.features.lowPrice.ourService.price'),
+        highlight: t('home.features.lowPrice.ourService.highlight')
       },
       services: [
         'レスポンシブデザイン',
@@ -38,15 +38,15 @@ export const Home = ({ onPageChange }: HomeProps) => {
       description: t('home.features.speed.description'),
       color: 'orange',
       competitors: {
-        title: '一般的な制作会社',
-        price: '30～60営業日',
-        subtitle: '制作期間'
+        title: t('home.features.speed.competitors.title'),
+        price: t('home.features.speed.competitors.duration'),
+        subtitle: t('home.features.speed.competitors.period')
       },
       ourService: {
-        title: 'MiniMaxCode',
-        price: '7～20営業日',
-        subtitle: '制作期間',
-        highlight: '相談後、最短2日で納品可能'
+        title: t('home.features.speed.ourService.title'),
+        price: t('home.features.speed.ourService.duration'),
+        subtitle: t('home.features.speed.competitors.period'),
+        highlight: t('home.features.speed.ourService.highlight')
       },
       services: [
         'AI活用による効率化',
@@ -61,15 +61,15 @@ export const Home = ({ onPageChange }: HomeProps) => {
       description: t('home.features.transparency.description'),
       color: 'violet',
       competitors: {
-        title: '一般的な制作会社',
-        price: '不明朗',
-        subtitle: '追加費用ある場合多い'
+        title: t('home.features.transparency.competitors.title'),
+        price: t('home.features.transparency.competitors.status'),
+        subtitle: t('home.features.transparency.competitors.note')
       },
       ourService: {
-        title: 'MiniMaxCode',
-        price: '明朗会計',
+        title: t('home.features.transparency.ourService.title'),
+        price: t('home.features.transparency.ourService.status'),
         subtitle: '料金体系',
-        highlight: '事前見積もり・追加費用なし'
+        highlight: t('home.features.transparency.ourService.highlight')
       },
       services: [
         '詳細な見積書提供',
@@ -193,20 +193,20 @@ export const Home = ({ onPageChange }: HomeProps) => {
                       <>
                         <ul className="mb-4 space-y-2 text-center">
                           <li className="flex justify-between items-center w-full max-w-xs mx-auto">
-                            <span className="font-medium text-gray-600">コーディング費用</span>
+                            <span className="font-medium text-gray-600">{t('home.features.lowPrice.competitors.codingCost')}</span>
                             <span className="font-bold text-gray-600 whitespace-nowrap">¥50,000~</span>
                           </li>
                           <li className="flex justify-between items-center w-full max-w-xs mx-auto">
-                            <span className="font-medium text-gray-600">デザイン費用</span>
+                            <span className="font-medium text-gray-600">{t('home.features.lowPrice.competitors.designCost')}</span>
                             <span className="font-bold text-gray-600 whitespace-nowrap">¥50,000~</span>
                           </li>
                           <li className="flex justify-between items-center w-full max-w-xs mx-auto">
-                            <span className="font-medium text-gray-600">ディレクション費用</span>
+                            <span className="font-medium text-gray-600">{t('home.features.lowPrice.competitors.directionCost')}</span>
                             <span className="font-bold text-gray-600 whitespace-nowrap">¥50,000~</span>
                           </li>
                         </ul>
                         <div className="text-center mt-2">
-                          <span className="text-2xl font-bold text-gray-600">合计¥150,000~</span>
+                          <span className="text-2xl font-bold text-gray-600">{t('home.features.lowPrice.competitors.total')}</span>
                         </div>
                       </>
                     ) : (
@@ -232,13 +232,13 @@ export const Home = ({ onPageChange }: HomeProps) => {
                         feature.color === 'violet' ? 'bg-violet-600' :
                         'bg-orange-600'
                       }`}>
-                        MiniMaxCode
+                        {t('home.features.lowPrice.ourService.title')}
                       </span>
                     </div>
                     <h4 className="text-lg font-semibold text-gray-900 mb-4 mt-2">{feature.ourService.title}</h4>
                     <div className="text-center mb-4">
                       {feature.title === t('home.features.lowPrice.title') ? (
-                        <div className="text-4xl font-bold mb-1 text-teal-600">¥30,000～</div>
+                        <div className="text-4xl font-bold mb-1 text-teal-600">{t('home.features.lowPrice.ourService.price')}</div>
                       ) : (
                         <div className={`text-2xl font-bold mb-1 ${
                           feature.color === 'teal' ? 'text-teal-600' :

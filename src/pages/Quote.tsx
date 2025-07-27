@@ -20,41 +20,41 @@ interface QuoteData {
 
 // WEB制作プラン数据
 const webPlans = [
-  { id: 'template', name: 'ベーシックプラン（3P）', pages: 3, price: 30000 },
-  { id: 'standard-5', name: 'スタンダードプラン（5P）', pages: 5, price: 100000 },
-  { id: 'standard-10', name: 'スタンダードプラン（10P）', pages: 10, price: 150000 },
-  { id: 'customize', name: 'カスタマイズプラン', pages: 10, price: 180000 },
-  { id: 'premium', name: 'プレミアムプラン', pages: 10, price: 250000 },
+  { id: 'template', nameKey: 'basic', pages: 3, price: 30000 },
+  { id: 'standard-5', nameKey: 'standard5', pages: 5, price: 100000 },
+  { id: 'standard-10', nameKey: 'standard10', pages: 10, price: 150000 },
+  { id: 'customize', nameKey: 'customize', pages: 10, price: 180000 },
+  { id: 'premium', nameKey: 'premium', pages: 10, price: 250000 },
 ];
 
 // オプション料金データ
 const optionItems = [
-  { id: 'cms', name: 'CMS管理システム', price: 20000 },
-  { id: 'mobile', name: 'スマホ対応', price: 20000 },
-  { id: 'product', name: '商品展示機能', price: 10000 },
-  { id: 'news', name: '情報掲示機能', price: 10000 },
-  { id: 'content', name: '原稿お任せ', price: 30000 },
-  { id: 'contact', name: 'お問い合わせフォーム', price: 9900 },
-  { id: 'shop', name: 'ネットショップ機能', price: 30000 },
-  { id: 'blog', name: 'ブログ機能', price: 11880 },
-  { id: 'seo', name: 'SEO対策', price: 0 },
-  { id: 'meo', name: 'MEO対策', price: 9000 },
-  { id: 'recaptcha', name: 'reCAPTCHA導入', price: 10800 },
-  { id: 'ssl', name: 'SSL化', price: 10800 },
+  { id: 'cms', nameKey: 'cms', price: 20000 },
+  { id: 'mobile', nameKey: 'mobile', price: 20000 },
+  { id: 'product', nameKey: 'product', price: 10000 },
+  { id: 'news', nameKey: 'news', price: 10000 },
+  { id: 'content', nameKey: 'content', price: 30000 },
+  { id: 'contact', nameKey: 'contact', price: 9900 },
+  { id: 'shop', nameKey: 'shop', price: 30000 },
+  { id: 'blog', nameKey: 'blog', price: 11880 },
+  { id: 'seo', nameKey: 'seo', price: 0 },
+  { id: 'meo', nameKey: 'meo', price: 9000 },
+  { id: 'recaptcha', nameKey: 'recaptcha', price: 10800 },
+  { id: 'ssl', nameKey: 'ssl', price: 10800 },
 ];
 
 // 维护选项数据
 const maintenanceItems = [
-  { id: 'email', name: '企業メール', price: 900, unit: 'month' },
-  { id: 'update', name: 'サイト更新', price: 4990, unit: 'month' },
+  { id: 'email', nameKey: 'email', price: 900, unit: 'month' },
+  { id: 'update', nameKey: 'update', price: 4990, unit: 'month' },
 ];
 
 // 网站语言选项
 const languageOptions = [
-  { id: 'ja', name: '日本語' },
-  { id: 'en', name: '英語' },
-  { id: 'zh', name: '中国語' },
-  { id: 'ko', name: '韓国語' },
+  { id: 'ja', nameKey: 'japanese' },
+  { id: 'en', nameKey: 'english' },
+  { id: 'zh', nameKey: 'chinese' },
+  { id: 'ko', nameKey: 'korean' },
 ];
 
 export const Quote = ({ onPageChange }: QuoteProps) => {
@@ -66,7 +66,7 @@ export const Quote = ({ onPageChange }: QuoteProps) => {
     options: [],
     maintenance: [], // 默认不选择任何维护
     languages: [], // 默认不选择任何语言
-    timeline: '',
+    timeline: '', // 使用英文值：'rush', 'quick', 'normal', 'flexible'
     sourceCode: false,
   });
 
@@ -84,14 +84,15 @@ export const Quote = ({ onPageChange }: QuoteProps) => {
 
   // 当选择カスタマイズプラン/プレミアムプラン或ページ数变化时，自动清除无效的timeline选择
   useEffect(() => {
-    const isCustomizeOrPremium = quoteData.webPlan === 'customize' || quoteData.webPlan === 'premium';
     let shouldClear = false;
     
     // 检查当前timeline是否应该被禁用
-    if (quoteData.timeline === '2-3日') {
-      shouldClear = isCustomizeOrPremium || quoteData.pageCount > 10;
-    } else if (quoteData.timeline === '1-2週間') {
-      shouldClear = isCustomizeOrPremium || quoteData.pageCount > 20;
+    if (quoteData.timeline === 'rush') {
+      shouldClear = quoteData.pageCount > 5;
+    } else if (quoteData.timeline === 'quick') {
+      shouldClear = quoteData.pageCount > 10;
+    } else if (quoteData.timeline === 'normal') {
+      shouldClear = quoteData.pageCount > 17;
     }
     
     if (shouldClear) {
@@ -149,12 +150,12 @@ export const Quote = ({ onPageChange }: QuoteProps) => {
         const isIncludedInPlan = 
           // SEO対策: 选择了任何计划时都包含
           (optionId === 'seo' && quoteData.webPlan) ||
-          // CMS管理システム: ベーシック以上のプラン包含
-          (optionId === 'cms' && (quoteData.webPlan === 'basic-5' || quoteData.webPlan === 'basic-10' || quoteData.webPlan === 'standard-5' || quoteData.webPlan === 'standard-10' || quoteData.webPlan === 'customize' || quoteData.webPlan === 'premium')) ||
-          // お問い合わせフォーム: テンプレートプラン不包含，其他计划包含
-          (optionId === 'contact' && (quoteData.webPlan === 'basic-5' || quoteData.webPlan === 'basic-10' || quoteData.webPlan === 'standard-5' || quoteData.webPlan === 'standard-10' || quoteData.webPlan === 'customize' || quoteData.webPlan === 'premium')) ||
-          // 商品展示機能: ベーシック以上のプラン包含
-          (optionId === 'product' && (quoteData.webPlan === 'basic-5' || quoteData.webPlan === 'basic-10' || quoteData.webPlan === 'standard-5' || quoteData.webPlan === 'standard-10' || quoteData.webPlan === 'customize' || quoteData.webPlan === 'premium')) ||
+          // CMS管理システム: スタンダード以上のプラン包含
+          (optionId === 'cms' && (quoteData.webPlan === 'standard-5' || quoteData.webPlan === 'standard-10' || quoteData.webPlan === 'customize' || quoteData.webPlan === 'premium')) ||
+          // お問い合わせフォーム: スタンダード以上のプラン包含
+          (optionId === 'contact' && (quoteData.webPlan === 'standard-5' || quoteData.webPlan === 'standard-10' || quoteData.webPlan === 'customize' || quoteData.webPlan === 'premium')) ||
+          // 商品展示機能: スタンダード以上のプラン包含
+          (optionId === 'product' && (quoteData.webPlan === 'standard-5' || quoteData.webPlan === 'standard-10' || quoteData.webPlan === 'customize' || quoteData.webPlan === 'premium')) ||
           // スマホ対応: スタンダード以上のプラン包含
           (optionId === 'mobile' && (quoteData.webPlan === 'standard-5' || quoteData.webPlan === 'standard-10' || quoteData.webPlan === 'customize' || quoteData.webPlan === 'premium')) ||
           // ネットショップ機能: カスタマイズとプレミアム包含
@@ -212,11 +213,19 @@ export const Quote = ({ onPageChange }: QuoteProps) => {
 
     // 納期费用计算
     let finalPrice = baseTotal;
-    if (quoteData.timeline === '2-3日') {
-      finalPrice = baseTotal * 1.4; // +40%
+    let timelineCost = 0;
+    if (quoteData.timeline === 'rush') {
+      timelineCost = baseTotal * 0.4; // +40%
+      finalPrice = baseTotal * 1.4;
+    } else if (quoteData.timeline === 'quick' && quoteData.pageCount >= 6 && quoteData.pageCount <= 10) {
+      timelineCost = baseTotal * 0.2; // +20%
+      finalPrice = baseTotal * 1.2;
+    } else if (quoteData.timeline === 'normal' && quoteData.pageCount >= 11 && quoteData.pageCount <= 17) {
+      timelineCost = baseTotal * 0.2; // +20%
+      finalPrice = baseTotal * 1.2;
     }
 
-        // 计算价格范围（如果有起始价格选项）
+    // 计算价格范围（如果有起始价格选项）
     let finalPriceMax = finalPrice;
     if (variableOptionCount > 0) {
       // 每个起始价格选项增加20%
@@ -245,7 +254,7 @@ export const Quote = ({ onPageChange }: QuoteProps) => {
       isSSLFreeByAmount, // 是否因为金额超15万而免费
       languageCost,
       maintenanceCost, // 新增维护费用（月度）
-      timelineCost: quoteData.timeline === '2-3日' ? baseTotal * 0.4 : 0,
+      timelineCost, // 納期加价费用
       sourceCodeCost, // 新增ソースコード納品费用
       websiteTotal: Math.round(finalPriceWithSourceCode), // 网站搭建总费用（含ソースコード納品，最低价）
       websiteTotalMax: Math.round(finalPriceMaxWithSourceCode), // 网站搭建总费用（含ソースコード納品，最高价）
@@ -309,11 +318,11 @@ export const Quote = ({ onPageChange }: QuoteProps) => {
           >
             <h1 className="text-5xl md:text-6xl font-bold mb-6">
               <span className="bg-gradient-to-r from-gray-900 via-blue-600 to-emerald-600 bg-clip-text text-transparent">
-                オンライン見積もり
+                {t('quote.hero.title')}
               </span>
             </h1>
             <p className="text-xl text-gray-600 max-w-3xl mx-auto">
-              プロジェクト内容を選択して概算をご確認ください
+              {t('quote.hero.subtitle')}
             </p>
           </motion.div>
         </div>
@@ -333,7 +342,7 @@ export const Quote = ({ onPageChange }: QuoteProps) => {
               >
                                  {/* WEB制作プラン選択 */}
                  <div className="mb-6">
-                   <h3 className="text-2xl font-bold text-gray-900 mb-6">WEB制作プラン</h3>
+                   <h3 className="text-2xl font-bold text-gray-900 mb-6">{t('quote.form.webPlan.title')}</h3>
                    <div className="grid grid-cols-2 sm:grid-cols-3 lg:grid-cols-4 xl:grid-cols-4 gap-3">
                     {webPlans.map((plan, idx) => (
                       <>
@@ -359,54 +368,69 @@ export const Quote = ({ onPageChange }: QuoteProps) => {
                                  setQuoteData({ 
                                    ...quoteData, 
                                    webPlan: '',
-                                   options: quoteData.options.filter(id => id !== 'contact')
-                                 });
-                               } else if (plan.id === 'basic-5' || plan.id === 'basic-10') {
-                                 setQuoteData({ 
-                                   ...quoteData, 
-                                   webPlan: '',
-                                   options: quoteData.options.filter(id => id !== 'contact' && id !== 'product')
+                                   pageCount: 3,
+                                   options: quoteData.options.filter(id => id !== 'seo')
                                  });
                                } else if (plan.id === 'standard-5' || plan.id === 'standard-10') {
                                  setQuoteData({ 
                                    ...quoteData, 
                                    webPlan: '',
-                                   options: quoteData.options.filter(id => id !== 'contact' && id !== 'product' && id !== 'mobile')
+                                   pageCount: 3,
+                                   options: quoteData.options.filter(id => !['cms', 'contact', 'product', 'mobile', 'seo'].includes(id))
                                  });
-                               } else if (plan.id === 'customize' || plan.id === 'premium') {
+                               } else if (plan.id === 'customize') {
                                  setQuoteData({ 
                                    ...quoteData, 
                                    webPlan: '',
-                                   options: quoteData.options.filter(id => id !== 'contact' && id !== 'product' && id !== 'mobile' && id !== 'shop')
+                                   pageCount: 3,
+                                   options: quoteData.options.filter(id => !['cms', 'contact', 'product', 'mobile', 'shop', 'seo'].includes(id))
                                  });
-                               } else {
-                                 setQuoteData({ ...quoteData, webPlan: '' });
+                               } else if (plan.id === 'premium') {
+                                 setQuoteData({ 
+                                   ...quoteData, 
+                                   webPlan: '',
+                                   pageCount: 3,
+                                   options: quoteData.options.filter(id => !['cms', 'contact', 'product', 'mobile', 'shop', 'meo', 'content', 'seo'].includes(id))
+                                 });
                                }
                              } else {
-                                                              // 选择新的计划
-                                if (e.target.value === 'template') {
-                                  // 选择テンプレートプラン时，清除所有选项，只自动勾选SEO対策
-                                  const newOptions = ['seo'];
-                                  setQuoteData({ ...quoteData, webPlan: e.target.value, options: newOptions });
-                                } else if (e.target.value === 'basic-5' || e.target.value === 'basic-10') {
-                                  // 选择ベーシックプラン时，清除所有选项，自动勾选CMS、お問い合わせフォーム、商品展示機能、SEO対策
-                                  const newOptions = ['cms', 'contact', 'product', 'seo'];
-                                  setQuoteData({ ...quoteData, webPlan: e.target.value, options: newOptions });
-                                } else if (e.target.value === 'standard-5' || e.target.value === 'standard-10') {
-                                  // 选择スタンダードプラン时，清除所有选项，自动勾选CMS、お問い合わせフォーム、商品展示機能、スマホ対応、SEO対策
-                                  const newOptions = ['cms', 'contact', 'product', 'mobile', 'seo'];
-                                  setQuoteData({ ...quoteData, webPlan: e.target.value, options: newOptions });
-                                } else if (e.target.value === 'customize') {
-                                  // 选择カスタマイズプラン时，清除所有选项，自动勾选CMS、お問い合わせフォーム、商品展示機能、スマホ対応、ネットショップ機能、SEO対策
-                                  const newOptions = ['cms', 'contact', 'product', 'mobile', 'shop', 'seo'];
-                                  setQuoteData({ ...quoteData, webPlan: e.target.value, options: newOptions });
-                                } else if (e.target.value === 'premium') {
-                                  // 选择プレミアムプラン时，清除所有选项，自动勾选CMS、お問い合わせフォーム、商品展示機能、スマホ対応、ネットショップ機能、MEO対策、原稿お任せ、SEO対策
-                                  const newOptions = ['cms', 'contact', 'product', 'mobile', 'shop', 'meo', 'content', 'seo'];
-                                  setQuoteData({ ...quoteData, webPlan: e.target.value, options: newOptions });
-                                } else {
-                                  setQuoteData({ ...quoteData, webPlan: e.target.value });
-                                }
+                               // 选择新的计划
+                               if (plan.id === 'template') {
+                                 setQuoteData({ 
+                                   ...quoteData, 
+                                   webPlan: plan.id,
+                                   pageCount: 3,
+                                   options: ['seo'] // 只保留 SEO対策
+                                 });
+                               } else if (plan.id === 'standard-5') {
+                                 setQuoteData({ 
+                                   ...quoteData, 
+                                   webPlan: plan.id,
+                                   pageCount: 5,
+                                   options: ['cms', 'contact', 'product', 'mobile', 'seo']
+                                 });
+                               } else if (plan.id === 'standard-10') {
+                                 setQuoteData({ 
+                                   ...quoteData, 
+                                   webPlan: plan.id,
+                                   pageCount: 10,
+                                   options: ['cms', 'contact', 'product', 'mobile', 'seo']
+                                 });
+                               } else if (plan.id === 'customize') {
+                                 setQuoteData({ 
+                                   ...quoteData, 
+                                   webPlan: plan.id,
+                                   pageCount: 10,
+                                   options: ['cms', 'contact', 'product', 'mobile', 'shop', 'seo']
+                                 });
+                               } else if (plan.id === 'premium') {
+                                 setQuoteData({ 
+                                   ...quoteData, 
+                                   webPlan: plan.id,
+                                   pageCount: 10,
+                                   options: ['cms', 'contact', 'product', 'mobile', 'shop', 'meo', 'content', 'seo']
+                                 });
+                               }
                              }
                            }}
                            onClick={(e) => {
@@ -455,16 +479,16 @@ export const Quote = ({ onPageChange }: QuoteProps) => {
                            <div className="text-center">
                              <div className={`font-bold text-base leading-tight truncate ${
                                quoteData.webPlan === plan.id ? 'text-blue-700' : 'text-gray-900'
-                             }`}>{plan.name}</div>
+                             }`}>{t(`quote.form.webPlan.${plan.nameKey}`)}</div>
                              <div className={`text-sm mt-1 truncate ${
                                quoteData.webPlan === plan.id ? 'text-blue-600' : 'text-gray-600'
                              }`}>
-                               {plan.pages}ページまで
+                               {plan.pages}{t('quote.form.webPlan.pages')}
                              </div>
                              <div className={`text-sm font-semibold truncate ${
                                quoteData.webPlan === plan.id ? 'text-blue-800' : 'text-blue-600'
                              }`}>
-                               ¥{plan.price.toLocaleString()}
+                               {t('quote.form.webPlan.price', { price: plan.price.toLocaleString() })}
                              </div>
                            </div>
                          </div>
@@ -480,12 +504,12 @@ export const Quote = ({ onPageChange }: QuoteProps) => {
                                  {/* ページ数選択 */}
                  <div className="mb-6">
                   <h3 className="text-2xl font-bold text-gray-900 mb-6">
-                    ページ数（3-50ページ）
+                    {t('quote.form.pageCount.title')}
                   </h3>
                   <div className="space-y-4">
                     <div className="flex items-center justify-between">
-                      <span className="text-gray-600">3ページ</span>
-                      <span className="text-gray-600">50ページ</span>
+                      <span className="text-gray-600">{t('quote.form.pageCount.min')}</span>
+                      <span className="text-gray-600">{t('quote.form.pageCount.max')}</span>
                     </div>
                       <input
                         type="range"
@@ -500,11 +524,11 @@ export const Quote = ({ onPageChange }: QuoteProps) => {
                     />
                     <div className="text-center">
                       <span className="inline-block bg-gradient-to-r from-blue-600 to-emerald-600 text-white px-6 py-3 rounded-xl font-bold text-lg shadow-lg">
-                        {quoteData.pageCount}ページ
+                        {quoteData.pageCount}{t('quote.form.pageCount.pages')}
                       </span>
                     </div>
                     <div className="flex items-center space-x-2 mt-4">
-                      <label className="text-sm text-gray-600">直接入力：</label>
+                      <label className="text-sm text-gray-600">{t('quote.form.pageCount.directInput')}</label>
                       <input
                         type="text"
                         value={pageInputValue}
@@ -542,26 +566,26 @@ export const Quote = ({ onPageChange }: QuoteProps) => {
                         className="w-20 px-3 py-2 border border-gray-300 rounded-lg text-center focus:outline-none focus:ring-2 focus:ring-blue-500 focus:border-transparent"
                         placeholder="3-50"
                       />
-                      <span className="text-sm text-gray-600">ページ</span>
+                      <span className="text-sm text-gray-600">{t('quote.form.pageCount.pages')}</span>
                     </div>
                   </div>
                 </div>
 
                                  {/* オプション選択 */}
                  <div className="mb-6">
-                   <h3 className="text-2xl font-bold text-gray-900 mb-6">オプション</h3>
+                   <h3 className="text-2xl font-bold text-gray-900 mb-6">{t('quote.form.options.title')}</h3>
                    <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 xl:grid-cols-4 gap-3">
                     {optionItems.map((option) => {
                                              // 使用与价格计算相同的逻辑判断是否为计划包含的选项
                        const isPlanIncluded = 
                          // SEO対策: 选择了任何计划时都包含
                          (option.id === 'seo' && quoteData.webPlan) ||
-                        // CMS管理システム: ベーシック以上のプラン包含
-                        (option.id === 'cms' && (quoteData.webPlan === 'basic-5' || quoteData.webPlan === 'basic-10' || quoteData.webPlan === 'standard-5' || quoteData.webPlan === 'standard-10' || quoteData.webPlan === 'customize' || quoteData.webPlan === 'premium')) ||
-                        // お問い合わせフォーム: テンプレートプラン不包含，其他计划包含
-                        (option.id === 'contact' && (quoteData.webPlan === 'basic-5' || quoteData.webPlan === 'basic-10' || quoteData.webPlan === 'standard-5' || quoteData.webPlan === 'standard-10' || quoteData.webPlan === 'customize' || quoteData.webPlan === 'premium')) ||
-                        // 商品展示機能: ベーシック以上のプラン包含
-                        (option.id === 'product' && (quoteData.webPlan === 'basic-5' || quoteData.webPlan === 'basic-10' || quoteData.webPlan === 'standard-5' || quoteData.webPlan === 'standard-10' || quoteData.webPlan === 'customize' || quoteData.webPlan === 'premium')) ||
+                        // CMS管理システム: スタンダード以上のプラン包含
+                        (option.id === 'cms' && (quoteData.webPlan === 'standard-5' || quoteData.webPlan === 'standard-10' || quoteData.webPlan === 'customize' || quoteData.webPlan === 'premium')) ||
+                        // お問い合わせフォーム: スタンダード以上のプラン包含
+                        (option.id === 'contact' && (quoteData.webPlan === 'standard-5' || quoteData.webPlan === 'standard-10' || quoteData.webPlan === 'customize' || quoteData.webPlan === 'premium')) ||
+                        // 商品展示機能: スタンダード以上のプラン包含
+                        (option.id === 'product' && (quoteData.webPlan === 'standard-5' || quoteData.webPlan === 'standard-10' || quoteData.webPlan === 'customize' || quoteData.webPlan === 'premium')) ||
                         // スマホ対応: スタンダード以上のプラン包含
                         (option.id === 'mobile' && (quoteData.webPlan === 'standard-5' || quoteData.webPlan === 'standard-10' || quoteData.webPlan === 'customize' || quoteData.webPlan === 'premium')) ||
                         // ネットショップ機能: カスタマイズとプレミアム包含
@@ -619,24 +643,24 @@ export const Quote = ({ onPageChange }: QuoteProps) => {
                           />
                           <div className="flex-1">
                             <span className="font-medium text-gray-900">
-                              {option.name}
+                              {t(`quote.form.options.${option.nameKey}`)}
                               {isPlanIncluded && (
-                                <span className="text-xs text-green-600 ml-1">(プラン含有)</span>
+                                <span className="text-xs text-green-600 ml-1">{t('quote.form.options.planIncluded')}</span>
                               )}
                               {isSSLFreeByAmount && (
-                                <span className="text-xs text-green-600 ml-1">(15万円以上)</span>
+                                <span className="text-xs text-green-600 ml-1">{t('quote.form.options.over150k')}</span>
                               )}
                             </span>
                             <div className="text-sm text-gray-600 mt-1">
                               {isPlanIncluded 
-                                ? '無料 (プラン含有)' 
+                                ? t('quote.form.options.freePlanIncluded')
                                 : option.price === 0 
-                                  ? '無料' 
+                                  ? t('quote.form.options.free')
                                   : isSSLFreeByAmount 
-                                    ? '無料 (15万円以上)' 
+                                    ? t('quote.form.options.freeOver150k')
                                     : (['cms', 'mobile', 'content', 'shop', 'blog'].includes(option.id) 
-                                        ? `¥${option.price.toLocaleString()}~` 
-                                        : `¥${option.price.toLocaleString()}`)
+                                        ? t('quote.form.options.variablePrice', { price: option.price.toLocaleString() })
+                                        : t('quote.form.options.fixedPrice', { price: option.price.toLocaleString() }))
                               }
                             </div>
                           </div>
@@ -653,7 +677,7 @@ export const Quote = ({ onPageChange }: QuoteProps) => {
 
                                  {/* 保守 */}
                  <div className="mb-6">
-                   <h3 className="text-2xl font-bold text-gray-900 mb-6">保守</h3>
+                   <h3 className="text-2xl font-bold text-gray-900 mb-6">{t('quote.form.maintenance.title')}</h3>
                    <div className="grid grid-cols-1 sm:grid-cols-3 lg:grid-cols-6 gap-3">
                     {maintenanceItems.map((maintenance) => (
                       <label
@@ -683,9 +707,9 @@ export const Quote = ({ onPageChange }: QuoteProps) => {
                           className="sr-only"
                         />
                         <div className="text-center">
-                          <span className="font-medium text-gray-900">{maintenance.name}</span>
+                          <span className="font-medium text-gray-900">{t(`quote.form.maintenance.${maintenance.nameKey}`)}</span>
                           <div className="text-sm text-gray-600 mt-1">
-                            ¥{maintenance.price.toLocaleString()}/{maintenance.unit === 'year' ? '年' : '月'}
+                            ¥{maintenance.price.toLocaleString()}/{maintenance.unit === 'year' ? t('quote.form.maintenance.year') : t('quote.form.maintenance.month')}
                           </div>
                         </div>
                         {quoteData.maintenance.includes(maintenance.id) && (
@@ -696,81 +720,154 @@ export const Quote = ({ onPageChange }: QuoteProps) => {
                   </div>
                 </div>
 
-                                 {/* 希望納期 */}
+                 {/* 希望納期 */}
                  <div className="mb-6">
-                   <h3 className="text-2xl font-bold text-gray-900 mb-6">希望納期</h3>
-                   <div className="grid grid-cols-1 sm:grid-cols-3 lg:grid-cols-6 gap-3">
-                    {['2-3日', '1-2週間', '3-4週間', '1ヶ月以上'].map((timeline) => {
-                      // 检查是否为カスタマイズプラン或プレミアムプラン
-                      const isCustomizeOrPremium = quoteData.webPlan === 'customize' || quoteData.webPlan === 'premium';
-                      // 根据ページ数和プラン类型禁用选项
-                      const isDisabled = 
-                        // カスタマイズプラン和プレミアムプラン：禁用2-3日和1-2週間
-                        (isCustomizeOrPremium && (timeline === '2-3日' || timeline === '1-2週間')) ||
-                        // ページ数 > 20：禁用2-3日和1-2週間
-                        (quoteData.pageCount > 20 && (timeline === '2-3日' || timeline === '1-2週間')) ||
-                        // ページ数 > 10：禁用2-3日
-                        (quoteData.pageCount > 10 && timeline === '2-3日');
-                      const isSelected = quoteData.timeline === timeline;
-                      
-                      return (
-                        <label
-                          key={timeline}
-                          className={`relative flex items-center justify-center p-4 border-2 rounded-lg transition-all ${
-                            isDisabled
-                              ? 'border-gray-200 bg-gray-100 cursor-not-allowed opacity-50'
-                              : isSelected
-                                ? 'border-blue-500 bg-blue-50 cursor-pointer'
-                                : 'border-gray-200 hover:border-gray-300 cursor-pointer'
-                          }`}
-                          onClick={(e) => {
-                            if (isDisabled) {
-                              e.preventDefault();
-                              return;
-                            }
-                            // 支持取消选择：如果点击已选择的选项，则取消选择
-                            if (isSelected) {
-                              e.preventDefault();
-                              setQuoteData({ ...quoteData, timeline: '' });
-                            }
-                          }}
-                        >
-                          <input
-                            type="radio"
-                            name="timeline"
-                            value={timeline}
-                            checked={isSelected}
-                            disabled={isDisabled}
-                            onChange={(e) => {
-                              if (!isDisabled) {
-                                setQuoteData({ ...quoteData, timeline: e.target.value });
-                              }
-                            }}
-                            className="sr-only"
-                          />
-                          <div className="text-center">
-                            <span className={`font-medium ${isDisabled ? 'text-gray-400' : 'text-gray-900'}`}>
-                              {timeline}
-                            </span>
-                            {timeline === '2-3日' && !isDisabled && (
-                              <div className="text-xs text-red-600 mt-1">金額+40%</div>
-                            )}
-                            {isDisabled && (
-                              <div className="text-xs text-gray-400 mt-1">選択不可</div>
-                            )}
-                          </div>
-                          {isSelected && !isDisabled && (
-                            <CheckCircle className="w-5 h-5 text-blue-500 absolute top-2 right-2" />
-                          )}
-                        </label>
-                      );
-                    })}
+                  <h3 className="text-2xl font-bold text-gray-900 mb-6">{t('quote.form.timeline.title')}</h3>
+                  <div className="grid grid-cols-2 sm:grid-cols-3 lg:grid-cols-4 xl:grid-cols-4 gap-3">
+                    <label
+                      className={`relative flex items-center p-4 border-2 rounded-lg transition-all ${
+                        quoteData.timeline === 'rush'
+                          ? 'border-blue-500 bg-blue-50'
+                          : 'border-gray-200 hover:border-gray-300'
+                      } ${
+                        (quoteData.webPlan === 'customize' || quoteData.webPlan === 'premium' || quoteData.pageCount > 5)
+                          ? 'opacity-50 cursor-not-allowed'
+                          : 'cursor-pointer'
+                      }`}
+                      onClick={(e) => {
+                        // 如果已经选中，则取消选择
+                        if (quoteData.timeline === 'rush' && !(quoteData.webPlan === 'customize' || quoteData.webPlan === 'premium' || quoteData.pageCount > 5)) {
+                          e.preventDefault();
+                          setQuoteData({ ...quoteData, timeline: '' });
+                        }
+                      }}
+                    >
+                      <input
+                        type="radio"
+                        name="timeline"
+                        value="rush"
+                        checked={quoteData.timeline === 'rush'}
+                        onChange={(e) => {
+                          if (!(quoteData.webPlan === 'customize' || quoteData.webPlan === 'premium' || quoteData.pageCount > 5)) {
+                            setQuoteData({ ...quoteData, timeline: e.target.value });
+                          }
+                        }}
+                        disabled={quoteData.webPlan === 'customize' || quoteData.webPlan === 'premium' || quoteData.pageCount > 5}
+                        className="sr-only"
+                      />
+                      <div className="flex-1">
+                        <div className="font-semibold">{t('quote.form.timeline.rush')}</div>
+                        <div className="text-sm text-red-600">{t('quote.form.timeline.rushFee')}</div>
+                      </div>
+                    </label>
+                    <label
+                      className={`relative flex items-center p-4 border-2 rounded-lg transition-all ${
+                        quoteData.timeline === 'quick'
+                          ? 'border-blue-500 bg-blue-50'
+                          : 'border-gray-200 hover:border-gray-300'
+                      } ${
+                        (quoteData.webPlan === 'customize' || quoteData.webPlan === 'premium' || quoteData.pageCount > 10)
+                          ? 'opacity-50 cursor-not-allowed'
+                          : 'cursor-pointer'
+                      }`}
+                      onClick={(e) => {
+                        // 如果已经选中，则取消选择
+                        if (quoteData.timeline === 'quick' && !(quoteData.webPlan === 'customize' || quoteData.webPlan === 'premium' || quoteData.pageCount > 10)) {
+                          e.preventDefault();
+                          setQuoteData({ ...quoteData, timeline: '' });
+                        }
+                      }}
+                    >
+                      <input
+                        type="radio"
+                        name="timeline"
+                        value="quick"
+                        checked={quoteData.timeline === 'quick'}
+                        onChange={(e) => {
+                          if (!(quoteData.webPlan === 'customize' || quoteData.webPlan === 'premium' || quoteData.pageCount > 10)) {
+                            setQuoteData({ ...quoteData, timeline: e.target.value });
+                          }
+                        }}
+                        disabled={quoteData.webPlan === 'customize' || quoteData.webPlan === 'premium' || quoteData.pageCount > 10}
+                        className="sr-only"
+                      />
+                      <div className="flex-1">
+                        <div className="font-semibold">{t('quote.form.timeline.quick')}</div>
+                        {quoteData.pageCount >= 6 && quoteData.pageCount <= 10 && (
+                          <div className="text-sm text-red-600">{t('quote.form.timeline.quickFee')}</div>
+                        )}
+                      </div>
+                    </label>
+                    <label
+                      className={`relative flex items-center p-4 border-2 rounded-lg transition-all ${
+                        quoteData.timeline === 'normal'
+                          ? 'border-blue-500 bg-blue-50'
+                          : 'border-gray-200 hover:border-gray-300'
+                      } ${
+                        quoteData.pageCount > 17
+                          ? 'opacity-50 cursor-not-allowed'
+                          : 'cursor-pointer'
+                      }`}
+                      onClick={(e) => {
+                        // 如果已经选中，则取消选择
+                        if (quoteData.timeline === 'normal' && quoteData.pageCount <= 17) {
+                          e.preventDefault();
+                          setQuoteData({ ...quoteData, timeline: '' });
+                        }
+                      }}
+                    >
+                      <input
+                        type="radio"
+                        name="timeline"
+                        value="normal"
+                        checked={quoteData.timeline === 'normal'}
+                        onChange={(e) => {
+                          if (quoteData.pageCount <= 17) {
+                            setQuoteData({ ...quoteData, timeline: e.target.value });
+                          }
+                        }}
+                        disabled={quoteData.pageCount > 17}
+                        className="sr-only"
+                      />
+                      <div className="flex-1">
+                        <div className="font-semibold">{t('quote.form.timeline.normal')}</div>
+                        {quoteData.pageCount >= 11 && quoteData.pageCount <= 17 && (
+                          <div className="text-sm text-red-600">{t('quote.form.timeline.normalFee')}</div>
+                        )}
+                      </div>
+                    </label>
+                    <label
+                      className={`relative flex items-center p-4 border-2 rounded-lg transition-all ${
+                        quoteData.timeline === 'flexible'
+                          ? 'border-blue-500 bg-blue-50'
+                          : 'border-gray-200 hover:border-gray-300'
+                      } cursor-pointer`}
+                      onClick={(e) => {
+                        // 如果已经选中，则取消选择
+                        if (quoteData.timeline === 'flexible') {
+                          e.preventDefault();
+                          setQuoteData({ ...quoteData, timeline: '' });
+                        }
+                      }}
+                    >
+                      <input
+                        type="radio"
+                        name="timeline"
+                        value="flexible"
+                        checked={quoteData.timeline === 'flexible'}
+                        onChange={(e) => setQuoteData({ ...quoteData, timeline: e.target.value })}
+                        className="sr-only"
+                      />
+                      <div className="flex-1">
+                        <div className="font-semibold">{t('quote.form.timeline.flexible')}</div>
+                      </div>
+                    </label>
                   </div>
                 </div>
 
                  {/* 网站语言选择 */}
                  <div className="mb-6">
-                   <h3 className="text-2xl font-bold text-gray-900 mb-6">ウェブサイト言語</h3>
+                   <h3 className="text-2xl font-bold text-gray-900 mb-6">{t('quote.form.languages.title')}</h3>
                    <div className="space-y-3">
                      {languageOptions.map((language) => (
                        <label
@@ -796,22 +893,22 @@ export const Quote = ({ onPageChange }: QuoteProps) => {
                            className="w-5 h-5 text-blue-600 border-gray-300 rounded focus:ring-blue-500"
                          />
                          <div className="flex-1">
-                           <span className="font-medium text-gray-900">{language.name}</span>
+                           <span className="font-medium text-gray-900">{t(`quote.form.languages.${language.nameKey}`)}</span>
                            {quoteData.languages.includes(language.id) && quoteData.languages.length > 1 && quoteData.languages.indexOf(language.id) > 0 && (
-                             <span className="text-sm text-blue-600 ml-2">(+30%)</span>
+                               <span className="text-sm text-blue-600 ml-2">{t('quote.form.languages.extraFee')}</span>
                            )}
                          </div>
                     </label>
                      ))}
                      <div className="text-sm text-gray-500 mt-2">
-                       ※ 言語を2つ以上選択した場合、2つ目以降の言語につき制作費の30%が追加されます
+                       {t('quote.form.languages.note')}
                      </div>
                    </div>
                  </div>
 
                  {/* ソースコード納品 */}
                  <div className="mb-6">
-                   <h3 className="text-2xl font-bold text-gray-900 mb-6">ソースコード納品</h3>
+                   <h3 className="text-2xl font-bold text-gray-900 mb-6">{t('quote.form.sourceCode.title')}</h3>
                    <div className="grid grid-cols-1 gap-3">
                      <label className={`relative flex items-center p-4 border-2 rounded-lg cursor-pointer transition-all ${
                        quoteData.sourceCode
@@ -828,13 +925,13 @@ export const Quote = ({ onPageChange }: QuoteProps) => {
                        />
                        <div className="flex-1">
                          <span className="font-medium text-gray-900">
-                           ソースコード納品
+                           {t('quote.form.sourceCode.name')}
                          </span>
                          <div className="text-sm text-gray-600 mt-1">
-                           総額の+20%
+                           {t('quote.form.sourceCode.fee')}
                          </div>
                          <div className="text-xs text-gray-500 mt-1">
-                           制作したウェブサイトのソースコードをお客様に納品いたします
+                           {t('quote.form.sourceCode.description')}
                          </div>
                        </div>
                        {quoteData.sourceCode && (
@@ -854,21 +951,21 @@ export const Quote = ({ onPageChange }: QuoteProps) => {
                     className="w-full bg-gradient-to-r from-blue-600 to-emerald-600 text-white font-bold py-4 px-8 rounded-lg disabled:opacity-50 disabled:cursor-not-allowed transition-all duration-200 flex items-center justify-center space-x-2"
                   >
                     <Calculator className="w-5 h-5" />
-                    <span>見積もりを計算</span>
+                    <span>{t('quote.form.calculate')}</span>
                   </motion.button>
                   {(!quoteData.webPlan || !quoteData.timeline || quoteData.languages.length === 0) && (
                     <div className="mt-2 text-sm text-red-600 text-center">
                       {!quoteData.webPlan && (
-                        <div>※ WEB制作プランを選択してください</div>
+                        <div>{t('quote.form.validation.selectPlan')}</div>
                       )}
                       {quoteData.webPlan && !quoteData.timeline && quoteData.languages.length === 0 && (
-                        <div>※ 希望納期とウェブサイト言語を選択してください</div>
+                        <div>{t('quote.form.validation.selectTimelineAndLanguage')}</div>
                       )}
                       {quoteData.webPlan && !quoteData.timeline && quoteData.languages.length > 0 && (
-                        <div>※ 希望納期を選択してください</div>
+                        <div>{t('quote.form.validation.selectTimeline')}</div>
                       )}
                       {quoteData.webPlan && quoteData.timeline && quoteData.languages.length === 0 && (
-                        <div>※ ウェブサイト言語を選択してください</div>
+                        <div>{t('quote.form.validation.selectLanguage')}</div>
                       )}
                   </div>
                   )}
@@ -886,7 +983,7 @@ export const Quote = ({ onPageChange }: QuoteProps) => {
                 <div className="bg-gradient-to-br from-blue-50 to-emerald-50 rounded-2xl p-6 border border-blue-200">
                   <div className="flex items-center justify-center mb-6">
                     <Calculator className="w-8 h-8 text-blue-600 mr-3" />
-                    <h3 className="text-xl font-bold text-gray-900">概算お見積もり</h3>
+                    <h3 className="text-xl font-bold text-gray-900">{t('quote.result.title')}</h3>
                   </div>
 
                   {showResult && quoteData.timeline && quoteData.languages.length > 0 ? (
@@ -895,7 +992,7 @@ export const Quote = ({ onPageChange }: QuoteProps) => {
                       <div className="grid grid-cols-1 lg:grid-cols-2 gap-6">
                         {/* 网站搭建费用部分 */}
                         <div className="bg-white rounded-lg p-4 border border-gray-200">
-                          <h4 className="text-lg font-bold text-blue-600 mb-3">【ウェブサイト制作費用】</h4>
+                          <h4 className="text-lg font-bold text-blue-600 mb-3">{t('quote.result.websiteCost')}</h4>
                           <div className="text-center mb-4">
                             <div className="text-3xl font-bold text-blue-600">
                               {pricing.hasVariableOptions 
@@ -903,71 +1000,84 @@ export const Quote = ({ onPageChange }: QuoteProps) => {
                                 : `¥${pricing.websiteTotal.toLocaleString()}`
                               }
                             </div>
-                            <p className="text-sm text-gray-600">（初期費用）</p>
+                            <p className="text-sm text-gray-600">{t('quote.result.initialCost')}</p>
                             {pricing.hasVariableOptions && (
                               <p className="text-xs text-amber-600 mt-1">
-                                ※ 開始価格オプションにより変動
+                                {t('quote.result.variableNote')}
                               </p>
                             )}
                           </div>
                           <div className="space-y-2 text-sm">
+                            {/* 基本プラン */}
                             {pricing.basePrice > 0 && (
                               <div className="flex justify-between">
-                                <span>基本プラン</span>
+                                <span>{t('quote.result.basePlan')}</span>
                                 <span>¥{pricing.basePrice.toLocaleString()}</span>
                               </div>
                             )}
+
+                            {/* 追加ページ */}
                             {pricing.pageExtraCost > 0 && (
                               <div className="flex justify-between">
-                                <span>追加ページ</span>
+                                <span>{t('quote.result.extraPages')}</span>
                                 <span>¥{pricing.pageExtraCost.toLocaleString()}</span>
                               </div>
                             )}
+
+                            {/* オプション */}
                             {pricing.optionCost > 0 && (
                               <div className="flex justify-between">
-                                <span>オプション</span>
+                                <span>{t('quote.result.options')}</span>
                                 <span>¥{pricing.optionCost.toLocaleString()}</span>
                               </div>
                             )}
+
+                            {/* 多言語対応 */}
                             {pricing.languageCost > 0 && (
                               <div className="flex justify-between">
-                                <span>多言語対応</span>
+                                <span>{t('quote.result.multilingual')}</span>
                                 <span>¥{pricing.languageCost.toLocaleString()}</span>
                               </div>
                             )}
+
+                            {/* 納期加速料金 */}
                             {pricing.timelineCost > 0 && (
                               <div className="flex justify-between">
-                                <span>特急料金</span>
+                                <span>
+                                  {t('quote.result.timelineFee', { 
+                                    percentage: quoteData.timeline === 'rush' ? '+40%' : '+20%' 
+                                  })}
+                                </span>
                                 <span>¥{pricing.timelineCost.toLocaleString()}</span>
                               </div>
                             )}
-                            {pricing.sourceCodeCost > 0 && (
-                              <div className="flex justify-between border-t pt-2 mt-2">
-                                <span className="font-medium">ソースコード納品</span>
-                                <span className="font-medium">
-                                  {pricing.hasVariableOptions 
-                                    ? `¥${pricing.sourceCodeCost.toLocaleString()} ~ ¥${Math.round(pricing.websiteTotalMaxBeforeSourceCode * 0.2).toLocaleString()}`
-                                    : `¥${pricing.sourceCodeCost.toLocaleString()}`
-                                  }
-                                </span>
-                              </div>
-                            )}
                           </div>
+                          {pricing.sourceCodeCost > 0 && (
+                            <div className="flex justify-between border-t pt-2 mt-2">
+                              <span className="font-medium">{t('quote.result.sourceCodeDelivery')}</span>
+                              <span className="font-medium">
+                                {pricing.hasVariableOptions 
+                                  ? `¥${pricing.sourceCodeCost.toLocaleString()} ~ ¥${Math.round(pricing.websiteTotalMaxBeforeSourceCode * 0.2).toLocaleString()}`
+                                  : `¥${pricing.sourceCodeCost.toLocaleString()}`
+                                }
+                              </span>
+                            </div>
+                          )}
                         </div>
 
                         {/* 维护费用部分 */}
                         <div className="bg-white rounded-lg p-4 border border-gray-200">
-                          <h4 className="text-lg font-bold text-green-600 mb-3">【保守費用】</h4>
+                          <h4 className="text-lg font-bold text-green-600 mb-3">{t('quote.result.maintenanceCost')}</h4>
                           <div className="text-center mb-4">
                             <div className="text-3xl font-bold text-green-600">
                               ¥{pricing.maintenanceTotal.toLocaleString()}/月
                             </div>
-                            <p className="text-sm text-gray-600">（月額料金）</p>
+                            <p className="text-sm text-gray-600">{t('quote.result.monthlyCost')}</p>
                           </div>
                           <div className="space-y-2 text-sm">
                             <div className="flex justify-between">
-                              <span>サーバー保守</span>
-                              <span>¥2,400/月</span>
+                              <span>{t('quote.result.serverMaintenance')}</span>
+                              <span>¥2,400/{t('quote.form.maintenance.month')}</span>
                             </div>
                             {quoteData.maintenance.map(maintenanceId => {
                               const maintenance = maintenanceItems.find(item => item.id === maintenanceId);
@@ -975,15 +1085,19 @@ export const Quote = ({ onPageChange }: QuoteProps) => {
                               const monthlyPrice = maintenance.unit === 'year' ? Math.round(maintenance.price / 12) : maintenance.price;
                               return (
                                 <div key={maintenanceId} className="flex justify-between">
-                                  <span>{maintenance.name}</span>
-                                  <span>¥{monthlyPrice.toLocaleString()}/月</span>
+                                  <span>
+                                    {t(`quote.form.maintenance.${maintenance.nameKey}`)}
+                                    {maintenance.id === 'email' && (
+                                      <span className="text-green-600 ml-1">
+                                        {t('quote.result.emailFirstYearFree')}
+                                      </span>
+                                    )}
+                                  </span>
+                                  <span>¥{monthlyPrice.toLocaleString()}/{t('quote.form.maintenance.month')}</span>
                                 </div>
                               );
                             })}
                           </div>
-                          {quoteData.maintenance.length === 0 && (
-                            <p className="text-center text-gray-500 text-sm">保守項目が選択されていません</p>
-                          )}
                         </div>
                       </div>
 
@@ -996,14 +1110,14 @@ export const Quote = ({ onPageChange }: QuoteProps) => {
                           className="bg-gradient-to-r from-emerald-600 to-teal-600 text-white font-bold py-3 px-8 rounded-lg transition-all duration-200 flex items-center justify-center space-x-2"
                         >
                           <MessageSquare className="w-4 h-4" />
-                          <span>お問い合わせ</span>
+                          <span>{t('quote.result.contact')}</span>
                           <ArrowRight className="w-4 h-4" />
                         </motion.button>
                       </div>
                     </div>
                   ) : (
                     <div className="text-center text-gray-500">
-                      <p>項目を選択すると概算が表示されます</p>
+                      <p>{t('quote.result.selectPrompt')}</p>
                       <div className="text-2xl font-bold text-gray-400 mt-4">¥--- ~ ¥---</div>
                     </div>
                   )}
