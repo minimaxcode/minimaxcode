@@ -168,73 +168,70 @@ export const Pricing = ({ onPageChange }: PricingProps) => {
               {t('pricing.table.subtitle')}
             </p>
           </motion.div>
-          <div className="overflow-x-auto">
-            <table className="w-full border border-gray-200 rounded-lg overflow-hidden bg-white text-center">
-              <thead className="bg-gray-100">
-                <tr>
-                  <th className="px-4 py-3 text-sm font-semibold text-gray-900 border-b border-r-2 border-gray-300 w-52 whitespace-nowrap">{t('pricing.table.item')}</th>
-                  {plans.map((plan, idx) => (
-                    <th
-                      key={plan.name}
-                      className={`px-4 py-3 text-sm font-semibold border-b w-52
-                        ${idx === 1 ? ' border-l-2 border-gray-200 border-r-2 border-gray-200' : ''}
-                        ${idx === 2 ? ' border-l-2 border-gray-300 border-r-2 border-gray-300' : ''}
-                        ${idx > 2 ? ' border-l-2 border-gray-200' : ''}
-                      `}
-                    >
-                      <div className={`font-bold ${idx === 0 ? 'text-blue-600' : idx === plans.length - 1 ? 'text-purple-700' : `text-${plan.color}-700`}`}>{plan.name}</div>
-                      {plan.tag && <div className={`inline-block mt-1 text-xs rounded-full px-2 py-0.5 ${idx === 0 ? 'bg-blue-100 text-blue-800' : idx === plans.length - 1 ? 'bg-purple-100 text-purple-800' : `bg-${plan.color}-100 text-${plan.color}-800`}`}>{plan.tag}</div>}
+
+          {/* 添加滑动提示 */}
+          <div className="text-sm text-gray-500 md:hidden mb-2 text-center">
+            <span>← スワイプしてご確認いただけます →</span>
+          </div>
+
+          {/* 表格容器 */}
+          <div className="relative -mx-4 sm:mx-0">
+            <div className="overflow-x-auto hide-scrollbar">
+              <table className="min-w-[800px] border border-gray-200 rounded-lg overflow-hidden bg-white text-center">
+                <thead className="bg-gray-100">
+                  <tr>
+                    <th className="sticky left-0 bg-gray-100 z-10 px-4 py-3 text-sm font-semibold text-gray-900 text-left w-52 border-r border-gray-200">
+                      {t('pricing.table.item')}
                     </th>
-                  ))}
-                </tr>
-              </thead>
-              <tbody className="divide-y divide-gray-200">
-                {features.map((feature) => (
-                  <tr key={feature.key}>
-                    <td className="px-4 py-3 font-semibold text-gray-700 text-left bg-gray-50 border-r-2 border-gray-300 w-52">{t(feature.label)}</td>
                     {plans.map((plan, idx) => (
-                      <td
-                        key={plan.name + feature.key}
-                        className={`px-4 py-3 w-52
-                          ${idx === 1 ? ' border-l-2 border-gray-200 border-r-2 border-gray-200' : ''}
-                          ${idx === 2 ? ' border-l-2 border-gray-300 border-r-2 border-gray-300' : ''}
-                          ${idx > 2 ? ' border-l-2 border-gray-200' : ''}
-                        `}
+                      <th
+                        key={plan.name}
+                        className="px-4 py-3 text-sm font-semibold text-center w-52"
                       >
-                        {feature.key === 'price' ? (
-                          <span className="block">
-                            <span className="line-through text-gray-400 mr-1">{plan.price.old}</span>
-                            <br />
-                            <span className={`text-lg font-bold ${idx === 0 ? 'text-blue-600' : idx === plans.length - 1 ? 'text-purple-600' : `text-${plan.color}-600`}`}>¥{plan.price.current}</span>
-                          </span>
-                        ) : (
-                          feature.key === 'period'
-                            ? t(`pricing.period.${plan.period}`)
-                            : (typeof plan[feature.key as keyof typeof plan] === 'string'
-                                ? (plan[feature.key as keyof typeof plan] as string === '無料'
-                                    ? t('pricing.options.items.seo.price')
-                                    : plan[feature.key as keyof typeof plan] as string)
-                                : '-')
-                        )}
-                      </td>
+                        <div className={`font-bold ${idx === 0 ? 'text-blue-600' : idx === plans.length - 1 ? 'text-purple-700' : `text-${plan.color}-700`}`}>{plan.name}</div>
+                        {plan.tag && <div className={`inline-block mt-1 text-xs rounded-full px-2 py-0.5 ${idx === 0 ? 'bg-blue-100 text-blue-800' : idx === plans.length - 1 ? 'bg-purple-100 text-purple-800' : `bg-${plan.color}-100 text-${plan.color}-800`}`}>{plan.tag}</div>}
+                      </th>
                     ))}
                   </tr>
-                ))}
-                <tr>
-                  <td className="px-4 py-3 text-sm font-medium text-gray-900">Production Period</td>
-                  {plans.map((plan) => (
-                    <td key={plan.name} className="px-4 py-3 text-sm text-gray-500 text-center">
-                      {t(`pricing.period.${plan.period}`)}
-                    </td>
+                </thead>
+                <tbody className="bg-white divide-y divide-gray-200">
+                  {features.map((feature) => (
+                    <tr key={feature.key}>
+                      <td className="sticky left-0 bg-white z-10 px-4 py-3 text-sm font-medium text-gray-900 text-left w-52 border-r border-gray-200">
+                        {t(feature.label)}
+                      </td>
+                      {plans.map((plan, idx) => (
+                        <td
+                          key={plan.name + feature.key}
+                          className="px-4 py-3 text-sm text-gray-500 text-center w-52"
+                        >
+                          {feature.key === 'price' ? (
+                            <span className="block">
+                              <span className="line-through text-gray-400 mr-1">{plan.price.old}</span>
+                              <br />
+                              <span className={`text-lg font-bold ${idx === 0 ? 'text-blue-600' : idx === plans.length - 1 ? 'text-purple-600' : `text-${plan.color}-600`}`}>¥{plan.price.current}</span>
+                            </span>
+                          ) : (
+                            feature.key === 'period'
+                              ? t(`pricing.period.${plan.period}`)
+                              : (typeof plan[feature.key as keyof typeof plan] === 'string'
+                                  ? (plan[feature.key as keyof typeof plan] as string === '無料'
+                                      ? t('pricing.options.items.seo.price')
+                                      : plan[feature.key as keyof typeof plan] as string)
+                                  : '-')
+                          )}
+                        </td>
+                      ))}
+                    </tr>
                   ))}
-                </tr>
-              </tbody>
-            </table>
-            <div className="text-xs text-gray-500 mt-4 text-left">
-              <p>{t('pricing.notes.period')}</p>
-              <p>{t('pricing.notes.requirements')}</p>
-              <p>{t('pricing.notes.materials')}</p>
+                </tbody>
+              </table>
             </div>
+          </div>
+          <div className="text-xs text-gray-500 mt-4 text-left">
+            <p>{t('pricing.notes.period')}</p>
+            <p>{t('pricing.notes.requirements')}</p>
+            <p>{t('pricing.notes.materials')}</p>
           </div>
         </div>
       </section>
@@ -255,37 +252,56 @@ export const Pricing = ({ onPageChange }: PricingProps) => {
               {t('pricing.options.subtitle')}
             </p>
           </motion.div>
-          <div className="overflow-x-auto">
-            <table className="w-full border border-gray-200 rounded-lg overflow-hidden bg-white text-center">
-              <thead className="bg-gray-100">
-                <tr>
-                  <th className="px-4 py-3 text-sm font-semibold text-gray-900 border-b w-80 whitespace-nowrap">{t('pricing.options.table.item')}</th>
-                  <th className="px-4 py-3 text-sm font-semibold text-gray-900 border-b w-[400px] border-l-2 border-gray-200">{t('pricing.options.table.unitPrice')}</th>
-                  <th className="px-4 py-3 text-sm font-semibold text-gray-900 border-b w-[600px] border-l-2 border-gray-200">{t('pricing.options.table.description')}</th>
-                </tr>
-              </thead>
-              <tbody className="divide-y divide-gray-200">
-                {optionItems.map((item) => (
-                  <tr key={item.key}>
-                    <td className="px-4 py-3 font-semibold text-gray-700 text-left bg-gray-50 w-80">{t(item.name)}</td>
-                    <td className="px-4 py-3 w-[400px] border-l-2 border-gray-200">
-                      {['domain', 'multilingual', 'sourceCode', 'other'].includes(item.key) || /^¥/.test(t(item.price)) || t(item.price) === 'Free' || t(item.price) === '無料'
-                        ? t(item.price)
-                        : `¥${t(item.price)}`}
-                    </td>
-                    <td className="px-4 py-3 w-[600px] border-l-2 border-gray-200">{t(item.description)}</td>
+
+          {/* 添加滑动提示 */}
+          <div className="text-sm text-gray-500 md:hidden mb-2 text-center">
+            <span>← スワイプしてご確認いただけます →</span>
+          </div>
+
+          {/* 表格容器 */}
+          <div className="relative -mx-4 sm:mx-0 mt-8">
+            <div className="overflow-x-auto hide-scrollbar">
+              <table className="min-w-[800px] border border-gray-200 rounded-lg overflow-hidden bg-white text-center">
+                <thead className="bg-gray-100">
+                  <tr>
+                    <th className="sticky left-0 bg-gray-100 z-10 px-4 py-3 text-sm font-semibold text-gray-900 text-left w-80 border-r border-gray-200">
+                      {t('pricing.options.table.item')}
+                    </th>
+                    <th className="px-4 py-3 text-sm font-semibold text-gray-900 text-left w-[400px]">
+                      {t('pricing.options.table.unitPrice')}
+                    </th>
+                    <th className="px-4 py-3 text-sm font-semibold text-gray-900 text-left w-[600px]">
+                      {t('pricing.options.table.description')}
+                    </th>
                   </tr>
-                ))}
-              </tbody>
-            </table>
-            <div className="text-xs text-gray-500 mt-4 text-left">
-              <p>{t('pricing.options.notes.period')}</p>
-              <p>{t('pricing.options.notes.materials')}</p>
-              <p>{t('pricing.options.notes.requirements')}</p>
+                </thead>
+                <tbody className="bg-white divide-y divide-gray-200">
+                  {optionItems.map((item) => (
+                    <tr key={item.key}>
+                      <td className="sticky left-0 bg-white z-10 px-4 py-3 text-sm font-medium text-gray-900 text-left w-80 border-r border-gray-200">
+                        {t(item.name)}
+                      </td>
+                      <td className="px-4 py-3 text-sm text-gray-500 w-[400px]">
+                        {['domain', 'multilingual', 'sourceCode', 'other'].includes(item.key) || /^¥/.test(t(item.price)) || t(item.price) === 'Free' || t(item.price) === '無料'
+                          ? t(item.price)
+                          : `¥${t(item.price)}`}
+                      </td>
+                      <td className="px-4 py-3 text-sm text-gray-500 w-[600px]">
+                        {t(item.description)}
+                      </td>
+                    </tr>
+                  ))}
+                </tbody>
+              </table>
             </div>
+          </div>
+          <div className="text-xs text-gray-500 mt-4 text-left">
+            <p>{t('pricing.options.notes.period')}</p>
+            <p>{t('pricing.options.notes.materials')}</p>
+            <p>{t('pricing.options.notes.requirements')}</p>
           </div>
         </div>
       </section>
-    </div>
+      </div>
   );
 };
