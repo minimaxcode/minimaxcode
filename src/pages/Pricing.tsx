@@ -1,33 +1,85 @@
 import { motion } from 'framer-motion';
-import { useEffect } from 'react';
+import { useEffect, useRef, useState } from 'react';
 import { useTranslation } from 'react-i18next';
+import { Shield, CheckCircle } from 'lucide-react';
+import { Tooltip, TooltipContent, TooltipProvider, TooltipTrigger } from '../components/ui/tooltip';
 
 interface PricingProps {
   onPageChange: (page: string) => void;
 }
 
 const features = [
-  { key: 'cms', label: 'pricing.table.features.cms' },
-  { key: 'mobile', label: 'pricing.table.features.mobile' },
+  // Section: サイトの基本機能
+  { key: 'section_basic', label: 'pricing.table.sections.basic', type: 'section' as const },
   { key: 'pages', label: 'pricing.table.features.pages' },
   { key: 'contact', label: 'pricing.table.features.contact' },
+  { key: 'noAds', label: 'pricing.table.features.noAds' },
   { key: 'product', label: 'pricing.table.features.product' },
   { key: 'shop', label: 'pricing.table.features.shop' },
+  { key: 'responsive', label: 'pricing.table.features.responsive' },
+  { key: 'favicon', label: 'pricing.table.features.favicon' },
+  { key: 'ssl', label: 'pricing.table.features.ssl' },
+  // Section: マーケティングパッケージ
+  { key: 'section_marketing', label: 'pricing.table.sections.marketing', type: 'section' as const },
+  { key: 'seo', label: 'pricing.table.features.seo' },
+  { key: 'ga4', label: 'pricing.table.features.ga4' },
+  { key: 'gsc', label: 'pricing.table.features.gsc' },
   { key: 'meo', label: 'pricing.table.features.meo' },
   { key: 'content', label: 'pricing.table.features.content' },
-  { key: 'seo', label: 'pricing.table.features.seo' },
-  { key: 'ssl', label: 'pricing.table.features.ssl' },
-  { key: 'period', label: 'pricing.table.features.period' },
-  { key: 'feature', label: 'pricing.table.features.feature' },
   { key: 'price', label: 'pricing.table.features.price' },
 ];
 
 export const Pricing = ({ onPageChange }: PricingProps) => {
   const { t } = useTranslation();
+  const plansTableRef = useRef<HTMLTableElement | null>(null);
+  const optionsTableRef = useRef<HTMLTableElement | null>(null);
+  const plansWrapRef = useRef<HTMLDivElement | null>(null);
+  const optionsWrapRef = useRef<HTMLDivElement | null>(null);
+  const [showPlansSticky, setShowPlansSticky] = useState(false);
+  const [showOptionsSticky, setShowOptionsSticky] = useState(false);
+  const [plansGridCols, setPlansGridCols] = useState<string>('');
+  const [optionsGridCols, setOptionsGridCols] = useState<string>('');
+
+  useEffect(() => {
+    const headerHeight = 64;
+    const computeVisibility = () => {
+      if (plansWrapRef.current) {
+        const r = plansWrapRef.current.getBoundingClientRect();
+        setShowPlansSticky(r.top <= headerHeight && r.bottom > headerHeight);
+      }
+      if (optionsWrapRef.current) {
+        const r2 = optionsWrapRef.current.getBoundingClientRect();
+        setShowOptionsSticky(r2.top <= headerHeight && r2.bottom > headerHeight);
+      }
+    };
+    computeVisibility();
+    window.addEventListener('scroll', computeVisibility, { passive: true } as any);
+    window.addEventListener('resize', computeVisibility);
+    return () => {
+      window.removeEventListener('scroll', computeVisibility as any);
+      window.removeEventListener('resize', computeVisibility);
+    };
+  }, []);
+
+  // 计算各表头实际列宽，保持覆盖层与表格对齐
+  useEffect(() => {
+    const computeCols = () => {
+      const buildTemplate = (table: HTMLTableElement | null) => {
+        if (!table) return '';
+        const ths = Array.from(table.querySelectorAll('thead tr th')) as HTMLTableCellElement[];
+        if (!ths.length) return '';
+        const widths = ths.map((th) => `${Math.round(th.getBoundingClientRect().width)}px`);
+        return widths.join(' ');
+      };
+      setPlansGridCols(buildTemplate(plansTableRef.current));
+      setOptionsGridCols(buildTemplate(optionsTableRef.current));
+    };
+    computeCols();
+    window.addEventListener('resize', computeCols);
+    return () => window.removeEventListener('resize', computeCols);
+  }, []);
 
   const optionItems = [
-    { key: 'cms', name: 'pricing.options.items.cms.name', price: 'pricing.options.items.cms.price', description: 'pricing.options.items.cms.description' },
-    { key: 'mobile', name: 'pricing.options.items.mobile.name', price: 'pricing.options.items.mobile.price', description: 'pricing.options.items.mobile.description' },
     { key: 'product', name: 'pricing.options.items.product.name', price: 'pricing.options.items.product.price', description: 'pricing.options.items.product.description' },
     { key: 'news', name: 'pricing.options.items.news.name', price: 'pricing.options.items.news.price', description: 'pricing.options.items.news.description' },
     { key: 'content', name: 'pricing.options.items.content.name', price: 'pricing.options.items.content.price', description: 'pricing.options.items.content.description' },
@@ -54,14 +106,17 @@ export const Pricing = ({ onPageChange }: PricingProps) => {
       color: 'teal',
       price: { old: '40,000', current: '30,000' },
       pages: '1P~3P',
-      cms: '-',
-      mobile: '-',
       contact: '-',
+      noAds: '〇',
       product: '-',
       shop: '-',
       meo: '-',
       content: '-',
-      seo: t('pricing.options.items.seo.price'),
+      seo: t('common.free'),
+      ga4: t('common.free'),
+      gsc: t('common.free'),
+      favicon: t('common.free'),
+      responsive: t('common.free'),
       ssl: '-',
       period: 'basic',
       feature: t('pricing.plans.basic.feature'),
@@ -72,14 +127,17 @@ export const Pricing = ({ onPageChange }: PricingProps) => {
       color: 'teal',
       price: { old: '200,000', current: '100,000/150,000' },
       pages: '~5P / ~10P',
-      cms: '〇',
-      mobile: '〇',
-      contact: '〇',
+      contact: t('common.contactLimit'),
+      noAds: '〇',
       product: '〇',
       shop: '-',
       meo: '-',
       content: '-',
-      seo: t('pricing.options.items.seo.price'),
+      seo: t('common.free'),
+      ga4: t('common.free'),
+      gsc: t('common.free'),
+      favicon: t('common.free'),
+      responsive: t('common.free'),
       ssl: '-',
       period: 'standard',
       feature: t('pricing.plans.standard.feature'),
@@ -90,15 +148,18 @@ export const Pricing = ({ onPageChange }: PricingProps) => {
       color: 'orange',
       price: { old: '250,000', current: '180,000~' },
       pages: '10P~',
-      cms: '〇',
-      mobile: '〇',
-      contact: '〇',
+      contact: t('common.contactLimit'),
+      noAds: '〇',
       product: '〇',
       shop: '〇',
       meo: '-',
       content: '-',
-      seo: t('pricing.options.items.seo.price'),
-      ssl: '無料',
+      seo: t('common.free'),
+      ga4: t('common.free'),
+      gsc: t('common.free'),
+      favicon: t('common.free'),
+      responsive: t('common.free'),
+      ssl: t('common.free'),
       period: 'customize',
       feature: t('pricing.plans.customize.feature'),
     },
@@ -108,43 +169,51 @@ export const Pricing = ({ onPageChange }: PricingProps) => {
       color: 'indigo',
       price: { old: '373,000', current: '250,000~' },
       pages: '10P~',
-      cms: '〇',
-      mobile: '〇',
-      contact: '〇',
+      contact: t('common.contactLimit'),
+      noAds: '〇',
       product: '〇',
       shop: '〇',
       meo: '〇',
       content: '〇',
-      seo: t('pricing.options.items.seo.price'),
-      ssl: '無料',
+      seo: t('common.free'),
+      ga4: t('common.free'),
+      gsc: t('common.free'),
+      favicon: t('common.free'),
+      responsive: t('common.free'),
+      ssl: t('common.free'),
       period: 'premium',
       feature: t('pricing.plans.premium.feature'),
     },
   ];
+
+  const featureTooltipKeyByKey: Record<string, string> = {
+    seo: 'service.included.basic.descriptions.0',
+    ga4: 'service.included.basic.descriptions.1',
+    gsc: 'service.included.basic.descriptions.2',
+    favicon: 'service.included.basic.descriptions.3',
+    responsive: 'service.included.basic.descriptions.4',
+    ssl: 'service.included.basic.descriptions.7',
+    noAds: 'pricing.options.items.noAds.description',
+    meo: 'service.included.basic.descriptions.5',
+    content: 'service.included.basic.descriptions.6',
+  };
 
   useEffect(() => {
     window.scrollTo(0, 0);
   }, []);
 
   return (
-    <div className="min-h-screen bg-white text-gray-900 pt-24">
+    <div className="min-h-screen text-gray-900 pt-24" style={{ background: 'linear-gradient(180deg, #F6FAFF 0%, #FFFFFF 100%)' }}>
       {/* Hero Section */}
-      <section className="relative overflow-hidden bg-gradient-to-r from-[#3F87F5]/20 via-[#32E2C4]/20 to-[#50FA7B]/20 pt-16 pb-20">
-        <div className="absolute inset-0">
-          <div className="absolute inset-0 bg-gradient-to-br from-primary-50/50 via-transparent to-gray-100/50" />
-        </div>
-        <div className="relative max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
+      <section className="pt-16 pb-20 bg-transparent">
+        <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
           <motion.div
             initial={{ opacity: 0, y: 30 }}
             animate={{ opacity: 1, y: 0 }}
             transition={{ duration: 0.8 }}
             className="text-center"
           >
-            <h1 className="text-5xl md:text-6xl font-bold mb-6 text-gray-900">
-              <span className="bg-gradient-to-r from-[#3F87F5] via-[#32E2C4] to-[#50FA7B] bg-clip-text text-transparent">
-                {t('pricing.hero.title')}
-              </span>
-            </h1>
+            <h1 className="text-5xl md:text-6xl font-bold mb-6 text-[#2F4766]">{t('pricing.hero.title')}</h1>
             <p className="text-xl text-gray-600 max-w-3xl mx-auto">
               {t('pricing.hero.subtitle')}
             </p>
@@ -152,16 +221,18 @@ export const Pricing = ({ onPageChange }: PricingProps) => {
         </div>
       </section>
 
+      {/* 応援キャンペーン Section removed per request */}
+
       {/* WEB制作プラン料金表 */}
-      <section className="py-20 bg-white">
-        <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
+      <section id="plans" className="py-20 bg-transparent">
+        <div className="max-w-[1500px] mx-auto px-4 sm:px-6 lg:px-8">
           <motion.div
             initial={{ opacity: 0, y: 30 }}
             animate={{ opacity: 1, y: 0 }}
             transition={{ duration: 0.8 }}
             className="text-center mb-16"
           >
-            <h2 className="text-3xl md:text-4xl font-bold mb-6 text-gray-900">
+            <h2 className="text-3xl md:text-4xl font-bold mb-6 text-[#2F4766]">
               {t('pricing.table.title')}
             </h2>
             <p className="text-xl text-gray-600 max-w-2xl mx-auto">
@@ -175,80 +246,174 @@ export const Pricing = ({ onPageChange }: PricingProps) => {
           </div>
 
           {/* 表格容器 */}
-          <div className="relative -mx-4 sm:mx-0">
-            <div className="overflow-x-auto hide-scrollbar">
-              <table className="min-w-[800px] border border-gray-200 rounded-lg overflow-hidden bg-white text-center">
-                <thead className="bg-gray-100">
+          <div className="flex justify-center">
+            <div className="relative w-full max-w-[1500px] mx-0" ref={plansWrapRef}>
+              <div className="overflow-x-auto hide-scrollbar">
+                {/* Sticky header overlay for plans (desktop) */}
+                {showPlansSticky && (
+                  <div className="fixed left-1/2 -translate-x-1/2 top-16 z-30 hidden md:block w-full max-w-[1500px] px-4 sm:px-6 lg:px-8 pointer-events-none">
+                    <div className="bg-gradient-to-r from-blue-50 to-cyan-50 border-b border-blue-100 min-w-[1200px]">
+                      <div className="grid" style={{ gridTemplateColumns: plansGridCols || '15rem repeat(4, 15rem)' }}>
+                        <div className="px-4 py-3 text-sm font-semibold text-gray-900 text-center whitespace-nowrap border-r border-blue-100">{t('pricing.table.item')}</div>
+                        {plans.map((plan) => (
+                          <div key={plan.name} className="px-4 py-3 text-sm font-semibold text-center whitespace-nowrap">
+                            <div className="font-bold text-[#2F4766]">{plan.name}</div>
+                            {plan.tag && (
+                              <div className="inline-block mt-1 text-xs rounded-full px-2 py-0.5 bg-blue-100 text-blue-800">{plan.tag}</div>
+                            )}
+                          </div>
+                        ))}
+                      </div>
+                    </div>
+                  </div>
+                )}
+                <table className="w-full min-w-[1200px] rounded-xl bg-transparent text-center mx-auto" ref={plansTableRef}>
+                <thead className="bg-gradient-to-r from-blue-50 to-cyan-50 border-b border-blue-100">
                   <tr>
-                    <th className="sticky left-0 bg-gray-100 z-10 px-4 py-3 text-sm font-semibold text-gray-900 text-left w-52 border-r border-gray-200">
+                    <th className="left-0 z-20 px-4 py-3 text-sm font-semibold text-gray-900 text-center w-60 whitespace-nowrap border-r border-blue-100">
                       {t('pricing.table.item')}
                     </th>
                     {plans.map((plan, idx) => (
                       <th
                         key={plan.name}
-                        className="px-4 py-3 text-sm font-semibold text-center w-52"
+                        className={`px-4 py-3 text-sm font-semibold text-center w-60 whitespace-nowrap ${idx === 2 ? 'border-l-2 border-r-2 border-t-2 border-[#0EA5FF]' : ''}`}
                       >
-                        <div className={`font-bold ${idx === 0 ? 'text-blue-600' : idx === plans.length - 1 ? 'text-purple-700' : `text-${plan.color}-700`}`}>{plan.name}</div>
-                        {plan.tag && <div className={`inline-block mt-1 text-xs rounded-full px-2 py-0.5 ${idx === 0 ? 'bg-blue-100 text-blue-800' : idx === plans.length - 1 ? 'bg-purple-100 text-purple-800' : `bg-${plan.color}-100 text-${plan.color}-800`}`}>{plan.tag}</div>}
+                        <div className="font-bold text-[#2F4766]">{plan.name}</div>
+                        {plan.tag && <div className="inline-block mt-1 text-xs rounded-full px-2 py-0.5 bg-blue-100 text-blue-800">{plan.tag}</div>}
                       </th>
                     ))}
                   </tr>
                 </thead>
-                <tbody className="bg-white divide-y divide-gray-200">
-                  {features.map((feature) => (
-                    <tr key={feature.key}>
-                      <td className="sticky left-0 bg-white z-10 px-4 py-3 text-sm font-medium text-gray-900 text-left w-52 border-r border-gray-200">
-                        {t(feature.label)}
-                      </td>
-                      {plans.map((plan, idx) => (
-                        <td
-                          key={plan.name + feature.key}
-                          className="px-4 py-3 text-sm text-gray-500 text-center w-52"
-                        >
-                          {feature.key === 'price' ? (
-                            <span className="block">
-                              <span className="line-through text-gray-400 mr-1">{plan.price.old}</span>
-                              <br />
-                              <span className={`text-lg font-bold ${idx === 0 ? 'text-blue-600' : idx === plans.length - 1 ? 'text-purple-600' : `text-${plan.color}-600`}`}>¥{plan.price.current}</span>
-                            </span>
-                          ) : (
-                            feature.key === 'period'
-                              ? t(`pricing.period.${plan.period}`)
-                              : (typeof plan[feature.key as keyof typeof plan] === 'string'
-                                  ? (plan[feature.key as keyof typeof plan] as string === '無料'
-                                      ? t('pricing.options.items.seo.price')
-                                      : plan[feature.key as keyof typeof plan] as string)
-                                  : '-')
-                          )}
+                <tbody className="bg-transparent divide-y divide-gray-100">
+                  {features.map((feature, featureIdx) => {
+                    if ((feature as any).type === 'section') {
+                      return (
+                        <tr key={feature.key}>
+                          <td className="sticky left-0 bg-transparent z-10 px-4 py-3 text-sm font-bold text-[#0EA5FF] text-left w-60 whitespace-nowrap border-r border-blue-100">
+                            {t(feature.label)}
+                          </td>
+                          {plans.map((plan, idx) => (
+                            <td key={plan.name + feature.key} className={`px-4 py-3 text-sm text-center w-60 whitespace-nowrap text-gray-600 ${idx === 2 ? 'border-l-2 border-r-2 border-[#0EA5FF]' : ''}`}>
+                              {/* section spacer */}
+                            </td>
+                          ))}
+                        </tr>
+                      );
+                    }
+                    return (
+                      <tr key={feature.key}>
+                        <td className="sticky left-0 bg-transparent z-10 px-4 py-3 text-sm text-gray-700 text-left w-60 whitespace-nowrap border-r border-blue-100">
+                          {(() => {
+                            const tooltipKey = featureTooltipKeyByKey[(feature as any).key as string] || '';
+                            const labelEl = <span className={tooltipKey ? 'cursor-help' : ''}>{t((feature as any).label)}</span>;
+                            if (!tooltipKey) return labelEl;
+                            return (
+                              <TooltipProvider>
+                                <Tooltip>
+                                  <TooltipTrigger asChild>{labelEl}</TooltipTrigger>
+                                  <TooltipContent side="top" className="max-w-[360px] text-sm leading-relaxed bg-white text-[#2F4766] border border-blue-200 shadow-sm">
+                                    <span className="whitespace-pre-line">{t(tooltipKey)}</span>
+                                  </TooltipContent>
+                                </Tooltip>
+                              </TooltipProvider>
+                            );
+                          })()}
                         </td>
-                      ))}
-                    </tr>
-                  ))}
-                </tbody>
+                        {plans.map((plan, idx) => (
+                          <td
+                            key={plan.name + feature.key}
+                            className={`px-4 py-3 text-sm text-center w-60 whitespace-nowrap text-gray-600 ${idx === 2 ? `border-l-2 border-r-2 border-[#0EA5FF] ${featureIdx === features.length - 1 ? 'border-b-2 border-b-[#0EA5FF]' : ''}` : ''}`}
+                          >
+                            {feature.key === 'price' ? (
+                              <span className="block">
+                                <span className="line-through text-gray-400 mr-1">{plan.price.old}</span>
+                                <br />
+                                <span className="text-lg font-bold text-[#0EA5FF]">¥{plan.price.current}</span>
+                              </span>
+                            ) : feature.key === 'seo' ? (
+                              t('common.free')
+                            ) : (
+                              feature.key === 'period'
+                                ? t(`pricing.period.${plan.period}`)
+                                : (typeof plan[feature.key as keyof typeof plan] === 'string'
+                                    ? (plan[feature.key as keyof typeof plan] as string)
+                                    : '-')
+                            )}
+                          </td>
+                        ))}
+                      </tr>
+                    );
+                  })}
+                 </tbody>
               </table>
             </div>
           </div>
+        </div>
           <div className="text-xs text-gray-500 mt-4 text-left">
             <p>{t('pricing.notes.period')}</p>
             <p>{t('pricing.notes.requirements')}</p>
-            <p>{t('pricing.notes.materials')}</p>
+            <p>{t('pricing.notes.images', '※ ウェブサイトに掲載する画像は原則としてお客様にご提供いただきます。')}</p>
+            <p>{t('pricing.notes.modifications', '※ 納品後1週間以内は無料で修正対応いたします。期間経過後、追加機能やデザイン要件には、追加料金が発生する場合があります。')}</p>
           </div>
         </div>
       </section>
 
+      {/* Quote CTA Hook */}
+      <section className="py-16 bg-transparent">
+        <div className="max-w-4xl mx-auto px-4 sm:px-6 lg:px-8">
+          <motion.div
+            initial={{ opacity: 0, y: 30 }}
+            animate={{ opacity: 1, y: 0 }}
+            transition={{ duration: 0.8 }}
+            className="text-center"
+          >
+            <div className="bg-white rounded-2xl shadow-lg border border-gray-200 p-8 md:p-12">
+              <div className="flex justify-center mb-6">
+                <div className="w-16 h-16 bg-[#0EA5FF] rounded-full flex items-center justify-center">
+                  <svg className="w-8 h-8 text-white" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                    <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M9 12l2 2 4-4m6 2a9 9 0 11-18 0 9 9 0 0118 0z" />
+                  </svg>
+                </div>
+              </div>
+              
+              <h3 className="text-2xl md:text-3xl font-bold text-[#2F4766] mb-4">
+                {t('pricing.quoteCta.title')}
+              </h3>
+              <p className="text-lg text-gray-600 mb-8 leading-relaxed whitespace-pre-line">
+                {t('pricing.quoteCta.description')}
+              </p>
+              
+              <button
+                onClick={() => onPageChange('quote')}
+                className="inline-flex items-center px-8 py-4 bg-[#0EA5FF] hover:bg-[#0284C7] text-white font-semibold rounded-full transition-all duration-300 shadow-lg hover:shadow-xl"
+              >
+                <svg className="w-5 h-5 mr-2" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                  <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M15.232 5.232l3.536 3.536m-2.036-5.036a2.5 2.5 0 113.536 3.536L6.5 21.036H3v-3.572L16.732 3.732z" />
+                </svg>
+                {t('pricing.quoteCta.button')}
+              </button>
+              
+              <p className="text-sm text-gray-500 mt-4">
+                {t('pricing.quoteCta.note')}
+              </p>
+            </div>
+          </motion.div>
+        </div>
+      </section>
+
       {/* オプション料金 */}
-      <section className="py-20 bg-white">
-        <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
+      <section id="options" className="py-20 bg-transparent">
+        <div className="max-w-[1500px] mx-auto px-4 sm:px-6 lg:px-8">
           <motion.div
             initial={{ opacity: 0, y: 30 }}
             animate={{ opacity: 1, y: 0 }}
             transition={{ duration: 0.8 }}
             className="text-center mb-16"
           >
-            <h2 className="text-3xl md:text-4xl font-bold mb-6 text-gray-900">
+            <h2 className="text-3xl md:text-4xl font-bold mb-6 text-[#2F4766]">
               {t('pricing.options.title')}
             </h2>
-            <p className="text-lg text-gray-600 max-w-2xl mx-auto">
+            <p className="text-lg text-gray-600 max-w-4xl mx-auto whitespace-nowrap">
               {t('pricing.options.subtitle')}
             </p>
           </motion.div>
@@ -259,35 +424,62 @@ export const Pricing = ({ onPageChange }: PricingProps) => {
           </div>
 
           {/* 表格容器 */}
-          <div className="relative -mx-4 sm:mx-0 mt-8">
-            <div className="overflow-x-auto hide-scrollbar">
-              <table className="min-w-[800px] border border-gray-200 rounded-lg overflow-hidden bg-white text-center">
-                <thead className="bg-gray-100">
+          <div className="flex justify-center">
+            <div className="relative w-full max-w-[1500px] mx-0 mt-8" ref={optionsWrapRef}>
+              <div className="overflow-x-auto hide-scrollbar">
+                {/* Sticky header overlay for options (desktop) */}
+                {showOptionsSticky && (
+                  <div className="fixed left-1/2 -translate-x-1/2 top-16 z-30 hidden md:block w-full max-w-[1500px] px-4 sm:px-6 lg:px-8 pointer-events-none">
+                    <div className="bg-gradient-to-r from-blue-50 to-cyan-50 border-b border-blue-100 min-w-[1300px]">
+                      <div className="grid" style={{ gridTemplateColumns: optionsGridCols || '360px 320px 720px' }}>
+                        <div className="px-4 py-3 text-sm font-semibold text-gray-900 text-center whitespace-nowrap border-r border-blue-100">{t('pricing.options.table.item')}</div>
+                        <div className="px-4 py-3 text-sm font-semibold text-gray-900 text-center whitespace-nowrap border-r border-blue-100">{t('pricing.options.table.unitPrice')}</div>
+                        <div className="px-4 py-3 text-sm font-semibold text-gray-900 text-center whitespace-nowrap">{t('pricing.options.table.description')}</div>
+                      </div>
+                    </div>
+                  </div>
+                )}
+                <table className="w-full min-w-[1300px] rounded-xl bg-transparent text-center mx-auto" ref={optionsTableRef}>
+                <thead className="bg-gradient-to-r from-blue-50 to-cyan-50 border-b border-blue-100">
                   <tr>
-                    <th className="sticky left-0 bg-gray-100 z-10 px-4 py-3 text-sm font-semibold text-gray-900 text-left w-80 border-r border-gray-200">
+                    <th className="left-0 z-20 px-4 py-3 text-sm font-semibold text-gray-900 text-center w-[360px] whitespace-nowrap border-r border-blue-100">
                       {t('pricing.options.table.item')}
                     </th>
-                    <th className="px-4 py-3 text-sm font-semibold text-gray-900 text-left w-[400px]">
+                    <th className="px-4 py-3 text-sm font-semibold text-gray-900 text-center w-[320px] whitespace-nowrap border-r border-blue-100">
                       {t('pricing.options.table.unitPrice')}
                     </th>
-                    <th className="px-4 py-3 text-sm font-semibold text-gray-900 text-left w-[600px]">
+                    <th className="px-4 py-3 text-sm font-semibold text-gray-900 text-center w-[720px]">
                       {t('pricing.options.table.description')}
                     </th>
                   </tr>
                 </thead>
-                <tbody className="bg-white divide-y divide-gray-200">
+                <tbody className="bg-transparent divide-y divide-gray-100">
                   {optionItems.map((item) => (
                     <tr key={item.key}>
-                      <td className="sticky left-0 bg-white z-10 px-4 py-3 text-sm font-medium text-gray-900 text-left w-80 border-r border-gray-200">
+                      <td className="sticky left-0 bg-transparent z-10 px-4 py-3 text-sm text-gray-700 text-left w-[360px] whitespace-nowrap border-r border-blue-100">
                         {t(item.name)}
                       </td>
-                      <td className="px-4 py-3 text-sm text-gray-500 w-[400px]">
-                        {['domain', 'multilingual', 'sourceCode', 'other'].includes(item.key) || /^¥/.test(t(item.price)) || t(item.price) === 'Free' || t(item.price) === '無料'
-                          ? t(item.price)
+                      <td className="px-4 py-3 text-sm text-gray-500 text-center w-[320px] whitespace-nowrap border-r border-blue-100">
+                        {['domain', 'multilingual', 'sourceCode', 'other'].includes(item.key) || /^¥/.test(t(item.price)) || t(item.price) === 'Free' || t(item.price) === '無料' || t(item.price) === '無料キャンペーン中'
+                          ? (
+                            <span className={item.key === 'seo' ? 'text-blue-600 font-medium' : ''}>{t(item.price)}</span>
+                          )
                           : `¥${t(item.price)}`}
                       </td>
-                      <td className="px-4 py-3 text-sm text-gray-500 w-[600px]">
-                        {t(item.description)}
+                      <td className="px-4 py-3 text-sm text-gray-700 text-left w-[720px] leading-relaxed">
+                        <div className="max-w-none" style={{lineHeight: '1.5'}}>
+                          {t(item.description).includes('\n') ? (
+                            <div>
+                              {t(item.description).split('\n').map((line, index) => (
+                                <div key={index} className={index === 0 ? '' : 'text-blue-600 font-medium mt-1'}>
+                                  {line}
+                                </div>
+                              ))}
+                            </div>
+                          ) : (
+                            t(item.description)
+                          )}
+                        </div>
                       </td>
                     </tr>
                   ))}
@@ -295,11 +487,8 @@ export const Pricing = ({ onPageChange }: PricingProps) => {
               </table>
             </div>
           </div>
-          <div className="text-xs text-gray-500 mt-4 text-left">
-            <p>{t('pricing.options.notes.period')}</p>
-            <p>{t('pricing.options.notes.materials')}</p>
-            <p>{t('pricing.options.notes.requirements')}</p>
           </div>
+
         </div>
       </section>
       </div>

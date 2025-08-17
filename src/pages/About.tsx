@@ -45,24 +45,17 @@ export const About = ({ onPageChange }: AboutProps) => {
   ];
 
   return (
-    <div className="min-h-screen bg-white text-gray-900 pt-24">
+    <div className="min-h-screen bg-[#F6FAFF] text-gray-900 pt-24">
       {/* Hero Section */}
-      <section className="relative overflow-hidden bg-gradient-to-r from-[#3F87F5]/20 via-[#32E2C4]/20 to-[#50FA7B]/20 pt-16 pb-20">
-        <div className="absolute inset-0">
-          <div className="absolute inset-0 bg-gradient-to-br from-primary-50/50 via-transparent to-gray-100/50" />
-        </div>
-        <div className="relative max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
+      <section className="pt-16 pb-20 bg-transparent">
+        <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
           <motion.div
             initial={{ opacity: 0, y: 30 }}
             animate={{ opacity: 1, y: 0 }}
             transition={{ duration: 0.8 }}
             className="text-center"
           >
-            <h1 className="text-5xl md:text-6xl font-bold mb-6 text-gray-900">
-              <span className="bg-gradient-to-r from-[#3F87F5] via-[#32E2C4] to-[#50FA7B] bg-clip-text text-transparent">
-                {t('about.title')}
-              </span>
-            </h1>
+            <h1 className="text-5xl md:text-6xl font-bold mb-6 text-[#2F4766]">{t('about.title')}</h1>
             <p className="text-xl text-gray-600 max-w-3xl mx-auto">
               {t('about.subtitle')}
             </p>
@@ -71,7 +64,7 @@ export const About = ({ onPageChange }: AboutProps) => {
       </section>
 
       {/* Values Section */}
-      <section className="py-20">
+      <section className="py-20 bg-transparent">
         <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
           <motion.div
             initial={{ opacity: 0, y: 30 }}
@@ -80,9 +73,7 @@ export const About = ({ onPageChange }: AboutProps) => {
             viewport={{ once: true }}
             className="text-center mb-16"
           >
-            <h2 className="text-4xl md:text-5xl font-bold mb-6 bg-gradient-to-r from-gray-900 via-violet-600 to-purple-600 bg-clip-text text-transparent">
-              {t('about.values.title')}
-            </h2>
+            <h2 className="text-4xl md:text-5xl font-bold mb-6 text-[#2F4766]">{t('about.values.title')}</h2>
           </motion.div>
 
           <div className="grid grid-cols-1 lg:grid-cols-3 gap-8">
@@ -114,7 +105,7 @@ export const About = ({ onPageChange }: AboutProps) => {
       </section>
 
       {/* Company Outline & Access Section - 移动到ミッション部分下方 */}
-      <section className="py-20">
+      <section className="py-20 bg-transparent">
         <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
           <motion.div
             initial={{ opacity: 0, y: 30 }}
@@ -123,9 +114,7 @@ export const About = ({ onPageChange }: AboutProps) => {
             viewport={{ once: true }}
             className="text-center mb-16"
           >
-            <h2 className="text-4xl md:text-5xl font-bold mb-6 bg-gradient-to-r from-gray-900 via-blue-600 to-cyan-600 bg-clip-text text-transparent">
-              {t('about.outline.title')}
-            </h2>
+            <h2 className="text-3xl md:text-4xl font-bold mb-6 text-[#2F4766]">{t('about.outline.title')}</h2>
           </motion.div>
 
           <div className="grid grid-cols-1 lg:grid-cols-2 gap-12">
@@ -185,8 +174,8 @@ export const About = ({ onPageChange }: AboutProps) => {
                     <Building className="w-8 h-8 text-white" />
                   </div>
                   <div className="flex-1">
-                    <p className="text-base text-gray-500 mb-2">{t('about.outline.name')}</p>
-                    <p className="text-xl font-bold bg-gradient-to-r from-blue-600 to-cyan-600 bg-clip-text text-transparent">{t('about.outline.nameValue')}</p>
+                    <p className="text-sm text-gray-500 mb-2">{t('about.outline.name')}</p>
+                    <p className="text-lg font-bold bg-gradient-to-r from-blue-600 to-cyan-600 bg-clip-text text-transparent">{t('about.outline.nameValue')}</p>
                   </div>
                 </li>
                 <li className="flex items-start space-x-6">
@@ -203,8 +192,8 @@ export const About = ({ onPageChange }: AboutProps) => {
                     <MapPin className="w-8 h-8 text-white" />
                   </div>
                   <div className="flex-1">
-                    <p className="text-base text-gray-500 mb-2">{t('about.outline.location')}</p>
-                    <p className="text-xl font-bold bg-gradient-to-r from-blue-600 to-cyan-600 bg-clip-text text-transparent">{t('about.outline.locationValue')}</p>
+                    <p className="text-sm text-gray-500 mb-2">{t('about.outline.location')}</p>
+                    <p className="text-lg font-bold bg-gradient-to-r from-blue-600 to-cyan-600 bg-clip-text text-transparent">{t('about.outline.locationValue')}</p>
                   </div>
                 </li>
                 <li className="flex items-start space-x-6">
@@ -221,8 +210,8 @@ export const About = ({ onPageChange }: AboutProps) => {
                     <Mail className="w-8 h-8 text-white" />
                   </div>
                   <div className="flex-1">
-                    <p className="text-base text-gray-500 mb-2">{t('about.outline.contact')}</p>
-                    <p className="text-xl font-bold bg-gradient-to-r from-blue-600 to-cyan-600 bg-clip-text text-transparent">{t('about.outline.contactValue')}</p>
+                    <p className="text-sm text-gray-500 mb-2">{t('about.outline.contact')}</p>
+                    <p className="text-lg font-bold bg-gradient-to-r from-blue-600 to-cyan-600 bg-clip-text text-transparent">{t('about.outline.contactValue')}</p>
                   </div>
                 </li>
                 <li className="flex items-start space-x-6">
@@ -239,8 +228,8 @@ export const About = ({ onPageChange }: AboutProps) => {
                     <Phone className="w-8 h-8 text-white" />
                   </div>
                   <div className="flex-1">
-                    <p className="text-base text-gray-500 mb-2">{t('about.outline.phone')}</p>
-                    <p className="text-xl font-bold bg-gradient-to-r from-blue-600 to-cyan-600 bg-clip-text text-transparent">{t('about.outline.phoneValue')}</p>
+                    <p className="text-sm text-gray-500 mb-2">{t('about.outline.phone')}</p>
+                    <p className="text-lg font-bold bg-gradient-to-r from-blue-600 to-cyan-600 bg-clip-text text-transparent">{t('about.outline.phoneValue')}</p>
                   </div>
                 </li>
                 <li className="flex items-start space-x-6">
@@ -257,8 +246,8 @@ export const About = ({ onPageChange }: AboutProps) => {
                     <Clock className="w-8 h-8 text-white" />
                   </div>
                   <div className="flex-1">
-                    <p className="text-base text-gray-500 mb-2">{t('about.outline.businessHours')}</p>
-                    <p className="text-xl font-bold bg-gradient-to-r from-blue-600 to-cyan-600 bg-clip-text text-transparent">{t('about.outline.businessHoursValue')}</p>
+                    <p className="text-sm text-gray-500 mb-2">{t('about.outline.businessHours')}</p>
+                    <p className="text-lg font-bold bg-gradient-to-r from-blue-600 to-cyan-600 bg-clip-text text-transparent">{t('about.outline.businessHoursValue')}</p>
                   </div>
                 </li>
               </ul>

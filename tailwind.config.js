@@ -10,8 +10,12 @@ module.exports = {
 	theme: {
 		container: {
 			center: true,
-			padding: '2rem',
+			padding: '2.25rem', // 增加容器内边距以适应更大的字体
 			screens: {
+				'sm': '640px',
+				'md': '768px',
+				'lg': '1024px',
+				'xl': '1280px',
 				'2xl': '1400px',
 			},
 		},
@@ -80,6 +84,34 @@ module.exports = {
 			},
 		},
 		extend: {
+			fontSize: {
+				// 扩大所有字体大小（增加12.5%）
+				'xs': ['0.8125rem', { lineHeight: '1.125rem' }],   // 13px
+				'sm': ['0.9375rem', { lineHeight: '1.375rem' }],   // 15px
+				'base': ['1.125rem', { lineHeight: '1.75rem' }],   // 18px
+				'lg': ['1.25rem', { lineHeight: '1.875rem' }],     // 20px
+				'xl': ['1.375rem', { lineHeight: '2rem' }],        // 22px
+				'2xl': ['1.6875rem', { lineHeight: '2.25rem' }],   // 27px
+				'3xl': ['2.125rem', { lineHeight: '2.5rem' }],     // 34px
+				'4xl': ['2.5rem', { lineHeight: '2.75rem' }],      // 40px
+				'5xl': ['3.375rem', { lineHeight: '3.5rem' }],     // 54px
+				'6xl': ['4.25rem', { lineHeight: '4.5rem' }],      // 68px
+				'7xl': ['5.0625rem', { lineHeight: '5.25rem' }],   // 81px
+				'8xl': ['6.75rem', { lineHeight: '7rem' }],        // 108px
+				'9xl': ['9rem', { lineHeight: '9.25rem' }],        // 144px
+			},
+			spacing: {
+				// 相应调整间距以保持布局
+				'18': '4.5rem',   // 72px
+				'22': '5.5rem',   // 88px
+				'26': '6.5rem',   // 104px
+				'30': '7.5rem',   // 120px
+				'34': '8.5rem',   // 136px
+				'38': '9.5rem',   // 152px
+				'42': '10.5rem',  // 168px
+				'46': '11.5rem',  // 184px
+				'50': '12.5rem',  // 200px
+			},
 			colors: {
 				border: 'hsl(var(--border))',
 				input: 'hsl(var(--input))',

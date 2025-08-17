@@ -92,56 +92,64 @@ export const Home = ({ onPageChange }: HomeProps) => {
   return (
     <div className="min-h-screen bg-white text-gray-900">
       {/* Hero Section */}
-      <section className="relative overflow-hidden bg-gradient-to-r from-[#3F87F5]/20 via-[#32E2C4]/20 to-[#50FA7B]/20">
-        <div className="absolute inset-0">
-          <div className="absolute inset-0 bg-gradient-to-br from-primary-50/50 via-transparent to-gray-100/50" />
-        </div>
-        
-        <div className="relative max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 pt-32 pb-20">
+      <section className="relative bg-transparent" style={{ marginTop: 'calc(var(--header-h) * -1)' }}>
+        <div className="relative w-full h-[60vh] sm:h-[70vh] md:aspect-[5/2] lg:aspect-[21/9] overflow-hidden">
           <motion.div
             initial={{ opacity: 0, y: 30 }}
             animate={{ opacity: 1, y: 0 }}
             transition={{ duration: 0.8 }}
-            className="text-center"
+            className="absolute inset-0"
           >
-            <h1 className="text-6xl md:text-8xl font-bold mb-6 text-gray-900">
-              {t('home.title')}
-            </h1>
-            <p className="text-3xl md:text-4xl text-teal-600 font-semibold mb-4">
-              {t('home.slogan')}
-            </p>
-            <p className="text-2xl text-gray-600 mb-8 max-w-3xl mx-auto">
-              {t('home.hero.subtitle')}
-            </p>
-            <p className="text-xl text-gray-500 mb-12 max-w-4xl mx-auto leading-relaxed">
-              {t('home.hero.description')}
-            </p>
-            <div className="flex flex-col sm:flex-row gap-4 justify-center">
-              <motion.button
-                whileHover={{ scale: 1.02 }}
-                whileTap={{ scale: 0.98 }}
-                onClick={() => onPageChange('quote')}
-                className="px-8 py-4 bg-gradient-to-r from-teal-500 to-emerald-500 text-white font-semibold text-lg rounded-lg hover:from-teal-600 hover:to-emerald-600 transition-all duration-200 flex items-center justify-center space-x-2 shadow-lg hover:shadow-xl"
-              >
-                <span>{t('home.hero.cta')}</span>
-                <ArrowRight className="w-5 h-5" />
-              </motion.button>
-              <motion.button
-                whileHover={{ scale: 1.02 }}
-                whileTap={{ scale: 0.98 }}
-                onClick={() => onPageChange('contact')}
-                className="px-8 py-4 border-2 border-violet-400 text-violet-600 font-semibold text-lg rounded-lg hover:bg-violet-50 hover:border-violet-500 transition-colors duration-200"
-              >
-                {t('home.hero.contact')}
-              </motion.button>
+            <img src="/images/home-hero.jpg" alt="Home Hero" className="w-full h-full object-cover object-center" />
+          </motion.div>
+
+          {/* 文案与按钮覆盖层（左半部分） */}
+          <motion.div
+            initial={{ opacity: 0, y: 20 }}
+            animate={{ opacity: 1, y: 0 }}
+            transition={{ duration: 0.8, delay: 0.1 }}
+            className="absolute inset-0 flex items-start justify-start"
+            style={{ zIndex: 10 }}
+          >
+            {/* 直接基于视口进行左侧内边距，贴合背景图白色方块区域 */}
+            <div className="w-full pl-4 pr-4 md:pl-[6vw] md:pr-[4vw] pt-6 md:pt-10 lg:pt-16">
+              <div className="w-full md:w-1/2 lg:w-1/2 text-left pt-[calc(var(--header-h)+12px)] md:pt-[calc(var(--header-h)+80px)] lg:pt-[calc(var(--header-h)+180px)] max-w-[90%] sm:max-w-[80%] overflow-hidden">
+                <h1 className="text-4xl md:text-6xl lg:text-8xl font-extrabold text-[#2F4766] mb-3 md:mb-4">
+                  {t('home.title')}
+                </h1>
+                <h2 className="text-2xl md:text-4xl text-[#0EA5FF] mb-6 md:mb-12">
+                  {t('home.hero.subtitle')}
+                </h2>
+                <p className="text-base md:text-xl lg:text-2xl text-[#2F4766]/95 leading-relaxed mb-6 md:mb-16 max-w-[52rem] break-words">
+                  {t('home.hero.description')}
+                </p>
+                <div className="flex flex-row gap-3 sm:gap-6 flex-wrap">
+                  <motion.button
+                    whileHover={{ scale: 1.03 }}
+                    whileTap={{ scale: 0.97 }}
+                    onClick={() => onPageChange('quote')}
+                    className="px-8 py-4 md:px-12 md:py-6 rounded-xl bg-gradient-to-r from-[#33C6FF] to-[#0EA5FF] text-white font-semibold text-lg md:text-2xl shadow-lg hover:opacity-90"
+                  >
+                    {t('home.hero.cta')}
+                  </motion.button>
+                  <motion.button
+                    whileHover={{ scale: 1.03 }}
+                    whileTap={{ scale: 0.97 }}
+                    onClick={() => onPageChange('contact')}
+                    className="px-8 py-4 md:px-12 md:py-6 rounded-xl bg-gradient-to-r from-[#0EA5FF] to-[#6A7DFF] text-white font-semibold text-lg md:text-2xl shadow-lg hover:opacity-90"
+                  >
+                    {t('home.hero.contact')}
+                  </motion.button>
+                </div>
+              </div>
             </div>
           </motion.div>
         </div>
       </section>
 
-      {/* Features Section */}
-      <section className="py-20 bg-white">
-        <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
+      {/* Why Choose Us Section */}
+      <section className="py-20 bg-transparent">
+        <div className="max-w-[1536px] mx-auto px-4 sm:px-6 lg:px-8">
           <motion.div
             initial={{ opacity: 0, y: 30 }}
             whileInView={{ opacity: 1, y: 0 }}
@@ -149,129 +157,154 @@ export const Home = ({ onPageChange }: HomeProps) => {
             viewport={{ once: true }}
             className="text-center mb-16"
           >
-            <h2 className="text-4xl md:text-5xl font-bold mb-6 text-gray-900">
-              {t('home.features.sectionTitle')}
+            <h2 className="text-4xl md:text-5xl font-bold mb-4 text-[#0EA5FF]">
+              {t('home.whyChooseUs.title')}
+            </h2>
+            <p className="text-xl font-medium text-[#0EA5FF] mb-8">{t('home.whyChooseUs.subtitle')}</p>
+          </motion.div>
+
+          <div className="relative">
+            {/* 图片背景层 - 绝对定位在文字后方，有序分布 */}
+            <motion.div
+              initial={{ opacity: 0, scale: 0.8 }}
+              whileInView={{ opacity: 1, scale: 1 }}
+              transition={{ duration: 1, delay: 0.2 }}
+              viewport={{ once: true }}
+              className="absolute top-8 -right-6 lg:-right-12 w-56 h-56 lg:w-72 lg:h-72 rounded-full overflow-hidden shadow-lg pointer-events-none"
+              style={{ zIndex: 1 }}
+            >
+              <img src="/images/concern-1.png" alt="illustration 1" className="w-full h-full object-cover" />
+            </motion.div>
+
+            <motion.div
+              initial={{ opacity: 0, scale: 0.8 }}
+              whileInView={{ opacity: 1, scale: 1 }}
+              transition={{ duration: 1, delay: 0.4 }}
+              viewport={{ once: true }}
+              className="absolute top-80 -left-6 lg:-left-12 w-56 h-56 lg:w-72 lg:h-72 rounded-full overflow-hidden shadow-lg pointer-events-none"
+              style={{ zIndex: 1 }}
+            >
+              <img src="/images/concern-2.png" alt="illustration 2" className="w-full h-full object-cover" />
+            </motion.div>
+
+            {/* 文字内容层 - 位于图片上方 */}
+            <div className="relative space-y-12" style={{ zIndex: 10 }}>
+              {[
+                t('home.whyChooseUs.item1'),
+                t('home.whyChooseUs.item2'),
+                t('home.whyChooseUs.item3'),
+                t('home.whyChooseUs.item4'),
+                t('home.whyChooseUs.item5')
+              ].map((item, index) => (
+                <motion.div
+                  key={index}
+                  initial={{ opacity: 0, y: 30 }}
+                  whileInView={{ opacity: 1, y: 0 }}
+                  transition={{ duration: 0.8, delay: index * 0.1 }}
+                  viewport={{ once: true }}
+                  className={`max-w-4xl mx-auto px-4 ${
+                    index === 0 ? 'text-right pr-8 lg:pr-20' :
+                    index === 1 ? 'text-left pl-8 lg:pl-20' :
+                    index === 2 ? 'text-right pr-8 lg:pr-20' :
+                    index === 3 ? 'text-left pl-8 lg:pl-20' :
+                    'text-right pr-8 lg:pr-20'
+                  }`}
+                >
+                  <div className={`inline-block ${
+                    index % 2 === 0 ? 'bg-white' : 'bg-blue-50'
+                  } rounded-2xl px-4 py-3 md:px-8 md:py-6 shadow-md border border-blue-100`}>
+                    <p className="text-base md:text-xl text-gray-800 font-medium leading-relaxed whitespace-normal md:whitespace-nowrap break-words">
+                      {item}
+                    </p>
+                  </div>
+                </motion.div>
+              ))}
+            </div>
+          </div>
+        </div>
+      </section>
+
+      {/* Features Section */}
+      <section className="py-20 bg-transparent">
+        <div className="max-w-[2000px] mx-auto px-4 sm:px-6 lg:px-12 xl:px-16">
+          <motion.div
+            initial={{ opacity: 0, y: 30 }}
+            whileInView={{ opacity: 1, y: 0 }}
+            transition={{ duration: 0.8 }}
+            viewport={{ once: true }}
+            className="text-center mb-16"
+          >
+            <h2 className="text-4xl md:text-5xl font-bold mb-6 text-[#2F4766]">
+              <span className="text-[#0EA5FF]">
+                {t('home.features.sectionTitle')}
+              </span>
             </h2>
           </motion.div>
 
-          <div className="space-y-16">
-            {features.map((feature, index) => (
+          <div className="grid grid-cols-1 lg:grid-cols-3 gap-12">
+            {[
+              {
+                title: t('home.features.costEffective.title'),
+                description: t('home.features.costEffective.description'),
+                bgColor: 'bg-orange-100',
+                borderColor: 'border-orange-200',
+                image: '/images/reason-1.png' // AI技術でコストパフォーマンス
+              },
+              {
+                title: t('home.features.timeSaving.title'),
+                description: t('home.features.timeSaving.description'),
+                bgColor: 'bg-green-100',
+                borderColor: 'border-green-200',
+                image: '/images/reason-2.png' // コアビジネスに集中
+              },
+              {
+                title: t('home.features.customization.title'),
+                description: t('home.features.customization.description'),
+                bgColor: 'bg-purple-100',
+                borderColor: 'border-purple-200',
+                image: '/images/reason-3.png' // カスタマイズデザイン
+              }
+            ].map((feature, index) => (
               <motion.div
                 key={index}
                 initial={{ opacity: 0, y: 30 }}
                 whileInView={{ opacity: 1, y: 0 }}
                 transition={{ duration: 0.8, delay: index * 0.1 }}
                 viewport={{ once: true }}
-                className="bg-white border border-gray-200 rounded-xl p-8 shadow-sm hover:shadow-md transition-shadow duration-300"
+                className={`rounded-xl p-10 transition-all duration-300 min-w-0`}
               >
-                {/* Feature Header */}
-                <div className="flex items-center mb-8">
-                  <div className={`w-16 h-16 rounded-xl flex items-center justify-center mr-6 ${
-                    feature.color === 'teal' ? 'bg-teal-100' :
-                    feature.color === 'emerald' ? 'bg-emerald-100' :
-                    feature.color === 'violet' ? 'bg-violet-100' :
-                    'bg-orange-100'
-                  }`}>
-                    <feature.icon className={`w-8 h-8 ${
-                      feature.color === 'teal' ? 'text-teal-600' :
-                      feature.color === 'emerald' ? 'text-emerald-600' :
-                      feature.color === 'violet' ? 'text-violet-600' :
-                      'text-orange-600'
-                    }`} />
-                  </div>
-                  <div>
-                    <h3 className="text-3xl font-bold text-gray-900 mb-2">{feature.title}</h3>
-                    <p className="text-gray-600">{feature.description}</p>
-                  </div>
+                <h3 className="text-xl md:text-xl lg:text-2xl font-bold text-[#2F4766] mb-4 text-center leading-tight">
+                  {feature.title}
+                </h3>
+                <div className="mb-6 w-full h-48 sm:h-56 lg:h-64 flex items-center justify-center">
+                  <img
+                    src={feature.image}
+                    alt={feature.title}
+                    className="max-h-full max-w-full object-contain"
+                  />
                 </div>
-                {/* Comparison Section */}
-                <div className="grid grid-cols-1 lg:grid-cols-2 gap-8 mb-8">
-                  {/* Competitors */}
-                  <div className="bg-gray-50 border border-gray-200 rounded-lg p-6">
-                    <h4 className="text-lg font-semibold text-gray-700 mb-4">{feature.competitors.title}</h4>
-                    {feature.title === t('home.features.lowPrice.title') ? (
-                      <>
-                        <ul className="mb-4 space-y-2 text-center">
-                          <li className="flex justify-between items-center w-full max-w-xs mx-auto">
-                            <span className="font-medium text-gray-600">{t('home.features.lowPrice.competitors.codingCost')}</span>
-                            <span className="font-bold text-gray-600 whitespace-nowrap">¥50,000~</span>
-                          </li>
-                          <li className="flex justify-between items-center w-full max-w-xs mx-auto">
-                            <span className="font-medium text-gray-600">{t('home.features.lowPrice.competitors.designCost')}</span>
-                            <span className="font-bold text-gray-600 whitespace-nowrap">¥50,000~</span>
-                          </li>
-                          <li className="flex justify-between items-center w-full max-w-xs mx-auto">
-                            <span className="font-medium text-gray-600">{t('home.features.lowPrice.competitors.directionCost')}</span>
-                            <span className="font-bold text-gray-600 whitespace-nowrap">¥50,000~</span>
-                          </li>
-                        </ul>
-                        <div className="text-center mt-2">
-                          <span className="text-2xl font-bold text-gray-600">{t('home.features.lowPrice.competitors.total')}</span>
-                        </div>
-                      </>
-                    ) : (
-                      <div className="text-center mb-4">
-                        <div className="text-2xl font-bold text-gray-600 mb-1">{feature.competitors.price}</div>
-                        {feature.competitors.subtitle && (
-                          <div className="text-sm text-gray-500">{feature.competitors.subtitle}</div>
-                        )}
-                      </div>
-                    )}
-                  </div>
-                  {/* Our Service */}
-                  <div className={`rounded-lg p-6 relative border-2 ${
-                    feature.color === 'teal' ? 'bg-teal-50 border-teal-200' :
-                    feature.color === 'emerald' ? 'bg-emerald-50 border-emerald-200' :
-                    feature.color === 'violet' ? 'bg-violet-50 border-violet-200' :
-                    'bg-orange-50 border-orange-200'
-                  }`}>
-                    <div className="absolute -top-3 left-4">
-                      <span className={`text-white px-3 py-1 rounded-full text-sm font-medium ${
-                        feature.color === 'teal' ? 'bg-teal-600' :
-                        feature.color === 'emerald' ? 'bg-emerald-600' :
-                        feature.color === 'violet' ? 'bg-violet-600' :
-                        'bg-orange-600'
-                      }`}>
-                        {t('home.features.lowPrice.ourService.title')}
-                      </span>
-                    </div>
-                    <h4 className="text-lg font-semibold text-gray-900 mb-4 mt-2">{feature.ourService.title}</h4>
-                    <div className="text-center mb-4">
-                      {feature.title === t('home.features.lowPrice.title') ? (
-                        <div className="text-4xl font-bold mb-1 text-teal-600">{t('home.features.lowPrice.ourService.price')}</div>
-                      ) : (
-                        <div className={`text-2xl font-bold mb-1 ${
-                          feature.color === 'teal' ? 'text-teal-600' :
-                          feature.color === 'emerald' ? 'text-emerald-600' :
-                          feature.color === 'violet' ? 'text-violet-600' :
-                          'text-orange-600'
-                        }`}>{feature.ourService.price}</div>
-                      )}
-                      <div className={`text-base font-medium mt-2 ${
-                        feature.color === 'teal' ? 'text-teal-700' :
-                        feature.color === 'emerald' ? 'text-emerald-700' :
-                        feature.color === 'violet' ? 'text-violet-700' :
-                        'text-orange-700'
-                      }`}>{feature.ourService.highlight}</div>
-                    </div>
-                  </div>
-                </div>
-                {/* Services List */}
-                {/* 已删除“サービス内容”部分 */}
-                {/* CTA Button */}
-                {/* 已删除“相談する”按钮 */}
+                <p className="text-gray-700 text-lg leading-relaxed text-left">
+                  {feature.description}
+                </p>
               </motion.div>
             ))}
+          </div>
+
+          <div className="mt-12 text-center">
+            <button
+              onClick={() => onPageChange('quote')}
+              className="inline-flex items-center px-8 py-4 border border-[#0EA5FF] text-[#0EA5FF] font-semibold text-lg rounded-xl hover:bg-[#0EA5FF] hover:text-white transition-all duration-200"
+            >
+              {t('home.features.getStarted')}
+              <ArrowRight className="w-5 h-5 ml-2" />
+            </button>
           </div>
         </div>
       </section>
 
-      {/* Works Summary Section */}
-      <WorksSummary onPageChange={onPageChange} />
-
-      {/* Pricing Section */}
-      <section className="py-20 bg-white">
-        <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
+      {/* MiniMaxCode Strengths Section */}
+      <section className="py-20 bg-transparent">
+        <div className="w-[90%] max-w-[2000px] mx-auto px-4 sm:px-6 lg:px-12 xl:px-16">
           <motion.div
             initial={{ opacity: 0, y: 30 }}
             whileInView={{ opacity: 1, y: 0 }}
@@ -279,45 +312,122 @@ export const Home = ({ onPageChange }: HomeProps) => {
             viewport={{ once: true }}
             className="text-center mb-16"
           >
-            <h2 className="text-4xl md:text-5xl font-bold mb-6 text-gray-900">
-              {t('home.pricing.title')}
+            <h2 className="text-4xl md:text-5xl font-bold mb-6 text-[#2F4766]">
+              <span className="text-[#0EA5FF]">
+                {t('home.strengths.title')}
+              </span>
             </h2>
-            <p className="text-xl text-gray-600">{t('home.pricing.subtitle')}</p>
           </motion.div>
 
-          <div className="max-w-2xl mx-auto">
-            {/* Basic Package */}
-            <motion.div
-              initial={{ opacity: 0, y: 30 }}
-              whileInView={{ opacity: 1, y: 0 }}
-              transition={{ duration: 0.8 }}
-              viewport={{ once: true }}
-              className="bg-gradient-to-br from-violet-50 to-orange-50 border border-violet-200 rounded-xl p-8 hover:shadow-md transition-shadow duration-300"
-            >
-              {t('service.included.basic.title') && (
-              <div className="flex items-center mb-6">
-                <Shield className="w-8 h-8 text-violet-600 mr-3" />
-                <h3 className="text-2xl font-bold text-gray-900">{t('service.included.basic.title')}</h3>
-              </div>
-              )}
-              <ul className="space-y-4">
-                {[
-                  t('service.included.basic.items.0'),
-                  t('service.included.basic.items.1'),
-                  t('service.included.basic.items.2'),
-                  t('service.included.basic.items.3'),
-                  t('service.included.basic.items.4'),
-                ].map((item, index) => (
-                  <li key={index} className="flex items-start space-x-3">
-                    <CheckCircle className="w-5 h-5 text-orange-600 mt-0.5 flex-shrink-0" />
-                    <span className="text-gray-600">{item}</span>
-                  </li>
-                ))}
-              </ul>
-            </motion.div>
+          <div className="space-y-16">
+            {[
+              { title: t('home.strengths.item1.title'), description: t('home.strengths.item1.description') },
+              { title: t('home.strengths.item2.title'), description: t('home.strengths.item2.description') },
+              { title: t('home.strengths.item3.title'), description: t('home.strengths.item3.description') },
+              { title: t('home.strengths.item4.title'), description: t('home.strengths.item4.description') },
+              { title: t('home.strengths.item5.title'), description: t('home.strengths.item5.description') },
+              { title: t('home.strengths.item6.title'), description: t('home.strengths.item6.description') },
+            ].map((item, index) => (
+              <motion.div
+                key={index}
+                initial={{ opacity: 0, y: 30 }}
+                whileInView={{ opacity: 1, y: 0 }}
+                transition={{ duration: 0.8, delay: index * 0.05 }}
+                viewport={{ once: true }}
+                className={`flex flex-col lg:flex-row items-center gap-10 ${index % 2 === 1 ? 'lg:flex-row-reverse' : ''}`}
+              >
+                {/* 文本区 */}
+                <div className="lg:w-1/2">
+                  <h3 className="text-xl md:text-2xl font-bold text-[#2F4766] mb-4">
+                    {item.title}
+                  </h3>
+                  <p className="text-gray-700 text-lg leading-relaxed mb-4">
+                    {item.description}
+                  </p>
+                  <button
+                    onClick={() => onPageChange('quote')}
+                    className="inline-flex items-center text-[#0EA5FF] font-semibold hover:underline text-xl"
+                  >
+                    {t('home.features.getStarted')}
+                    <ArrowRight className="w-4 h-4 ml-1" />
+                  </button>
+                </div>
+                {/* 预留图片位置 */}
+                <div className="lg:w-1/2">
+                  <div className="w-full aspect-[4/3] rounded-2xl overflow-hidden bg-white p-6 lg:p-8">
+                    <img src={`/images/strength-${index + 1}.png`} alt={`Strength ${index + 1}`} className="w-full h-full object-contain" />
+                  </div>
+                </div>
+              </motion.div>
+            ))}
           </div>
         </div>
       </section>
+
+
+
+      {/* Works Summary Section */}
+      <WorksSummary onPageChange={onPageChange} />
+
+      {/* Flow Section */}
+      <section id="flow" className="py-20 bg-transparent">
+        <div className="w-[92%] max-w-[96rem] mx-auto px-4 sm:px-6 lg:px-8">
+          <motion.div
+            initial={{ opacity: 0, y: 30 }}
+            whileInView={{ opacity: 1, y: 0 }}
+            transition={{ duration: 0.8 }}
+            viewport={{ once: true }}
+            className="text-center mb-16"
+          >
+            <h2 className="text-4xl md:text-5xl font-bold mb-6 text-[#2F4766]">
+              <span className="text-[#0EA5FF]">
+                {t('flow.hero.title')}
+              </span>
+            </h2>
+            {/* 删除副标题 */}
+          </motion.div>
+
+          <div className="max-w-[61.6rem] mx-auto">
+            <div className="space-y-14">
+              {[
+                { title: t('flow.steps.step1.title'), description: t('flow.steps.step1.description'), image: '/images/flow-1.png' },
+                { title: t('flow.steps.step2.title'), description: t('flow.steps.step2.description'), image: '/images/flow-2.png' },
+                { title: t('flow.steps.step3.title'), description: t('flow.steps.step3.description'), image: '/images/flow-3.png' },
+                { title: t('flow.steps.step4.title'), description: t('flow.steps.step4.description'), image: '/images/flow-4.png' },
+                { title: t('flow.steps.step5.title'), description: t('flow.steps.step5.description'), image: '/images/flow-5.png' },
+                { title: t('flow.steps.step6.title'), description: t('flow.steps.step6.description'), image: '/images/flow-6.png' },
+                { title: t('flow.steps.step7.title'), description: t('flow.steps.step7.description'), image: '/images/flow-7.png' },
+              ].map((step, idx) => (
+                <motion.div
+                  key={idx}
+                  initial={{ opacity: 0, y: 20 }}
+                  whileInView={{ opacity: 1, y: 0 }}
+                  transition={{ duration: 0.5, delay: idx * 0.05 }}
+                  viewport={{ once: true }}
+                  className="flex items-start gap-6"
+                >
+                  {/* 左侧：步骤图标/图片 */}
+                  <div className="w-20 h-20 sm:w-24 sm:h-24 rounded-xl flex items-center justify-center overflow-hidden bg-transparent">
+                    {step.image ? (
+                      <img src={step.image} alt={`Step ${idx + 1}`} className="w-full h-full object-contain p-3" />
+                    ) : (
+                      <div className="w-full h-full flex items-center justify-center text-gray-400 text-sm">制作中</div>
+                    )}
+                  </div>
+
+                  {/* 右侧：文案 */}
+                  <div className="flex-1">
+                    <h3 className="text-xl md:text-xl font-bold text-[#2F4766] mb-2">{step.title}</h3>
+                    <p className="text-gray-700 text-base md:text-lg leading-relaxed whitespace-pre-wrap">{step.description}</p>
+                  </div>
+                </motion.div>
+              ))}
+            </div>
+          </div>
+        </div>
+      </section>
+
+
 
       {/* Flow Section */}
       {/* 已删除制作フロー相关内容 */}

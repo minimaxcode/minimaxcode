@@ -24,6 +24,7 @@ export const worksData: Project[] = [
       'works.daisoubus.features.0',
       'works.daisoubus.features.1',
       'works.daisoubus.features.2',
+      'works.daisoubus.features.3',
     ],
   },
   {

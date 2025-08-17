@@ -14,21 +14,18 @@ export const Terms = ({ onPageChange }: TermsProps) => {
   const summary = (t('terms.summary', { returnObjects: true }) || { title: '', items: [] }) as { title: string; items: string[] };
 
   return (
-        <div className="min-h-screen bg-white text-gray-900 pt-24">
+        <div className="min-h-screen bg-[#F6FAFF] text-gray-900 pt-24">
       {/* Hero Section */}
-      <section className="relative overflow-hidden bg-gradient-to-r from-[#3F87F5]/20 via-[#32E2C4]/20 to-[#50FA7B]/20 py-20">
-        <div className="absolute inset-0">
-          <div className="absolute inset-0 bg-gradient-to-br from-primary-50/50 via-transparent to-gray-100/50" />
-        </div>
+      <section className="py-20 bg-transparent">
         
-        <div className="relative max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
+        <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
           <motion.div
             initial={{ opacity: 0, y: 30 }}
             animate={{ opacity: 1, y: 0 }}
             transition={{ duration: 0.8 }}
             className="text-center mb-16"
           >
-            <h1 className="text-5xl md:text-6xl font-bold mb-6 text-gray-900">
+            <h1 className="text-5xl md:text-6xl font-bold mb-6 text-[#2F4766]">
                 {t('terms.title')}
             </h1>
           </motion.div>
@@ -39,7 +36,7 @@ export const Terms = ({ onPageChange }: TermsProps) => {
             animate={{ opacity: 1, x: 0 }}
             transition={{ duration: 0.8, delay: 0.2 }}
             onClick={() => onPageChange('home')}
-            className="flex items-center space-x-2 text-gray-600 hover:text-teal-600 transition-colors duration-200 mb-8"
+            className="flex items-center space-x-2 text-gray-600 hover:text-[#0EA5FF] transition-colors duration-200 mb-8"
           >
             <ArrowLeft className="w-5 h-5" />
             <span>{t('terms.backToHome')}</span>
@@ -48,14 +45,14 @@ export const Terms = ({ onPageChange }: TermsProps) => {
       </section>
 
       {/* Terms Content */}
-      <section className="py-20 bg-white">
+      <section className="py-20 bg-transparent">
         <div className="max-w-4xl mx-auto px-4 sm:px-6 lg:px-8">
           <motion.div
             initial={{ opacity: 0, y: 30 }}
             whileInView={{ opacity: 1, y: 0 }}
             transition={{ duration: 0.8 }}
             viewport={{ once: true }}
-            className="bg-white border border-gray-200 rounded-xl p-8 md:p-12 space-y-12 shadow-sm"
+            className="rounded-xl p-8 md:p-12 space-y-12"
           >
             {/* Articles Section */}
             {articles.map((article, index) => (
@@ -92,14 +89,14 @@ export const Terms = ({ onPageChange }: TermsProps) => {
       </section>
 
       {/* Important Notice */}
-      <section className="py-20 bg-gray-50">
+      <section className="py-20 bg-transparent">
         <div className="max-w-4xl mx-auto px-4 sm:px-6 lg:px-8">
           <motion.div
             initial={{ opacity: 0, y: 30 }}
             whileInView={{ opacity: 1, y: 0 }}
             transition={{ duration: 0.8 }}
             viewport={{ once: true }}
-            className="bg-gradient-to-r from-emerald-50 to-teal-50 border border-emerald-200 rounded-xl p-8"
+            className="rounded-xl p-8"
           >
             <div className="flex items-start space-x-4">
               <FileText className="w-8 h-8 text-emerald-600 flex-shrink-0 mt-1" />
@@ -126,7 +123,7 @@ export const Terms = ({ onPageChange }: TermsProps) => {
       </section>
 
       {/* Contact Section */}
-      <section className="py-20 bg-white">
+      <section className="py-20 bg-transparent">
         <div className="max-w-4xl mx-auto px-4 sm:px-6 lg:px-8 text-center">
           <motion.div
             initial={{ opacity: 0, y: 30 }}
@@ -134,7 +131,7 @@ export const Terms = ({ onPageChange }: TermsProps) => {
             transition={{ duration: 0.8 }}
             viewport={{ once: true }}
           >
-            <h2 className="text-3xl md:text-4xl font-bold mb-6 text-gray-900">
+            <h2 className="text-3xl md:text-4xl font-bold mb-6 text-[#2F4766]">
               {t('terms.questions.title')}
             </h2>
             <p className="text-xl text-gray-600 mb-8">
@@ -145,7 +142,7 @@ export const Terms = ({ onPageChange }: TermsProps) => {
                 whileHover={{ scale: 1.05 }}
                 whileTap={{ scale: 0.95 }}
                 onClick={() => onPageChange('contact')}
-                className="px-8 py-4 bg-gradient-to-r from-teal-500 to-emerald-500 text-white font-bold text-lg rounded-xl hover:from-teal-600 hover:to-emerald-600 transition-colors duration-200"
+                className="px-8 py-4 bg-[#0EA5FF] hover:bg-[#0284C7] text-white font-bold text-lg rounded-xl transition-colors duration-200"
               >
                 {t('terms.questions.contactButton')}
               </motion.button>
@@ -153,7 +150,7 @@ export const Terms = ({ onPageChange }: TermsProps) => {
                 whileHover={{ scale: 1.05 }}
                 whileTap={{ scale: 0.95 }}
                 onClick={() => onPageChange('works')}
-                className="px-8 py-4 border-2 border-teal-500 text-teal-600 font-bold text-lg rounded-xl hover:bg-teal-500 hover:text-white transition-colors duration-200"
+                className="px-8 py-4 border border-[#0EA5FF] text-[#0EA5FF] font-bold text-lg rounded-xl hover:bg-[#0EA5FF] hover:text-white transition-colors duration-200"
               >
                 {t('terms.questions.serviceButton')}
               </motion.button>

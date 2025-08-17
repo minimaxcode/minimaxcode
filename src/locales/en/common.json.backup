@@ -20,7 +20,7 @@
     "slogan": "Maximum Result, Minimum Cost.",
     "hero": {
       "subtitle": "Lightweight Development Service for the Japanese Market",
-      "description": "Your digital partner for startups, accelerating growth. High cost-performance website plans that save budget with peace of mind—no compromise on results.",
+      "description": "We create high-quality websites in as little as 2 days with overwhelmingly reasonable pricing that startups and SMEs can afford without strain.",
       "cta": "Start Free Quote",
       "contact": "Contact Us"
     },
@@ -28,7 +28,7 @@
       "title": "Having These Concerns?",
       "subtitle": "For SMEs and Individual Business Owners",
       "item1": "I'm not good at IT, so I want professionals to plan and propose a website.",
-      "item2": "Save time and effort—leave design and operation to our expert team.",
+      "item2": "I want to save time and effort, so I'd like to entrust everything from design to maintenance to a professional team.",
       "item3": "I want a more personalized website rather than modifying templates.",
       "item4": "I have an existing website but there are some issues, so I want improvement and optimization.",
       "item5": "My old site can't meet current business needs, so I want to add functions."
@@ -40,7 +40,7 @@
         "description": "We understand that every investment you make is crucial. MiniMaxCode provides industry-leading ultra-high cost-performance website solutions at low prices with absolutely no hidden fees, ensuring your budget is used effectively."
       },
       "item2": {
-        "title": "Personalized Design",
+        "title": "AI Original Design",
         "description": "Based on deep understanding of your business, we use MiniMaxCode's unique AI collaborative development technology, not traditional templates, to customize original designs exclusively for you. Make your digital business card stand out in the competition."
       },
       "item3": {
@@ -153,44 +153,44 @@
         "description": "Provide an official quote from a competitor, and we will complete the project for 50% of the listed price. Applicability will be confirmed after we review the quote to ensure the scope of work matches our service offerings."
       }
     },
-    "flow": {
-      "title": "Production Process",
-      "subtitle": "Simple and clear 6-step process",
-      "hero": {
-        "title": "Our Process",
-        "subtitle": "From inquiry to delivery and after-sales support, you can trust us with peace of mind."
-      },
-      "steps": {
-        "step1": {
-          "title": "Quote & Contact",
-          "description": "After filling out the quote form, please contact us through the contact form.\nWe will listen to your requirements and propose the optimal plan and quote that fits your budget.\nWe welcome consultations and questions as well."
-        },
-        "step2": {
-          "title": "Hearing",
-          "description": "We will discuss detailed requirements, image, production schedule, and optimal site structure, and send you an invoice.\n※ For requests under ¥50,000, we use Google Forms."
-        },
-        "step3": {
-          "title": "Contract & Payment",
-          "description": "Once you are satisfied with the quote, we will proceed with the contract.\nPayment is made in advance.\nPlease transfer to our designated account. Payment can be split into advance and final payments."
-        },
-        "step4": {
-          "title": "Start",
-          "description": "Please prepare the content you want to publish (information, text, images, etc.).\nOnce the content is ready, we will start creating your homepage. We will propose page structure as needed."
-        },
-        "step5": {
-          "title": "Review & Revision",
-          "description": "Please review the completed content, and we will make revisions as requested.\nWe will revise as many times as needed until you are satisfied."
-        },
-        "step6": {
-          "title": "Delivery & Launch",
-          "description": "After final confirmation, we will deliver and launch.\nWe also support server setup, domain acquisition, and SEO optimization."
-        },
-        "step7": {
-          "title": "After-Sales Support",
-          "description": "After delivery, we provide reliable support for operation, updates, and maintenance.\nPlease feel free to consult us anytime if you have any concerns."
-        }
-      }
+      "flow": {
+    "title": "Production Process",
+    "subtitle": "Simple and clear 6-step process",
+    "hero": {
+      "title": "Our Process",
+      "subtitle": "From inquiry to delivery and after-sales support, you can trust us with peace of mind."
     },
+    "steps": {
+      "step1": {
+        "title": "Quote & Contact",
+        "description": "After filling out the quote form, please contact us through the contact form.\nWe will listen to your requirements and propose the optimal plan and quote that fits your budget.\nWe welcome consultations and questions as well."
+      },
+      "step2": {
+        "title": "Hearing",
+        "description": "We will discuss detailed requirements, image, production schedule, and optimal site structure, and send you an invoice.\n※ For requests under ¥50,000, we use Google Forms."
+      },
+      "step3": {
+        "title": "Contract & Payment",
+        "description": "Once you are satisfied with the quote, we will proceed with the contract.\nPayment is made in advance.\nPlease transfer to our designated account. Payment can be split into advance and final payments."
+      },
+      "step4": {
+        "title": "Start",
+        "description": "Please prepare the content you want to publish (information, text, images, etc.).\nOnce the content is ready, we will start creating your homepage. We will propose page structure as needed."
+      },
+      "step5": {
+        "title": "Review & Revision",
+        "description": "Please review the completed content, and we will make revisions as requested.\nWe will revise as many times as needed until you are satisfied."
+      },
+      "step6": {
+        "title": "Delivery & Launch",
+        "description": "After final confirmation, we will deliver and launch.\nWe also support server setup, domain acquisition, and SEO optimization."
+      },
+      "step7": {
+        "title": "After-Sales Support",
+        "description": "After delivery, we provide reliable support for operation, updates, and maintenance.\nPlease feel free to consult us anytime if you have any concerns."
+      }
+    }
+  },
     "works": {
       "cta": "View All Works"
     },
@@ -279,9 +279,9 @@
       "subtitle": "All prices include tax",
       "item": "Item",
       "sections": {
-        "basic": "Basic Site Features",
-        "marketing": "Marketing Package"
-      },
+          "basic": "Basic Site Features",
+          "marketing": "Marketing Package"
+        },
       "features": {
         "mobile": "Mobile Responsive",
         "pages": "Number of Pages",
@@ -307,9 +307,14 @@
           "customize": "20 business days~",
           "premium": "20 business days~"
         },
-        "yen": " JPY",
+                "yen": " JPY",
         "price": "Price"
       }
+    },
+  "pricing": {
+    "labels": {
+      "free": "Free",
+      "contactLimit": "100 per day"
     },
     "plans": {
       "basic": {
@@ -354,6 +359,7 @@
         "description": "Description"
       },
       "items": {
+
         "mobile": {
           "name": "Mobile Responsive",
           "price": "20,000~",
@@ -539,9 +545,6 @@
     "about": "About",
     "quote": "Quote",
     "contact": "Contact",
-    "privacy": "Privacy Policy",
-    "terms": "Terms of Service",
-    "works": "Our Works",
     "solutions": {
       "title": "Solutions",
       "restaurant": "Restaurant",
@@ -550,7 +553,7 @@
       "travel": "Travel & Hotel",
       "ecommerce": "E-commerce",
       "freelance": "Freelance",
-      "common": "Features"
+      "common": "Common Features"
     }
   },
   "restaurant": {
@@ -1070,9 +1073,9 @@
           "cart": "Shopping cart & purchase flow",
           "payment": "Support mainstream payment methods (credit cards, e-money, etc.)",
           "product": "Product management with SKU, inventory, and images/videos"
-        }
+                }
       },
-      "analytics": {
+        "analytics": {
         "title": "Data Analytics",
         "description": "Provide essential analytics features for business growth including real-time data monitoring, user behavior analysis, and sales report generation.",
         "benefits": {
@@ -1181,9 +1184,7 @@
         "title": "External System Integration",
         "description": "Seamlessly integrate with external software, services, and hardware through APIs."
       }
-    },
-    "free": "Free",
-    "contactLimit": "100 per day"
+    }
   },
   "flow": {
     "hero": {
@@ -1331,103 +1332,103 @@
       "title": "Online Quote",
       "subtitle": "Select your project details to see estimated pricing"
     },
-    "form": {
-      "webPlan": {
-        "title": "Web Production Plan",
-        "basic": "Basic Plan (3P)",
-        "standard5": "Standard Plan (5P)",
-        "standard10": "Standard Plan (10P)",
-        "customize": "Customize Plan (10P+)",
-        "premium": "Premium Plan (10P+)",
-        "pages": "pages included",
-        "price": "¥{{price}}"
-      },
-      "pageCount": {
-        "title": "Number of Pages (3-50 pages)",
-        "min": "3 pages",
-        "max": "50 pages",
-        "pages": "pages",
-        "directInput": "Custom page count:"
-      },
-      "options": {
-        "title": "Options",
-        "mobile": "Mobile Responsive",
-        "product": "Product Display",
-        "news": "Information Display",
-        "content": "Content Creation",
-        "contact": "Contact Form",
-        "shop": "E-commerce Function",
-        "blog": "Blog Function",
-        "seo": "SEO Optimization",
-        "meo": "MEO Optimization",
-        "recaptcha": "reCAPTCHA Integration",
-        "ssl": "SSL Certificate",
-        "planIncluded": "(Plan included)",
-        "over150k": "(Over ¥150,000)",
-        "free": "Free",
-        "freePlanIncluded": "Free (Plan included)",
-        "freeOver150k": "Free (Over ¥150,000)",
-        "variablePrice": "¥{{price}}~",
-        "fixedPrice": "¥{{price}}"
-      },
-      "maintenance": {
-        "title": "Maintenance",
-        "email": "Business Email",
-        "update": "Site Updates",
-        "month": "month",
-        "year": "year"
-      },
-      "timeline": {
-        "title": "Desired Timeline",
-        "rush": "2-3 days",
-        "quick": "1-2 weeks",
-        "normal": "3-4 weeks",
-        "flexible": "1 month+",
-        "rushFee": "Price +40%",
-        "quickFee": "Price +20%",
-        "normalFee": "Price +20%"
-      },
-      "languages": {
-        "title": "Website Languages",
-        "japanese": "Japanese",
-        "english": "English",
-        "chinese": "Chinese",
-        "korean": "Korean",
-        "extraFee": "(+30%)",
-        "note": "※ Each additional language will incur a 30% surcharge on the production cost"
-      },
-      "sourceCode": {
-        "title": "Source Code Delivery",
-        "name": "Source Code Delivery",
-        "fee": "Total +20%",
-        "description": "We will deliver the source code of the created website to you"
-      },
-      "calculate": "Calculate Quote",
-      "validation": {
-        "selectPlan": "※ Please select a Web Production Plan",
-        "selectTimelineAndLanguage": "※ Please select desired timeline and website languages",
-        "selectTimeline": "※ Please select desired timeline",
-        "selectLanguage": "※ Please select website languages"
-      }
+          "form": {
+        "webPlan": {
+          "title": "Web Production Plan",
+          "basic": "Basic Plan (3P)",
+          "standard5": "Standard Plan (5P)",
+          "standard10": "Standard Plan (10P)",
+          "customize": "Customize Plan (10P+)",
+          "premium": "Premium Plan (10P+)",
+          "pages": "pages included",
+          "price": "¥{{price}}"
+        },
+              "pageCount": {
+          "title": "Number of Pages (3-50 pages)",
+          "min": "3 pages",
+          "max": "50 pages",
+          "pages": "pages",
+          "directInput": "Custom page count:"
+        },
+              "options": {
+          "title": "Options",
+          "mobile": "Mobile Responsive",
+          "product": "Product Display",
+          "news": "Information Display",
+          "content": "Content Creation",
+          "contact": "Contact Form",
+          "shop": "E-commerce Function",
+          "blog": "Blog Function",
+          "seo": "SEO Optimization",
+          "meo": "MEO Optimization",
+          "recaptcha": "reCAPTCHA Integration",
+          "ssl": "SSL Certificate",
+          "planIncluded": "(Plan included)",
+          "over150k": "(Over ¥150,000)",
+          "free": "Free",
+          "freePlanIncluded": "Free (Plan included)",
+          "freeOver150k": "Free (Over ¥150,000)",
+          "variablePrice": "¥{{price}}~",
+          "fixedPrice": "¥{{price}}"
+        },
+              "maintenance": {
+          "title": "Maintenance",
+          "email": "Business Email",
+          "update": "Site Updates",
+          "month": "month",
+          "year": "year"
+        },
+              "timeline": {
+          "title": "Desired Timeline",
+          "rush": "2-3 days",
+          "quick": "1-2 weeks",
+          "normal": "3-4 weeks",
+          "flexible": "1 month+",
+          "rushFee": "Price +40%",
+          "quickFee": "Price +20%",
+          "normalFee": "Price +20%"
+        },
+              "languages": {
+          "title": "Website Languages",
+          "japanese": "Japanese",
+          "english": "English",
+          "chinese": "Chinese",
+          "korean": "Korean",
+          "extraFee": "(+30%)",
+          "note": "※ Each additional language will incur a 30% surcharge on the production cost"
+        },
+              "sourceCode": {
+          "title": "Source Code Delivery",
+          "name": "Source Code Delivery",
+          "fee": "Total +20%",
+          "description": "We will deliver the source code of the created website to you"
+        },
+              "calculate": "Calculate Quote",
+        "validation": {
+          "selectPlan": "※ Please select a Web Production Plan",
+          "selectTimelineAndLanguage": "※ Please select desired timeline and website languages",
+          "selectTimeline": "※ Please select desired timeline",
+          "selectLanguage": "※ Please select website languages"
+        }
     },
-    "result": {
-      "title": "Estimated Quote",
-      "websiteCost": "【Website Production Cost】",
-      "maintenanceCost": "【Maintenance Cost】",
-      "initialCost": "(Initial Cost)",
-      "monthlyCost": "(Monthly Cost)",
-      "variableNote": "※ Price varies due to starting price options",
-      "basePlan": "Base Plan",
-      "extraPages": "Extra Pages",
-      "options": "Options",
-      "multilingual": "Multilingual Support",
-      "timelineFee": "Timeline Acceleration Fee ({{percentage}})",
-      "sourceCodeDelivery": "Source Code Delivery",
-      "serverMaintenance": "Server Maintenance",
-      "contact": "Contact Us",
-      "selectPrompt": "Select options to see an estimate",
-      "emailFirstYearFree": "(Free for 1 year)"
-    }
+          "result": {
+        "title": "Estimated Quote",
+        "websiteCost": "【Website Production Cost】",
+        "maintenanceCost": "【Maintenance Cost】",
+        "initialCost": "(Initial Cost)",
+        "monthlyCost": "(Monthly Cost)",
+        "variableNote": "※ Price varies due to starting price options",
+        "basePlan": "Base Plan",
+        "extraPages": "Extra Pages",
+        "options": "Options",
+        "multilingual": "Multilingual Support",
+        "timelineFee": "Timeline Acceleration Fee ({{percentage}})",
+        "sourceCodeDelivery": "Source Code Delivery",
+        "serverMaintenance": "Server Maintenance",
+        "contact": "Contact Us",
+        "selectPrompt": "Select options to see an estimate",
+        "emailFirstYearFree": "(Free for 1 year)"
+      }
   },
   "contact": {
     "title": "Contact Us",
@@ -1453,18 +1454,6 @@
       "industryOther": {
         "label": "Specific Industry",
         "placeholder": "Please specify your industry"
-      },
-      "websiteUrl": {
-        "label": "Current Website URL",
-        "placeholder": "https://example.com"
-      },
-      "status": {
-        "label": "Current Status",
-        "placeholder": "Please select",
-        "options": {
-          "noSite": "No Website",
-          "hasSite": "Have Website"
-        }
       },
       "name": {
         "label": "Name",
@@ -1495,8 +1484,7 @@
     },
     "validation": {
       "required": "This field is required.",
-      "email": "Please enter a valid email address.",
-      "url": "Please enter a valid URL (e.g., https://example.com)"
+      "email": "Please enter a valid email address."
     },
     "success": {
       "title": "Message Sent!",
@@ -1541,8 +1529,6 @@
     "faq": {
       "title": "Frequently Asked Questions",
       "subtitle": "If you have any questions, please feel free to contact us.",
-      "searchPlaceholder": "Search by keyword",
-      "noResults": "No matching questions found.",
 
       "faq2": {
         "q": "Are there any additional charges for icons and images?",
@@ -1562,74 +1548,10 @@
         "a": "Yes. You can use your existing domain. In that case, please provide us with your domain name and registrar information, and we will arrange the server."
       },
 
+
       "faq9": {
         "q": "How should I choose a contract plan?",
         "a": "It depends on the amount of information you want to convey. Even a 1-page (BASIC plan) homepage can effectively convey information. However, if you want to 'present company information and recruitment information on separate pages' or 'have multiple businesses, so want to prepare pages by business', we recommend multi-page plans. Please also refer to our production results."
-      },
-
-      "faq10": {
-        "q": "What is the website development process?",
-        "a": "The typical development flow is: requirement hearing → planning and structure design → UI/UX design → frontend development → backend development → content input → testing and launch → operation and maintenance. We maintain close communication throughout all stages, emphasizing transparency and speed."
-      },
-      "faq11": {
-        "q": "What materials are needed for website development?",
-        "a": "Please provide company overview, logo, product/service introduction, brand VI guidelines (if available), content (text), image materials, and any specific information you want to display on the site."
-      },
-      "faq12": {
-        "q": "How are costs calculated?",
-        "a": "We provide estimates based on comprehensive evaluation of site type, feature complexity, design requirements, development period, etc. We present detailed quotes with clear breakdowns and explain transparent and reasonable pricing."
-      },
-      "faq13": {
-        "q": "How long does the development period take?",
-        "a": "It varies depending on scale and feature complexity. A typical corporate site takes about X weeks, while e-commerce and complex systems take longer. We will provide an estimated schedule based on your specific requirements."
-      },
-      "faq14": {
-        "q": "What types of development do you handle?",
-        "a": "MiniMaxCode handles a wide range of custom development including corporate sites, business systems, mini-apps, internal tools, e-commerce sites, from brand promotion to business operations."
-      },
-      "faq15": {
-        "q": "Are designs fixed? Can they be customized?",
-        "a": "We provide completely custom designs. We propose and create dedicated designs tailored to your brand positioning, industry characteristics, and preferences."
-      },
-      "faq16": {
-        "q": "Do you support smartphones and tablets?",
-        "a": "All our creations adopt responsive design, providing optimal experience on smartphones, tablets, and PCs."
-      },
-      "faq17": {
-        "q": "What basic features are needed for a website? (online consultation, product display, etc.)",
-        "a": "Generally includes company introduction, product/service introduction, news/announcements, contact information, inquiry forms, etc. Custom features like product catalogs, e-commerce, and member functions can also be added according to your needs."
-      },
-      "faq18": {
-        "q": "Is multilingual support possible?",
-        "a": "Yes. We can add multiple languages such as Japanese, English, and Chinese according to your target market."
-      },
-      "faq19": {
-        "q": "How do you ensure security?",
-        "a": "We implement measures such as reCAPTCHA and SSL encryption, and also provide server maintenance services. We ensure secure data communication and stable operation."
-      },
-      "faq20": {
-        "q": "Can I update content myself after launch?",
-        "a": "Yes. We build a CMS (Content Management System) that allows easy updates from the admin panel without technical knowledge."
-      },
-      "faq21": {
-        "q": "How are maintenance fees charged and what is included?",
-        "a": "Includes server maintenance, regular backups, security updates, emergency troubleshooting, etc. We offer multiple service level maintenance plans. Please contact us for details and pricing."
-      },
-      "faq22": {
-        "q": "Do you provide customer acquisition and SEO support after launch?",
-        "a": "Yes. We provide digital marketing including SEO optimization, MEO measures, and SNS operation support to enhance search engine visibility and influence."
-      },
-      "faq23": {
-        "q": "Can you implement analytics tools?",
-        "a": "Yes. We set up Google Analytics (GA4) and Google Search Console to visualize access, user behavior, and search performance."
-      },
-      "faq24": {
-        "q": "Can you deliver source code?",
-        "a": "Yes. Based on contract terms, we can deliver website/system source code after project completion. We support securing intellectual property."
-      },
-      "faq25": {
-        "q": "How can I receive technical support when issues occur?",
-        "a": "We have a dedicated support window. You can contact us via phone, email, or online tickets for prompt response."
       }
     }
   },

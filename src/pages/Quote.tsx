@@ -29,8 +29,6 @@ const webPlans = [
 
 // オプション料金データ
 const optionItems = [
-  { id: 'cms', nameKey: 'cms', price: 20000 },
-  { id: 'mobile', nameKey: 'mobile', price: 20000 },
   { id: 'product', nameKey: 'product', price: 10000 },
   { id: 'news', nameKey: 'news', price: 10000 },
   { id: 'content', nameKey: 'content', price: 30000 },
@@ -150,14 +148,10 @@ export const Quote = ({ onPageChange }: QuoteProps) => {
         const isIncludedInPlan = 
           // SEO対策: 选择了任何计划时都包含
           (optionId === 'seo' && quoteData.webPlan) ||
-          // CMS管理システム: スタンダード以上のプラン包含
-          (optionId === 'cms' && (quoteData.webPlan === 'standard-5' || quoteData.webPlan === 'standard-10' || quoteData.webPlan === 'customize' || quoteData.webPlan === 'premium')) ||
           // お問い合わせフォーム: スタンダード以上のプラン包含
           (optionId === 'contact' && (quoteData.webPlan === 'standard-5' || quoteData.webPlan === 'standard-10' || quoteData.webPlan === 'customize' || quoteData.webPlan === 'premium')) ||
           // 商品展示機能: スタンダード以上のプラン包含
           (optionId === 'product' && (quoteData.webPlan === 'standard-5' || quoteData.webPlan === 'standard-10' || quoteData.webPlan === 'customize' || quoteData.webPlan === 'premium')) ||
-          // スマホ対応: スタンダード以上のプラン包含
-          (optionId === 'mobile' && (quoteData.webPlan === 'standard-5' || quoteData.webPlan === 'standard-10' || quoteData.webPlan === 'customize' || quoteData.webPlan === 'premium')) ||
           // ネットショップ機能: カスタマイズとプレミアム包含
           (optionId === 'shop' && (quoteData.webPlan === 'customize' || quoteData.webPlan === 'premium')) ||
           // MEO対策: プレミアムプランのみ包含
@@ -172,9 +166,9 @@ export const Quote = ({ onPageChange }: QuoteProps) => {
         }
         
         // 检查是否为起始价格选项（无论是否包含在计划中）
-        // CMS管理システム和原稿お任せ即使被计划包含也参与浮动价格计算
-        if (['cms', 'content'].includes(optionId) || 
-            (!isIncludedInPlan && ['mobile', 'shop', 'blog'].includes(optionId))) {
+        // 原稿お任せ即使被计划包含也参与浮动价格计算
+        if (['content'].includes(optionId) || 
+            (!isIncludedInPlan && ['shop', 'blog'].includes(optionId))) {
           variableOptionCount++;
         }
       }
@@ -269,6 +263,45 @@ export const Quote = ({ onPageChange }: QuoteProps) => {
 
   const pricing = calculatePrice();
 
+  // ---- Timeline display logic (filter zero-cost duplicates) ----
+  const isCustomizeOrPremium = quoteData.webPlan === 'customize' || quoteData.webPlan === 'premium';
+  const pages = quoteData.pageCount;
+
+  const rushAllowed = !isCustomizeOrPremium && pages <= 5;
+  const quickAllowed = !isCustomizeOrPremium && pages <= 10;
+  const normalAllowed = pages <= 17;
+  const flexibleAllowed = true;
+
+  const quickHasSurcharge = pages >= 6 && pages <= 10; // +20%
+  const normalHasSurcharge = pages >= 11 && pages <= 17; // +20%
+
+  const quickZero = quickAllowed && !quickHasSurcharge; // pages <= 5
+  const normalZero = normalAllowed && !normalHasSurcharge; // pages <= 10
+  const flexibleZero = flexibleAllowed; // always 0
+
+  let showQuick = true; // 显示开关不依赖allowed，仅控制禁用状态
+  let showNormal = true;
+  let showFlexible = true;
+
+  // 同时存在多个0加价项时，仅保留最短的一个：quick > normal > flexible
+  const zeroCandidates = [
+    quickZero ? 'quick' : null,
+    normalZero ? 'normal' : null,
+    flexibleZero ? 'flexible' : null,
+  ].filter(Boolean) as string[];
+
+  if (zeroCandidates.length > 1) {
+    const keep = zeroCandidates.includes('quick')
+      ? 'quick'
+      : zeroCandidates.includes('normal')
+      ? 'normal'
+      : 'flexible';
+
+    if (keep !== 'quick' && quickZero) showQuick = false;
+    if (keep !== 'normal' && normalZero) showNormal = false;
+    if (keep !== 'flexible' && flexibleZero) showFlexible = false;
+  }
+
   const handleSubmit = () => {
     // 计算当前价格
     const currentPricing = calculatePrice();
@@ -317,7 +350,7 @@ export const Quote = ({ onPageChange }: QuoteProps) => {
             className="text-center mb-16"
           >
             <h1 className="text-5xl md:text-6xl font-bold mb-6">
-              <span className="bg-gradient-to-r from-gray-900 via-blue-600 to-emerald-600 bg-clip-text text-transparent">
+              <span className="bg-gradient-to-r from-blue-500 to-emerald-500 bg-clip-text text-transparent">
                 {t('quote.hero.title')}
               </span>
             </h1>
@@ -372,26 +405,26 @@ export const Quote = ({ onPageChange }: QuoteProps) => {
                                    options: quoteData.options.filter(id => id !== 'seo')
                                  });
                                } else if (plan.id === 'standard-5' || plan.id === 'standard-10') {
-                                 setQuoteData({ 
-                                   ...quoteData, 
-                                   webPlan: '',
-                                   pageCount: 3,
-                                   options: quoteData.options.filter(id => !['cms', 'contact', 'product', 'mobile', 'seo'].includes(id))
-                                 });
+                                                                   setQuoteData({ 
+                                    ...quoteData, 
+                                    webPlan: '',
+                                    pageCount: 3,
+                                    options: quoteData.options.filter(id => !['contact', 'product', 'seo'].includes(id))
+                                  });
                                } else if (plan.id === 'customize') {
-                                 setQuoteData({ 
-                                   ...quoteData, 
-                                   webPlan: '',
-                                   pageCount: 3,
-                                   options: quoteData.options.filter(id => !['cms', 'contact', 'product', 'mobile', 'shop', 'seo'].includes(id))
-                                 });
+                                                                   setQuoteData({ 
+                                    ...quoteData, 
+                                    webPlan: '',
+                                    pageCount: 3,
+                                    options: quoteData.options.filter(id => !['contact', 'product', 'shop', 'seo'].includes(id))
+                                  });
                                } else if (plan.id === 'premium') {
-                                 setQuoteData({ 
-                                   ...quoteData, 
-                                   webPlan: '',
-                                   pageCount: 3,
-                                   options: quoteData.options.filter(id => !['cms', 'contact', 'product', 'mobile', 'shop', 'meo', 'content', 'seo'].includes(id))
-                                 });
+                                                                   setQuoteData({ 
+                                    ...quoteData, 
+                                    webPlan: '',
+                                    pageCount: 3,
+                                    options: quoteData.options.filter(id => !['contact', 'product', 'shop', 'meo', 'content', 'seo'].includes(id))
+                                  });
                                }
                              } else {
                                // 选择新的计划
@@ -402,34 +435,34 @@ export const Quote = ({ onPageChange }: QuoteProps) => {
                                    pageCount: 3,
                                    options: ['seo'] // 只保留 SEO対策
                                  });
-                               } else if (plan.id === 'standard-5') {
-                                 setQuoteData({ 
-                                   ...quoteData, 
-                                   webPlan: plan.id,
-                                   pageCount: 5,
-                                   options: ['cms', 'contact', 'product', 'mobile', 'seo']
-                                 });
-                               } else if (plan.id === 'standard-10') {
-                                 setQuoteData({ 
-                                   ...quoteData, 
-                                   webPlan: plan.id,
-                                   pageCount: 10,
-                                   options: ['cms', 'contact', 'product', 'mobile', 'seo']
-                                 });
-                               } else if (plan.id === 'customize') {
-                                 setQuoteData({ 
-                                   ...quoteData, 
-                                   webPlan: plan.id,
-                                   pageCount: 10,
-                                   options: ['cms', 'contact', 'product', 'mobile', 'shop', 'seo']
-                                 });
-                               } else if (plan.id === 'premium') {
-                                 setQuoteData({ 
-                                   ...quoteData, 
-                                   webPlan: plan.id,
-                                   pageCount: 10,
-                                   options: ['cms', 'contact', 'product', 'mobile', 'shop', 'meo', 'content', 'seo']
-                                 });
+                                                               } else if (plan.id === 'standard-5') {
+                                  setQuoteData({ 
+                                    ...quoteData, 
+                                    webPlan: plan.id,
+                                    pageCount: 5,
+                                    options: ['contact', 'product', 'seo']
+                                  });
+                                                               } else if (plan.id === 'standard-10') {
+                                  setQuoteData({ 
+                                    ...quoteData, 
+                                    webPlan: plan.id,
+                                    pageCount: 10,
+                                    options: ['contact', 'product', 'seo']
+                                  });
+                                                               } else if (plan.id === 'customize') {
+                                  setQuoteData({ 
+                                    ...quoteData, 
+                                    webPlan: plan.id,
+                                    pageCount: 10,
+                                    options: ['contact', 'product', 'shop', 'seo']
+                                  });
+                                                               } else if (plan.id === 'premium') {
+                                  setQuoteData({ 
+                                    ...quoteData, 
+                                    webPlan: plan.id,
+                                    pageCount: 10,
+                                    options: ['contact', 'product', 'shop', 'meo', 'content', 'seo']
+                                  });
                                }
                              }
                            }}
@@ -448,25 +481,25 @@ export const Quote = ({ onPageChange }: QuoteProps) => {
                                  setQuoteData({ 
                                    ...quoteData, 
                                    webPlan: '',
-                                   options: quoteData.options.filter(id => id !== 'cms' && id !== 'contact' && id !== 'product' && id !== 'seo')
+                                   options: quoteData.options.filter(id => id !== 'contact' && id !== 'product' && id !== 'seo')
                                  });
                                } else if (plan.id === 'standard-5' || plan.id === 'standard-10') {
                                  setQuoteData({ 
                                    ...quoteData, 
                                    webPlan: '',
-                                   options: quoteData.options.filter(id => id !== 'cms' && id !== 'contact' && id !== 'product' && id !== 'mobile' && id !== 'seo')
+                                   options: quoteData.options.filter(id => id !== 'contact' && id !== 'product' && id !== 'mobile' && id !== 'seo')
                                  });
                                } else if (plan.id === 'customize') {
                                  setQuoteData({ 
                                    ...quoteData, 
                                    webPlan: '',
-                                   options: quoteData.options.filter(id => id !== 'cms' && id !== 'contact' && id !== 'product' && id !== 'mobile' && id !== 'shop' && id !== 'seo')
+                                   options: quoteData.options.filter(id => id !== 'contact' && id !== 'product' && id !== 'mobile' && id !== 'shop' && id !== 'seo')
                                  });
                                } else if (plan.id === 'premium') {
                                  setQuoteData({ 
                                    ...quoteData, 
                                    webPlan: '',
-                                   options: quoteData.options.filter(id => id !== 'cms' && id !== 'contact' && id !== 'product' && id !== 'mobile' && id !== 'shop' && id !== 'meo' && id !== 'content' && id !== 'seo')
+                                   options: quoteData.options.filter(id => id !== 'contact' && id !== 'product' && id !== 'mobile' && id !== 'shop' && id !== 'meo' && id !== 'content' && id !== 'seo')
                                  });
                                } else {
                                  setQuoteData({ ...quoteData, webPlan: '' });
@@ -513,17 +546,17 @@ export const Quote = ({ onPageChange }: QuoteProps) => {
                     </div>
                       <input
                         type="range"
-                      min="3"
-                        max="50"
+                        min="1"
+                        max="20"
                         value={quoteData.pageCount}
                       onChange={(e) => setQuoteData({ ...quoteData, pageCount: parseInt(e.target.value) })}
                       className="w-full h-2 bg-gray-200 rounded-lg appearance-none cursor-pointer"
                         style={{
-                        background: `linear-gradient(to right, #10b981 0%, #10b981 ${((quoteData.pageCount - 3) / 47) * 100}%, #e5e7eb ${((quoteData.pageCount - 3) / 47) * 100}%, #e5e7eb 100%)`
+                          background: `linear-gradient(to right, #10b981 0%, #10b981 ${((quoteData.pageCount - 1) / 19) * 100}%, #e5e7eb ${((quoteData.pageCount - 1) / 19) * 100}%, #e5e7eb 100%)`
                       }}
                     />
                     <div className="text-center">
-                      <span className="inline-block bg-gradient-to-r from-blue-600 to-emerald-600 text-white px-6 py-3 rounded-xl font-bold text-lg shadow-lg">
+                      <span className="inline-block bg-gradient-to-r from-blue-500 to-emerald-500 text-white px-6 py-3 rounded-xl font-bold text-lg shadow-lg">
                         {quoteData.pageCount}{t('quote.form.pageCount.pages')}
                       </span>
                     </div>
@@ -540,7 +573,7 @@ export const Quote = ({ onPageChange }: QuoteProps) => {
                             // 如果输入的是有效数字且在范围内，立即更新状态
                             if (inputValue !== '') {
                               const value = parseInt(inputValue);
-                              if (!isNaN(value) && value >= 3 && value <= 50) {
+                              if (!isNaN(value) && value >= 1 && value <= 20) {
                                 setQuoteData({ ...quoteData, pageCount: value });
                               }
                             }
@@ -549,22 +582,22 @@ export const Quote = ({ onPageChange }: QuoteProps) => {
                         onBlur={(e) => {
                           const inputValue = e.target.value;
                           if (inputValue === '' || isNaN(parseInt(inputValue))) {
-                            // 如果输入为空或无效，重置为3
-                            setPageInputValue('3');
-                            setQuoteData({ ...quoteData, pageCount: 3 });
+                            // 如果输入为空或无效，重置为1
+                            setPageInputValue('1');
+                            setQuoteData({ ...quoteData, pageCount: 1 });
                           } else {
                             const value = parseInt(inputValue);
-                            if (value < 3) {
-                              setPageInputValue('3');
-                              setQuoteData({ ...quoteData, pageCount: 3 });
-                            } else if (value > 50) {
-                              setPageInputValue('50');
-                              setQuoteData({ ...quoteData, pageCount: 50 });
+                            if (value < 1) {
+                              setPageInputValue('1');
+                              setQuoteData({ ...quoteData, pageCount: 1 });
+                            } else if (value > 20) {
+                              setPageInputValue('20');
+                              setQuoteData({ ...quoteData, pageCount: 20 });
                             }
                           }
                         }}
                         className="w-20 px-3 py-2 border border-gray-300 rounded-lg text-center focus:outline-none focus:ring-2 focus:ring-blue-500 focus:border-transparent"
-                        placeholder="3-50"
+                        placeholder="1-20"
                       />
                       <span className="text-sm text-gray-600">{t('quote.form.pageCount.pages')}</span>
                     </div>
@@ -580,16 +613,12 @@ export const Quote = ({ onPageChange }: QuoteProps) => {
                        const isPlanIncluded = 
                          // SEO対策: 选择了任何计划时都包含
                          (option.id === 'seo' && quoteData.webPlan) ||
-                        // CMS管理システム: スタンダード以上のプラン包含
-                        (option.id === 'cms' && (quoteData.webPlan === 'standard-5' || quoteData.webPlan === 'standard-10' || quoteData.webPlan === 'customize' || quoteData.webPlan === 'premium')) ||
                         // お問い合わせフォーム: スタンダード以上のプラン包含
                         (option.id === 'contact' && (quoteData.webPlan === 'standard-5' || quoteData.webPlan === 'standard-10' || quoteData.webPlan === 'customize' || quoteData.webPlan === 'premium')) ||
                         // 商品展示機能: スタンダード以上のプラン包含
-                        (option.id === 'product' && (quoteData.webPlan === 'standard-5' || quoteData.webPlan === 'standard-10' || quoteData.webPlan === 'customize' || quoteData.webPlan === 'premium')) ||
-                        // スマホ対応: スタンダード以上のプラン包含
-                        (option.id === 'mobile' && (quoteData.webPlan === 'standard-5' || quoteData.webPlan === 'standard-10' || quoteData.webPlan === 'customize' || quoteData.webPlan === 'premium')) ||
-                        // ネットショップ機能: カスタマイズとプレミアム包含
-                        (option.id === 'shop' && (quoteData.webPlan === 'customize' || quoteData.webPlan === 'premium')) ||
+                                                 (option.id === 'product' && (quoteData.webPlan === 'standard-5' || quoteData.webPlan === 'standard-10' || quoteData.webPlan === 'customize' || quoteData.webPlan === 'premium')) ||
+                         // ネットショップ機能: カスタマイズとプレミアム包含
+                         (option.id === 'shop' && (quoteData.webPlan === 'customize' || quoteData.webPlan === 'premium')) ||
                         // MEO対策: プレミアムプランのみ包含
                         (option.id === 'meo' && quoteData.webPlan === 'premium') ||
                         // 原稿お任せ: プレミアムプランのみ包含
@@ -608,7 +637,7 @@ export const Quote = ({ onPageChange }: QuoteProps) => {
                       return (
                         <label
                           key={option.id}
-                          className={`relative flex items-center p-4 border-2 rounded-lg transition-all ${
+                          className={`relative group flex items-center p-4 border-2 rounded-lg transition-all ${
                             isFreeOption 
                               ? 'border-green-500 bg-green-50 cursor-default'
                               : (isSSLFreeByAmount && isChecked)
@@ -653,12 +682,16 @@ export const Quote = ({ onPageChange }: QuoteProps) => {
                             </span>
                             <div className="text-sm text-gray-600 mt-1">
                               {isPlanIncluded 
-                                ? t('quote.form.options.freePlanIncluded')
+                                ? (option.id === 'seo' 
+                                    ? t('pricing.options.items.seo.price') 
+                                    : t('quote.form.options.freePlanIncluded'))
                                 : option.price === 0 
-                                  ? t('quote.form.options.free')
+                                  ? (option.id === 'seo' 
+                                      ? t('pricing.options.items.seo.price') 
+                                      : t('quote.form.options.free'))
                                   : isSSLFreeByAmount 
                                     ? t('quote.form.options.freeOver150k')
-                                    : (['cms', 'mobile', 'content', 'shop', 'blog'].includes(option.id) 
+                                    : (['content', 'shop', 'blog'].includes(option.id) 
                                         ? t('quote.form.options.variablePrice', { price: option.price.toLocaleString() })
                                         : t('quote.form.options.fixedPrice', { price: option.price.toLocaleString() }))
                               }
@@ -669,6 +702,11 @@ export const Quote = ({ onPageChange }: QuoteProps) => {
                               isFreeOption ? 'text-green-500' : 'text-blue-500'
                         }`} />
                           )}
+                          {/* 说明气泡 */}
+                          <div className="absolute left-0 top-full mt-2 w-80 p-4 bg-gradient-to-br from-blue-50 to-cyan-50 border border-blue-200 text-gray-700 text-sm rounded-lg opacity-0 invisible group-hover:opacity-100 group-hover:visible transition-all duration-300 z-50 shadow-xl">
+                            {t(`pricing.options.items.${option.nameKey}.description`)}
+                            <div className="absolute -top-2 left-6 w-0 h-0 border-l-4 border-l-transparent border-r-4 border-r-transparent border-b-4 border-b-blue-200"></div>
+                          </div>
                         </label>
                       );
                     })}
@@ -678,11 +716,11 @@ export const Quote = ({ onPageChange }: QuoteProps) => {
                                  {/* 保守 */}
                  <div className="mb-6">
                    <h3 className="text-2xl font-bold text-gray-900 mb-6">{t('quote.form.maintenance.title')}</h3>
-                   <div className="grid grid-cols-1 sm:grid-cols-3 lg:grid-cols-6 gap-3">
+                   <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 xl:grid-cols-4 gap-3">
                     {maintenanceItems.map((maintenance) => (
                       <label
                         key={maintenance.id}
-                        className={`relative flex items-center justify-center p-4 border-2 rounded-lg cursor-pointer transition-all ${
+                        className={`relative flex items-center p-4 border-2 rounded-lg cursor-pointer transition-all ${
                           quoteData.maintenance.includes(maintenance.id)
                             ? 'border-green-500 bg-green-50'
                             : 'border-gray-200 hover:border-gray-300'
@@ -730,13 +768,13 @@ export const Quote = ({ onPageChange }: QuoteProps) => {
                           ? 'border-blue-500 bg-blue-50'
                           : 'border-gray-200 hover:border-gray-300'
                       } ${
-                        (quoteData.webPlan === 'customize' || quoteData.webPlan === 'premium' || quoteData.pageCount > 5)
+                        (!rushAllowed)
                           ? 'opacity-50 cursor-not-allowed'
                           : 'cursor-pointer'
                       }`}
                       onClick={(e) => {
                         // 如果已经选中，则取消选择
-                        if (quoteData.timeline === 'rush' && !(quoteData.webPlan === 'customize' || quoteData.webPlan === 'premium' || quoteData.pageCount > 5)) {
+                        if (quoteData.timeline === 'rush' && rushAllowed) {
                           e.preventDefault();
                           setQuoteData({ ...quoteData, timeline: '' });
                         }
@@ -748,31 +786,32 @@ export const Quote = ({ onPageChange }: QuoteProps) => {
                         value="rush"
                         checked={quoteData.timeline === 'rush'}
                         onChange={(e) => {
-                          if (!(quoteData.webPlan === 'customize' || quoteData.webPlan === 'premium' || quoteData.pageCount > 5)) {
+                          if (rushAllowed) {
                             setQuoteData({ ...quoteData, timeline: e.target.value });
                           }
                         }}
-                        disabled={quoteData.webPlan === 'customize' || quoteData.webPlan === 'premium' || quoteData.pageCount > 5}
+                        disabled={!rushAllowed}
                         className="sr-only"
                       />
                       <div className="flex-1">
-                        <div className="font-semibold">{t('quote.form.timeline.rush')}</div>
+                        <div className="font-medium text-gray-900">{t('quote.form.timeline.rush')}</div>
                         <div className="text-sm text-red-600">{t('quote.form.timeline.rushFee')}</div>
                       </div>
                     </label>
+                    {showQuick && (
                     <label
                       className={`relative flex items-center p-4 border-2 rounded-lg transition-all ${
                         quoteData.timeline === 'quick'
                           ? 'border-blue-500 bg-blue-50'
                           : 'border-gray-200 hover:border-gray-300'
                       } ${
-                        (quoteData.webPlan === 'customize' || quoteData.webPlan === 'premium' || quoteData.pageCount > 10)
+                        (!quickAllowed)
                           ? 'opacity-50 cursor-not-allowed'
                           : 'cursor-pointer'
                       }`}
                       onClick={(e) => {
                         // 如果已经选中，则取消选择
-                        if (quoteData.timeline === 'quick' && !(quoteData.webPlan === 'customize' || quoteData.webPlan === 'premium' || quoteData.pageCount > 10)) {
+                        if (quoteData.timeline === 'quick' && quickAllowed) {
                           e.preventDefault();
                           setQuoteData({ ...quoteData, timeline: '' });
                         }
@@ -784,33 +823,35 @@ export const Quote = ({ onPageChange }: QuoteProps) => {
                         value="quick"
                         checked={quoteData.timeline === 'quick'}
                         onChange={(e) => {
-                          if (!(quoteData.webPlan === 'customize' || quoteData.webPlan === 'premium' || quoteData.pageCount > 10)) {
+                          if (quickAllowed) {
                             setQuoteData({ ...quoteData, timeline: e.target.value });
                           }
                         }}
-                        disabled={quoteData.webPlan === 'customize' || quoteData.webPlan === 'premium' || quoteData.pageCount > 10}
+                        disabled={!quickAllowed}
                         className="sr-only"
                       />
                       <div className="flex-1">
-                        <div className="font-semibold">{t('quote.form.timeline.quick')}</div>
-                        {quoteData.pageCount >= 6 && quoteData.pageCount <= 10 && (
+                        <div className="font-medium text-gray-900">{t('quote.form.timeline.quick')}</div>
+                        {quickHasSurcharge && (
                           <div className="text-sm text-red-600">{t('quote.form.timeline.quickFee')}</div>
                         )}
                       </div>
                     </label>
+                    )}
+                    {showNormal && (
                     <label
                       className={`relative flex items-center p-4 border-2 rounded-lg transition-all ${
                         quoteData.timeline === 'normal'
                           ? 'border-blue-500 bg-blue-50'
                           : 'border-gray-200 hover:border-gray-300'
                       } ${
-                        quoteData.pageCount > 17
+                        (!normalAllowed)
                           ? 'opacity-50 cursor-not-allowed'
                           : 'cursor-pointer'
                       }`}
                       onClick={(e) => {
                         // 如果已经选中，则取消选择
-                        if (quoteData.timeline === 'normal' && quoteData.pageCount <= 17) {
+                        if (quoteData.timeline === 'normal' && normalAllowed) {
                           e.preventDefault();
                           setQuoteData({ ...quoteData, timeline: '' });
                         }
@@ -822,20 +863,22 @@ export const Quote = ({ onPageChange }: QuoteProps) => {
                         value="normal"
                         checked={quoteData.timeline === 'normal'}
                         onChange={(e) => {
-                          if (quoteData.pageCount <= 17) {
+                          if (normalAllowed) {
                             setQuoteData({ ...quoteData, timeline: e.target.value });
                           }
                         }}
-                        disabled={quoteData.pageCount > 17}
+                        disabled={!normalAllowed}
                         className="sr-only"
                       />
                       <div className="flex-1">
-                        <div className="font-semibold">{t('quote.form.timeline.normal')}</div>
-                        {quoteData.pageCount >= 11 && quoteData.pageCount <= 17 && (
+                        <div className="font-medium text-gray-900">{t('quote.form.timeline.normal')}</div>
+                        {normalHasSurcharge && (
                           <div className="text-sm text-red-600">{t('quote.form.timeline.normalFee')}</div>
                         )}
                       </div>
                     </label>
+                    )}
+                    {showFlexible && (
                     <label
                       className={`relative flex items-center p-4 border-2 rounded-lg transition-all ${
                         quoteData.timeline === 'flexible'
@@ -859,21 +902,26 @@ export const Quote = ({ onPageChange }: QuoteProps) => {
                         className="sr-only"
                       />
                       <div className="flex-1">
-                        <div className="font-semibold">{t('quote.form.timeline.flexible')}</div>
+                        <div className="font-medium text-gray-900">{t('quote.form.timeline.flexible')}</div>
                       </div>
                     </label>
+                    )}
                   </div>
                 </div>
 
                  {/* 网站语言选择 */}
                  <div className="mb-6">
                    <h3 className="text-2xl font-bold text-gray-900 mb-6">{t('quote.form.languages.title')}</h3>
-                   <div className="space-y-3">
+                                       <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-4 gap-3">
                      {languageOptions.map((language) => (
-                       <label
-                         key={language.id}
-                         className="flex items-center space-x-3 p-3 border-2 rounded-lg cursor-pointer transition-all hover:bg-gray-50"
-                       >
+                                               <label
+                          key={language.id}
+                          className={`relative flex items-center p-4 border-2 rounded-lg cursor-pointer transition-all min-h-[4.5rem] ${
+                            quoteData.languages.includes(language.id)
+                              ? 'border-blue-500 bg-blue-50'
+                              : 'border-gray-200 hover:border-gray-300'
+                          }`}
+                        >
                     <input
                       type="checkbox"
                            checked={quoteData.languages.includes(language.id)}
@@ -890,17 +938,20 @@ export const Quote = ({ onPageChange }: QuoteProps) => {
                                });
                              }
                            }}
-                           className="w-5 h-5 text-blue-600 border-gray-300 rounded focus:ring-blue-500"
+                           className="sr-only"
                          />
                          <div className="flex-1">
-                           <span className="font-medium text-gray-900">{t(`quote.form.languages.${language.nameKey}`)}</span>
+                           <div className="font-medium text-gray-900">{t(`quote.form.languages.${language.nameKey}`)}</div>
                            {quoteData.languages.includes(language.id) && quoteData.languages.length > 1 && quoteData.languages.indexOf(language.id) > 0 && (
-                               <span className="text-sm text-blue-600 ml-2">{t('quote.form.languages.extraFee')}</span>
+                             <div className="text-sm text-blue-600">{t('quote.form.languages.extraFee')}</div>
                            )}
                          </div>
+                         {quoteData.languages.includes(language.id) && (
+                           <CheckCircle className="w-5 h-5 text-blue-500 ml-2" />
+                         )}
                     </label>
                      ))}
-                     <div className="text-sm text-gray-500 mt-2">
+                     <div className="text-sm text-gray-500 mt-2 whitespace-nowrap">
                        {t('quote.form.languages.note')}
                      </div>
                    </div>
@@ -909,12 +960,21 @@ export const Quote = ({ onPageChange }: QuoteProps) => {
                  {/* ソースコード納品 */}
                  <div className="mb-6">
                    <h3 className="text-2xl font-bold text-gray-900 mb-6">{t('quote.form.sourceCode.title')}</h3>
-                   <div className="grid grid-cols-1 gap-3">
-                     <label className={`relative flex items-center p-4 border-2 rounded-lg cursor-pointer transition-all ${
-                       quoteData.sourceCode
-                         ? 'border-blue-500 bg-blue-50'
-                         : 'border-gray-200 hover:border-gray-300'
-                     }`}>
+                   <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-4 gap-3">
+                     <label 
+                       className={`relative group flex items-center p-4 border-2 rounded-lg cursor-pointer transition-all ${
+                         quoteData.sourceCode
+                           ? 'border-blue-500 bg-blue-50'
+                           : 'border-gray-200 hover:border-gray-300'
+                       }`}
+                       onClick={(e) => {
+                         // 如果已经选中，则取消选择
+                         if (quoteData.sourceCode) {
+                           e.preventDefault();
+                           setQuoteData({ ...quoteData, sourceCode: false });
+                         }
+                       }}
+                     >
                        <input
                          type="checkbox"
                          checked={quoteData.sourceCode}
@@ -924,14 +984,16 @@ export const Quote = ({ onPageChange }: QuoteProps) => {
                          className="sr-only"
                        />
                        <div className="flex-1">
-                         <span className="font-medium text-gray-900">
+                         <div className="font-medium text-gray-900">
                            {t('quote.form.sourceCode.name')}
-                         </span>
-                         <div className="text-sm text-gray-600 mt-1">
+                         </div>
+                         <div className="text-sm text-gray-600">
                            {t('quote.form.sourceCode.fee')}
                          </div>
-                         <div className="text-xs text-gray-500 mt-1">
+                        {/* 说明改为悬浮气泡 */}
+                        <div className="absolute left-0 top-full mt-2 w-80 p-4 bg-gradient-to-br from-blue-50 to-cyan-50 border border-blue-200 text-gray-700 text-sm rounded-lg opacity-0 invisible group-hover:opacity-100 group-hover:visible transition-all duration-300 z-50 shadow-xl">
                            {t('quote.form.sourceCode.description')}
+                          <div className="absolute -top-2 left-6 w-0 h-0 border-l-4 border-l-transparent border-r-4 border-r-transparent border-b-4 border-b-blue-200"></div>
                          </div>
                        </div>
                        {quoteData.sourceCode && (
@@ -948,10 +1010,10 @@ export const Quote = ({ onPageChange }: QuoteProps) => {
                     whileTap={{ scale: 0.98 }}
                     onClick={handleSubmit}
                     disabled={!quoteData.webPlan || !quoteData.timeline || quoteData.languages.length === 0}
-                    className="w-full bg-gradient-to-r from-blue-600 to-emerald-600 text-white font-bold py-4 px-8 rounded-lg disabled:opacity-50 disabled:cursor-not-allowed transition-all duration-200 flex items-center justify-center space-x-2"
+                    className="bg-gradient-to-r from-blue-500 to-emerald-500 text-white font-bold py-5 px-16 rounded-lg disabled:opacity-50 disabled:cursor-not-allowed transition-all duration-200 flex items-center justify-center space-x-3 mx-auto w-full sm:w-auto sm:min-w-[360px]"
                   >
-                    <Calculator className="w-5 h-5" />
-                    <span>{t('quote.form.calculate')}</span>
+                    <Calculator className="w-6 h-6" />
+                    <span className="text-xl">{t('quote.form.calculate')}</span>
                   </motion.button>
                   {(!quoteData.webPlan || !quoteData.timeline || quoteData.languages.length === 0) && (
                     <div className="mt-2 text-sm text-red-600 text-center">
@@ -1107,7 +1169,7 @@ export const Quote = ({ onPageChange }: QuoteProps) => {
                           whileHover={{ scale: 1.02 }}
                           whileTap={{ scale: 0.98 }}
                           onClick={handleContactSubmit}
-                          className="bg-gradient-to-r from-emerald-600 to-teal-600 text-white font-bold py-3 px-8 rounded-lg transition-all duration-200 flex items-center justify-center space-x-2"
+                          className="bg-gradient-to-r from-blue-500 to-emerald-500 text-white font-bold py-3 px-8 rounded-lg transition-all duration-200 flex items-center justify-center space-x-2"
                         >
                           <MessageSquare className="w-4 h-4" />
                           <span>{t('quote.result.contact')}</span>
