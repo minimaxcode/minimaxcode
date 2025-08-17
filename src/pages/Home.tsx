@@ -92,15 +92,15 @@ export const Home = ({ onPageChange }: HomeProps) => {
   return (
     <div className="min-h-screen bg-white text-gray-900">
       {/* Hero Section */}
-      <section className="relative bg-transparent" style={{ marginTop: 'calc(var(--header-h) * -1)' }}>
-        <div className="relative w-full h-[60vh] sm:h-[70vh] md:aspect-[5/2] lg:aspect-[21/9] overflow-hidden">
+      <section className="relative bg-transparent pt-[var(--header-h)] md:pt-0 md:-mt-[var(--header-h)]">
+        <div className="relative w-full h-[55vh] sm:h-[60vh] md:h-auto md:aspect-[5/2] lg:aspect-[21/9] overflow-hidden">
           <motion.div
             initial={{ opacity: 0, y: 30 }}
             animate={{ opacity: 1, y: 0 }}
             transition={{ duration: 0.8 }}
             className="absolute inset-0"
           >
-            <img src="/images/home-hero.jpg" alt="Home Hero" className="w-full h-full object-cover object-center" />
+            <img src="/images/home-hero.jpg" alt="Home Hero" className="w-full h-full object-contain md:object-cover object-center" />
           </motion.div>
 
           {/* 文案与按钮覆盖层（左半部分） */}
@@ -108,27 +108,27 @@ export const Home = ({ onPageChange }: HomeProps) => {
             initial={{ opacity: 0, y: 20 }}
             animate={{ opacity: 1, y: 0 }}
             transition={{ duration: 0.8, delay: 0.1 }}
-            className="absolute inset-0 flex items-start justify-start"
+            className="hidden md:flex md:absolute md:inset-0 items-start justify-start"
             style={{ zIndex: 10 }}
           >
-            {/* 直接基于视口进行左侧内边距，贴合背景图白色方块区域 */}
-            <div className="w-full pl-4 pr-4 md:pl-[6vw] md:pr-[4vw] pt-6 md:pt-10 lg:pt-16">
-              <div className="w-full md:w-1/2 lg:w-1/2 text-left pt-[calc(var(--header-h)+12px)] md:pt-[calc(var(--header-h)+80px)] lg:pt-[calc(var(--header-h)+180px)] max-w-[90%] sm:max-w-[80%] overflow-hidden">
-                <h1 className="text-4xl md:text-6xl lg:text-8xl font-extrabold text-[#2F4766] mb-3 md:mb-4">
+            {/* 桌面端覆盖层 */}
+            <div className="w-full md:pl-[6vw] md:pr-[4vw] pt-6 md:pt-10 lg:pt-16">
+              <div className="w-full md:w-1/2 lg:w-1/2 text-left md:pt-[calc(var(--header-h)+80px)] lg:pt-[calc(var(--header-h)+180px)] max-w-[80%] overflow-hidden">
+                <h1 className="text-6xl lg:text-8xl font-extrabold text-[#2F4766] mb-4">
                   {t('home.title')}
                 </h1>
-                <h2 className="text-2xl md:text-4xl text-[#0EA5FF] mb-6 md:mb-12">
+                <h2 className="text-4xl text-[#0EA5FF] mb-12">
                   {t('home.hero.subtitle')}
                 </h2>
-                <p className="text-base md:text-xl lg:text-2xl text-[#2F4766]/95 leading-relaxed mb-6 md:mb-16 max-w-[52rem] break-words">
+                <p className="text-xl lg:text-2xl text-[#2F4766]/95 leading-relaxed mb-16 max-w-[52rem] break-words">
                   {t('home.hero.description')}
                 </p>
-                <div className="flex flex-row gap-3 sm:gap-6 flex-wrap">
+                <div className="flex flex-row gap-6 flex-wrap">
                   <motion.button
                     whileHover={{ scale: 1.03 }}
                     whileTap={{ scale: 0.97 }}
                     onClick={() => onPageChange('quote')}
-                    className="px-8 py-4 md:px-12 md:py-6 rounded-xl bg-gradient-to-r from-[#33C6FF] to-[#0EA5FF] text-white font-semibold text-lg md:text-2xl shadow-lg hover:opacity-90"
+                    className="px-12 py-6 rounded-xl bg-gradient-to-r from-[#33C6FF] to-[#0EA5FF] text-white font-semibold text-2xl shadow-lg hover:opacity-90"
                   >
                     {t('home.hero.cta')}
                   </motion.button>
@@ -136,7 +136,7 @@ export const Home = ({ onPageChange }: HomeProps) => {
                     whileHover={{ scale: 1.03 }}
                     whileTap={{ scale: 0.97 }}
                     onClick={() => onPageChange('contact')}
-                    className="px-8 py-4 md:px-12 md:py-6 rounded-xl bg-gradient-to-r from-[#0EA5FF] to-[#6A7DFF] text-white font-semibold text-lg md:text-2xl shadow-lg hover:opacity-90"
+                    className="px-12 py-6 rounded-xl bg-gradient-to-r from-[#0EA5FF] to-[#6A7DFF] text-white font-semibold text-2xl shadow-lg hover:opacity-90"
                   >
                     {t('home.hero.contact')}
                   </motion.button>
@@ -144,6 +144,32 @@ export const Home = ({ onPageChange }: HomeProps) => {
               </div>
             </div>
           </motion.div>
+        </div>
+        {/* 移动端独立文案块（不覆盖图片，避免重叠） */}
+        <div className="md:hidden px-4 pt-4 pb-8">
+          <h1 className="text-3xl font-extrabold text-[#2F4766] mb-3">
+            {t('home.title')}
+          </h1>
+          <h2 className="text-xl text-[#0EA5FF] mb-4">
+            {t('home.hero.subtitle')}
+          </h2>
+          <p className="text-base text-[#2F4766]/95 leading-relaxed mb-6">
+            {t('home.hero.description')}
+          </p>
+          <div className="flex gap-3 flex-wrap">
+            <button
+              onClick={() => onPageChange('quote')}
+              className="px-6 py-3 rounded-xl bg-gradient-to-r from-[#33C6FF] to-[#0EA5FF] text-white font-semibold text-base"
+            >
+              {t('home.hero.cta')}
+            </button>
+            <button
+              onClick={() => onPageChange('contact')}
+              className="px-6 py-3 rounded-xl bg-gradient-to-r from-[#0EA5FF] to-[#6A7DFF] text-white font-semibold text-base"
+            >
+              {t('home.hero.contact')}
+            </button>
+          </div>
         </div>
       </section>
 

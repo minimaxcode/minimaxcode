@@ -145,7 +145,7 @@ export const Ecommerce = ({ onPageChange }: EcommerceProps) => {
   return (
     <div className="min-h-screen text-gray-900 pt-24" style={{ background: 'linear-gradient(180deg, #F6FAFF 0%, #FFFFFF 100%)' }}>
       {/* Hero Section */}
-      <section className="relative bg-transparent" style={{ marginTop: 'calc(var(--header-h) * -1)' }}>
+      <section className="relative bg-transparent pt-[var(--header-h)] md:pt-0 md:-mt-[var(--header-h)]">
         <div className="relative w-full aspect-[16/9] md:aspect-[5/2] lg:aspect-[21/9]">
           <motion.div
             initial={{ opacity: 0, y: 30 }}

@@ -182,6 +182,29 @@ export const Header = ({ currentPage, onPageChange }: HeaderProps) => {
                   {item.label}
                 </button>
               ))}
+
+              {/* Mobile Solutions Section */}
+              <div className="pt-3 border-t border-gray-200">
+                <h3 className="px-3 py-2 text-base font-semibold text-gray-900">
+                  {t('nav.solutions.title')}
+                </h3>
+                <div className="space-y-1">
+                  {solutionItems.map((solution) => (
+                    <button
+                      key={solution.key}
+                      onClick={() => {
+                        const key = solution.key === 'common' ? 'solutions/common' : `solutions/${solution.key}`;
+                        handleNavClick(key);
+                        setIsMenuOpen(false);
+                      }}
+                      className="block w-full text-left py-2 text-base rounded-md px-3 text-gray-700 hover:text-[#0EA5FF] hover:bg-gray-50 transition-colors duration-200"
+                    >
+                      {solution.label}
+                    </button>
+                  ))}
+                </div>
+              </div>
+
               <div className="pt-3 border-t border-gray-200">
                 <div className="flex items-center justify-between">
                   <LanguageSwitcher />
