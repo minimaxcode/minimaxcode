@@ -50,10 +50,10 @@ export const Footer = ({ onPageChange }: FooterProps) => {
               onClick={() => onPageChange('home')}
             >
               <img src="/images/logo_nomoji.svg" alt={t('footer.company')} className="w-9 h-9" />
-              <span className="text-2xl font-bold text-gray-900">{t('footer.company')}</span>
+              <span className="text-xl font-bold text-gray-900">{t('footer.company')}</span>
             </div>
-            <p className="text-[#0EA5FF] font-medium mb-4 text-lg">{t('footer.slogan')}</p>
-            <p className="text-gray-600 text-base">
+            <p className="text-[#0EA5FF] font-medium mb-4 text-sm">{t('footer.slogan')}</p>
+            <p className="text-gray-600 text-sm">
               {t('footer.description')}
             </p>
           </div>
@@ -62,7 +62,7 @@ export const Footer = ({ onPageChange }: FooterProps) => {
             <div className="flex flex-col sm:flex-row" style={{ gap: '3rem' }}>
               {/* Column: Solutions - 分为两列 */}
               <div className="flex-shrink-0">
-                <h3 className="text-gray-900 font-semibold mb-4 text-center text-lg">{t('nav.solutions.title')}</h3>
+                <h3 className="text-gray-900 font-semibold mb-4 text-center text-sm">{t('nav.solutions.title')}</h3>
                 <div className="flex flex-col sm:flex-row gap-4">
                   {/* Solutions 第一列 */}
                   <div>
@@ -71,7 +71,7 @@ export const Footer = ({ onPageChange }: FooterProps) => {
                         <li key={link.key}>
                           <button
                             onClick={() => onPageChange(link.key)}
-                            className="flex items-center text-gray-700 hover:text-[#0EA5FF] transition-colors duration-200 text-base group"
+                            className="flex items-center text-gray-700 hover:text-[#0EA5FF] transition-colors duration-200 text-sm group"
                           >
                             {link.label}
                           </button>
@@ -86,7 +86,7 @@ export const Footer = ({ onPageChange }: FooterProps) => {
                         <li key={link.key}>
                           <button
                             onClick={() => onPageChange(link.key)}
-                            className="flex items-center text-gray-700 hover:text-[#0EA5FF] transition-colors duration-200 text-base group"
+                            className="flex items-center text-gray-700 hover:text-[#0EA5FF] transition-colors duration-200 text-sm group"
                           >
                             {link.label}
                           </button>
@@ -99,7 +99,7 @@ export const Footer = ({ onPageChange }: FooterProps) => {
 
               {/* Column 2: Service Links */}
               <div className="flex-shrink-0" style={{ minWidth: '160px' }}>
-                <h3 className="text-gray-900 font-semibold mb-4 whitespace-nowrap text-lg">{t('footer.links.services')}</h3>
+                <h3 className="text-gray-900 font-semibold mb-4 whitespace-nowrap text-sm">{t('footer.links.services')}</h3>
                 <ul className="space-y-3">
                   {serviceLinks.map((link) => (
                     <li key={link.key}>
@@ -117,7 +117,7 @@ export const Footer = ({ onPageChange }: FooterProps) => {
                             onPageChange(link.key);
                           }
                         }}
-                        className="flex items-center text-gray-700 hover:text-[#0EA5FF] transition-colors duration-200 text-base group whitespace-nowrap"
+                        className="flex items-center text-gray-700 hover:text-[#0EA5FF] transition-colors duration-200 text-sm group whitespace-nowrap"
                       >
                         {link.label}
                       </button>
@@ -128,13 +128,13 @@ export const Footer = ({ onPageChange }: FooterProps) => {
 
               {/* Column 3: Company Links */}
               <div className="flex-shrink-0" style={{ minWidth: '140px' }}>
-                <h3 className="text-gray-900 font-semibold mb-4 whitespace-nowrap text-lg">{t('footer.links.company')}</h3>
+                <h3 className="text-gray-900 font-semibold mb-4 whitespace-nowrap text-sm">{t('footer.links.company')}</h3>
                 <ul className="space-y-3">
                   {companyLinks.map((link) => (
                     <li key={link.key}>
                       <button
                         onClick={() => onPageChange(link.key)}
-                        className="flex items-center text-gray-700 hover:text-[#0EA5FF] transition-colors duration-200 text-base group whitespace-nowrap"
+                        className="flex items-center text-gray-700 hover:text-[#0EA5FF] transition-colors duration-200 text-sm group whitespace-nowrap"
                       >
                         {link.label}
                       </button>
@@ -145,7 +145,7 @@ export const Footer = ({ onPageChange }: FooterProps) => {
 
               {/* Column 4: Support */}
               <div className="flex-shrink-0" style={{ minWidth: '120px' }}>
-                <h3 className="text-gray-900 font-semibold mb-4 whitespace-nowrap text-lg">{t('footer.links.support')}</h3>
+                <h3 className="text-gray-900 font-semibold mb-4 whitespace-nowrap text-sm">{t('footer.links.support')}</h3>
                 <ul className="space-y-3">
                   {supportLinks.map((link) => (
                     <li key={link.key}>
@@ -161,7 +161,7 @@ export const Footer = ({ onPageChange }: FooterProps) => {
                             onPageChange(link.key);
                           }
                         }}
-                        className="flex items-center text-gray-700 hover:text-[#0EA5FF] transition-colors duration-200 text-base group whitespace-nowrap"
+                        className="flex items-center text-gray-700 hover:text-[#0EA5FF] transition-colors duration-200 text-sm group whitespace-nowrap"
                       >
                         {link.label}
                       </button>
@@ -175,7 +175,7 @@ export const Footer = ({ onPageChange }: FooterProps) => {
 
         {/* Bottom Bar */}
         <div className="mt-12 pt-8 text-center">
-          <p className="text-gray-400 text-base">{t('footer.copyright')}</p>
+          <p className="text-gray-400 text-sm">{t('footer.copyright')}</p>
         </div>
       </div>
     </footer>

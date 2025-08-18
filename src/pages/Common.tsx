@@ -49,14 +49,14 @@ export const Common = ({ onPageChange }: CommonProps) => {
             transition={{ duration: 0.8 }}
             className="text-center"
           >
-            <h1 className="text-5xl md:text-6xl font-bold mb-6 text-[#2F4766]">{t('common.hero.title')}</h1>
-            <p className="text-xl text-gray-600 max-w-5xl mx-auto">{t('common.hero.subtitle')}</p>
+            <h1 className="text-4xl md:text-5xl font-bold mb-6 text-[#2F4766]">{t('common.hero.title')}</h1>
+            <p className="text-lg text-gray-600 max-w-5xl mx-auto">{t('common.hero.subtitle')}</p>
           </motion.div>
         </div>
       </section>
 
       {/* 主体两行模块：予約システム / ECシステム */}
-      <section className="py-10 bg-transparent">
+      <section className="py-8 md:py-10 bg-transparent">
         <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 space-y-16">
           {sections.map((s, idx) => (
             <motion.div
@@ -76,7 +76,7 @@ export const Common = ({ onPageChange }: CommonProps) => {
                       <s.icon className="w-8 h-8 text-[#0EA5FF]" />
                       <h2 className="text-3xl md:text-4xl font-bold text-[#2F4766]">{s.title}</h2>
                     </div>
-                    <p className="text-xl text-gray-600 leading-relaxed mb-6">{s.description}</p>
+                    <p className="text-lg text-gray-600 leading-relaxed mb-6">{s.description}</p>
                     <ul className="space-y-3 mb-6">
                       {s.benefits.map((b, i) => (
                         <li key={i} className="flex items-start space-x-3 text-base">
@@ -123,7 +123,7 @@ export const Common = ({ onPageChange }: CommonProps) => {
                       <s.icon className="w-8 h-8 text-[#0EA5FF]" />
                       <h2 className="text-3xl md:text-4xl font-bold text-[#2F4766]">{s.title}</h2>
                     </div>
-                    <p className="text-xl text-gray-600 leading-relaxed mb-6">{s.description}</p>
+                    <p className="text-lg text-gray-600 leading-relaxed mb-6">{s.description}</p>
                     <ul className="space-y-3 mb-6">
                       {s.benefits.map((b, i) => (
                         <li key={i} className="flex items-start space-x-3 text-base">
@@ -175,7 +175,7 @@ export const Common = ({ onPageChange }: CommonProps) => {
       </section>
 
       {/* CTA Section（保留） */}
-      <section className="py-16 bg-transparent">
+      <section className="py-12 md:py-16 bg-transparent">
         <div className="max-w-4xl mx-auto px-4 sm:px-6 lg:px-8">
           <motion.div
             initial={{ opacity: 0, y: 30 }}

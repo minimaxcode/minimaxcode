@@ -205,7 +205,7 @@ export const Pricing = ({ onPageChange }: PricingProps) => {
   return (
     <div className="min-h-screen text-gray-900 pt-24" style={{ background: 'linear-gradient(180deg, #F6FAFF 0%, #FFFFFF 100%)' }}>
       {/* Hero Section */}
-      <section className="pt-16 pb-20 bg-transparent">
+      <section className="pt-12 pb-16 md:pt-16 md:pb-20 bg-transparent">
         <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
           <motion.div
             initial={{ opacity: 0, y: 30 }}
@@ -213,8 +213,8 @@ export const Pricing = ({ onPageChange }: PricingProps) => {
             transition={{ duration: 0.8 }}
             className="text-center"
           >
-            <h1 className="text-5xl md:text-6xl font-bold mb-6 text-[#2F4766]">{t('pricing.hero.title')}</h1>
-            <p className="text-xl text-gray-600 max-w-3xl mx-auto">
+            <h1 className="text-3xl md:text-5xl font-bold mb-5 text-[#2F4766]">{t('pricing.hero.title')}</h1>
+            <p className="text-base md:text-xl text-gray-600 max-w-3xl mx-auto">
               {t('pricing.hero.subtitle')}
             </p>
           </motion.div>
@@ -224,18 +224,18 @@ export const Pricing = ({ onPageChange }: PricingProps) => {
       {/* 応援キャンペーン Section removed per request */}
 
       {/* WEB制作プラン料金表 */}
-      <section id="plans" className="py-20 bg-transparent">
+      <section id="plans" className="py-12 md:py-20 bg-transparent">
         <div className="max-w-[1500px] mx-auto px-4 sm:px-6 lg:px-8">
           <motion.div
             initial={{ opacity: 0, y: 30 }}
             animate={{ opacity: 1, y: 0 }}
             transition={{ duration: 0.8 }}
-            className="text-center mb-16"
+            className="text-center mb-12 md:mb-16"
           >
-            <h2 className="text-3xl md:text-4xl font-bold mb-6 text-[#2F4766]">
+            <h2 className="text-2xl md:text-4xl font-bold mb-5 text-[#2F4766]">
               {t('pricing.table.title')}
             </h2>
-            <p className="text-xl text-gray-600 max-w-2xl mx-auto">
+            <p className="text-base md:text-xl text-gray-600 max-w-2xl mx-auto">
               {t('pricing.table.subtitle')}
             </p>
           </motion.div>
@@ -359,7 +359,7 @@ export const Pricing = ({ onPageChange }: PricingProps) => {
       </section>
 
       {/* Quote CTA Hook */}
-      <section className="py-16 bg-transparent">
+      <section className="py-12 md:py-16 bg-transparent">
         <div className="max-w-4xl mx-auto px-4 sm:px-6 lg:px-8">
           <motion.div
             initial={{ opacity: 0, y: 30 }}
@@ -367,25 +367,25 @@ export const Pricing = ({ onPageChange }: PricingProps) => {
             transition={{ duration: 0.8 }}
             className="text-center"
           >
-            <div className="bg-white rounded-2xl shadow-lg border border-gray-200 p-8 md:p-12">
+            <div className="bg-white rounded-2xl shadow-lg border border-gray-200 p-6 md:p-8 lg:p-12">
               <div className="flex justify-center mb-6">
-                <div className="w-16 h-16 bg-[#0EA5FF] rounded-full flex items-center justify-center">
-                  <svg className="w-8 h-8 text-white" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                <div className="w-12 h-12 md:w-16 md:h-16 bg-[#0EA5FF] rounded-full flex items-center justify-center">
+                  <svg className="w-6 h-6 md:w-8 md:h-8 text-white" fill="none" stroke="currentColor" viewBox="0 0 24 24">
                     <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M9 12l2 2 4-4m6 2a9 9 0 11-18 0 9 9 0 0118 0z" />
                   </svg>
                 </div>
               </div>
               
-              <h3 className="text-2xl md:text-3xl font-bold text-[#2F4766] mb-4">
+              <h3 className="text-xl md:text-3xl font-bold text-[#2F4766] mb-4">
                 {t('pricing.quoteCta.title')}
               </h3>
-              <p className="text-lg text-gray-600 mb-8 leading-relaxed whitespace-pre-line">
+              <p className="text-base md:text-lg text-gray-600 mb-6 md:mb-8 leading-relaxed whitespace-pre-line">
                 {t('pricing.quoteCta.description')}
               </p>
               
               <button
                 onClick={() => onPageChange('quote')}
-                className="inline-flex items-center px-8 py-4 bg-[#0EA5FF] hover:bg-[#0284C7] text-white font-semibold rounded-full transition-all duration-300 shadow-lg hover:shadow-xl"
+                className="inline-flex items-center px-6 py-3 md:px-8 md:py-4 bg-[#0EA5FF] hover:bg-[#0284C7] text-white font-semibold text-sm md:text-base rounded-full transition-all duration-300 shadow-lg hover:shadow-xl"
               >
                 <svg className="w-5 h-5 mr-2" fill="none" stroke="currentColor" viewBox="0 0 24 24">
                   <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M15.232 5.232l3.536 3.536m-2.036-5.036a2.5 2.5 0 113.536 3.536L6.5 21.036H3v-3.572L16.732 3.732z" />
@@ -402,18 +402,18 @@ export const Pricing = ({ onPageChange }: PricingProps) => {
       </section>
 
       {/* オプション料金 */}
-      <section id="options" className="py-20 bg-transparent">
+      <section id="options" className="py-12 md:py-20 bg-transparent">
         <div className="max-w-[1500px] mx-auto px-4 sm:px-6 lg:px-8">
           <motion.div
             initial={{ opacity: 0, y: 30 }}
             animate={{ opacity: 1, y: 0 }}
             transition={{ duration: 0.8 }}
-            className="text-center mb-16"
+            className="text-center mb-12 md:mb-16"
           >
-            <h2 className="text-3xl md:text-4xl font-bold mb-6 text-[#2F4766]">
+            <h2 className="text-2xl md:text-4xl font-bold mb-5 text-[#2F4766]">
               {t('pricing.options.title')}
             </h2>
-            <p className="text-lg text-gray-600 max-w-4xl mx-auto whitespace-nowrap">
+            <p className="text-base md:text-lg text-gray-600 max-w-4xl mx-auto whitespace-nowrap">
               {t('pricing.options.subtitle')}
             </p>
           </motion.div>

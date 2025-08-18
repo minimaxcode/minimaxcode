@@ -170,7 +170,7 @@ export const WorksSummary = ({ onPageChange }: WorksSummaryProps) => {
   };
 
   return (
-    <section className="py-20 bg-transparent">
+    <section className="py-12 md:py-20 bg-transparent">
       <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
         <motion.div
           initial={{ opacity: 0, y: 30 }}
@@ -179,7 +179,7 @@ export const WorksSummary = ({ onPageChange }: WorksSummaryProps) => {
           viewport={{ once: true }}
           className="text-center mb-16"
         >
-          <h2 className="text-4xl md:text-5xl font-bold mb-6 text-[#2F4766]">
+          <h2 className="text-2xl md:text-4xl font-bold mb-5 text-[#2F4766]">
             <span className="text-[#0EA5FF]">
               {t('works.title')}
             </span>
@@ -187,7 +187,7 @@ export const WorksSummary = ({ onPageChange }: WorksSummaryProps) => {
           {/* 删除描述以与页面背景更统一 */}
         </motion.div>
 
-        <div className="grid grid-cols-1 md:grid-cols-2 gap-8 mb-16">
+        <div className="grid grid-cols-1 md:grid-cols-2 gap-6 md:gap-8 mb-14">
           {displayedWorks.map((project, index) => (
             <motion.div
               key={project.id}
@@ -220,9 +220,9 @@ export const WorksSummary = ({ onPageChange }: WorksSummaryProps) => {
                   }}
                 />
               </div>
-              <div className="p-6 flex flex-col flex-grow">
+              <div className="p-5 md:p-6 flex flex-col flex-grow">
                 <div className="flex items-start justify-between mb-4">
-                  <h3 className="text-2xl font-bold text-gray-900 flex-1">{t(project.titleKey)}</h3>
+                  <h3 className="text-xl font-bold text-gray-900 flex-1">{t(project.titleKey)}</h3>
                   <a
                     href={project.url}
                     target="_blank"
@@ -237,7 +237,7 @@ export const WorksSummary = ({ onPageChange }: WorksSummaryProps) => {
 
                 <div className="space-y-3 mt-4 flex-grow">
                   {project.features.map((feature, fIndex) => (
-                    <div key={fIndex} className="flex items-start text-base text-gray-700">
+                    <div key={fIndex} className="flex items-start text-sm md:text-base text-gray-700">
                       <CheckCircle className="w-4 h-4 mr-3 mt-0.5 text-[#0EA5FF] flex-shrink-0" />
                       <span>{t(feature)}</span>
                     </div>
@@ -253,7 +253,7 @@ export const WorksSummary = ({ onPageChange }: WorksSummaryProps) => {
             whileHover={{ scale: 1.02 }}
             whileTap={{ scale: 0.98 }}
             onClick={() => onPageChange('works')}
-            className="inline-flex items-center px-9 py-5 border border-[#0EA5FF] text-[#0EA5FF] font-semibold text-lg rounded-xl hover:bg-[#0EA5FF] hover:text-white transition-all duration-200"
+            className="inline-flex items-center px-6 py-4 md:px-9 md:py-5 border border-[#0EA5FF] text-[#0EA5FF] font-semibold text-base md:text-lg rounded-xl hover:bg-[#0EA5FF] hover:text-white transition-all duration-200"
           >
             {t('home.works.cta')}
             <ArrowRight className="w-5 h-5 ml-2" />

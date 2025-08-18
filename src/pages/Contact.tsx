@@ -327,20 +327,20 @@ export const Contact = ({ onPageChange, quoteDetails }: ContactProps) => {
         <div className="absolute top-1/2 left-1/2 transform -translate-x-1/2 -translate-y-1/2 w-64 h-64 bg-gradient-to-br from-purple-400/15 to-pink-400/15 rounded-full animate-pulse" style={{ animationDelay: '2s' }} />
       </div>
       {/* Hero Section */}
-      <section className="relative overflow-hidden py-20">
+      <section className="relative overflow-hidden py-12 md:py-20">
         <div className="relative max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
           <motion.div
             initial={{ opacity: 0, y: 30 }}
             animate={{ opacity: 1, y: 0 }}
             transition={{ duration: 0.8 }}
-            className="text-center mb-16"
+            className="text-center mb-12 md:mb-16"
           >
-            <h1 className="text-5xl md:text-6xl font-bold mb-6">
+            <h1 className="text-3xl md:text-5xl font-bold mb-5">
               <span className="bg-gradient-to-r from-[#32E2C4] via-[#3F87F5] to-[#50FA7B] bg-clip-text text-transparent">
                 {t('contact.title')}
               </span>
             </h1>
-            <p className="text-xl text-gray-600 max-w-3xl mx-auto">
+            <p className="text-base md:text-xl text-gray-600 max-w-3xl mx-auto">
               {t('contact.subtitle')}
             </p>
           </motion.div>
@@ -348,7 +348,7 @@ export const Contact = ({ onPageChange, quoteDetails }: ContactProps) => {
       </section>
 
       {/* Contact Form */}
-      <section className="pb-20">
+      <section className="pb-12 md:pb-20">
         <div className="max-w-4xl mx-auto px-4 sm:px-6 lg:px-8">
           {submitStatus === 'success' ? (
             <motion.div
@@ -357,14 +357,14 @@ export const Contact = ({ onPageChange, quoteDetails }: ContactProps) => {
               transition={{ duration: 0.8 }}
               className="bg-gradient-to-r from-[#50FA7B]/10 to-[#32E2C4]/10 border border-[#50FA7B]/30 rounded-2xl p-8 text-center"
             >
-              <CheckCircle className="w-16 h-16 text-emerald-600 mx-auto mb-6" />
-              <h2 className="text-3xl font-bold text-gray-900 mb-4">{t('contact.success.title')}</h2>
-              <p className="text-xl text-gray-600 mb-8">{t('contact.success.message')}</p>
+              <CheckCircle className="w-12 h-12 md:w-16 md:h-16 text-emerald-600 mx-auto mb-5 md:mb-6" />
+              <h2 className="text-2xl md:text-3xl font-bold text-gray-900 mb-4">{t('contact.success.title')}</h2>
+              <p className="text-base md:text-xl text-gray-600 mb-6 md:mb-8">{t('contact.success.message')}</p>
               <motion.button
                 whileHover={{ scale: 1.05 }}
                 whileTap={{ scale: 0.95 }}
                 onClick={() => setSubmitStatus('idle')}
-                className="px-8 py-3 bg-gradient-to-r from-[#0EA5FF] to-[#6A7DFF] text-white font-bold rounded-xl hover:opacity-90 transition-opacity duration-200"
+                className="px-6 py-2 md:px-8 md:py-3 bg-gradient-to-r from-[#0EA5FF] to-[#6A7DFF] text-white text-sm md:text-base font-bold rounded-xl hover:opacity-90 transition-opacity duration-200"
               >
                 {t('contact.success.newInquiry')}
               </motion.button>
@@ -375,7 +375,7 @@ export const Contact = ({ onPageChange, quoteDetails }: ContactProps) => {
               whileInView={{ opacity: 1, y: 0 }}
               transition={{ duration: 0.8 }}
               viewport={{ once: true }}
-              className="rounded-2xl p-8"
+              className="rounded-2xl p-5 md:p-8"
               style={{
                 background: 'linear-gradient(135deg, rgba(255, 255, 255, 0.9) 0%, rgba(248, 250, 252, 0.9) 100%)',
                 border: '1px solid rgba(20, 184, 166, 0.2)',
@@ -446,7 +446,7 @@ export const Contact = ({ onPageChange, quoteDetails }: ContactProps) => {
                           {...register('industryOther')}
                           type="text"
                           placeholder={t('contact.form.industryOther.placeholder')}
-                          className="w-full pl-10 pr-4 py-3 bg-white border border-gray-300 rounded-xl text-gray-900 placeholder-gray-400 focus:outline-none focus:ring-2 focus:ring-[#32E2C4] focus:border-transparent transition-colors duration-200"
+                          className="w-full pl-10 pr-4 py-2 md:py-3 bg-white border border-gray-300 rounded-xl text-gray-900 placeholder-gray-400 focus:outline-none focus:ring-2 focus:ring-[#32E2C4] focus:border-transparent transition-colors duration-200"
                         />
                       </div>
                       {errors.industryOther && (
@@ -457,7 +457,7 @@ export const Contact = ({ onPageChange, quoteDetails }: ContactProps) => {
                 </div>
 
                 {/* 現状（サイトの有無） */}
-                <div className="grid grid-cols-1 md:grid-cols-2 gap-6 mb-6">
+                <div className="grid grid-cols-1 md:grid-cols-2 gap-5 mb-5 md:gap-6 md:mb-6">
                                       <div>
                       <label className="block text-sm font-semibold text-gray-900 mb-2">
                         {t('contact.form.status.label')}<span className="ml-1 text-red-500">*</span>
@@ -505,7 +505,7 @@ export const Contact = ({ onPageChange, quoteDetails }: ContactProps) => {
                           })}
                           type="url"
                           placeholder={t('contact.form.websiteUrl.placeholder')}
-                          className="w-full pl-10 pr-4 py-3 bg-white border border-gray-300 rounded-xl text-gray-900 placeholder-gray-400 focus:outline-none focus:ring-2 focus:ring-[#32E2C4] focus:border-transparent transition-colors duration-200"
+                          className="w-full pl-10 pr-4 py-2 md:py-3 bg-white border border-gray-300 rounded-xl text-gray-900 placeholder-gray-400 focus:outline-none focus:ring-2 focus:ring-[#32E2C4] focus:border-transparent transition-colors duration-200"
                         />
                       </div>
                       {errors.websiteUrl && (
@@ -536,7 +536,7 @@ export const Contact = ({ onPageChange, quoteDetails }: ContactProps) => {
                           })}
                           type={field.type}
                           placeholder={field.placeholder}
-                          className="w-full pl-10 pr-4 py-3 bg-white border border-gray-300 rounded-xl text-gray-900 placeholder-gray-400 focus:outline-none focus:ring-2 focus:ring-[#32E2C4] focus:border-transparent transition-colors duration-200"
+                          className="w-full pl-10 pr-4 py-2 md:py-3 bg-white border border-gray-300 rounded-xl text-gray-900 placeholder-gray-400 focus:outline-none focus:ring-2 focus:ring-[#32E2C4] focus:border-transparent transition-colors duration-200"
                         />
                       </div>
                       {errors[field.name] && (
@@ -553,9 +553,9 @@ export const Contact = ({ onPageChange, quoteDetails }: ContactProps) => {
                   </label>
                   <textarea
                     {...register('message')}
-                    rows={10}
+                    rows={8}
                     placeholder={t('contact.form.message.placeholder')}
-                    className="w-full px-4 py-3 bg-white border border-gray-300 rounded-xl text-gray-900 placeholder-gray-400 focus:outline-none focus:ring-2 focus:ring-[#32E2C4] focus:border-transparent transition-colors duration-200 resize-vertical"
+                    className="w-full px-4 py-2 md:py-3 bg-white border border-gray-300 rounded-xl text-gray-900 placeholder-gray-400 focus:outline-none focus:ring-2 focus:ring-[#32E2C4] focus:border-transparent transition-colors duration-200 resize-vertical"
                   />
                   {errors.message && (
                     <p className="mt-1 text-sm text-red-400">{errors.message.message}</p>
@@ -563,13 +563,13 @@ export const Contact = ({ onPageChange, quoteDetails }: ContactProps) => {
                 </div>
 
                 {/* Submit Button */}
-                <div className="pt-6">
+                <div className="pt-5 md:pt-6">
                   <motion.button
                     type="submit"
                     disabled={isSubmitting}
                     whileHover={{ scale: isSubmitting ? 1 : 1.05 }}
                     whileTap={{ scale: isSubmitting ? 1 : 0.95 }}
-                    className="w-full px-8 py-4 bg-gradient-to-r from-[#0EA5FF] to-[#6A7DFF] text-white font-bold text-lg rounded-xl hover:opacity-90 transition-opacity duration-200 disabled:opacity-50 disabled:cursor-not-allowed flex items-center justify-center space-x-2"
+                    className="w-full px-6 py-3 md:px-8 md:py-4 bg-gradient-to-r from-[#0EA5FF] to-[#6A7DFF] text-white font-bold text-base md:text-lg rounded-xl hover:opacity-90 transition-opacity duration-200 disabled:opacity-50 disabled:cursor-not-allowed flex items-center justify-center space-x-2"
                   >
                     {isSubmitting ? (
                       <>

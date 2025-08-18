@@ -93,7 +93,7 @@ export const Home = ({ onPageChange }: HomeProps) => {
     <div className="min-h-screen bg-white text-gray-900">
       {/* Hero Section */}
       <section className="relative bg-transparent pt-[var(--header-h)] md:pt-0 md:-mt-[var(--header-h)]">
-        <div className="relative w-full h-[55vh] sm:h-[60vh] md:h-auto md:aspect-[5/2] lg:aspect-[21/9] overflow-hidden">
+        <div className="relative w-full h-[55vh] sm:h-[50vh] md:h-auto md:aspect-[5/2] lg:aspect-[21/9] overflow-hidden">
           <motion.div
             initial={{ opacity: 0, y: 30 }}
             animate={{ opacity: 1, y: 0 }}
@@ -114,13 +114,13 @@ export const Home = ({ onPageChange }: HomeProps) => {
             {/* 桌面端覆盖层 */}
             <div className="w-full md:pl-[6vw] md:pr-[4vw] pt-6 md:pt-10 lg:pt-16">
               <div className="w-full md:w-1/2 lg:w-1/2 text-left md:pt-[calc(var(--header-h)+80px)] lg:pt-[calc(var(--header-h)+180px)] max-w-[80%] overflow-hidden">
-                <h1 className="text-6xl lg:text-8xl font-extrabold text-[#2F4766] mb-4">
+                <h1 className="text-5xl lg:text-7xl font-extrabold text-[#2F4766] mb-4">
                   {t('home.title')}
                 </h1>
-                <h2 className="text-4xl text-[#0EA5FF] mb-12">
+                <h2 className="text-3xl text-[#0EA5FF] mb-10">
                   {t('home.hero.subtitle')}
                 </h2>
-                <p className="text-xl lg:text-2xl text-[#2F4766]/95 leading-relaxed mb-16 max-w-[52rem] break-words">
+                <p className="text-lg lg:text-xl text-[#2F4766]/95 leading-relaxed mb-16 max-w-[52rem] break-words">
                   {t('home.hero.description')}
                 </p>
                 <div className="flex flex-row gap-6 flex-wrap">
@@ -128,7 +128,7 @@ export const Home = ({ onPageChange }: HomeProps) => {
                     whileHover={{ scale: 1.03 }}
                     whileTap={{ scale: 0.97 }}
                     onClick={() => onPageChange('quote')}
-                    className="px-12 py-6 rounded-xl bg-gradient-to-r from-[#33C6FF] to-[#0EA5FF] text-white font-semibold text-2xl shadow-lg hover:opacity-90"
+                    className="px-12 py-6 rounded-xl bg-gradient-to-r from-[#33C6FF] to-[#0EA5FF] text-white font-semibold text-xl shadow-lg hover:opacity-90"
                   >
                     {t('home.hero.cta')}
                   </motion.button>
@@ -136,7 +136,7 @@ export const Home = ({ onPageChange }: HomeProps) => {
                     whileHover={{ scale: 1.03 }}
                     whileTap={{ scale: 0.97 }}
                     onClick={() => onPageChange('contact')}
-                    className="px-12 py-6 rounded-xl bg-gradient-to-r from-[#0EA5FF] to-[#6A7DFF] text-white font-semibold text-2xl shadow-lg hover:opacity-90"
+                    className="px-12 py-6 rounded-xl bg-gradient-to-r from-[#0EA5FF] to-[#6A7DFF] text-white font-semibold text-xl shadow-lg hover:opacity-90"
                   >
                     {t('home.hero.contact')}
                   </motion.button>
@@ -146,26 +146,26 @@ export const Home = ({ onPageChange }: HomeProps) => {
           </motion.div>
         </div>
         {/* 移动端独立文案块（不覆盖图片，避免重叠） */}
-        <div className="md:hidden px-4 pt-4 pb-8">
-          <h1 className="text-3xl font-extrabold text-[#2F4766] mb-3">
-            {t('home.title')}
-          </h1>
-          <h2 className="text-xl text-[#0EA5FF] mb-4">
-            {t('home.hero.subtitle')}
-          </h2>
-          <p className="text-base text-[#2F4766]/95 leading-relaxed mb-6">
-            {t('home.hero.description')}
-          </p>
+                 <div className="md:hidden px-4 pt-3 pb-6">
+           <h1 className="text-2xl font-extrabold text-[#2F4766] mb-3">
+             {t('home.title')}
+           </h1>
+           <h2 className="text-lg text-[#0EA5FF] mb-4">
+             {t('home.hero.subtitle')}
+           </h2>
+           <p className="text-sm text-[#2F4766]/95 leading-relaxed mb-5">
+             {t('home.hero.description')}
+           </p>
           <div className="flex gap-3 flex-wrap">
             <button
               onClick={() => onPageChange('quote')}
-              className="px-6 py-3 rounded-xl bg-gradient-to-r from-[#33C6FF] to-[#0EA5FF] text-white font-semibold text-base"
+              className="px-5 py-3 rounded-xl bg-gradient-to-r from-[#33C6FF] to-[#0EA5FF] text-white font-semibold text-sm"
             >
               {t('home.hero.cta')}
             </button>
             <button
               onClick={() => onPageChange('contact')}
-              className="px-6 py-3 rounded-xl bg-gradient-to-r from-[#0EA5FF] to-[#6A7DFF] text-white font-semibold text-base"
+              className="px-5 py-3 rounded-xl bg-gradient-to-r from-[#0EA5FF] to-[#6A7DFF] text-white font-semibold text-sm"
             >
               {t('home.hero.contact')}
             </button>
@@ -174,7 +174,7 @@ export const Home = ({ onPageChange }: HomeProps) => {
       </section>
 
       {/* Why Choose Us Section */}
-      <section className="py-20 bg-transparent">
+      <section className="py-16 md:py-20 bg-transparent">
         <div className="max-w-[1536px] mx-auto px-4 sm:px-6 lg:px-8">
           <motion.div
             initial={{ opacity: 0, y: 30 }}
@@ -183,7 +183,7 @@ export const Home = ({ onPageChange }: HomeProps) => {
             viewport={{ once: true }}
             className="text-center mb-16"
           >
-            <h2 className="text-4xl md:text-5xl font-bold mb-4 text-[#0EA5FF]">
+            <h2 className="text-3xl md:text-4xl font-bold mb-4 text-[#0EA5FF]">
               {t('home.whyChooseUs.title')}
             </h2>
             <p className="text-xl font-medium text-[#0EA5FF] mb-8">{t('home.whyChooseUs.subtitle')}</p>
@@ -228,7 +228,7 @@ export const Home = ({ onPageChange }: HomeProps) => {
                   whileInView={{ opacity: 1, y: 0 }}
                   transition={{ duration: 0.8, delay: index * 0.1 }}
                   viewport={{ once: true }}
-                  className={`max-w-4xl mx-auto px-4 ${
+                  className={`max-w-4xl mx-auto px-3 ${
                     index === 0 ? 'text-right pr-8 lg:pr-20' :
                     index === 1 ? 'text-left pl-8 lg:pl-20' :
                     index === 2 ? 'text-right pr-8 lg:pr-20' :
@@ -238,8 +238,8 @@ export const Home = ({ onPageChange }: HomeProps) => {
                 >
                   <div className={`inline-block ${
                     index % 2 === 0 ? 'bg-white' : 'bg-blue-50'
-                  } rounded-2xl px-4 py-3 md:px-8 md:py-6 shadow-md border border-blue-100`}>
-                    <p className="text-base md:text-xl text-gray-800 font-medium leading-relaxed whitespace-normal md:whitespace-nowrap break-words">
+                  } rounded-2xl px-3 py-2 md:px-8 md:py-6 shadow-md border border-blue-100`}>
+                    <p className="text-sm md:text-xl text-gray-800 font-medium leading-relaxed whitespace-normal md:whitespace-nowrap break-words">
                       {item}
                     </p>
                   </div>
@@ -251,8 +251,8 @@ export const Home = ({ onPageChange }: HomeProps) => {
       </section>
 
       {/* Features Section */}
-      <section className="py-20 bg-transparent">
-        <div className="max-w-[2000px] mx-auto px-4 sm:px-6 lg:px-12 xl:px-16">
+      <section className="py-12 md:py-20 bg-transparent">
+        <div className="w-full md:w-[70%] max-w-[2000px] mx-auto px-4 sm:px-6 lg:px-12 xl:px-16">
           <motion.div
             initial={{ opacity: 0, y: 30 }}
             whileInView={{ opacity: 1, y: 0 }}
@@ -260,14 +260,14 @@ export const Home = ({ onPageChange }: HomeProps) => {
             viewport={{ once: true }}
             className="text-center mb-16"
           >
-            <h2 className="text-4xl md:text-5xl font-bold mb-6 text-[#2F4766]">
+            <h2 className="text-2xl md:text-4xl font-bold mb-5 text-[#2F4766]">
               <span className="text-[#0EA5FF]">
                 {t('home.features.sectionTitle')}
               </span>
             </h2>
           </motion.div>
 
-          <div className="grid grid-cols-1 lg:grid-cols-3 gap-12">
+          <div className="grid grid-cols-1 lg:grid-cols-3 gap-6 md:gap-10">
             {[
               {
                 title: t('home.features.costEffective.title'),
@@ -297,19 +297,19 @@ export const Home = ({ onPageChange }: HomeProps) => {
                 whileInView={{ opacity: 1, y: 0 }}
                 transition={{ duration: 0.8, delay: index * 0.1 }}
                 viewport={{ once: true }}
-                className={`rounded-xl p-10 transition-all duration-300 min-w-0`}
+                className={`rounded-xl p-6 md:p-10 transition-all duration-300 min-w-0`}
               >
-                <h3 className="text-xl md:text-xl lg:text-2xl font-bold text-[#2F4766] mb-4 text-center leading-tight">
+                <h3 className="text-lg md:text-xl lg:text-2xl font-bold text-[#2F4766] mb-4 text-center leading-tight">
                   {feature.title}
                 </h3>
-                <div className="mb-6 w-full h-48 sm:h-56 lg:h-64 flex items-center justify-center">
+                <div className="mb-6 w-full h-40 sm:h-48 lg:h-64 flex items-center justify-center">
                   <img
                     src={feature.image}
                     alt={feature.title}
                     className="max-h-full max-w-full object-contain"
                   />
                 </div>
-                <p className="text-gray-700 text-lg leading-relaxed text-left">
+                <p className="text-gray-700 text-sm md:text-base leading-relaxed text-left">
                   {feature.description}
                 </p>
               </motion.div>
@@ -329,8 +329,8 @@ export const Home = ({ onPageChange }: HomeProps) => {
       </section>
 
       {/* MiniMaxCode Strengths Section */}
-      <section className="py-20 bg-transparent">
-        <div className="w-[90%] max-w-[2000px] mx-auto px-4 sm:px-6 lg:px-12 xl:px-16">
+      <section className="py-12 md:py-20 bg-transparent">
+        <div className="w-full md:w-[70%] max-w-[2000px] mx-auto px-3 sm:px-4 lg:px-12 xl:px-16">
           <motion.div
             initial={{ opacity: 0, y: 30 }}
             whileInView={{ opacity: 1, y: 0 }}
@@ -338,14 +338,14 @@ export const Home = ({ onPageChange }: HomeProps) => {
             viewport={{ once: true }}
             className="text-center mb-16"
           >
-            <h2 className="text-4xl md:text-5xl font-bold mb-6 text-[#2F4766]">
+            <h2 className="text-2xl md:text-4xl font-bold mb-5 text-[#2F4766]">
               <span className="text-[#0EA5FF]">
                 {t('home.strengths.title')}
               </span>
             </h2>
           </motion.div>
 
-          <div className="space-y-16">
+          <div className="space-y-10 md:space-y-16">
             {[
               { title: t('home.strengths.item1.title'), description: t('home.strengths.item1.description') },
               { title: t('home.strengths.item2.title'), description: t('home.strengths.item2.description') },
@@ -364,15 +364,15 @@ export const Home = ({ onPageChange }: HomeProps) => {
               >
                 {/* 文本区 */}
                 <div className="lg:w-1/2">
-                  <h3 className="text-xl md:text-2xl font-bold text-[#2F4766] mb-4">
+                  <h3 className="text-lg md:text-2xl font-bold text-[#2F4766] mb-3">
                     {item.title}
                   </h3>
-                  <p className="text-gray-700 text-lg leading-relaxed mb-4">
+                  <p className="text-gray-700 text-sm md:text-base leading-relaxed mb-4">
                     {item.description}
                   </p>
                   <button
                     onClick={() => onPageChange('quote')}
-                    className="inline-flex items-center text-[#0EA5FF] font-semibold hover:underline text-xl"
+                    className="inline-flex items-center text-[#0EA5FF] font-semibold hover:underline text-lg"
                   >
                     {t('home.features.getStarted')}
                     <ArrowRight className="w-4 h-4 ml-1" />
@@ -380,7 +380,7 @@ export const Home = ({ onPageChange }: HomeProps) => {
                 </div>
                 {/* 预留图片位置 */}
                 <div className="lg:w-1/2">
-                  <div className="w-full aspect-[4/3] rounded-2xl overflow-hidden bg-white p-6 lg:p-8">
+                  <div className="w-full aspect-[4/3] rounded-2xl overflow-hidden bg-white p-4 md:p-6 lg:p-8">
                     <img src={`/images/strength-${index + 1}.png`} alt={`Strength ${index + 1}`} className="w-full h-full object-contain" />
                   </div>
                 </div>
@@ -396,8 +396,8 @@ export const Home = ({ onPageChange }: HomeProps) => {
       <WorksSummary onPageChange={onPageChange} />
 
       {/* Flow Section */}
-      <section id="flow" className="py-20 bg-transparent">
-        <div className="w-[92%] max-w-[96rem] mx-auto px-4 sm:px-6 lg:px-8">
+      <section id="flow" className="py-12 md:py-20 bg-transparent">
+        <div className="w-[97%] max-w-[96rem] mx-auto px-4 sm:px-6 lg:px-8">
           <motion.div
             initial={{ opacity: 0, y: 30 }}
             whileInView={{ opacity: 1, y: 0 }}
@@ -405,7 +405,7 @@ export const Home = ({ onPageChange }: HomeProps) => {
             viewport={{ once: true }}
             className="text-center mb-16"
           >
-            <h2 className="text-4xl md:text-5xl font-bold mb-6 text-[#2F4766]">
+            <h2 className="text-2xl md:text-4xl font-bold mb-5 text-[#2F4766]">
               <span className="text-[#0EA5FF]">
                 {t('flow.hero.title')}
               </span>
@@ -413,7 +413,7 @@ export const Home = ({ onPageChange }: HomeProps) => {
             {/* 删除副标题 */}
           </motion.div>
 
-          <div className="max-w-[61.6rem] mx-auto">
+          <div className="max-w-[65rem] mx-auto">
             <div className="space-y-14">
               {[
                 { title: t('flow.steps.step1.title'), description: t('flow.steps.step1.description'), image: '/images/flow-1.png' },
@@ -443,8 +443,8 @@ export const Home = ({ onPageChange }: HomeProps) => {
 
                   {/* 右侧：文案 */}
                   <div className="flex-1">
-                    <h3 className="text-xl md:text-xl font-bold text-[#2F4766] mb-2">{step.title}</h3>
-                    <p className="text-gray-700 text-base md:text-lg leading-relaxed whitespace-pre-wrap">{step.description}</p>
+                    <h3 className="text-lg md:text-lg font-bold text-[#2F4766] mb-2">{step.title}</h3>
+                    <p className="text-gray-700 text-sm md:text-base leading-relaxed whitespace-pre-wrap">{step.description}</p>
                   </div>
                 </motion.div>
               ))}

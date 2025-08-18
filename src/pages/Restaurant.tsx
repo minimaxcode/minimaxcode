@@ -140,20 +140,20 @@ export const Restaurant = ({ onPageChange }: RestaurantProps) => {
     <div className="min-h-screen text-gray-900 pt-24" style={{ background: 'linear-gradient(180deg, #F6FAFF 0%, #FFFFFF 100%)' }}>
       {/* Hero Section */}
       <section className="relative bg-transparent pt-[var(--header-h)] md:pt-0 md:-mt-[var(--header-h)]">
-        <div className="relative w-full aspect-[16/9] md:aspect-[5/2] lg:aspect-[21/9]">
+        <div className="relative w-full h-auto aspect-[16/9] md:aspect-[5/2] lg:aspect-[21/9]">
           <motion.div
             initial={{ opacity: 0, y: 30 }}
             animate={{ opacity: 1, y: 0 }}
             transition={{ duration: 0.8 }}
             className="absolute inset-0"
           >
-            <img src="/images/restaurant-hero.jpg" alt="Restaurant Hero" className="w-full h-full object-cover object-center" />
+            <img src="/images/restaurant-hero.jpg" alt="Restaurant Hero" className="w-full h-full object-contain md:object-cover object-center" />
           </motion.div>
         </div>
       </section>
 
       {/* Customer Needs Section */}
-      <section className="py-20 bg-transparent">
+      <section className="py-12 md:py-20 bg-transparent">
         <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
           <motion.div
             initial={{ opacity: 0, y: 30 }}
@@ -162,7 +162,7 @@ export const Restaurant = ({ onPageChange }: RestaurantProps) => {
             viewport={{ once: true }}
             className="text-center mb-16"
           >
-            <h2 className="text-4xl md:text-5xl font-bold mb-6 text-[#2F4766]">{t('restaurant.needs.title')}</h2>
+            <h2 className="text-3xl md:text-4xl font-bold mb-6 text-[#2F4766]">{t('restaurant.needs.title')}</h2>
             <p className="text-xl text-gray-600 max-w-3xl mx-auto">
               {t('restaurant.needs.subtitle')}
             </p>
@@ -181,10 +181,10 @@ export const Restaurant = ({ onPageChange }: RestaurantProps) => {
                 <div className={`w-14 h-14 rounded-xl flex items-center justify-center mb-4 ${getColorClasses(need.color)}`}>
                   <need.icon className="w-7 h-7" />
                 </div>
-                <h3 className="text-2xl font-extrabold text-[#2F4766] leading-snug mb-3 tracking-wide">
+                <h3 className="text-xl font-extrabold text-[#2F4766] leading-snug mb-3 tracking-wide">
                   {need.title}
                 </h3>
-                <p className="text-base text-gray-600 leading-relaxed">
+                <p className="text-sm md:text-base text-gray-600 leading-relaxed">
                   {need.description}
                 </p>
               </motion.div>
@@ -194,7 +194,7 @@ export const Restaurant = ({ onPageChange }: RestaurantProps) => {
       </section>
 
       {/* Solutions Section */}
-      <section className="py-20 bg-transparent">
+      <section className="py-12 md:py-20 bg-transparent">
         <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
           <motion.div
             initial={{ opacity: 0, y: 30 }}
@@ -203,7 +203,7 @@ export const Restaurant = ({ onPageChange }: RestaurantProps) => {
             viewport={{ once: true }}
             className="text-center mb-16"
           >
-            <h2 className="text-4xl md:text-5xl font-bold mb-6 text-[#2F4766]">{t('restaurant.solutions.title')}</h2>
+            <h2 className="text-3xl md:text-4xl font-bold mb-6 text-[#2F4766]">{t('restaurant.solutions.title')}</h2>
             <p className="text-xl text-gray-600 max-w-3xl mx-auto">
               {t('restaurant.solutions.subtitle')}
             </p>
@@ -222,10 +222,10 @@ export const Restaurant = ({ onPageChange }: RestaurantProps) => {
                 <div className={`w-14 h-14 rounded-xl flex items-center justify-center mb-4 ${getColorClasses(solution.color)}`}>
                   <solution.icon className="w-7 h-7" />
                 </div>
-                <h3 className="text-2xl font-extrabold text-[#2F4766] leading-snug mb-3 tracking-wide">
+                <h3 className="text-xl font-extrabold text-[#2F4766] leading-snug mb-3 tracking-wide">
                   {solution.title}
                 </h3>
-                <p className="text-base text-gray-600 leading-relaxed">
+                <p className="text-sm md:text-base text-gray-600 leading-relaxed">
                   {solution.description}
                 </p>
               </motion.div>

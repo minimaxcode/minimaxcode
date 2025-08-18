@@ -341,20 +341,20 @@ export const Quote = ({ onPageChange }: QuoteProps) => {
       </div>
 
       {/* Hero Section */}
-      <section className="relative py-20">
+      <section className="relative py-12 md:py-20">
         <div className="max-w-4xl mx-auto px-4 sm:px-6 lg:px-8">
           <motion.div
             initial={{ opacity: 0, y: 30 }}
             animate={{ opacity: 1, y: 0 }}
             transition={{ duration: 0.8 }}
-            className="text-center mb-16"
+            className="text-center mb-12 md:mb-16"
           >
-            <h1 className="text-5xl md:text-6xl font-bold mb-6">
+            <h1 className="text-3xl md:text-5xl font-bold mb-5">
               <span className="bg-gradient-to-r from-blue-500 to-emerald-500 bg-clip-text text-transparent">
                 {t('quote.hero.title')}
               </span>
             </h1>
-            <p className="text-xl text-gray-600 max-w-3xl mx-auto">
+            <p className="text-base md:text-xl text-gray-600 max-w-3xl mx-auto">
               {t('quote.hero.subtitle')}
             </p>
           </motion.div>
@@ -362,7 +362,7 @@ export const Quote = ({ onPageChange }: QuoteProps) => {
       </section>
 
       {/* Quote Form */}
-      <section className="py-20">
+      <section className="py-12 md:py-20">
         <div className="max-w-[1800px] mx-auto px-4 sm:px-6 lg:px-8">
           <div className="space-y-8">
             {/* Form Section */}
@@ -371,11 +371,11 @@ export const Quote = ({ onPageChange }: QuoteProps) => {
                 initial={{ opacity: 0, x: -30 }}
                 animate={{ opacity: 1, x: 0 }}
             transition={{ duration: 0.8 }}
-                className="bg-white/80 backdrop-blur-sm rounded-2xl p-6 shadow-xl border border-gray-200"
+                className="bg-white/80 backdrop-blur-sm rounded-2xl p-4 md:p-6 shadow-xl border border-gray-200"
               >
                                  {/* WEB制作プラン選択 */}
-                 <div className="mb-6">
-                   <h3 className="text-2xl font-bold text-gray-900 mb-6">{t('quote.form.webPlan.title')}</h3>
+                 <div className="mb-5 md:mb-6">
+                   <h3 className="text-xl md:text-2xl font-bold text-gray-900 mb-5">{t('quote.form.webPlan.title')}</h3>
                    <div className="grid grid-cols-2 sm:grid-cols-3 lg:grid-cols-4 xl:grid-cols-4 gap-3">
                     {webPlans.map((plan, idx) => (
                       <>
@@ -535,8 +535,8 @@ export const Quote = ({ onPageChange }: QuoteProps) => {
                 </div>
 
                                  {/* ページ数選択 */}
-                 <div className="mb-6">
-                  <h3 className="text-2xl font-bold text-gray-900 mb-6">
+                 <div className="mb-5 md:mb-6">
+                  <h3 className="text-xl md:text-2xl font-bold text-gray-900 mb-5">
                     {t('quote.form.pageCount.title')}
                   </h3>
                   <div className="space-y-4">
@@ -605,8 +605,8 @@ export const Quote = ({ onPageChange }: QuoteProps) => {
                 </div>
 
                                  {/* オプション選択 */}
-                 <div className="mb-6">
-                   <h3 className="text-2xl font-bold text-gray-900 mb-6">{t('quote.form.options.title')}</h3>
+                 <div className="mb-5 md:mb-6">
+                   <h3 className="text-xl md:text-2xl font-bold text-gray-900 mb-5">{t('quote.form.options.title')}</h3>
                    <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 xl:grid-cols-4 gap-3">
                     {optionItems.map((option) => {
                                              // 使用与价格计算相同的逻辑判断是否为计划包含的选项
@@ -714,8 +714,8 @@ export const Quote = ({ onPageChange }: QuoteProps) => {
                 </div>
 
                                  {/* 保守 */}
-                 <div className="mb-6">
-                   <h3 className="text-2xl font-bold text-gray-900 mb-6">{t('quote.form.maintenance.title')}</h3>
+                 <div className="mb-5 md:mb-6">
+                   <h3 className="text-xl md:text-2xl font-bold text-gray-900 mb-5">{t('quote.form.maintenance.title')}</h3>
                    <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 xl:grid-cols-4 gap-3">
                     {maintenanceItems.map((maintenance) => (
                       <label
@@ -759,8 +759,8 @@ export const Quote = ({ onPageChange }: QuoteProps) => {
                 </div>
 
                  {/* 希望納期 */}
-                 <div className="mb-6">
-                  <h3 className="text-2xl font-bold text-gray-900 mb-6">{t('quote.form.timeline.title')}</h3>
+                 <div className="mb-5 md:mb-6">
+                  <h3 className="text-xl md:text-2xl font-bold text-gray-900 mb-5">{t('quote.form.timeline.title')}</h3>
                   <div className="grid grid-cols-2 sm:grid-cols-3 lg:grid-cols-4 xl:grid-cols-4 gap-3">
                     <label
                       className={`relative flex items-center p-4 border-2 rounded-lg transition-all ${
@@ -910,8 +910,8 @@ export const Quote = ({ onPageChange }: QuoteProps) => {
                 </div>
 
                  {/* 网站语言选择 */}
-                 <div className="mb-6">
-                   <h3 className="text-2xl font-bold text-gray-900 mb-6">{t('quote.form.languages.title')}</h3>
+                 <div className="mb-5 md:mb-6">
+                   <h3 className="text-xl md:text-2xl font-bold text-gray-900 mb-5">{t('quote.form.languages.title')}</h3>
                                        <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-4 gap-3">
                      {languageOptions.map((language) => (
                                                <label
@@ -958,8 +958,8 @@ export const Quote = ({ onPageChange }: QuoteProps) => {
                  </div>
 
                  {/* ソースコード納品 */}
-                 <div className="mb-6">
-                   <h3 className="text-2xl font-bold text-gray-900 mb-6">{t('quote.form.sourceCode.title')}</h3>
+                 <div className="mb-5 md:mb-6">
+                   <h3 className="text-xl md:text-2xl font-bold text-gray-900 mb-5">{t('quote.form.sourceCode.title')}</h3>
                    <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-4 gap-3">
                      <label 
                        className={`relative group flex items-center p-4 border-2 rounded-lg cursor-pointer transition-all ${
