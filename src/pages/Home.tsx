@@ -92,15 +92,15 @@ export const Home = ({ onPageChange }: HomeProps) => {
   return (
     <div className="min-h-screen bg-white text-gray-900">
       {/* Hero Section */}
-      <section className="relative bg-transparent pt-[var(--header-h)] md:pt-0 md:-mt-[var(--header-h)]">
-        <div className="relative w-full h-[55vh] sm:h-[50vh] md:h-auto md:aspect-[5/2] lg:aspect-[21/9] overflow-hidden">
+      <section className="relative bg-transparent pt-[var(--header-h)] md:pt-0 md:-mt-[var(--header-h)] mb-6 md:mb-8">
+        <div className="relative w-full md:grid h-[55vh] sm:h-[50vh] md:h-auto md:aspect-[21/9] md:min-h-[500px] lg:min-h-[560px] max-w-[1536px] mx-auto">
           <motion.div
             initial={{ opacity: 0, y: 30 }}
             animate={{ opacity: 1, y: 0 }}
             transition={{ duration: 0.8 }}
-            className="absolute inset-0"
+            className="md:col-start-1 md:row-start-1"
           >
-            <img src="/images/home-hero.jpg" alt="Home Hero" className="w-full h-full object-contain md:object-cover object-center" />
+            <img src="/images/home-hero-1600.webp" alt="Home Hero" className="w-full h-full object-contain object-center" />
           </motion.div>
 
           {/* 文案与按钮覆盖层（左半部分） */}
@@ -108,27 +108,26 @@ export const Home = ({ onPageChange }: HomeProps) => {
             initial={{ opacity: 0, y: 20 }}
             animate={{ opacity: 1, y: 0 }}
             transition={{ duration: 0.8, delay: 0.1 }}
-            className="hidden md:flex md:absolute md:inset-0 items-start justify-start"
-            style={{ zIndex: 10 }}
+            className="hidden md:flex md:col-start-1 md:row-start-1 items-start justify-start z-10"
           >
             {/* 桌面端覆盖层 */}
             <div className="w-full md:pl-[6vw] md:pr-[4vw] pt-6 md:pt-10 lg:pt-16">
-              <div className="w-full md:w-1/2 lg:w-1/2 text-left md:pt-[calc(var(--header-h)+80px)] lg:pt-[calc(var(--header-h)+180px)] max-w-[80%] overflow-hidden">
-                <h1 className="text-5xl lg:text-7xl font-extrabold text-[#2F4766] mb-4">
+              <div className="w-full md:w-1/2 lg:w-1/2 text-left md:pt-[calc(var(--header-h)+8px)] lg:pt-[calc(var(--header-h)+28px)] xl:pt-[calc(var(--header-h)+48px)] pb-[clamp(16px,4vh,48px)] max-w-[72%]">
+                <h1 className="text-[clamp(26px,3.6vw,56px)] font-extrabold text-[#2F4766] mb-3">
                   {t('home.title')}
                 </h1>
-                <h2 className="text-3xl text-[#0EA5FF] mb-10">
+                <h2 className="text-[clamp(16px,2.2vw,28px)] text-[#0EA5FF] mb-5">
                   {t('home.hero.subtitle')}
                 </h2>
-                <p className="text-lg lg:text-xl text-[#2F4766]/95 leading-relaxed mb-16 max-w-[52rem] break-words">
+                <p className="text-[clamp(14px,1.2vw,18px)] text-[#2F4766]/95 leading-relaxed mb-10 max-w-[52rem] break-words">
                   {t('home.hero.description')}
                 </p>
-                <div className="flex flex-row gap-6 flex-wrap">
+                <div className="flex flex-row gap-5 flex-wrap">
                   <motion.button
                     whileHover={{ scale: 1.03 }}
                     whileTap={{ scale: 0.97 }}
                     onClick={() => onPageChange('quote')}
-                    className="px-12 py-6 rounded-xl bg-gradient-to-r from-[#33C6FF] to-[#0EA5FF] text-white font-semibold text-xl shadow-lg hover:opacity-90"
+                    className="px-6 py-3 rounded-xl bg-gradient-to-r from-[#33C6FF] to-[#0EA5FF] text-white font-semibold text-base shadow-lg hover:opacity-90"
                   >
                     {t('home.hero.cta')}
                   </motion.button>
@@ -136,7 +135,7 @@ export const Home = ({ onPageChange }: HomeProps) => {
                     whileHover={{ scale: 1.03 }}
                     whileTap={{ scale: 0.97 }}
                     onClick={() => onPageChange('contact')}
-                    className="px-12 py-6 rounded-xl bg-gradient-to-r from-[#0EA5FF] to-[#6A7DFF] text-white font-semibold text-xl shadow-lg hover:opacity-90"
+                    className="px-6 py-3 rounded-xl bg-gradient-to-r from-[#0EA5FF] to-[#6A7DFF] text-white font-semibold text-base shadow-lg hover:opacity-90"
                   >
                     {t('home.hero.contact')}
                   </motion.button>

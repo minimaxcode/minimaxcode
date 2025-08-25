@@ -1,7 +1,7 @@
 import { useTranslation } from 'react-i18next';
 import { motion } from 'framer-motion';
 import { worksData } from '../data/works';
-import { ArrowRight, FileText, CheckCircle, ExternalLink, ChevronUp, ChevronDown } from 'lucide-react';
+import { ArrowRight, FileText, CheckCircle, ExternalLink } from 'lucide-react';
 import { useRef, useEffect, useState } from 'react';
 
 interface WorksSummaryProps {
@@ -11,162 +11,124 @@ interface WorksSummaryProps {
 export const WorksSummary = ({ onPageChange }: WorksSummaryProps) => {
   const { t } = useTranslation('common');
   const displayedWorks = worksData.slice(0, 2);
-  
-  // 为每个项目创建ref和状态
-  const imageContainerRefs = useRef<(HTMLDivElement | null)[]>([]);
+
+  // 与 works 页面一致的滚动/拖拽实现
+  const containerRefs = useRef<(HTMLDivElement | null)[]>([]);
   const imageRefs = useRef<(HTMLImageElement | null)[]>([]);
-  const [isHovering, setIsHovering] = useState<boolean[]>([]);
-  const scrollDirectionRefs = useRef<('up' | 'down' | 'none')[]>([]);
-  const [scrollPositions, setScrollPositions] = useState<number[]>([]);
-  const [imageHeights, setImageHeights] = useState<number[]>([]);
+  const [translatePercents, setTranslatePercents] = useState<number[]>([]);
+  const translatePercentsRef = useRef<number[]>([]);
+  const [maxDownPercents, setMaxDownPercents] = useState<number[]>([]);
+  const isDraggingRef = useRef<boolean[]>([]);
+  const dragStartYRef = useRef<number[]>([]);
+  const animationIdsRef = useRef<number[]>([]);
 
-  // 初始化状态
   useEffect(() => {
-    setIsHovering(new Array(displayedWorks.length).fill(false));
-    scrollDirectionRefs.current = new Array(displayedWorks.length).fill('down');
-    setScrollPositions(new Array(displayedWorks.length).fill(0));
-    setImageHeights(new Array(displayedWorks.length).fill(0));
+    const len = displayedWorks.length;
+    setTranslatePercents(new Array(len).fill(0));
+    translatePercentsRef.current = new Array(len).fill(0);
+    setMaxDownPercents(new Array(len).fill(-70));
+    isDraggingRef.current = new Array(len).fill(false);
+    dragStartYRef.current = new Array(len).fill(0);
+    animationIdsRef.current = new Array(len).fill(0);
   }, []);
 
-  // 监听图片加载
-  useEffect(() => {
-    const handleImageLoad = (index: number) => {
-      const img = imageRefs.current[index];
-      if (img) {
-        const container = imageContainerRefs.current[index];
-        if (container) {
-          const containerHeight = container.clientHeight;
-          const imageHeight = img.naturalHeight;
-          const maxScroll = Math.max(0, (imageHeight / containerHeight * 100) - 100);
-          setImageHeights(prev => {
-            const newHeights = [...prev];
-            newHeights[index] = maxScroll;
-            return newHeights;
+  const onImageLoad = (index: number) => {
+    const img = imageRefs.current[index];
+    const container = containerRefs.current[index];
+    if (!img || !container) return;
+    const imageHeight = img.naturalHeight || img.clientHeight;
+    const containerHeight = container.clientHeight;
+    if (containerHeight <= 0) return;
+    const extra = Math.max(0, imageHeight - containerHeight);
+    const maxDown = -Math.min(70, Math.round((extra / containerHeight) * 100));
+    setMaxDownPercents(prev => {
+      const next = [...prev];
+      next[index] = -Math.abs(maxDown);
+      return next;
+    });
+  };
+
+  const AUTO_SPEED = 0.15;
+
+  const startAutoScroll = (index: number, direction: 'down' | 'up') => {
+    cancelAnimationFrame(animationIdsRef.current[index]);
+    const step = () => {
+      const maxDown = maxDownPercents[index] ?? -70;
+      const current = translatePercentsRef.current[index] ?? 0;
+      let nextVal = current;
+
+      if (direction === 'down') {
+        if (current > maxDown) {
+          nextVal = Math.max(maxDown, current - AUTO_SPEED);
+          translatePercentsRef.current[index] = nextVal;
+          setTranslatePercents(prev => {
+            const next = [...prev];
+            next[index] = nextVal;
+            return next;
           });
-        }
-      }
-    };
-
-    displayedWorks.forEach((_, index) => {
-      const img = imageRefs.current[index];
-      if (img) {
-        if (img.complete) {
-          handleImageLoad(index);
+          animationIdsRef.current[index] = requestAnimationFrame(step);
         } else {
-          img.addEventListener('load', () => handleImageLoad(index));
+          startAutoScroll(index, 'up');
+        }
+      } else {
+        if (current < 0) {
+          nextVal = Math.min(0, current + AUTO_SPEED);
+          translatePercentsRef.current[index] = nextVal;
+          setTranslatePercents(prev => {
+            const next = [...prev];
+            next[index] = nextVal;
+            return next;
+          });
+          animationIdsRef.current[index] = requestAnimationFrame(step);
+        } else {
+          cancelAnimationFrame(animationIdsRef.current[index]);
         }
       }
-    });
-  }, []);
-
-  // 处理自动滚动动画
-  useEffect(() => {
-    const animations = displayedWorks.map((_, index) => {
-      let animationFrameId: number;
-
-      const animate = () => {
-        if (isHovering[index]) {
-          const direction = scrollDirectionRefs.current[index];
-          const currentPosition = scrollPositions[index];
-          let scrollSpeed = 0;
-          let shouldContinue = true;
-
-          // 调整滚动范围，考虑图片下方有内容
-          // 为不同项目设置不同的滚动范围
-          let maxDownScroll = -70; // 默认滚动范围
-          
-          // 为大爽観光バス项目设置特定的滚动范围
-          const project = displayedWorks[index];
-          if (project.id === 'daisoubus') {
-            maxDownScroll = -65; // 大爽観光バス使用 -65%
-          }
-
-          // 简化的边界检查
-          if (direction === 'down') {
-            if (currentPosition > maxDownScroll) {
-              scrollSpeed = -0.5;
-            } else {
-              // 到达底部边界，停止动画循环
-              shouldContinue = false;
-            }
-          } else if (direction === 'up') {
-            if (currentPosition < 0) {
-              scrollSpeed = 0.5;
-            } else {
-              // 到达顶部边界，停止动画循环
-              shouldContinue = false;
-            }
-          }
-
-          if (scrollSpeed !== 0) {
-            setScrollPositions(prev => {
-              const newPositions = [...prev];
-              let newPosition = newPositions[index] + scrollSpeed;
-              
-              // 严格限制边界
-              if (newPosition < maxDownScroll) {
-                newPosition = maxDownScroll;
-              } else if (newPosition > 0) {
-                newPosition = 0;
-              }
-              
-              newPositions[index] = newPosition;
-              return newPositions;
-            });
-          }
-
-          // 只有在应该继续且悬停时才继续动画
-          if (shouldContinue && isHovering[index]) {
-            animationFrameId = requestAnimationFrame(animate);
-          }
-        }
-      };
-
-      if (isHovering[index]) {
-        animationFrameId = requestAnimationFrame(animate);
-      }
-
-      return () => {
-        if (animationFrameId) {
-          cancelAnimationFrame(animationFrameId);
-        }
-      };
-    });
-
-    return () => {
-      animations.forEach(cleanup => cleanup());
     };
-  }, [isHovering, scrollPositions]);
-
-  // 处理鼠标移动 - 用于控制滚动方向
-  const handleMouseMove = (event: React.MouseEvent<HTMLDivElement>, index: number) => {
-    const rect = event.currentTarget.getBoundingClientRect();
-    const y = event.clientY - rect.top;
-    const centerY = rect.height / 2;
-    
-    // 根据鼠标位置设置滚动方向（上半部分向上，下半部分向下）
-    scrollDirectionRefs.current[index] = y < centerY ? 'up' : 'down';
+    animationIdsRef.current[index] = requestAnimationFrame(step);
   };
 
-  // 处理鼠标进入
+  const stopAutoScroll = (index: number) => {
+    cancelAnimationFrame(animationIdsRef.current[index]);
+  };
+
   const handleMouseEnter = (index: number) => {
-    setIsHovering(prev => {
-      const newHovering = [...prev];
-      newHovering[index] = true;
-      return newHovering;
-    });
-    // 初始设置为向下滚动
-    scrollDirectionRefs.current[index] = 'down';
+    startAutoScroll(index, 'down');
   };
 
-  // 处理鼠标离开
   const handleMouseLeave = (index: number) => {
-    setIsHovering(prev => {
-      const newHovering = [...prev];
-      newHovering[index] = false;
-      return newHovering;
+    stopAutoScroll(index);
+    isDraggingRef.current[index] = false;
+  };
+
+  const handleMouseDown = (index: number, e: React.MouseEvent<HTMLDivElement>) => {
+    e.preventDefault();
+    stopAutoScroll(index);
+    isDraggingRef.current[index] = true;
+    dragStartYRef.current[index] = e.clientY;
+  };
+
+  const handleMouseUp = (index: number) => {
+    isDraggingRef.current[index] = false;
+  };
+
+  const handleMouseMove = (index: number, e: React.MouseEvent<HTMLDivElement>) => {
+    if (!isDraggingRef.current[index]) return;
+    const delta = e.clientY - dragStartYRef.current[index];
+    dragStartYRef.current[index] = e.clientY;
+    const container = containerRefs.current[index];
+    if (!container) return;
+    const deltaPercent = (delta / container.clientHeight) * 100;
+    setTranslatePercents(prev => {
+      const next = [...prev];
+      const maxDown = maxDownPercents[index] ?? -70;
+      let v = (next[index] ?? 0) + deltaPercent;
+      if (v < maxDown) v = maxDown;
+      if (v > 0) v = 0;
+      next[index] = v;
+      translatePercentsRef.current[index] = v;
+      return next;
     });
-    scrollDirectionRefs.current[index] = 'none';
   };
 
   return (
@@ -197,26 +159,27 @@ export const WorksSummary = ({ onPageChange }: WorksSummaryProps) => {
               viewport={{ once: true }}
               className="group flex flex-col bg-white border border-gray-200 rounded-2xl overflow-hidden hover:shadow-lg hover:border-gray-300 transition-all duration-300"
             >
-              <div 
-                ref={el => imageContainerRefs.current[index] = el}
+              <div
+                ref={el => (containerRefs.current[index] = el)}
                 className="aspect-[2/2] overflow-hidden relative"
-                onMouseMove={(e) => handleMouseMove(e, index)}
                 onMouseEnter={() => handleMouseEnter(index)}
                 onMouseLeave={() => handleMouseLeave(index)}
-                style={{
-                  cursor: 'ns-resize',
-                }}
+                onMouseDown={(e) => handleMouseDown(index, e)}
+                onMouseUp={() => handleMouseUp(index)}
+                onMouseMove={(e) => handleMouseMove(index, e)}
+                style={{ cursor: 'grab' }}
               >
                 <img
-                  ref={el => imageRefs.current[index] = el}
+                  ref={el => (imageRefs.current[index] = el)}
                   src={project.image}
                   alt={t(project.titleKey)}
+                  onLoad={() => onImageLoad(index)}
                   className="w-full"
                   style={{
                     display: 'block',
-                    minHeight: '200%',
-                    transform: `translateY(${scrollPositions[index]}%)`,
-                    transition: 'transform 100ms linear',
+                    minHeight: '180%',
+                    transform: `translateY(${translatePercents[index] ?? 0}%)`,
+                    transition: isDraggingRef.current[index] ? 'none' : 'transform 120ms linear',
                   }}
                 />
               </div>

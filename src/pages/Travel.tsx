@@ -140,14 +140,14 @@ export const Travel = ({ onPageChange }: TravelProps) => {
     <div className="min-h-screen text-gray-900 pt-24" style={{ background: 'linear-gradient(180deg, #F6FAFF 0%, #FFFFFF 100%)' }}>
       {/* Hero Section */}
       <section className="relative bg-transparent pt-[var(--header-h)] md:pt-0 md:-mt-[var(--header-h)]">
-        <div className="relative w-full h-auto aspect-[16/9] md:aspect-[5/2] lg:aspect-[21/9]">
+        <div className="relative w-full md:grid h-[55vh] sm:h-[50vh] md:h-auto md:aspect-[21/9] md:min-h-[500px] lg:min-h-[560px] max-w-[1536px] mx-auto">
           <motion.div
             initial={{ opacity: 0, y: 30 }}
             animate={{ opacity: 1, y: 0 }}
             transition={{ duration: 0.8 }}
-            className="absolute inset-0"
+            className="md:col-start-1 md:row-start-1"
           >
-            <img src="/images/travel-hero-1600.webp" alt="Travel Hero" className="w-full h-full object-contain md:object-cover object-center" />
+            <img src="/images/travel-hero-1600.webp" alt="Travel Hero" className="w-full h-full object-contain object-center" />
           </motion.div>
         </div>
       </section>

@@ -2,7 +2,7 @@ import { useTranslation } from 'react-i18next';
 import { motion } from 'framer-motion';
 import { ExternalLink, CheckCircle, FileText } from 'lucide-react';
 import { worksData } from '../data/works';
-import { useEffect } from 'react';
+import { useEffect, useRef, useState } from 'react';
 
 
 interface WorksProps {
@@ -15,6 +15,136 @@ export const Works = ({ onPageChange }: WorksProps) => {
   useEffect(() => {
     window.scrollTo(0, 0);
   }, []);
+
+  // Long image scroll/drag state (one set per project card)
+  const containerRefs = useRef<(HTMLDivElement | null)[]>([]);
+  const imageRefs = useRef<(HTMLImageElement | null)[]>([]);
+  const [translatePercents, setTranslatePercents] = useState<number[]>([]); // 0 to negative
+  const translatePercentsRef = useRef<number[]>([]);
+  const [maxDownPercents, setMaxDownPercents] = useState<number[]>([]); // negative values
+  const isDraggingRef = useRef<boolean[]>([]);
+  const dragStartYRef = useRef<number[]>([]);
+  const didDragRef = useRef<boolean[]>([]);
+  const animationIdsRef = useRef<number[]>([]);
+
+  // Initialize per-card arrays
+  useEffect(() => {
+    const len = worksData.length;
+    setTranslatePercents(new Array(len).fill(0));
+    translatePercentsRef.current = new Array(len).fill(0);
+    setMaxDownPercents(new Array(len).fill(-70)); // default fallback range
+    isDraggingRef.current = new Array(len).fill(false);
+    dragStartYRef.current = new Array(len).fill(0);
+    didDragRef.current = new Array(len).fill(false);
+    animationIdsRef.current = new Array(len).fill(0);
+  }, []);
+
+  // Compute max scroll when image loads
+  const onImageLoad = (index: number) => {
+    const img = imageRefs.current[index];
+    const container = containerRefs.current[index];
+    if (!img || !container) return;
+    const imageHeight = img.naturalHeight || img.clientHeight;
+    const containerHeight = container.clientHeight;
+    if (containerHeight <= 0) return;
+    // percentage the image can scroll within container
+    const extra = Math.max(0, imageHeight - containerHeight);
+    const maxDown = -Math.min(70, Math.round((extra / containerHeight) * 100));
+    setMaxDownPercents(prev => {
+      const next = [...prev];
+      next[index] = -Math.abs(maxDown);
+      return next;
+    });
+  };
+
+  const AUTO_SPEED = 0.15; // smaller value => slower movement per frame (~9%/s at 60fps)
+
+  const startAutoScroll = (index: number, direction: 'down' | 'up') => {
+    cancelAnimationFrame(animationIdsRef.current[index]);
+    const step = () => {
+      const maxDown = maxDownPercents[index] ?? -70;
+      const current = translatePercentsRef.current[index] ?? 0;
+      let nextVal = current;
+
+      if (direction === 'down') {
+        if (current > maxDown) {
+          nextVal = Math.max(maxDown, current - AUTO_SPEED);
+          translatePercentsRef.current[index] = nextVal;
+          setTranslatePercents(prev => {
+            const next = [...prev];
+            next[index] = nextVal;
+            return next;
+          });
+          animationIdsRef.current[index] = requestAnimationFrame(step);
+        } else {
+          // reached bottom, bounce to top
+          startAutoScroll(index, 'up');
+        }
+      } else {
+        if (current < 0) {
+          nextVal = Math.min(0, current + AUTO_SPEED);
+          translatePercentsRef.current[index] = nextVal;
+          setTranslatePercents(prev => {
+            const next = [...prev];
+            next[index] = nextVal;
+            return next;
+          });
+          animationIdsRef.current[index] = requestAnimationFrame(step);
+        } else {
+          // reached top, stop
+          cancelAnimationFrame(animationIdsRef.current[index]);
+        }
+      }
+    };
+    animationIdsRef.current[index] = requestAnimationFrame(step);
+  };
+
+  const stopAutoScroll = (index: number) => {
+    cancelAnimationFrame(animationIdsRef.current[index]);
+  };
+
+  const handleMouseEnter = (index: number) => {
+    // start auto scroll towards bottom
+    startAutoScroll(index, 'down');
+  };
+
+  const handleMouseLeave = (index: number) => {
+    stopAutoScroll(index);
+    isDraggingRef.current[index] = false;
+  };
+
+  const handleMouseDown = (index: number, e: React.MouseEvent<HTMLDivElement>) => {
+    e.preventDefault();
+    stopAutoScroll(index);
+    isDraggingRef.current[index] = true;
+    dragStartYRef.current[index] = e.clientY;
+    didDragRef.current[index] = false;
+  };
+
+  const handleMouseUp = (index: number) => {
+    isDraggingRef.current[index] = false;
+  };
+
+  const handleMouseMove = (index: number, e: React.MouseEvent<HTMLDivElement>) => {
+    if (!isDraggingRef.current[index]) return;
+    const delta = e.clientY - dragStartYRef.current[index];
+    dragStartYRef.current[index] = e.clientY;
+    if (Math.abs(delta) > 1) didDragRef.current[index] = true;
+    const container = containerRefs.current[index];
+    if (!container) return;
+    const deltaPercent = (delta / container.clientHeight) * 100;
+    setTranslatePercents(prev => {
+      const next = [...prev];
+      const maxDown = maxDownPercents[index] ?? -70;
+      let v = (next[index] ?? 0) + deltaPercent; // dragging down increases percent (upwards)
+      // clamp between maxDown and 0
+      if (v < maxDown) v = maxDown;
+      if (v > 0) v = 0;
+      next[index] = v;
+      translatePercentsRef.current[index] = v;
+      return next;
+    });
+  };
 
   return (
     <div className="min-h-screen text-gray-900 pt-24" style={{ background: 'linear-gradient(180deg, #F6FAFF 0%, #FFFFFF 100%)' }}>
@@ -54,15 +184,30 @@ export const Works = ({ onPageChange }: WorksProps) => {
                   className={`flex flex-col lg:flex-row items-center gap-6 lg:gap-12 ${index % 2 !== 0 ? 'lg:flex-row-reverse' : ''}`}
                 >
                   <div className="lg:w-1/2 w-full flex-shrink-0">
-                    <a href={project.url} target="_blank" rel="noopener noreferrer" className="block group">
-                      <div className="aspect-[4/3] bg-gray-100 overflow-hidden rounded-xl shadow-lg">
-                        <img
-                          src={project.image}
-                          alt={t(project.titleKey)}
-                          className="w-full h-full object-cover transition-transform duration-300 group-hover:scale-105"
-                        />
-                      </div>
-                    </a>
+                    <div
+                      ref={el => (containerRefs.current[index] = el)}
+                      className="aspect-[4/3] bg-gray-100 overflow-hidden rounded-xl shadow-lg relative select-none"
+                      onMouseEnter={() => handleMouseEnter(index)}
+                      onMouseLeave={() => handleMouseLeave(index)}
+                      onMouseDown={(e) => handleMouseDown(index, e)}
+                      onMouseUp={() => handleMouseUp(index)}
+                      onMouseMove={(e) => handleMouseMove(index, e)}
+                      style={{ cursor: 'grab' }}
+                    >
+                      <img
+                        ref={el => (imageRefs.current[index] = el)}
+                        src={project.image}
+                        alt={t(project.titleKey)}
+                        onLoad={() => onImageLoad(index)}
+                        className="w-full"
+                        style={{
+                          display: 'block',
+                          minHeight: '180%',
+                          transform: `translateY(${translatePercents[index] ?? 0}%)`,
+                          transition: isDraggingRef.current[index] ? 'none' : 'transform 120ms linear',
+                        }}
+                      />
+                    </div>
                   </div>
 
                   <div className="lg:w-1/2 w-full min-w-0">

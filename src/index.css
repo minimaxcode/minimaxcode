@@ -22,6 +22,7 @@
   html {
     font-size: 18px; /* 将根字体大小从16px增加到18px (增加12.5%) */
     scroll-behavior: smooth;
+    overflow-x: hidden;
   }
 
   body {
@@ -29,6 +30,7 @@
     color: var(--text-dark);
     font-family: 'Inter', system-ui, -apple-system, sans-serif;
     line-height: 1.6;
+    overflow-x: hidden;
   }
 
   /* Custom scrollbar for webkit browsers */

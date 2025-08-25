@@ -14,7 +14,7 @@ export interface Project {
 export const worksData: Project[] = [
   {
     id: 'daisoubus',
-    image: '/images/works/daisoubus.jp_.png',
+    image: '/images/works/daisoubus.jp_1280.webp',
     url: 'https://daisoubus.jp/',
     titleKey: 'works.daisoubus.title',
     descriptionKey: 'works.daisoubus.description',
@@ -29,7 +29,7 @@ export const worksData: Project[] = [
   },
   {
     id: 'mononest',
-    image: '/images/works/mononest.jp_.png',
+    image: '/images/works/mononest.jp_1280.webp',
     url: 'https://mononest.jp/',
     titleKey: 'works.mononest.title',
     descriptionKey: 'works.mononest.description',
