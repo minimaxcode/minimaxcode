@@ -491,26 +491,6 @@
     "pagesLabel": "ページ",
     "priceLabel": "価格"
   },
-  "nav": {
-    "home": "ホーム",
-    "service": "制作実績",
-    "pricing": "料金",
-    "about": "会社概要",
-    "quote": "見積もり",
-    "contact": "お問い合わせ",
-    "privacy": "プライバシーポリシー",
-    "terms": "利用規約",
-    "solutions": {
-      "title": "ソリューション",
-      "restaurant": "飲食店",
-      "education": "教育・研修",
-      "beauty": "美容・エステ",
-      "travel": "旅行・ホテル",
-      "ecommerce": "ECサイト",
-      "freelance": "フリーランス",
-      "common": "機能"
-    }
-  },
   "restaurant": {
     "hero": {
       "title": "飲食店向けウェブサイト制作",

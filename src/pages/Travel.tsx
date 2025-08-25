@@ -147,7 +147,7 @@ export const Travel = ({ onPageChange }: TravelProps) => {
             transition={{ duration: 0.8 }}
             className="absolute inset-0"
           >
-            <img src="/images/travel-hero.jpg" alt="Travel Hero" className="w-full h-full object-contain md:object-cover object-center" />
+            <img src="/images/travel-hero-1600.webp" alt="Travel Hero" className="w-full h-full object-contain md:object-cover object-center" />
           </motion.div>
         </div>
       </section>

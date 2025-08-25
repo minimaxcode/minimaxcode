@@ -30,9 +30,11 @@ build/
 
 # pnpm 的缓存/元数据（可选）
 .pnpm-debug.log
+pnpm-lock.yaml
 
 # 其他可选
 *.local
+.qoder/
 
 # 忽略环境变量文件
 .env*

@@ -532,27 +532,6 @@
     "pagesLabel": "Pages",
     "priceLabel": "Price"
   },
-  "nav": {
-    "home": "Home",
-    "service": "Works",
-    "pricing": "Pricing",
-    "about": "About",
-    "quote": "Quote",
-    "contact": "Contact",
-    "privacy": "Privacy Policy",
-    "terms": "Terms of Service",
-    "works": "Our Works",
-    "solutions": {
-      "title": "Solutions",
-      "restaurant": "Restaurant",
-      "education": "Education",
-      "beauty": "Beauty",
-      "travel": "Travel & Hotel",
-      "ecommerce": "E-commerce",
-      "freelance": "Freelance",
-      "common": "Features"
-    }
-  },
   "restaurant": {
     "hero": {
       "title": "Restaurant Website Solutions",
