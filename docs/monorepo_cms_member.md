@@ -1,6 +1,6 @@
 # Monorepo + 同机部署指南（Web + Strapi CMS + 会员系统）
 
-适用场景：在同一台服务器部署 Strapi v4（CMS）与后续的“会员信息系统”，前端（Vite）保持静态托管/独立部署；仓库采用 monorepo 统一管理，服务进程独立发布。
+适用场景：在同一台服务器部署 Strapi v5（CMS）与后续的“会员信息系统”，前端（Vite）保持静态托管/独立部署；仓库采用 monorepo 统一管理，服务进程独立发布。
 
 ---
 
@@ -13,7 +13,7 @@
 ```
 apps/
   web/            # 现有 Vite 前端（Vercel 或任意静态托管）
-  cms/            # Strapi v4（独立进程/容器）
+  cms/            # Strapi v5（独立进程/容器）
   member/         # 会员信息系统（NestJS/Express/FastAPI 等）
 packages/
   shared/         # 可选：共享类型/SDK/常量

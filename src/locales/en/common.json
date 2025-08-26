@@ -509,21 +509,20 @@
     "description": "We create websites that accelerate our clients' business with the latest technology and sophisticated design.",
     "daisoubus": {
       "title": "Daisoubus",
-      "description": "A corporate website with Japanese/English bilingual support, designed for corporate branding and credibility enhancement.",
+      "description": "Daisoubus provides charter transfers from Narita Airport to the Kanto area and sightseeing services, aiming to capture more bookings from overseas travelers.",
       "features": [
-        "Online automatic quote calculation function",
-        "Contact form automatic email delivery function",
-        "Japanese/English bilingual support",
-        "Travel guide and other latest information can be edited and displayed"
+        "Online auto-quote reduces phone inquiry workload significantly",
+        "Publishing travel guides and updates grows online subscribers",
+        "Form + LINE integration enables instant responses, improving deal conversion"
       ]
     },
     "mononest": {
       "title": "MONONEST E-commerce Brand Site",
-      "description": "The official E-commerce brand website that expresses the brand's worldview and maximizes the appeal of products.",
+      "description": "MONONEST is a startup offering cost-effective household goods, aiming to expand sales channels and strengthen customer touchpoints through a feature-rich e‑commerce site.",
       "features": [
-        "Product listing and product detail pages",
-        "Product inquiry contact form function",
-        "Simple design with brand appeal"
+        "Bulk product upload implemented, greatly improving operational efficiency",
+        "Automated shipment order management significantly reduces human error",
+        "Site analytics and email marketing introduced to drive new and repeat purchases"
       ]
     },
     "visitSite": "Visit Site",

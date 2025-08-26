@@ -1,6 +1,6 @@
-# Strapi v4 集成手册（MiniMaxCode Website）
+# Strapi v5 集成手册（MiniMaxCode Website）
 
-面向：将 Strapi v4 作为当前 React + Vite 项目的 Headless CMS，管理博客/新闻等内容。
+面向：将 Strapi v5 作为当前 React + Vite 项目的 Headless CMS，管理博客/新闻等内容。
 目标：本周准备、下周按清单实施；小流量、先用本地磁盘，后续可平滑切到对象存储。
 
 ---
@@ -16,7 +16,7 @@
 minimaxcode-website/
 ├─ apps/
 │  ├─ web/            # 现有前端（Vite + React）
-│  └─ cms/            # Strapi v4（独立部署）
+│  └─ cms/            # Strapi v5（独立部署）
 └─ docs/              # 文档
 ```
 
