@@ -18,6 +18,8 @@ import { Travel } from './pages/Travel';
 import { Ecommerce } from './pages/Ecommerce';
 import { Freelance } from './pages/Freelance';
 import { Common } from './pages/Common';
+import { News } from './pages/News';
+import { NewsDetail } from './pages/NewsDetail';
 
 // TypeScript a window objectにgtagが存在することを知らせる
 declare global {
@@ -59,6 +61,8 @@ function App() {
       <main>
         <Routes>
           <Route path="/" element={<Home {...pageProps} />} />
+          <Route path="/news" element={<News />} />
+          <Route path="/news/:slug" element={<NewsDetail />} />
           <Route path="/works" element={<Works {...pageProps} />} />
           <Route path="/pricing" element={<Pricing {...pageProps} />} />
           <Route path="/about" element={<About {...pageProps} />} />

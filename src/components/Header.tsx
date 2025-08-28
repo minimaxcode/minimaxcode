@@ -17,6 +17,7 @@ export const Header = ({ currentPage, onPageChange }: HeaderProps) => {
 
   const navigationItems = [
     { key: 'home', label: t('nav.home') },
+    { key: 'news', label: t('nav.news') },
     { key: 'works', label: t('nav.service') },
     { key: 'pricing', label: t('nav.pricing') },
   ];
@@ -60,17 +61,17 @@ export const Header = ({ currentPage, onPageChange }: HeaderProps) => {
             onClick={() => handleNavClick('home')}
           >
             <img src="/images/logo_nomoji.svg" alt="MiniMaxCode Logo" className="w-8 h-8" />
-            <span className="text-lg md:text-xl xl:text-2xl font-bold text-gray-900">MiniMaxCode</span>
+            <span className="text-lg md:text-lg xl:text-xl font-bold text-gray-900">MiniMaxCode</span>
           </div>
 
           {/* Desktop Navigation */}
           {/* 将导航提升到 lg 断点显示，避免 768/820 宽度拥挤 */}
-          <nav className="hidden lg:flex items-center lg:space-x-6 xl:space-x-8">
+          <nav className="hidden lg:flex items-center lg:space-x-4 xl:space-x-6">
             {navigationItems.map((item, index) => (
               <div key={item.key}>
                 <button
                   onClick={() => handleNavClick(item.key)}
-                  className={`text-sm xl:text-base font-medium transition-colors duration-200 px-2 xl:px-3 py-2 rounded-md ${
+                  className={`text-sm xl:text-sm font-medium transition-colors duration-200 px-2 xl:px-2 py-1.5 rounded-md ${
                     currentPage === item.key
                       ? 'text-[#0EA5FF] bg-white'
                       : 'text-gray-700 hover:text-[#0EA5FF]'
@@ -85,7 +86,7 @@ export const Header = ({ currentPage, onPageChange }: HeaderProps) => {
                     onMouseEnter={handleSolutionsMouseEnter}
                     onMouseLeave={handleSolutionsMouseLeave}
                   >
-                    <button className="text-sm xl:text-base font-medium text-gray-700 hover:text-[#0EA5FF] transition-colors duration-200 px-2 xl:px-3 py-2 rounded-md flex items-center space-x-1">
+                    <button className="text-sm xl:text-sm font-medium text-gray-700 hover:text-[#0EA5FF] transition-colors duration-200 px-2 xl:px-2 py-1.5 rounded-md flex items-center space-x-1">
                       <span>{t('nav.solutions.title')}</span>
                       <ChevronDown className={`w-4 h-4 transition-transform duration-200 ${isSolutionsOpen ? 'rotate-180' : ''}`} />
                     </button>
@@ -140,7 +141,7 @@ export const Header = ({ currentPage, onPageChange }: HeaderProps) => {
 
           {/* Mid-size Navigation: 768–1023 显示精简导航（ホーム/ソリューション/制作実績/料金）*/}
           <nav className="hidden md:flex lg:hidden items-center space-x-3">
-            {[...navigationItems.filter(i => ['home','works','pricing'].includes(i.key))].map((item) => (
+            {[...navigationItems.filter(i => ['home','news','works','pricing'].includes(i.key))].map((item) => (
               <div key={`md-${item.key}`}>
                 <button
                   onClick={() => handleNavClick(item.key)}
@@ -199,13 +200,13 @@ export const Header = ({ currentPage, onPageChange }: HeaderProps) => {
             <div className="flex items-center space-x-2">
               <button
                 onClick={() => handleNavClick('quote')}
-                className="px-7 py-3 bg-gradient-to-r from-[#33C6FF] to-[#0EA5FF] text-white font-semibold text-sm rounded-md hover:opacity-90 transition-opacity"
+                className="px-5 py-2 bg-gradient-to-r from-[#33C6FF] to-[#0EA5FF] text-white font-semibold text-sm rounded-md hover:opacity-90 transition-opacity"
               >
                 {t('nav.quote')}
               </button>
               <button
                 onClick={() => handleNavClick('contact')}
-                className="px-7 py-3 bg-gradient-to-r from-[#0EA5FF] to-[#6A7DFF] text-white font-semibold text-sm rounded-md hover:opacity-90 transition-opacity"
+                className="px-5 py-2 bg-gradient-to-r from-[#0EA5FF] to-[#6A7DFF] text-white font-semibold text-sm rounded-md hover:opacity-90 transition-opacity"
               >
                 {t('nav.contact')}
               </button>

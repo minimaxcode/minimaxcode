@@ -1,6 +1,7 @@
 {
   "nav": {
     "home": "Home",
+    "news": "News",
     "service": "Works",
     "pricing": "Pricing",
     "flow": "Process",
@@ -9,7 +10,37 @@
     "contact": "Contact",
     "privacy": "Privacy Policy",
     "terms": "Terms of Service",
-    "works": "Our Works"
+    "works": "Our Works",
+    "solutions": {
+      "title": "Solutions",
+      "restaurant": "Restaurant",
+      "education": "Education",
+      "beauty": "Beauty & Spa",
+      "travel": "Travel & Hotel",
+      "ecommerce": "E-commerce",
+      "freelance": "Freelance",
+      "common": "Features"
+    }
+  },
+  "news": {
+    "page": {
+      "description": "We bring you the latest announcements and articles."
+    },
+    "loading": "Loading...",
+    "error": {
+      "title": "Failed to load",
+      "description": "Please check your network and try again.",
+      "retry": "Retry"
+    },
+    "filter": {
+      "all": "All"
+    },
+    "no": {
+      "results": "There are currently no news items to display."
+    },
+    "read": {
+      "more": "Read more"
+    }
   },
   "language": {
     "ja": "日本語",
