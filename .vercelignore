@@ -1,0 +1,4 @@
+apps/cms/**
+apps/member/**
+docs/**
+infra/**
