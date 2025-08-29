@@ -7,13 +7,13 @@ import { marked } from 'marked'
 import SmartContentRenderer from '@/components/SmartContentRenderer'
 import { StrapiLocale } from 'strapi-sdk-js'
 import { Calendar, Tag as TagIcon } from 'lucide-react'
+import { useQuery, useQueryClient } from '@tanstack/react-query'
 
 export const NewsDetail = () => {
   const { slug = '' } = useParams()
-  const { i18n } = useTranslation('common')
+  const { i18n, t } = useTranslation('common')
   const [post, setPost] = useState<any | null>(null)
-  const [loading, setLoading] = useState(false)
-  const [error, setError] = useState<string | null>(null)
+  
 
   // 先计算 attrs 与内容 HTML，避免在条件 return 前调用 hooks 数量不一致
   const attrs = (post?.attributes ?? post ?? {}) as any
@@ -27,25 +27,32 @@ export const NewsDetail = () => {
     return DOMPurify.sanitize(html as string)
   }, [rawContent])
 
-  useEffect(() => {
-    if (!slug) return
-    let mounted = true
-    const load = async () => {
-      try {
-        setLoading(true)
-        const data = await fetchPostByDocumentId(slug, i18n.language as StrapiLocale)
-        if (!mounted) return
-        setPost(data)
-      } catch (e: any) {
-        if (!mounted) return
-        setError(e?.message ?? 'Failed to load')
-      } finally {
-        if (mounted) setLoading(false)
-      }
+  const queryClient = useQueryClient()
+  const initialFromList = () => {
+    const lists: any = queryClient.getQueriesData({ queryKey: ['posts', i18n.language] })
+    for (const [_key, val] of lists) {
+      const arr = (val as any)?.data ?? []
+      const hit = arr.find((p: any) => {
+        const attrs = p?.attributes ?? p
+        const docId = attrs?.documentId || p?.documentId || p?.id
+        return String(docId) === String(slug)
+      })
+      if (hit) return hit
     }
-    load()
-    return () => { mounted = false }
-  }, [slug, i18n.language])
+    return undefined
+  }
+  const { data: detailData, isLoading, error: detailError } = useQuery({
+    enabled: !!slug,
+    queryKey: ['post', slug, i18n.language],
+    queryFn: () => fetchPostByDocumentId(slug!, i18n.language as StrapiLocale),
+    // 使用列表项作为占位数据，同时强制认为是陈旧数据，触发后台刷新
+    placeholderData: initialFromList(),
+    staleTime: 0,
+  })
+
+  useEffect(() => { setPost(detailData as any) }, [detailData])
+  const loading = isLoading
+  const error = (detailError as any)?.message || null
 
   // 组装 SEO
   useEffect(() => {
@@ -83,7 +90,27 @@ export const NewsDetail = () => {
 
   if (loading) return <div className="pt-24 max-w-5xl mx-auto px-4">Loading...</div>
   if (error) return <div className="pt-24 max-w-5xl mx-auto px-4 text-red-600">{error}</div>
-  if (!post) return <div className="pt-24 max-w-5xl mx-auto px-4">Not found</div>
+  if (!post) {
+    return (
+      <div className="min-h-screen pt-24">
+        <div className="max-w-4xl mx-auto px-4">
+          <div className="bg-white shadow-sm rounded-xl p-8 text-center">
+            <p className="text-gray-800 text-lg font-semibold mb-2">
+              {t('news.detail.notfound.title')}
+            </p>
+            <p className="text-gray-600 mb-6">
+              {t('news.detail.notfound.description')}
+            </p>
+            <div className="flex justify-center">
+              <Link to="/news" className="px-5 py-2 bg-[#0EA5FF] text-white rounded-md hover:opacity-90">
+                {t('news.back.to.list')}
+              </Link>
+            </div>
+          </div>
+        </div>
+      </div>
+    )
+  }
 
   return (
     <div className="min-h-screen text-gray-900 pt-24">
@@ -96,7 +123,7 @@ export const NewsDetail = () => {
             </li>
             <li>/</li>
             <li>
-              <Link to="/news" className="hover:text-[#0EA5FF]">News</Link>
+              <Link to="/news" className="hover:text-[#0EA5FF]">{t('nav.news', 'News')}</Link>
             </li>
             <li>/</li>
             <li className="text-gray-700">{attrs.Title ?? attrs.title}</li>

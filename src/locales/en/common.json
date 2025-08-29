@@ -26,6 +26,15 @@
     "page": {
       "description": "We bring you the latest announcements and articles."
     },
+    "detail": {
+      "notfound": {
+        "title": "Article not found",
+        "description": "No article is available in the current language. Try another language or go back to the list."
+      }
+    },
+    "back": {
+      "to": { "list": "Back to News" }
+    },
     "loading": "Loading...",
     "error": {
       "title": "Failed to load",

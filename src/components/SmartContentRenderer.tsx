@@ -132,8 +132,23 @@ export const SmartContentRenderer: React.FC<SmartContentRendererProps> = ({ cont
       let buf: string[] = []
       const flush = () => { if (buf.length) { out.push({ type: 'text', content: buf.join('\n') }); buf.length = 0 } }
       tokens.forEach((t: any) => {
-        if (t.type === 'html') { flush(); out.push({ type: 'html', content: t.text || '' }) }
-        else { if (t.raw) buf.push(t.raw); else if (t.text) buf.push(t.text); else buf.push(String(t)) }
+        if (t.type === 'html') {
+          // 输出为原始 HTML 片段，避免使用 t.text 破坏换行
+          flush()
+          if (typeof t.raw === 'string' && t.raw.length) {
+            out.push({ type: 'html', content: t.raw })
+          } else {
+            // 无 raw 时保留结构间隔，避免相邻块黏连
+            buf.push('\n')
+          }
+          return
+        }
+        if (typeof t.raw === 'string' && t.raw.length) {
+          buf.push(t.raw)
+        } else {
+          // 无 raw 的 token 仅保留必要换行，避免丢空行
+          buf.push('\n')
+        }
       })
       flush()
     } catch { out.push({ type: 'text', content: s }) }
@@ -151,11 +166,6 @@ export const SmartContentRenderer: React.FC<SmartContentRendererProps> = ({ cont
     if (htmlFrag) return ContentKind.HtmlFragment
     return ContentKind.MarkdownOrText
   }, [normalized])
-
-  if (import.meta.env.DEV) {
-    // eslint-disable-next-line no-console
-    console.debug('[SmartContentRenderer] input kind=', kind, 'resolvedKind=', resolvedKind, 'raw=', String(content).slice(0, 300))
-  }
 
   if (!content) return null
 
@@ -176,7 +186,8 @@ export const SmartContentRenderer: React.FC<SmartContentRendererProps> = ({ cont
   marked.setOptions({ gfm: true, breaks: true })
   const blocks = splitMixed(normalized)
   if (blocks.length === 1 && blocks[0].type === 'text') {
-    const html = DOMPurify.sanitize(marked.parse(blocks[0].content) as string)
+    const rawHtml = String(marked.parse(blocks[0].content) as string)
+    const html = DOMPurify.sanitize(rawHtml)
     return <div className={`prose prose-lg max-w-none p-6 ${className}`} dangerouslySetInnerHTML={{ __html: html }} />
   }
   return (

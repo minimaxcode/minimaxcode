@@ -3,46 +3,41 @@ import { useTranslation } from 'react-i18next'
 import { Link } from 'react-router-dom'
 import { fetchPosts, fetchTags } from '@/lib/strapi'
 import { Calendar, Tag as TagIcon } from 'lucide-react'
+import { useQuery } from '@tanstack/react-query'
 
 export const News = () => {
   const { i18n, t } = useTranslation('common')
   const [posts, setPosts] = useState<any[]>([])
   const [tags, setTags] = useState<any[]>([])
   const [selectedTagId, setSelectedTagId] = useState<number>(0)
-  const [loading, setLoading] = useState(false)
-  const [error, setError] = useState<string | null>(null)
+  
 
-  const load = async () => {
-    try {
-      setError(null)
-      setLoading(true)
-      const [postRes, tagRes] = await Promise.all([
-        fetchPosts({ page: 1, pageSize: 12, locale: i18n.language as any }),
-        fetchTags(i18n.language as any),
-      ])
-      setPosts(postRes?.data ?? [])
-      setTags(tagRes?.data ?? [])
-      if (selectedTagId !== 0) {
-        const exists = (tagRes?.data ?? []).some((t: any) => t.id === selectedTagId)
-        if (!exists) setSelectedTagId(0)
-      }
-    } catch (e: any) {
-      setError(e?.message ?? 'Failed to load')
-    } finally {
-      setLoading(false)
-    }
-  }
+  const { data: postResData, isLoading: loadingPosts, error: postsError, refetch: refetchPosts } = useQuery({
+    queryKey: ['posts', i18n.language, 1, 12],
+    queryFn: () => fetchPosts({ page: 1, pageSize: 12, locale: i18n.language as any }),
+  })
+  const { data: tagResData, isLoading: loadingTags, error: tagsError, refetch: refetchTags } = useQuery({
+    queryKey: ['tags', i18n.language],
+    queryFn: () => fetchTags(i18n.language as any),
+  })
 
   useEffect(() => {
-    let mounted = true
-    ;(async () => {
-      await load()
-    })()
-    return () => {
-      mounted = false
-    }
-    // eslint-disable-next-line @typescript-eslint/no-unused-vars
-  }, [i18n.language])
+    setPosts(postResData?.data ?? [])
+  }, [postResData])
+
+  useEffect(() => {
+    setTags(tagResData?.data ?? [])
+  }, [tagResData])
+
+  const loading = loadingPosts || loadingTags
+  const error = (postsError as any)?.message || (tagsError as any)?.message || null
+
+  // 当前选择的标签在新语言中不存在时，重置为全部
+  useEffect(() => {
+    if (selectedTagId === 0) return
+    const exists = (tags ?? []).some((t: any) => t.id === selectedTagId)
+    if (!exists) setSelectedTagId(0)
+  }, [tags, selectedTagId])
 
   const filteredPosts = useMemo(() => {
     if (selectedTagId === 0) return posts
@@ -71,7 +66,7 @@ export const News = () => {
           {renderHeader}
           <div className="flex justify-center items-center py-16">
             <div className="h-8 w-8 border-2 border-[#0EA5FF] border-t-transparent rounded-full animate-spin" />
-            <span className="ml-3 text-gray-600">{t('news.loading', '読み込み中...')}</span>
+            <span className="ml-3 text-gray-600">{t('news.loading')}</span>
           </div>
         </div>
       </div>
@@ -84,11 +79,11 @@ export const News = () => {
         <div className="max-w-4xl mx-auto px-4">
           {renderHeader}
           <div className="bg-white shadow-sm rounded-xl p-8 text-center">
-            <p className="text-red-600 font-medium mb-2">{t('news.error.title', '読み込みに失敗しました')}</p>
-            <p className="text-gray-600 mb-6">{t('news.error.description', 'ネットワーク状況を確認のうえ、再試行してください。')}</p>
+            <p className="text-red-600 font-medium mb-2">{t('news.error.title')}</p>
+            <p className="text-gray-600 mb-6">{t('news.error.description')}</p>
             <div className="flex justify-center">
-              <button onClick={load} className="px-5 py-2 bg-[#0EA5FF] text-white rounded-md hover:opacity-90">
-                {t('news.error.retry', '再読み込み')}
+              <button onClick={() => { refetchPosts(); refetchTags() }} className="px-5 py-2 bg-[#0EA5FF] text-white rounded-md hover:opacity-90">
+                {t('news.error.retry')}
               </button>
             </div>
           </div>
@@ -112,7 +107,7 @@ export const News = () => {
                   selectedTagId === 0 ? 'bg-[#0EA5FF] text-white' : 'bg-white text-gray-800 border border-gray-200 hover:bg-gray-50'
                 }`}
               >
-                {t('news.filter.all', 'すべて')}
+                {t('news.filter.all')}
               </button>
               {(tags ?? []).map((tag: any) => (
                 <button
@@ -130,7 +125,7 @@ export const News = () => {
 
           {filteredPosts.length === 0 ? (
             <div className="text-center text-gray-500 py-16">
-              {t('news.no.results', '現在表示できるニュースはありません。')}
+              {t('news.no.results')}
             </div>
           ) : (
             <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 gap-6">
@@ -148,6 +143,9 @@ export const News = () => {
                 if (imageUrl && imageUrl.startsWith('/')) {
                   const base = (import.meta.env.VITE_STRAPI_URL || '').replace(/\/$/, '')
                   imageUrl = base + imageUrl
+                }
+                if (!imageUrl) {
+                  imageUrl = '/images/tokyo-skyline.jpg'
                 }
                 const dateText = item.Date || item.date || item.publishedAt
                 const docId = item.documentId || p.documentId || p.id
@@ -183,7 +181,7 @@ export const News = () => {
                       <h3 className="text-xl md:text-2xl font-bold mb-2 leading-snug line-clamp-2">{item.Title || item.title}</h3>
                       {item.excerpt && <p className="text-sm text-gray-600 line-clamp-3 mb-3">{item.excerpt}</p>}
                       <Link to={`/news/${docId}`} className="text-[#0EA5FF] hover:underline text-sm font-medium">
-                        {t('news.read.more', '詳しく見る')} →
+                        {t('news.read.more')} →
                       </Link>
                     </div>
                   </article>
