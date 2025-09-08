@@ -273,21 +273,21 @@ export const Home = ({ onPageChange }: HomeProps) => {
                 description: t('home.features.costEffective.description'),
                 bgColor: 'bg-orange-100',
                 borderColor: 'border-orange-200',
-                image: '/images/reason-1.png' // AI技術でコストパフォーマンス
+                image: '/images/reason-1_840.webp' // AI技術でコストパフォーマンス
               },
               {
                 title: t('home.features.timeSaving.title'),
                 description: t('home.features.timeSaving.description'),
                 bgColor: 'bg-green-100',
                 borderColor: 'border-green-200',
-                image: '/images/reason-2.png' // コアビジネスに集中
+                image: '/images/reason-2_840.webp' // コアビジネスに集中
               },
               {
                 title: t('home.features.customization.title'),
                 description: t('home.features.customization.description'),
                 bgColor: 'bg-purple-100',
                 borderColor: 'border-purple-200',
-                image: '/images/reason-3.png' // カスタマイズデザイン
+                image: '/images/reason-3_840.webp' // カスタマイズデザイン
               }
             ].map((feature, index) => (
               <motion.div
