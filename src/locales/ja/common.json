@@ -1345,12 +1345,12 @@
     "form": {
       "webPlan": {
         "title": "WEB制作プラン",
-        "basic": "ベーシックプラン（3P）",
-        "standard5": "スタンダードプラン（5P）",
-        "standard10": "スタンダードプラン（10P）",
-        "customize": "カスタマイズプラン（10P~）",
-        "premium": "プレミアムプラン（10P~）",
-        "pages": "ページまで",
+        "basic": "ベーシックプラン",
+        "standard5": "スタンダードプラン",
+        "standard10": "スタンダードプラン",
+        "customize": "カスタマイズプラン",
+        "premium": "プレミアムプラン",
+        "includedPages": "プラン内に{{count}}ページ含む",
         "price": "¥{{price}}"
       },
       "pageCount": {
@@ -1386,7 +1386,12 @@
         "email": "企業メール",
         "update": "サイト更新",
         "month": "月",
-        "year": "年"
+        "year": "年",
+        "fixed": {
+          "server": "サーバー費用",
+          "domain": "ドメイン費用",
+          "byProvider": "クラウドサービスの公式料金に基づき、追加の差額はいただきません"
+        }
       },
       "timeline": {
         "title": "希望納期",

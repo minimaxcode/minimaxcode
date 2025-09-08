@@ -35,7 +35,9 @@ pnpm-lock.yaml
 # 其他可选
 *.local
 .qoder/
+.serena/
 
 # 忽略环境变量文件
 .env*
 .vercel
+

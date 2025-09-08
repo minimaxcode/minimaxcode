@@ -225,7 +225,7 @@ export const Pricing = ({ onPageChange }: PricingProps) => {
 
       {/* WEB制作プラン料金表 */}
       <section id="plans" className="py-12 md:py-20 bg-transparent">
-        <div className="max-w-[1500px] mx-auto px-4 sm:px-6 lg:px-8">
+        <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
           <motion.div
             initial={{ opacity: 0, y: 30 }}
             animate={{ opacity: 1, y: 0 }}
@@ -247,11 +247,11 @@ export const Pricing = ({ onPageChange }: PricingProps) => {
 
           {/* 表格容器 */}
           <div className="flex justify-center">
-            <div className="relative w-full max-w-[1500px] mx-0" ref={plansWrapRef}>
+            <div className="relative w-full max-w-7xl mx-0" ref={plansWrapRef}>
               <div className="overflow-x-auto hide-scrollbar">
                 {/* Sticky header overlay for plans (desktop) */}
                 {showPlansSticky && (
-                  <div className="fixed left-1/2 -translate-x-1/2 top-16 z-30 hidden md:block w-full max-w-[1500px] px-4 sm:px-6 lg:px-8 pointer-events-none">
+                  <div className="fixed left-1/2 -translate-x-1/2 top-16 z-30 hidden md:block w-full max-w-7xl px-4 sm:px-6 lg:px-8 pointer-events-none">
                     <div className="bg-gradient-to-r from-blue-50 to-cyan-50 border-b border-blue-100 min-w-[1200px]">
                       <div className="grid" style={{ gridTemplateColumns: plansGridCols || '15rem repeat(4, 15rem)' }}>
                         <div className="px-4 py-3 text-sm font-semibold text-gray-900 text-center whitespace-nowrap border-r border-blue-100">{t('pricing.table.item')}</div>
@@ -360,7 +360,7 @@ export const Pricing = ({ onPageChange }: PricingProps) => {
 
       {/* Quote CTA Hook */}
       <section className="py-12 md:py-16 bg-transparent">
-        <div className="max-w-4xl mx-auto px-4 sm:px-6 lg:px-8">
+        <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
           <motion.div
             initial={{ opacity: 0, y: 30 }}
             animate={{ opacity: 1, y: 0 }}
@@ -403,7 +403,7 @@ export const Pricing = ({ onPageChange }: PricingProps) => {
 
       {/* オプション料金 */}
       <section id="options" className="py-12 md:py-20 bg-transparent">
-        <div className="max-w-[1500px] mx-auto px-4 sm:px-6 lg:px-8">
+        <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
           <motion.div
             initial={{ opacity: 0, y: 30 }}
             animate={{ opacity: 1, y: 0 }}
@@ -425,11 +425,11 @@ export const Pricing = ({ onPageChange }: PricingProps) => {
 
           {/* 表格容器 */}
           <div className="flex justify-center">
-            <div className="relative w-full max-w-[1500px] mx-0 mt-8" ref={optionsWrapRef}>
+            <div className="relative w-full max-w-7xl mx-0 mt-8" ref={optionsWrapRef}>
               <div className="overflow-x-auto hide-scrollbar">
                 {/* Sticky header overlay for options (desktop) */}
                 {showOptionsSticky && (
-                  <div className="fixed left-1/2 -translate-x-1/2 top-16 z-30 hidden md:block w-full max-w-[1500px] px-4 sm:px-6 lg:px-8 pointer-events-none">
+                  <div className="fixed left-1/2 -translate-x-1/2 top-16 z-30 hidden md:block w-full max-w-7xl px-4 sm:px-6 lg:px-8 pointer-events-none">
                     <div className="bg-gradient-to-r from-blue-50 to-cyan-50 border-b border-blue-100 min-w-[1300px]">
                       <div className="grid" style={{ gridTemplateColumns: optionsGridCols || '360px 320px 720px' }}>
                         <div className="px-4 py-3 text-sm font-semibold text-gray-900 text-center whitespace-nowrap border-r border-blue-100">{t('pricing.options.table.item')}</div>

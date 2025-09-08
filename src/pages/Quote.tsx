@@ -1,5 +1,5 @@
 import { useTranslation } from 'react-i18next';
-import { useState, useEffect } from 'react';
+import { useState, useEffect, Fragment } from 'react';
 import { motion } from 'framer-motion';
 import { Calculator, ArrowRight, CheckCircle, MessageSquare, FileCode } from 'lucide-react';
 
@@ -70,6 +70,8 @@ export const Quote = ({ onPageChange }: QuoteProps) => {
 
   const [showResult, setShowResult] = useState(false);
   const [pageInputValue, setPageInputValue] = useState('3'); // 独立的输入框状态
+  // 标记由系统自动勾选的选项（例如SSL满额免费自动勾选）
+  const [autoSelected, setAutoSelected] = useState<{ [key: string]: boolean }>({});
 
   useEffect(() => {
     window.scrollTo(0, 0);
@@ -263,6 +265,22 @@ export const Quote = ({ onPageChange }: QuoteProps) => {
 
   const pricing = calculatePrice();
 
+  // SSL 满额免费自动勾选/降回阈值自动移除（仅当为系统自动勾选时移除）
+  useEffect(() => {
+    if (pricing.isSSLFreeByAmount) {
+      if (!quoteData.options.includes('ssl')) {
+        setQuoteData(prev => ({ ...prev, options: [...prev.options, 'ssl'] }));
+        setAutoSelected(prev => ({ ...prev, ssl: true }));
+      }
+    } else {
+      if (quoteData.options.includes('ssl') && autoSelected.ssl) {
+        setQuoteData(prev => ({ ...prev, options: prev.options.filter(id => id !== 'ssl') }));
+        setAutoSelected(prev => ({ ...prev, ssl: false }));
+      }
+    }
+    // 仅在阈值状态变化时触发；依赖 autoSelected 与 quoteData.options 以确保一致
+  }, [pricing.isSSLFreeByAmount, quoteData.options, autoSelected.ssl]);
+
   // ---- Timeline display logic (filter zero-cost duplicates) ----
   const isCustomizeOrPremium = quoteData.webPlan === 'customize' || quoteData.webPlan === 'premium';
   const pages = quoteData.pageCount;
@@ -342,7 +360,7 @@ export const Quote = ({ onPageChange }: QuoteProps) => {
 
       {/* Hero Section */}
       <section className="relative py-12 md:py-20">
-        <div className="max-w-4xl mx-auto px-4 sm:px-6 lg:px-8">
+        <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
           <motion.div
             initial={{ opacity: 0, y: 30 }}
             animate={{ opacity: 1, y: 0 }}
@@ -363,7 +381,7 @@ export const Quote = ({ onPageChange }: QuoteProps) => {
 
       {/* Quote Form */}
       <section className="py-12 md:py-20">
-        <div className="max-w-[1800px] mx-auto px-4 sm:px-6 lg:px-8">
+        <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
           <div className="space-y-8">
             {/* Form Section */}
             <div>
@@ -378,10 +396,9 @@ export const Quote = ({ onPageChange }: QuoteProps) => {
                    <h3 className="text-xl md:text-2xl font-bold text-gray-900 mb-5">{t('quote.form.webPlan.title')}</h3>
                    <div className="grid grid-cols-2 sm:grid-cols-3 lg:grid-cols-4 xl:grid-cols-4 gap-3">
                     {webPlans.map((plan, idx) => (
-                      <>
+                     <Fragment key={plan.id}>
                         {plan.id === 'customize' && <div className="col-span-full h-0" />}
                         <label
-                          key={plan.id}
                           className={`relative flex items-center p-4 border-2 rounded-lg cursor-pointer transition-all min-w-0 ${
                             quoteData.webPlan === plan.id
                               ? 'border-blue-500 bg-blue-50'
@@ -516,7 +533,7 @@ export const Quote = ({ onPageChange }: QuoteProps) => {
                              <div className={`text-sm mt-1 truncate ${
                                quoteData.webPlan === plan.id ? 'text-blue-600' : 'text-gray-600'
                              }`}>
-                               {plan.pages}{t('quote.form.webPlan.pages')}
+                               {t('quote.form.webPlan.includedPages', { count: plan.pages })}
                              </div>
                              <div className={`text-sm font-semibold truncate ${
                                quoteData.webPlan === plan.id ? 'text-blue-800' : 'text-blue-600'
@@ -529,7 +546,7 @@ export const Quote = ({ onPageChange }: QuoteProps) => {
                           <CheckCircle className="w-5 h-5 text-blue-500 ml-2" />
                         )}
                       </label>
-                    </>
+                    </Fragment>
                   ))}
                   </div>
                 </div>
@@ -638,10 +655,10 @@ export const Quote = ({ onPageChange }: QuoteProps) => {
                         <label
                           key={option.id}
                           className={`relative group flex items-center p-4 border-2 rounded-lg transition-all ${
-                            isFreeOption 
+                            isFreeOption
                               ? 'border-green-500 bg-green-50 cursor-default'
-                              : (isSSLFreeByAmount && isChecked)
-                                ? 'border-blue-500 bg-blue-50 cursor-pointer'
+                              : (option.id === 'ssl' && isSSLFreeByAmount)
+                                ? 'border-green-500 bg-green-50 cursor-default'
                                 : isChecked
                                   ? 'border-blue-500 bg-blue-50 cursor-pointer'
                                   : 'border-gray-200 hover:border-gray-300 cursor-pointer'
@@ -652,7 +669,7 @@ export const Quote = ({ onPageChange }: QuoteProps) => {
                             checked={isChecked}
                             onChange={(e) => {
                               // 如果是plan包含的选项，阻止取消勾选
-                              if (isFreeOption && !e.target.checked) {
+                              if ((isFreeOption || (option.id === 'ssl' && isSSLFreeByAmount)) && !e.target.checked) {
                                 return;
                               }
                               
@@ -661,11 +678,19 @@ export const Quote = ({ onPageChange }: QuoteProps) => {
                                   ...quoteData,
                                   options: [...quoteData.options, option.id]
                                 });
+                                // 用户手动勾选SSL时，清除自动勾选标记
+                                if (option.id === 'ssl') {
+                                  setAutoSelected(prev => ({ ...prev, ssl: false }));
+                                }
                               } else {
                                 setQuoteData({
                                   ...quoteData,
                                   options: quoteData.options.filter(id => id !== option.id)
                                 });
+                                // 用户手动取消SSL时，也清除自动标记
+                                if (option.id === 'ssl') {
+                                  setAutoSelected(prev => ({ ...prev, ssl: false }));
+                                }
                               }
                             }}
                             className="sr-only"
@@ -713,7 +738,7 @@ export const Quote = ({ onPageChange }: QuoteProps) => {
                   </div>
                 </div>
 
-                                 {/* 保守 */}
+                 {/* 保守 */}
                  <div className="mb-5 md:mb-6">
                    <h3 className="text-xl md:text-2xl font-bold text-gray-900 mb-5">{t('quote.form.maintenance.title')}</h3>
                    <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 xl:grid-cols-4 gap-3">
@@ -755,6 +780,24 @@ export const Quote = ({ onPageChange }: QuoteProps) => {
                         )}
                       </label>
                     ))}
+                    {/* 固定勾选且不可编辑：サーバー費用 */}
+                    <label className="relative flex items-center p-4 border-2 rounded-lg cursor-default transition-all border-green-500 bg-green-50">
+                      <input type="checkbox" checked readOnly className="sr-only" />
+                      <div className="text-center">
+                        <span className="font-medium text-gray-900">{t('quote.form.maintenance.fixed.server')}</span>
+                        <div className="text-sm text-gray-600 mt-1">{t('quote.form.maintenance.fixed.byProvider')}</div>
+                      </div>
+                      <CheckCircle className="w-5 h-5 text-green-500 absolute top-2 right-2" />
+                    </label>
+                    {/* 固定勾选且不可编辑：ドメイン費用 */}
+                    <label className="relative flex items-center p-4 border-2 rounded-lg cursor-default transition-all border-green-500 bg-green-50">
+                      <input type="checkbox" checked readOnly className="sr-only" />
+                      <div className="text-center">
+                        <span className="font-medium text-gray-900">{t('quote.form.maintenance.fixed.domain')}</span>
+                        <div className="text-sm text-gray-600 mt-1">{t('quote.form.maintenance.fixed.byProvider')}</div>
+                      </div>
+                      <CheckCircle className="w-5 h-5 text-green-500 absolute top-2 right-2" />
+                    </label>
                   </div>
                 </div>
 

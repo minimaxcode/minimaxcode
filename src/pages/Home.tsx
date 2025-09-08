@@ -174,7 +174,7 @@ export const Home = ({ onPageChange }: HomeProps) => {
 
       {/* Why Choose Us Section */}
       <section className="py-16 md:py-20 bg-transparent">
-        <div className="max-w-[1536px] mx-auto px-4 sm:px-6 lg:px-8">
+        <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
           <motion.div
             initial={{ opacity: 0, y: 30 }}
             whileInView={{ opacity: 1, y: 0 }}
@@ -329,7 +329,7 @@ export const Home = ({ onPageChange }: HomeProps) => {
 
       {/* MiniMaxCode Strengths Section */}
       <section className="py-12 md:py-20 bg-transparent">
-        <div className="w-full md:w-[70%] max-w-[2000px] mx-auto px-3 sm:px-4 lg:px-12 xl:px-16">
+        <div className="w-full md:w-[85%] max-w-[1600px] mx-auto px-3 sm:px-6 lg:px-10 xl:px-12">
           <motion.div
             initial={{ opacity: 0, y: 30 }}
             whileInView={{ opacity: 1, y: 0 }}
@@ -344,7 +344,7 @@ export const Home = ({ onPageChange }: HomeProps) => {
             </h2>
           </motion.div>
 
-          <div className="space-y-10 md:space-y-16">
+          <div className="space-y-20 md:space-y-28 xl:space-y-32">
             {[
               { title: t('home.strengths.item1.title'), description: t('home.strengths.item1.description') },
               { title: t('home.strengths.item2.title'), description: t('home.strengths.item2.description') },
@@ -359,28 +359,28 @@ export const Home = ({ onPageChange }: HomeProps) => {
                 whileInView={{ opacity: 1, y: 0 }}
                 transition={{ duration: 0.8, delay: index * 0.05 }}
                 viewport={{ once: true }}
-                className={`flex flex-col lg:flex-row items-center gap-10 ${index % 2 === 1 ? 'lg:flex-row-reverse' : ''}`}
+                className={`flex flex-col lg:flex-row items-center gap-14 ${index % 2 === 1 ? 'lg:flex-row-reverse' : ''}`}
               >
                 {/* 文本区 */}
-                <div className="lg:w-1/2">
-                  <h3 className="text-lg md:text-2xl font-bold text-[#2F4766] mb-3">
+                <div className="lg:w-5/12">
+                  <h3 className="text-xl md:text-3xl lg:text-4xl font-bold text-[#2F4766] mb-4">
                     {item.title}
                   </h3>
-                  <p className="text-gray-700 text-sm md:text-base leading-relaxed mb-4">
+                  <p className="text-gray-700 text-base md:text-lg leading-relaxed mb-5">
                     {item.description}
                   </p>
                   <button
                     onClick={() => onPageChange('quote')}
-                    className="inline-flex items-center text-[#0EA5FF] font-semibold hover:underline text-lg"
+                    className="inline-flex items-center text-[#0EA5FF] font-semibold hover:underline text-xl"
                   >
                     {t('home.features.getStarted')}
                     <ArrowRight className="w-4 h-4 ml-1" />
                   </button>
                 </div>
                 {/* 预留图片位置 */}
-                <div className="lg:w-1/2">
-                  <div className="w-full aspect-[4/3] rounded-2xl overflow-hidden bg-white p-4 md:p-6 lg:p-8">
-                    <img src={`/images/strength-${index + 1}.png`} alt={`Strength ${index + 1}`} className="w-full h-full object-contain" />
+                <div className="lg:w-7/12">
+                  <div className="w-full aspect-auto rounded-2xl overflow-hidden bg-white p-0">
+                    <img src={`/images/strength-${index + 1}.png`} alt={`Strength ${index + 1}`} className="block w-full h-auto object-contain" />
                   </div>
                 </div>
               </motion.div>

@@ -1352,12 +1352,12 @@
     "form": {
       "webPlan": {
         "title": "Web Production Plan",
-        "basic": "Basic Plan (3P)",
-        "standard5": "Standard Plan (5P)",
-        "standard10": "Standard Plan (10P)",
-        "customize": "Customize Plan (10P+)",
-        "premium": "Premium Plan (10P+)",
-        "pages": "pages included",
+        "basic": "Basic Plan",
+        "standard5": "Standard Plan",
+        "standard10": "Standard Plan",
+        "customize": "Customize Plan",
+        "premium": "Premium Plan",
+        "includedPages": "Includes {{count}} pages",
         "price": "¥{{price}}"
       },
       "pageCount": {
@@ -1393,7 +1393,12 @@
         "email": "Business Email",
         "update": "Site Updates",
         "month": "month",
-        "year": "year"
+        "year": "year",
+        "fixed": {
+          "server": "Server Fee",
+          "domain": "Domain Fee",
+          "byProvider": "No additional charges will be charged based on the official price of the cloud service."
+        }
       },
       "timeline": {
         "title": "Desired Timeline",
