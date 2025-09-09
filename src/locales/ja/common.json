@@ -1441,8 +1441,7 @@
       "sourceCodeDelivery": "ソースコード納品",
       "serverMaintenance": "サーバー保守",
       "contact": "お問い合わせ",
-      "selectPrompt": "項目を選択すると概算が表示されます",
-      "emailFirstYearFree": "（1年間無料）"
+      "selectPrompt": "項目を選択すると概算が表示されます"
     }
   },
   "contact": {

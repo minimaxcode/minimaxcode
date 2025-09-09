@@ -1448,8 +1448,7 @@
       "sourceCodeDelivery": "Source Code Delivery",
       "serverMaintenance": "Server Maintenance",
       "contact": "Contact Us",
-      "selectPrompt": "Select options to see an estimate",
-      "emailFirstYearFree": "(Free for 1 year)"
+      "selectPrompt": "Select options to see an estimate"
     }
   },
   "contact": {
