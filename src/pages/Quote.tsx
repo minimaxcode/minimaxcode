@@ -1192,11 +1192,6 @@ export const Quote = ({ onPageChange }: QuoteProps) => {
                                 <div key={maintenanceId} className="flex justify-between">
                                   <span>
                                     {t(`quote.form.maintenance.${maintenance.nameKey}`)}
-                                    {maintenance.id === 'email' && (
-                                      <span className="text-green-600 ml-1">
-                                        {t('quote.result.emailFirstYearFree')}
-                                      </span>
-                                    )}
                                   </span>
                                   <span>¥{monthlyPrice.toLocaleString()}/{t('quote.form.maintenance.month')}</span>
                                 </div>
