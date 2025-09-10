@@ -51,10 +51,10 @@ export const News = () => {
   const renderHeader = (
     <div className="text-center mb-10">
       <h1 className="text-3xl lg:text-4xl font-bold text-gray-900 mb-3">
-        {t('nav.news', 'News')}
+        {t('nav.news')}
       </h1>
       <p className="text-gray-600 max-w-2xl mx-auto">
-        {t('news.page.description', '最新のお知らせや記事をお届けします。')}
+        {t('news.page.description')}
       </p>
     </div>
   )
@@ -171,18 +171,27 @@ export const News = () => {
                         )}
                       </div>
                     )}
-                    <div className="p-5">
-                      {dateText && (
-                        <div className="text-xs text-gray-500 mb-2 flex items-center">
-                          <Calendar className="w-4 h-4 mr-1.5 text-gray-400" />
-                          {new Date(dateText).toLocaleDateString('ja-JP')}
-                        </div>
+                    <div className="p-4">
+                      <h3 className="text-sm md:text-base font-bold leading-snug mb-1 break-words">
+                        {item.Title || item.title}
+                      </h3>
+                      <div className="flex items-center justify-between mb-1">
+                        {dateText && (
+                          <div className="text-xs text-gray-500 flex items-center">
+                            <Calendar className="w-4 h-4 mr-1.5 text-gray-400" />
+                            {new Date(dateText).toLocaleDateString('ja-JP')}
+                          </div>
+                        )}
+                        <Link
+                          to={`/news/${docId}`}
+                          className="inline-flex items-center px-3 py-1.5 bg-[#0EA5FF] text-white rounded-full text-xs md:text-sm font-medium hover:opacity-90"
+                        >
+                          {t('news.read.more')}
+                        </Link>
+                      </div>
+                      {item.excerpt && (
+                        <p className="text-sm text-gray-600 line-clamp-3 mb-3">{item.excerpt}</p>
                       )}
-                      <h3 className="text-xl md:text-2xl font-bold mb-2 leading-snug line-clamp-2">{item.Title || item.title}</h3>
-                      {item.excerpt && <p className="text-sm text-gray-600 line-clamp-3 mb-3">{item.excerpt}</p>}
-                      <Link to={`/news/${docId}`} className="text-[#0EA5FF] hover:underline text-sm font-medium">
-                        {t('news.read.more')} →
-                      </Link>
                     </div>
                   </article>
                 )

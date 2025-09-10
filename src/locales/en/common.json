@@ -1,7 +1,7 @@
 {
   "nav": {
     "home": "Home",
-    "news": "News",
+    "news": "Blog",
     "service": "Works",
     "pricing": "Pricing",
     "flow": "Process",
@@ -33,7 +33,7 @@
       }
     },
     "back": {
-      "to": { "list": "Back to News" }
+      "to": { "list": "Back to Blog" }
     },
     "loading": "Loading...",
     "error": {
@@ -45,7 +45,7 @@
       "all": "All"
     },
     "no": {
-      "results": "There are currently no news items to display."
+      "results": "There are currently no blog items to display."
     },
     "read": {
       "more": "Read more"
