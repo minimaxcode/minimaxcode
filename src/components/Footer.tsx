@@ -41,9 +41,9 @@ export const Footer = ({ onPageChange }: FooterProps) => {
   ];
 
   return (
-    <footer className="relative overflow-hidden border-t border-gray-200" style={{ backgroundColor: '#F6FAFF' }}>
+    <footer className="relative border-t border-gray-200" style={{ backgroundColor: '#F6FAFF' }}>
       <div className="relative max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 py-16">
-        <div className="flex flex-col lg:flex-row" style={{ gap: '3rem' }}>
+        <div className="flex flex-col lg:flex-row lg:flex-wrap xl:flex-nowrap" style={{ gap: '3rem' }}>
           {/* Column 1: Brand */}
           <div className="flex-shrink-0 w-full lg:w-96 mb-12 lg:mb-0">
             <div
@@ -60,7 +60,7 @@ export const Footer = ({ onPageChange }: FooterProps) => {
           </div>
 
           <div className="flex-1">
-            <div className="flex flex-col sm:flex-row" style={{ gap: '3rem' }}>
+            <div className="flex flex-col sm:flex-row sm:flex-wrap" style={{ gap: '3rem' }}>
               {/* Column: Solutions - 分为两列 */}
               <div className="flex-shrink-0">
                 <h3 className="text-gray-900 font-semibold mb-4 text-center text-sm">{t('nav.solutions.title')}</h3>

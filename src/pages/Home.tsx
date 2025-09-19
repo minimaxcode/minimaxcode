@@ -235,10 +235,10 @@ export const Home = ({ onPageChange }: HomeProps) => {
                     'text-right pr-8 lg:pr-20'
                   }`}
                 >
-                  <div className={`inline-block ${
+                  <div className={`inline-block max-w-full ${
                     index % 2 === 0 ? 'bg-white' : 'bg-blue-50'
                   } rounded-2xl px-3 py-2 md:px-8 md:py-6 shadow-md border border-blue-100`}>
-                    <p className="text-sm md:text-xl text-gray-800 font-medium leading-relaxed whitespace-normal md:whitespace-nowrap break-words">
+                    <p className="text-sm md:text-xl text-gray-800 font-medium leading-relaxed whitespace-normal xl:whitespace-nowrap break-words">
                       {item}
                     </p>
                   </div>
