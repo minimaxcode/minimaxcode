@@ -19,6 +19,7 @@ export const Works = ({ onPageChange }: WorksProps) => {
   // Long image scroll/drag state (one set per project card)
   const containerRefs = useRef<(HTMLDivElement | null)[]>([]);
   const imageRefs = useRef<(HTMLImageElement | null)[]>([]);
+  const textContainerRefs = useRef<(HTMLDivElement | null)[]>([]);
   const [translatePercents, setTranslatePercents] = useState<number[]>([]); // 0 to negative
   const translatePercentsRef = useRef<number[]>([]);
   const [maxDownPercents, setMaxDownPercents] = useState<number[]>([]); // negative values
@@ -26,6 +27,7 @@ export const Works = ({ onPageChange }: WorksProps) => {
   const dragStartYRef = useRef<number[]>([]);
   const didDragRef = useRef<boolean[]>([]);
   const animationIdsRef = useRef<number[]>([]);
+  const [textHeights, setTextHeights] = useState<number[]>([]);
 
   // Initialize per-card arrays
   useEffect(() => {
@@ -38,6 +40,28 @@ export const Works = ({ onPageChange }: WorksProps) => {
     didDragRef.current = new Array(len).fill(false);
     animationIdsRef.current = new Array(len).fill(0);
   }, []);
+
+  // Measure text column heights and sync image container heights
+  useEffect(() => {
+    const measure = () => {
+      const len = worksData.length;
+      const heights: number[] = new Array(len).fill(0).map((_, i) => {
+        const el = textContainerRefs.current[i];
+        return el ? el.clientHeight : 0;
+      });
+      setTextHeights(heights);
+    };
+    // initial measure and on resize
+    measure();
+    window.addEventListener('resize', measure);
+    return () => window.removeEventListener('resize', measure);
+  }, []);
+
+  // Recompute image scroll bounds when container heights change
+  useEffect(() => {
+    if (!textHeights.length) return;
+    worksData.forEach((_, i) => onImageLoad(i));
+  }, [textHeights]);
 
   // Compute max scroll when image loads
   const onImageLoad = (index: number) => {
@@ -181,18 +205,18 @@ export const Works = ({ onPageChange }: WorksProps) => {
                 className="bg-white border border-gray-200 rounded-2xl p-5 md:p-8 shadow-sm hover:shadow-md transition-shadow duration-300 overflow-hidden"
               >
                 <div
-                  className={`flex flex-col lg:flex-row items-center gap-6 lg:gap-12 ${index % 2 !== 0 ? 'lg:flex-row-reverse' : ''}`}
+                  className={`flex flex-col lg:flex-row items-start gap-6 lg:gap-12 ${index % 2 !== 0 ? 'lg:flex-row-reverse' : ''}`}
                 >
                   <div className="lg:w-1/2 w-full flex-shrink-0">
                     <div
                       ref={el => (containerRefs.current[index] = el)}
-                      className="aspect-[4/3] bg-gray-100 overflow-hidden rounded-xl shadow-lg relative select-none"
+                      className="bg-gray-100 overflow-hidden rounded-xl shadow-lg relative select-none"
                       onMouseEnter={() => handleMouseEnter(index)}
                       onMouseLeave={() => handleMouseLeave(index)}
                       onMouseDown={(e) => handleMouseDown(index, e)}
                       onMouseUp={() => handleMouseUp(index)}
                       onMouseMove={(e) => handleMouseMove(index, e)}
-                      style={{ cursor: 'grab' }}
+                      style={{ cursor: 'grab', height: textHeights[index] ? `${textHeights[index]}px` : undefined }}
                     >
                       <img
                         ref={el => (imageRefs.current[index] = el)}
@@ -210,7 +234,7 @@ export const Works = ({ onPageChange }: WorksProps) => {
                     </div>
                   </div>
 
-                  <div className="lg:w-1/2 w-full min-w-0">
+                  <div className="lg:w-1/2 w-full min-w-0" ref={el => (textContainerRefs.current[index] = el)}>
                     <h3 className="text-xl md:text-3xl font-bold text-[#2F4766] mb-3 md:mb-4 break-words">{t(project.titleKey)}</h3>
                     <p className="text-sm md:text-base text-gray-600 mb-4 md:mb-6 break-words">{t(project.descriptionKey)}</p>
 

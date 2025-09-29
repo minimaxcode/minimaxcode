@@ -557,21 +557,25 @@
       ]
     },
     "rakufirst": {
-      "title": "RAKU FIRST Corporate Site",
-      "description": "Corporate website for China import agency and OEM support. We structured services, pricing tables, plan comparisons, news, and clear CTAs to build trust and conversions.",
+      "title": "RAKU FIRST Official Website",
+      "description": "Corporate website for China import agency and OEM support. We organized service pages, pricing tables, plan comparisons, news updates, and clear inquiry paths to balance trust and conversions.",
       "features": [
-        "Optimized API-linked tables for rates and shipping information",
-        "Japanese-first information architecture with prominent contact CTAs",
-        "Image optimization and lightweight build for fast PC/mobile pages"
+        "Manage users, orders, and blog posts with a CMS",
+        "Japanese-first information architecture with clear CTAs to boost inquiries",
+        "Modern lightweight design with image optimization for a fast experience on PC and mobile"
       ]
     },
     "rakutto": {
-      "title": "Rakutto! Research & Proxy Purchasing Platform",
-      "description": "UI designed for 1688-linked API workflow, streamlining research → cart → request. Emphasis on mobile usability and clear visibility.",
+      "title": "Rakutto! Product Purchasing System",
+      "description": "API-integrated with 1688 to support the entire flow from product search to ordering and international shipping. Combines intuitive UI and refined design to deliver a smooth research experience.",
       "features": [
-        "Split long-screen preview to highlight core functions",
-        "Sign-up and CTA placed above the fold to drive registration",
-        "Accessible color contrast and readable typography"
+        "Easily find profitable products via 1688/Taobao API integration",
+        "Supports both online ordering and Excel ordering for efficient procurement",
+        "One-click repeat ordering drastically reduces ordering workload",
+        "Automatic barcode generation from simple barcode data input at ordering",
+        "Inbound photo uploads enable quick confirmation of actual item condition",
+        "FBA and RSL direct shipping supported for smoother logistics and cost reduction",
+        "Real-time tracking from order placement to warehouse inbound"
       ]
     },
     "mononest": {

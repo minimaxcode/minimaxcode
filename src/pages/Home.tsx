@@ -61,8 +61,9 @@ export const Home = ({ onPageChange }: HomeProps) => {
               initial={{ opacity: 0, y: 30 }}
               animate={{ opacity: 1, y: 0 }}
               transition={{ duration: 0.8, delay: 0.1 }}
+              className="self-center"
             >
-              <div className="w-full h-auto flex items-start justify-end md:mt-6 lg:mt-8 xl:mt-10 pr-0">
+              <div className="w-full h-auto flex items-center justify-center py-6 md:py-8 lg:py-10 xl:py-12">
                 <img
                   src="/images/home-introduction-1280.webp"
                   alt="MiniMaxCode Introduction"
