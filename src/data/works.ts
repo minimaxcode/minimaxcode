@@ -40,4 +40,32 @@ export const worksData: Project[] = [
       'works.mononest.features.2',
     ],
   },
+  {
+    id: 'rakufirst',
+    image: '/images/works/raku-first.co.jp-1280.webp',
+    url: 'https://raku-first.co.jp/',
+    titleKey: 'works.rakufirst.title',
+    descriptionKey: 'works.rakufirst.description',
+    pageCount: 12,
+    price: 480000,
+    features: [
+      'works.rakufirst.features.0',
+      'works.rakufirst.features.1',
+      'works.rakufirst.features.2',
+    ],
+  },
+  {
+    id: 'rakutto',
+    image: '/images/works/www.rakutto.com_index-1280.webp',
+    url: 'https://www.rakutto.com/index',
+    titleKey: 'works.rakutto.title',
+    descriptionKey: 'works.rakutto.description',
+    pageCount: 10,
+    price: 520000,
+    features: [
+      'works.rakutto.features.0',
+      'works.rakutto.features.1',
+      'works.rakutto.features.2',
+    ],
+  },
 ]; 

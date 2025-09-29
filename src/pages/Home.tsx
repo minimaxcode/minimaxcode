@@ -10,171 +10,73 @@ interface HomeProps {
 export const Home = ({ onPageChange }: HomeProps) => {
   const { t } = useTranslation();
 
-  const features = [
-    {
-      icon: Zap,
-      title: t('home.features.lowPrice.title'),
-      description: t('home.features.lowPrice.description'),
-      color: 'teal',
-      competitors: {
-        title: t('home.features.lowPrice.competitors.title'),
-        price: '¥300,000～500,000',
-      },
-      ourService: {
-        title: t('home.features.lowPrice.ourService.title'),
-        price: t('home.features.lowPrice.ourService.price'),
-        highlight: t('home.features.lowPrice.ourService.highlight')
-      },
-      services: [
-        'レスポンシブデザイン',
-        'SEO基本設定',
-        'お問い合わせフォーム',
-        '無料サポート30日間'
-      ]
-    },
-    {
-      icon: Shield,
-      title: t('home.features.speed.title'),
-      description: t('home.features.speed.description'),
-      color: 'orange',
-      competitors: {
-        title: t('home.features.speed.competitors.title'),
-        price: t('home.features.speed.competitors.duration'),
-        subtitle: t('home.features.speed.competitors.period')
-      },
-      ourService: {
-        title: t('home.features.speed.ourService.title'),
-        price: t('home.features.speed.ourService.duration'),
-        subtitle: t('home.features.speed.competitors.period'),
-        highlight: t('home.features.speed.ourService.highlight')
-      },
-      services: [
-        'AI活用による効率化',
-        '並行作業による短縮',
-        'テンプレート活用',
-        '迅速な修正対応'
-      ]
-    },
-    {
-      icon: Eye,
-      title: t('home.features.transparency.title'),
-      description: t('home.features.transparency.description'),
-      color: 'violet',
-      competitors: {
-        title: t('home.features.transparency.competitors.title'),
-        price: t('home.features.transparency.competitors.status'),
-        subtitle: t('home.features.transparency.competitors.note')
-      },
-      ourService: {
-        title: t('home.features.transparency.ourService.title'),
-        price: t('home.features.transparency.ourService.status'),
-        subtitle: '料金体系',
-        highlight: t('home.features.transparency.ourService.highlight')
-      },
-      services: [
-        '詳細な見積書提供',
-        '進捗状況リアルタイム共有',
-        '修正回数制限なし',
-        '完全固定料金制'
-      ]
-    },
-  ];
-
-  const flowSteps = [
-    t('flow.steps.step1.title'),
-    t('flow.steps.step2.title'),
-    t('flow.steps.step3.title'),
-    t('flow.steps.step4.title'),
-    t('flow.steps.step5.title'),
-    t('flow.steps.step6.title'),
-  ];
-
   return (
     <div className="min-h-screen bg-white text-gray-900">
       {/* Hero Section */}
-      <section className="relative bg-transparent pt-[var(--header-h)] md:pt-0 md:-mt-[var(--header-h)] mb-6 md:mb-8">
-        <div className="relative w-full md:grid h-[55vh] sm:h-[50vh] md:h-auto md:aspect-[21/9] md:min-h-[500px] lg:min-h-[560px] max-w-[1536px] mx-auto">
-          <motion.div
-            initial={{ opacity: 0, y: 30 }}
-            animate={{ opacity: 1, y: 0 }}
-            transition={{ duration: 0.8 }}
-            className="md:col-start-1 md:row-start-1"
-          >
-            <img src="/images/home-hero-1600.webp" alt="Home Hero" className="w-full h-full object-contain object-center" />
-          </motion.div>
-
-          {/* 文案与按钮覆盖层（左半部分） */}
-          <motion.div
-            initial={{ opacity: 0, y: 20 }}
-            animate={{ opacity: 1, y: 0 }}
-            transition={{ duration: 0.8, delay: 0.1 }}
-            className="hidden md:flex md:col-start-1 md:row-start-1 items-start justify-start z-10"
-          >
-            {/* 桌面端覆盖层 */}
-            <div className="w-full md:pl-[6vw] md:pr-[4vw] pt-6 md:pt-10 lg:pt-16">
-              <div className="w-full md:w-1/2 lg:w-1/2 text-left md:pt-[calc(var(--header-h)+8px)] lg:pt-[calc(var(--header-h)+28px)] xl:pt-[calc(var(--header-h)+48px)] pb-[clamp(16px,4vh,48px)] max-w-[72%]">
-                <h1 className="text-[clamp(26px,3.6vw,56px)] font-extrabold text-[#2F4766] mb-3">
-                  {t('home.title')}
-                </h1>
-                <h2 className="text-[clamp(16px,2.2vw,28px)] text-[#0EA5FF] mb-5">
-                  {t('home.hero.subtitle')}
-                </h2>
-                <p className="text-[clamp(14px,1.2vw,18px)] text-[#2F4766]/95 leading-relaxed mb-10 max-w-[52rem] break-words">
-                  {t('home.hero.description')}
-                </p>
-                <div className="flex flex-row gap-5 flex-wrap">
-                  <motion.button
-                    whileHover={{ scale: 1.03 }}
-                    whileTap={{ scale: 0.97 }}
-                    onClick={() => onPageChange('quote')}
-                    className="px-6 py-3 rounded-xl bg-gradient-to-r from-[#33C6FF] to-[#0EA5FF] text-white font-semibold text-base shadow-lg hover:opacity-90"
-                  >
-                    {t('home.hero.cta')}
-                  </motion.button>
-                  <motion.button
-                    whileHover={{ scale: 1.03 }}
-                    whileTap={{ scale: 0.97 }}
-                    onClick={() => onPageChange('contact')}
-                    className="px-6 py-3 rounded-xl bg-gradient-to-r from-[#0EA5FF] to-[#6A7DFF] text-white font-semibold text-base shadow-lg hover:opacity-90"
-                  >
-                    {t('home.hero.contact')}
-                  </motion.button>
+      <section className="relative bg-gradient-to-r from-[#CFEFFF] via-[#E3EEFF] to-[#EFDBFF] pt-[calc(var(--header-h)+8px)] md:pt-[calc(var(--header-h)+8px)] mb-6 md:mb-8">
+        <div className="w-[97%] max-w-[1536px] mx-auto px-2 sm:px-4 md:px-6 lg:px-8 xl:px-12">
+          <div className="grid md:grid-cols-2 items-start gap-6 md:gap-10">
+            {/* 左侧：文案与按钮 */}
+            <motion.div
+              initial={{ opacity: 0, y: 20 }}
+              animate={{ opacity: 1, y: 0 }}
+              transition={{ duration: 0.8 }}
+              className="order-1 md:order-none md:mt-6 lg:mt-8 xl:mt-10"
+            >
+              <div className="w-full md:pr-[2vw] pt-0">
+                <div className="text-left md:pt-0 lg:pt-0 xl:pt-0 pb-[clamp(16px,4vh,48px)] max-w-[52rem]">
+                  <h1 className="text-[clamp(26px,3.6vw,56px)] font-extrabold text-[#2F4766] mb-3">
+                    {t('home.title')}
+                  </h1>
+                  <h2 className="text-[clamp(16px,2.2vw,28px)] text-[#0EA5FF] mb-5">
+                    {t('home.hero.subtitle')}
+                  </h2>
+                  <p className="text-[clamp(14px,1.2vw,18px)] text-[#2F4766]/95 leading-relaxed mb-8 break-words">
+                    {t('home.hero.description')}
+                  </p>
+                  <div className="flex flex-row gap-5 flex-wrap">
+                    <motion.button
+                      whileHover={{ scale: 1.03 }}
+                      whileTap={{ scale: 0.97 }}
+                      onClick={() => onPageChange('quote')}
+                      className="px-6 py-3 rounded-xl bg-gradient-to-r from-[#33C6FF] to-[#0EA5FF] text-white font-semibold text-base shadow-lg hover:opacity-90"
+                    >
+                      {t('home.hero.cta')}
+                    </motion.button>
+                    <motion.button
+                      whileHover={{ scale: 1.03 }}
+                      whileTap={{ scale: 0.97 }}
+                      onClick={() => onPageChange('contact')}
+                      className="px-6 py-3 rounded-xl bg-gradient-to-r from-[#0EA5FF] to-[#6A7DFF] text-white font-semibold text-base shadow-lg hover:opacity-90"
+                    >
+                      {t('home.hero.contact')}
+                    </motion.button>
+                  </div>
                 </div>
               </div>
-            </div>
-          </motion.div>
-        </div>
-        {/* 移动端独立文案块（不覆盖图片，避免重叠） */}
-                 <div className="md:hidden px-4 pt-3 pb-6">
-           <h1 className="text-2xl font-extrabold text-[#2F4766] mb-3">
-             {t('home.title')}
-           </h1>
-           <h2 className="text-lg text-[#0EA5FF] mb-4">
-             {t('home.hero.subtitle')}
-           </h2>
-           <p className="text-sm text-[#2F4766]/95 leading-relaxed mb-5">
-             {t('home.hero.description')}
-           </p>
-          <div className="flex gap-3 flex-wrap">
-            <button
-              onClick={() => onPageChange('quote')}
-              className="px-5 py-3 rounded-xl bg-gradient-to-r from-[#33C6FF] to-[#0EA5FF] text-white font-semibold text-sm"
+            </motion.div>
+
+            {/* 右侧：示意图片 */}
+            <motion.div
+              initial={{ opacity: 0, y: 30 }}
+              animate={{ opacity: 1, y: 0 }}
+              transition={{ duration: 0.8, delay: 0.1 }}
             >
-              {t('home.hero.cta')}
-            </button>
-            <button
-              onClick={() => onPageChange('contact')}
-              className="px-5 py-3 rounded-xl bg-gradient-to-r from-[#0EA5FF] to-[#6A7DFF] text-white font-semibold text-sm"
-            >
-              {t('home.hero.contact')}
-            </button>
+              <div className="w-full h-auto flex items-start justify-end md:mt-6 lg:mt-8 xl:mt-10 pr-0">
+                <img
+                  src="/images/home-introduction-1280.webp"
+                  alt="MiniMaxCode Introduction"
+                  className="w-full h-auto md:max-h-[380px] lg:max-h-[460px] xl:max-h-[520px] object-contain object-center"
+                />
+              </div>
+            </motion.div>
           </div>
         </div>
       </section>
 
       {/* Why Choose Us Section */}
       <section className="py-16 md:py-20 bg-transparent">
-        <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
+        <div className="w-[97%] max-w-[1536px] mx-auto px-2 sm:px-4 md:px-6 lg:px-8 xl:px-12">
           <motion.div
             initial={{ opacity: 0, y: 30 }}
             whileInView={{ opacity: 1, y: 0 }}
@@ -227,7 +129,7 @@ export const Home = ({ onPageChange }: HomeProps) => {
                   whileInView={{ opacity: 1, y: 0 }}
                   transition={{ duration: 0.8, delay: index * 0.1 }}
                   viewport={{ once: true }}
-                  className={`max-w-4xl mx-auto px-3 ${
+                  className={`max-w-5xl mx-auto px-2 md:px-3 ${
                     index === 0 ? 'text-right pr-8 lg:pr-20' :
                     index === 1 ? 'text-left pl-8 lg:pl-20' :
                     index === 2 ? 'text-right pr-8 lg:pr-20' :
@@ -238,7 +140,7 @@ export const Home = ({ onPageChange }: HomeProps) => {
                   <div className={`inline-block max-w-full ${
                     index % 2 === 0 ? 'bg-white' : 'bg-blue-50'
                   } rounded-2xl px-3 py-2 md:px-8 md:py-6 shadow-md border border-blue-100`}>
-                    <p className="text-sm md:text-xl text-gray-800 font-medium leading-relaxed whitespace-normal xl:whitespace-nowrap break-words">
+                    <p className="text-sm md:text-xl text-gray-800 font-medium leading-relaxed whitespace-normal break-words">
                       {item}
                     </p>
                   </div>
@@ -251,7 +153,7 @@ export const Home = ({ onPageChange }: HomeProps) => {
 
       {/* Features Section */}
       <section className="py-12 md:py-20 bg-transparent">
-        <div className="w-full md:w-[70%] max-w-[2000px] mx-auto px-4 sm:px-6 lg:px-12 xl:px-16">
+        <div className="w-[97%] max-w-[1536px] mx-auto px-2 sm:px-4 md:px-6 lg:px-8 xl:px-12">
           <motion.div
             initial={{ opacity: 0, y: 30 }}
             whileInView={{ opacity: 1, y: 0 }}
@@ -308,7 +210,7 @@ export const Home = ({ onPageChange }: HomeProps) => {
                     className="max-h-full max-w-full object-contain"
                   />
                 </div>
-                <p className="text-gray-700 text-sm md:text-base leading-relaxed text-left">
+                <p className="text-gray-700 text-sm md:text-base leading-relaxed text-left max-w-[70ch]">
                   {feature.description}
                 </p>
               </motion.div>

@@ -156,15 +156,15 @@
         "description": "Get complete source code for +20% of total cost. Full ownership and freedom to modify and extend as needed."
       },
       "costEffective": {
-        "title": "Outstanding Cost Performance",
+        "title": "Top Value Design",
         "description": "Our company leverages cutting-edge AI development technology to provide customers with the significant advantage of launching high-quality websites at \"low cost\" and quickly."
       },
       "timeSaving": {
-        "title": "Time and Effort Savings",
+        "title": "Save Time & Effort",
         "description": "Professional teams handle everything from website construction to design. Furthermore, we provide comprehensive professional operation services all-in-one, supporting customers to focus on their core business."
       },
       "customization": {
-        "title": "Unique Customization",
+        "title": "Original Custom Build",
         "description": "Setting ourselves apart from conventional templates, we create \"custom-made\" websites tailored to your business. We craft unique digital business cards that are one-of-a-kind."
       },
       "getStarted": "Let's Get Started"
@@ -554,6 +554,24 @@
         "Online auto-quote reduces phone inquiry workload significantly",
         "Publishing travel guides and updates grows online subscribers",
         "Form + LINE integration enables instant responses, improving deal conversion"
+      ]
+    },
+    "rakufirst": {
+      "title": "RAKU FIRST Corporate Site",
+      "description": "Corporate website for China import agency and OEM support. We structured services, pricing tables, plan comparisons, news, and clear CTAs to build trust and conversions.",
+      "features": [
+        "Optimized API-linked tables for rates and shipping information",
+        "Japanese-first information architecture with prominent contact CTAs",
+        "Image optimization and lightweight build for fast PC/mobile pages"
+      ]
+    },
+    "rakutto": {
+      "title": "Rakutto! Research & Proxy Purchasing Platform",
+      "description": "UI designed for 1688-linked API workflow, streamlining research → cart → request. Emphasis on mobile usability and clear visibility.",
+      "features": [
+        "Split long-screen preview to highlight core functions",
+        "Sign-up and CTA placed above the fold to drive registration",
+        "Accessible color contrast and readable typography"
       ]
     },
     "mononest": {
