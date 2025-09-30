@@ -13,7 +13,8 @@ export const NewsDetail = () => {
   const { slug = '' } = useParams()
   const { i18n, t } = useTranslation('common')
   const [post, setPost] = useState<any | null>(null)
-  
+  // 动态记录封面图宽高比，保证既不留白也不裁切
+  const [coverRatio, setCoverRatio] = useState<string | undefined>(undefined)
 
   // 先计算 attrs 与内容 HTML，避免在条件 return 前调用 hooks 数量不一致
   const attrs = (post?.attributes ?? post ?? {}) as any
@@ -136,20 +137,35 @@ export const NewsDetail = () => {
           {(() => {
             const cover = attrs.coverImage || attrs.cover || attrs.Cover
             let imageUrl = ''
+            let ratioFromMeta: string | undefined
             if (Array.isArray(cover) && cover.length > 0) {
-              imageUrl = cover[0]?.url || cover[0]?.formats?.large?.url || cover[0]?.formats?.thumbnail?.url || ''
-            } else if (cover?.data) {
-              const m = Array.isArray(cover.data) ? cover.data[0] : cover.data
-              const mAttrs = m?.attributes ?? m
-              imageUrl = mAttrs?.url || mAttrs?.formats?.large?.url || mAttrs?.formats?.thumbnail?.url || ''
+              const c0 = cover[0]
+              // 文章详情的图片优先使用large版本
+              const imageInfo = c0?.formats?.large || c0 || c0?.formats?.thumbnail
+              imageUrl = imageInfo.url || ''
+              const w = imageInfo.width
+              const h = imageInfo.height
+              if (w && h) ratioFromMeta = `${w} / ${h}`
             }
+            
             if (imageUrl && imageUrl.startsWith('/')) {
               const base = (import.meta.env.VITE_STRAPI_URL || '').replace(/\/$/, '')
               imageUrl = base + imageUrl
             }
             return imageUrl ? (
-              <div className="relative">
-                <img src={imageUrl} alt={attrs.Title ?? attrs.title ?? ''} className="w-full h-auto max-h-96 object-contain bg-gray-100 rounded-xl" />
+              <div className="relative w-full rounded-xl overflow-hidden bg-gray-100" style={{ aspectRatio: ratioFromMeta || coverRatio || '16 / 9' }}>
+                <img
+                  src={imageUrl}
+                  alt={attrs.Title ?? attrs.title ?? ''}
+                  className="absolute inset-0 w-full h-full object-cover"
+                  onLoad={(e) => {
+                    if (!ratioFromMeta && !coverRatio) {
+                      const iw = (e.currentTarget as HTMLImageElement).naturalWidth
+                      const ih = (e.currentTarget as HTMLImageElement).naturalHeight
+                      if (iw && ih) setCoverRatio(`${iw} / ${ih}`)
+                    }
+                  }}
+                />
                 {itemTags && itemTags.length > 0 && (
                   <div className="absolute bottom-3 left-3 flex flex-wrap gap-2">
                     {itemTags.slice(0, 2).map((tg: any) => {

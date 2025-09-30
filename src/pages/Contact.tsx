@@ -278,7 +278,7 @@ export const Contact = ({ onPageChange, quoteDetails }: ContactProps) => {
     { q: t('contact.faq.faq17.q'), a: t('contact.faq.faq17.a') },
     { q: t('contact.faq.faq18.q'), a: t('contact.faq.faq18.a') },
     { q: t('contact.faq.faq19.q'), a: t('contact.faq.faq19.a') },
-    { q: t('contact.faq.faq20.q'), a: t('contact.faq.faq20.a') },
+    /* { q: t('contact.faq.faq20.q'), a: t('contact.faq.faq20.a') }, */
     { q: t('contact.faq.faq21.q'), a: t('contact.faq.faq21.a') },
     { q: t('contact.faq.faq22.q'), a: t('contact.faq.faq22.a') },
     { q: t('contact.faq.faq23.q'), a: t('contact.faq.faq23.a') },
