@@ -1,5 +1,5 @@
 import { useTranslation } from 'react-i18next';
-import { ChevronRight } from 'lucide-react';
+// removed unused import
 
 interface FooterProps {
   onPageChange: (page: string) => void;
@@ -63,7 +63,7 @@ export const Footer = ({ onPageChange }: FooterProps) => {
             <div className="flex flex-col sm:flex-row sm:flex-wrap" style={{ gap: '3rem' }}>
               {/* Column: Solutions - 分为两列 */}
               <div className="flex-shrink-0">
-                <h3 className="text-gray-900 font-semibold mb-4 text-center text-sm">{t('nav.solutions.title')}</h3>
+                <h3 className="text-gray-900 font-semibold mb-4 text-left sm:text-center text-sm">{t('nav.solutions.title')}</h3>
                 <div className="flex flex-col sm:flex-row gap-4">
                   {/* Solutions 第一列 */}
                   <div>
