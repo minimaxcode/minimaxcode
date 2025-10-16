@@ -37,7 +37,6 @@ export const Footer = ({ onPageChange }: FooterProps) => {
   const supportLinks = [
     { key: 'home#flow', label: t('flow.hero.title') },
     { key: 'contact', label: t('nav.contact') },
-    { key: 'news', label: t('nav.news') },
   ];
 
   return (

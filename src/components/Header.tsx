@@ -19,6 +19,7 @@ export const Header = ({ currentPage, onPageChange }: HeaderProps) => {
     { key: 'home', label: t('nav.home') },
     { key: 'works', label: t('nav.service') },
     { key: 'pricing', label: t('nav.pricing') },
+    { key: 'news', label: t('nav.news') },
   ];
 
   const solutionItems = [
@@ -140,7 +141,7 @@ export const Header = ({ currentPage, onPageChange }: HeaderProps) => {
 
           {/* Mid-size Navigation: 768–1023 显示精简导航（ホーム/ソリューション/制作実績/料金）*/}
           <nav className="hidden md:flex lg:hidden items-center space-x-3">
-            {[...navigationItems.filter(i => ['home','works','pricing'].includes(i.key))].map((item) => (
+            {[...navigationItems.filter(i => ['home','works','pricing','news'].includes(i.key))].map((item) => (
               <div key={`md-${item.key}`}>
                 <button
                   onClick={() => handleNavClick(item.key)}
