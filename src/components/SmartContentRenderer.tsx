@@ -38,8 +38,72 @@ const FullHtmlIframe: React.FC<{ html: string; className?: string }> = ({ html, 
         const doc = iframe.contentDocument || iframe.contentWindow?.document
         if (doc) {
           const style = doc.createElement('style')
-          style.textContent = 'html,body{margin:0;padding:0;overflow:hidden;height:auto}'
+          // 允许 iframe 内部内容滚动到锚点
+          style.textContent = 'html,body{margin:0;padding:0;overflow:auto;height:auto}'
           doc.head.appendChild(style)
+
+          // 链接处理：
+          // 1) 站内链接在顶层打开，避免在 iframe 内部再次嵌套站点
+          // 2) 目录锚点(#xxxx)平滑滚动到目标位置
+          const anchors = Array.from(doc.querySelectorAll('a[href]')) as HTMLAnchorElement[]
+          anchors.forEach((a) => {
+            const href = a.getAttribute('href') || ''
+            if (!href) return
+            if (href.startsWith('#')) {
+              a.addEventListener('click', (e) => {
+                const id = href.slice(1)
+                const target = doc.getElementById(id)
+                if (target) {
+                  e.preventDefault()
+                  try { target.scrollIntoView({ behavior: 'smooth', block: 'start' }) } catch { target.scrollIntoView() }
+                  // 滚动后重新计算高度
+                  setTimeout(() => {
+                    try {
+                      const h = Math.max(
+                        doc.documentElement.scrollHeight,
+                        doc.body.scrollHeight,
+                        doc.documentElement.offsetHeight,
+                        doc.body.offsetHeight,
+                        600,
+                      )
+                      setHeight(h + 16)
+                    } catch {}
+                  }, 200)
+                }
+              })
+              return
+            }
+
+            // 绝对/相对站内链接 → 顶层打开
+            try {
+              const url = new URL(href, window.location.origin)
+              if (url.origin === window.location.origin) {
+                a.setAttribute('target', '_top')
+                a.setAttribute('rel', 'noopener')
+              } else {
+                // 外部链接默认新窗口
+                a.setAttribute('target', '_blank')
+                a.setAttribute('rel', 'noopener noreferrer')
+              }
+            } catch {
+              // 非法 URL 保持默认行为
+            }
+          })
+
+          // 当 hash 变化时（例如用户手动修改或浏览器行为），同步高度
+          iframe.contentWindow?.addEventListener('hashchange', () => {
+            try {
+              const h = Math.max(
+                doc.documentElement.scrollHeight,
+                doc.body.scrollHeight,
+                doc.documentElement.offsetHeight,
+                doc.body.offsetHeight,
+                600,
+              )
+              setHeight(h + 16)
+            } catch {}
+          })
+
           setTimeout(() => {
             const h = Math.max(
               doc.documentElement.scrollHeight,
@@ -68,8 +132,7 @@ const FullHtmlIframe: React.FC<{ html: string; className?: string }> = ({ html, 
         srcDoc={html}
         className={`w-full border-0 rounded-lg ${className || ''}`}
         style={{ height, opacity: loading ? 0 : 1 }}
-        sandbox="allow-same-origin allow-scripts allow-forms allow-popups"
-        scrolling="no"
+        sandbox="allow-same-origin allow-scripts allow-forms allow-popups allow-top-navigation-by-user-activation"
         title="html"
       />
     </div>
