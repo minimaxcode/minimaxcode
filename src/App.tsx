@@ -24,10 +24,10 @@ import { NewsDetail } from './pages/NewsDetail';
 // TypeScript a window objectにgtagが存在することを知らせる
 declare global {
   interface Window {
-    gtag: (
-      command: 'config' | 'event',
-      targetId: string,
-      config?: { page_path?: string }
+    gtag?: (
+      command: 'js' | 'config' | 'event',
+      targetIdOrEventName: string | Date,
+      params?: Record<string, unknown>
     ) => void;
   }
 }
