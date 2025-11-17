@@ -78,6 +78,11 @@ export const News = () => {
 
   const canPrev = page > 1
   const canNext = page < (paginationMeta?.pageCount ?? 1)
+  const totalItems = paginationMeta?.total ?? 0
+  const pageSize = paginationMeta?.pageSize ?? 0
+  const hasItems = totalItems > 0
+  const startIndex = hasItems ? (page - 1) * pageSize + 1 : 0
+  const endIndex = hasItems ? Math.min(page * pageSize, totalItems) : 0
 
   const renderHeader = (
     <div className="text-center mb-10">
@@ -239,9 +244,13 @@ export const News = () => {
             
             <div className="flex items-center justify-between flex-col md:flex-row gap-4">
                 <div className="text-sm text-gray-600">
-                  {paginationMeta.total > 0
-                    ? `全${paginationMeta.total}件中 ${((page - 1) * paginationMeta.pageSize) + 1} - ${Math.min(page * paginationMeta.pageSize, paginationMeta.total)} 件を表示`
-                    : '記事がありません'}
+                  {hasItems
+                    ? t('news.pagination.summary', {
+                        total: totalItems,
+                        start: startIndex,
+                        end: endIndex,
+                      })
+                    : t('news.pagination.empty')}
                 </div>
                 <div className="flex items-center gap-2">
                   <button
@@ -250,17 +259,20 @@ export const News = () => {
                     className="inline-flex items-center gap-2 px-4 py-2 rounded-full border border-gray-200 text-sm font-medium text-gray-700 hover:bg-gray-50 disabled:opacity-40 disabled:cursor-not-allowed"
                   >
                     <ChevronLeft className="w-4 h-4" />
-                    前へ
+                    {t('news.pagination.prev')}
                   </button>
                   <span className="text-sm text-gray-600">
-                    {page} / {paginationMeta.pageCount}
+                    {t('news.pagination.pageInfo', {
+                      page,
+                      pageCount: paginationMeta.pageCount,
+                    })}
                   </span>
                   <button
                     onClick={() => canNext && setPage((prev) => prev + 1)}
                     disabled={!canNext}
                     className="inline-flex items-center gap-2 px-4 py-2 rounded-full border border-gray-200 text-sm font-medium text-gray-700 hover:bg-gray-50 disabled:opacity-40 disabled:cursor-not-allowed"
                   >
-                    次へ
+                    {t('news.pagination.next')}
                     <ChevronRight className="w-4 h-4" />
                   </button>
                 </div>

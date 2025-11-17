@@ -37,6 +37,13 @@
     "filter": { "all": "すべて" },
     "no": { "results": "現在表示できるブログはありません。" },
     "read": { "more": "詳しく見る" },
+    "pagination": {
+      "summary": "全{{total}}件中 {{start}} - {{end}} 件を表示",
+      "empty": "記事がありません",
+      "prev": "前へ",
+      "next": "次へ",
+      "pageInfo": "{{page}} / {{pageCount}}"
+    },
     "detail": {
       "notfound": {
         "title": "該当する記事が見つかりません",

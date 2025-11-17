@@ -49,6 +49,13 @@
     },
     "read": {
       "more": "Read more"
+    },
+    "pagination": {
+      "summary": "Showing {{start}}-{{end}} of {{total}} items",
+      "empty": "No articles available",
+      "prev": "Previous",
+      "next": "Next",
+      "pageInfo": "{{page}} / {{pageCount}}"
     }
   },
   "language": {
