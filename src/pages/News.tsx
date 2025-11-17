@@ -2,7 +2,7 @@ import { useEffect, useMemo, useState } from 'react'
 import { useTranslation } from 'react-i18next'
 import { Link } from 'react-router-dom'
 import { fetchPosts, fetchTags } from '@/lib/strapi'
-import { Calendar, Tag as TagIcon } from 'lucide-react'
+import { Calendar, ChevronLeft, ChevronRight, Tag as TagIcon } from 'lucide-react'
 import { useQuery } from '@tanstack/react-query'
 
 export const News = () => {
@@ -11,17 +11,25 @@ export const News = () => {
   const [tags, setTags] = useState<any[]>([])
   const [selectedTagId, setSelectedTagId] = useState<number>(0)
   
+  const [page, setPage] = useState<number>(1)
+  const [paginationMeta, setPaginationMeta] = useState<{ page: number; pageCount: number; pageSize: number; total: number }>({
+    page: 1,
+    pageCount: 1,
+    pageSize: 12,
+    total: 0,
+  })
 
   const {
     data: postResData,
     isLoading: loadingPosts,
+    isFetching: fetchingPosts,
     error: postsError,
     refetch: refetchPosts,
   } = useQuery({
-    queryKey: ['posts', 'ja', 1, 12, selectedTagId || 0],
+    queryKey: ['posts', 'ja', page, 12, selectedTagId || 0],
     queryFn: () =>
       fetchPosts({
-        page: 1,
+        page,
         pageSize: 12,
         locale: 'ja' as any,
         tagId: selectedTagId === 0 ? undefined : selectedTagId,
@@ -34,8 +42,18 @@ export const News = () => {
   })
 
   useEffect(() => {
+    if (!postResData) return
     const list = postResData?.data ?? []
     setPosts(list)
+    const meta = (postResData as any)?.meta?.pagination
+    if (meta) {
+      setPaginationMeta({
+        page: meta.page ?? page,
+        pageCount: meta.pageCount ?? 1,
+        pageSize: meta.pageSize ?? 12,
+        total: meta.total ?? list.length,
+      })
+    }
   }, [postResData])
 
   useEffect(() => {
@@ -52,7 +70,14 @@ export const News = () => {
     if (!exists) setSelectedTagId(0)
   }, [tags, selectedTagId])
 
+  useEffect(() => {
+    setPage(1)
+  }, [selectedTagId])
+
   const displayPosts = useMemo(() => posts ?? [], [posts])
+
+  const canPrev = page > 1
+  const canNext = page < (paginationMeta?.pageCount ?? 1)
 
   const renderHeader = (
     <div className="text-center mb-10">
@@ -134,74 +159,112 @@ export const News = () => {
               {t('news.no.results')}
             </div>
           ) : (
-            <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 gap-6">
-              {displayPosts.map((p) => {
-                const item = p.attributes ?? p
-                const cover = item.coverImage || item.cover || item.Cover
-                let imageUrl = ''
-                if (Array.isArray(cover) && cover.length > 0) {
-                  imageUrl = cover[0]?.url || cover[0]?.formats?.large?.url || cover[0]?.formats?.thumbnail?.url || ''
-                } else if (cover?.data) {
-                  const m = Array.isArray(cover.data) ? cover.data[0] : cover.data
-                  const mAttrs = m?.attributes ?? m
-                  imageUrl = mAttrs?.url || mAttrs?.formats?.large?.url || mAttrs?.formats?.thumbnail?.url || ''
-                }
-                if (imageUrl && imageUrl.startsWith('/')) {
-                  const base = (import.meta.env.VITE_STRAPI_URL || '').replace(/\/$/, '')
-                  imageUrl = base + imageUrl
-                }
-                if (!imageUrl) {
-                  imageUrl = '/images/tokyo-skyline.jpg'
-                }
-                const dateText = item.Date || item.date || item.publishedAt
-                const docId = item.documentId || p.documentId || p.id
-                const itemTags = (item?.tags?.data ?? item?.tags ?? []) as any[]
-                return (
-                  <article key={p.id} className="bg-white rounded-xl shadow-sm overflow-hidden hover:shadow-md transition-shadow">
-                    {imageUrl && (
-                      <div className="relative w-full h-56 md:h-60 overflow-hidden">
-                        <img src={imageUrl} alt={item.Title || item.title} className="w-full h-full object-cover" />
-                        {/* 标签徽标 */}
-                        {itemTags?.length > 0 && (
-                          <div className="absolute top-3 left-3 flex flex-wrap gap-2">
-                            {itemTags.slice(0, 2).map((tg: any) => {
-                              const label = tg?.attributes?.name ?? tg?.name ?? ''
-                              return (
-                                <span key={tg.id} className="inline-flex items-center px-2.5 py-1 rounded-full text-xs font-medium bg-white/90 text-gray-800 shadow">
-                                  <TagIcon className="w-3.5 h-3.5 mr-1 text-emerald-600" />
-                                  {label}
-                                </span>
-                              )
-                            })}
+            <div className="space-y-8">
+              <div className="relative">
+                {fetchingPosts && (
+                  <div className="absolute inset-0 z-10 flex items-center justify-center bg-white/70 backdrop-blur-sm rounded-2xl">
+                    <div className="h-6 w-6 border-2 border-[#0EA5FF] border-t-transparent rounded-full animate-spin" />
+                  </div>
+                )}
+                <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 gap-6">
+                  {displayPosts.map((p) => {
+                    const item = p.attributes ?? p
+                    const cover = item.coverImage || item.cover || item.Cover
+                    let imageUrl = ''
+                    if (Array.isArray(cover) && cover.length > 0) {
+                      imageUrl = cover[0]?.url || cover[0]?.formats?.large?.url || cover[0]?.formats?.thumbnail?.url || ''
+                    } else if (cover?.data) {
+                      const m = Array.isArray(cover.data) ? cover.data[0] : cover.data
+                      const mAttrs = m?.attributes ?? m
+                      imageUrl = mAttrs?.url || mAttrs?.formats?.large?.url || mAttrs?.formats?.thumbnail?.url || ''
+                    }
+                    if (imageUrl && imageUrl.startsWith('/')) {
+                      const base = (import.meta.env.VITE_STRAPI_URL || '').replace(/\/$/, '')
+                      imageUrl = base + imageUrl
+                    }
+                    if (!imageUrl) {
+                      imageUrl = '/images/tokyo-skyline.jpg'
+                    }
+                    const dateText = item.Date || item.date || item.publishedAt
+                    const docId = item.documentId || p.documentId || p.id
+                    const itemTags = (item?.tags?.data ?? item?.tags ?? []) as any[]
+                    return (
+                      <article key={p.id} className="bg-white rounded-xl shadow-sm overflow-hidden hover:shadow-md transition-shadow">
+                        {imageUrl && (
+                          <div className="relative w-full h-56 md:h-60 overflow-hidden">
+                            <img src={imageUrl} alt={item.Title || item.title} className="w-full h-full object-cover" />
+                            {/* 标签徽标 */}
+                            {itemTags?.length > 0 && (
+                              <div className="absolute top-3 left-3 flex flex-wrap gap-2">
+                                {itemTags.slice(0, 2).map((tg: any) => {
+                                  const label = tg?.attributes?.name ?? tg?.name ?? ''
+                                  return (
+                                    <span key={tg.id} className="inline-flex items-center px-2.5 py-1 rounded-full text-xs font-medium bg-white/90 text-gray-800 shadow">
+                                      <TagIcon className="w-3.5 h-3.5 mr-1 text-emerald-600" />
+                                      {label}
+                                    </span>
+                                  )
+                                })}
+                              </div>
+                            )}
                           </div>
                         )}
-                      </div>
-                    )}
-                    <div className="p-4">
-                      <h3 className="text-sm md:text-base font-bold leading-snug mb-1 break-words">
-                        {item.Title || item.title}
-                      </h3>
-                      <div className="flex items-center justify-between mb-1">
-                        {dateText && (
-                          <div className="text-xs text-gray-500 flex items-center">
-                            <Calendar className="w-4 h-4 mr-1.5 text-gray-400" />
-                            {new Date(dateText).toLocaleDateString('ja-JP')}
+                        <div className="p-4">
+                          <h3 className="text-sm md:text-base font-bold leading-snug mb-1 break-words">
+                            {item.Title || item.title}
+                          </h3>
+                          <div className="flex items-center justify-between mb-1">
+                            {dateText && (
+                              <div className="text-xs text-gray-500 flex items-center">
+                                <Calendar className="w-4 h-4 mr-1.5 text-gray-400" />
+                                {new Date(dateText).toLocaleDateString('ja-JP')}
+                              </div>
+                            )}
+                            <Link
+                              to={`/news/${docId}`}
+                              className="inline-flex items-center px-3 py-1.5 bg-[#0EA5FF] text-white rounded-full text-xs md:text-sm font-medium hover:opacity-90"
+                            >
+                              {t('news.read.more')}
+                            </Link>
                           </div>
-                        )}
-                        <Link
-                          to={`/news/${docId}`}
-                          className="inline-flex items-center px-3 py-1.5 bg-[#0EA5FF] text-white rounded-full text-xs md:text-sm font-medium hover:opacity-90"
-                        >
-                          {t('news.read.more')}
-                        </Link>
-                      </div>
-                      {item.excerpt && (
-                        <p className="text-sm text-gray-600 line-clamp-3 mb-3">{item.excerpt}</p>
-                      )}
-                    </div>
-                  </article>
-                )
-              })}
+                          {item.excerpt && (
+                            <p className="text-sm text-gray-600 line-clamp-3 mb-3">{item.excerpt}</p>
+                          )}
+                        </div>
+                      </article>
+                    )
+                  })}
+                </div>
+            </div>
+            
+            <div className="flex items-center justify-between flex-col md:flex-row gap-4">
+                <div className="text-sm text-gray-600">
+                  {paginationMeta.total > 0
+                    ? `全${paginationMeta.total}件中 ${((page - 1) * paginationMeta.pageSize) + 1} - ${Math.min(page * paginationMeta.pageSize, paginationMeta.total)} 件を表示`
+                    : '記事がありません'}
+                </div>
+                <div className="flex items-center gap-2">
+                  <button
+                    onClick={() => canPrev && setPage((prev) => Math.max(1, prev - 1))}
+                    disabled={!canPrev}
+                    className="inline-flex items-center gap-2 px-4 py-2 rounded-full border border-gray-200 text-sm font-medium text-gray-700 hover:bg-gray-50 disabled:opacity-40 disabled:cursor-not-allowed"
+                  >
+                    <ChevronLeft className="w-4 h-4" />
+                    前へ
+                  </button>
+                  <span className="text-sm text-gray-600">
+                    {page} / {paginationMeta.pageCount}
+                  </span>
+                  <button
+                    onClick={() => canNext && setPage((prev) => prev + 1)}
+                    disabled={!canNext}
+                    className="inline-flex items-center gap-2 px-4 py-2 rounded-full border border-gray-200 text-sm font-medium text-gray-700 hover:bg-gray-50 disabled:opacity-40 disabled:cursor-not-allowed"
+                  >
+                    次へ
+                    <ChevronRight className="w-4 h-4" />
+                  </button>
+                </div>
+              </div>
             </div>
           )}
         </div>
