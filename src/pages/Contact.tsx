@@ -174,15 +174,10 @@ export const Contact = ({ onPageChange, quoteDetails }: ContactProps) => {
 
   // 触发谷歌广告转化事件
   useEffect(() => {
-    console.log('submitStatus in useEffect', submitStatus);
-    console.log('typeof window !== "undefined"', typeof window !== 'undefined');
     if (submitStatus === 'success' && typeof window !== 'undefined') {
       const gtag = (window as typeof window & { gtag?: (...args: any[]) => void }).gtag;
-      console.log('gtag in useEffect', gtag);
-      console.log('typeof gtag === "function"', typeof gtag === 'function');
       if (typeof gtag === 'function') {
         gtag('event', 'conversion_event_purchase', {});
-        console.log('gtag("event", "conversion_event_purchase", {}) called');
       } else {
         console.warn('gtag 未初始化，无法上报转化事件');
       }
