@@ -21,7 +21,14 @@ if (__API_TOKEN) {
   }
 }
 
-export async function fetchPosts({ page = 1, pageSize = 10, locale = 'ja' }: { page?: number, pageSize?: number, locale?: StrapiLocale } = {}) {
+type FetchPostsParams = {
+  page?: number
+  pageSize?: number
+  locale?: StrapiLocale
+  tagId?: number | string
+}
+
+export async function fetchPosts({ page = 1, pageSize = 10, locale = 'ja', tagId }: FetchPostsParams = {}) {
   // 集合类型为 Article → REST 路由 /api/articles
   return strapi.find('articles', {
     // 仅返回列表所需字段（注意：字段名区分大小写，后端定义为 Title/Date；id 总会返回无需声明）
@@ -34,6 +41,13 @@ export async function fetchPosts({ page = 1, pageSize = 10, locale = 'ja' }: { p
     },
     sort: 'publishedAt:desc',
     pagination: { page, pageSize },
+    filters: tagId
+      ? {
+          tags: {
+            id: { $eq: tagId },
+          },
+        }
+      : undefined,
     locale,
   })
 }

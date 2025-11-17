@@ -12,17 +12,30 @@ export const News = () => {
   const [selectedTagId, setSelectedTagId] = useState<number>(0)
   
 
-  const { data: postResData, isLoading: loadingPosts, error: postsError, refetch: refetchPosts } = useQuery({
-    queryKey: ['posts', i18n.language, 1, 12],
-    queryFn: () => fetchPosts({ page: 1, pageSize: 12, locale: i18n.language as any }),
+  const {
+    data: postResData,
+    isLoading: loadingPosts,
+    error: postsError,
+    refetch: refetchPosts,
+  } = useQuery({
+    queryKey: ['posts', 'ja', 1, 12, selectedTagId || 0],
+    queryFn: () =>
+      fetchPosts({
+        page: 1,
+        pageSize: 12,
+        locale: 'ja' as any,
+        tagId: selectedTagId === 0 ? undefined : selectedTagId,
+      }),
   })
+
   const { data: tagResData, isLoading: loadingTags, error: tagsError, refetch: refetchTags } = useQuery({
     queryKey: ['tags', i18n.language],
     queryFn: () => fetchTags(i18n.language as any),
   })
 
   useEffect(() => {
-    setPosts(postResData?.data ?? [])
+    const list = postResData?.data ?? []
+    setPosts(list)
   }, [postResData])
 
   useEffect(() => {
@@ -39,14 +52,7 @@ export const News = () => {
     if (!exists) setSelectedTagId(0)
   }, [tags, selectedTagId])
 
-  const filteredPosts = useMemo(() => {
-    if (selectedTagId === 0) return posts
-    return (posts ?? []).filter((p: any) => {
-      const item = p?.attributes ?? p
-      const rel = item?.tags?.data ?? item?.tags ?? []
-      return rel.some((t: any) => (t?.id === selectedTagId))
-    })
-  }, [posts, selectedTagId])
+  const displayPosts = useMemo(() => posts ?? [], [posts])
 
   const renderHeader = (
     <div className="text-center mb-10">
@@ -123,13 +129,13 @@ export const News = () => {
             </div>
           </div>
 
-          {filteredPosts.length === 0 ? (
+          {displayPosts.length === 0 ? (
             <div className="text-center text-gray-500 py-16">
               {t('news.no.results')}
             </div>
           ) : (
             <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 gap-6">
-              {filteredPosts.map((p) => {
+              {displayPosts.map((p) => {
                 const item = p.attributes ?? p
                 const cover = item.coverImage || item.cover || item.Cover
                 let imageUrl = ''
