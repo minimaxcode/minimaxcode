@@ -19,7 +19,7 @@ export const Header = ({ currentPage, onPageChange }: HeaderProps) => {
     { key: 'home', label: t('nav.home') },
     { key: 'works', label: t('nav.service') },
     { key: 'pricing', label: t('nav.pricing') },
-    { key: 'news', label: t('nav.news') },
+    { key: 'blog', label: t('nav.news') },
   ];
 
   const solutionItems = [
