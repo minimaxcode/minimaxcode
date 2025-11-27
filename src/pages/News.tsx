@@ -226,7 +226,7 @@ export const News = () => {
                               </div>
                             )}
                             <Link
-                              to={`/news/${docId}`}
+                              to={`/blog/${docId}`}
                               className="inline-flex items-center px-3 py-1.5 bg-[#0EA5FF] text-white rounded-full text-xs md:text-sm font-medium hover:opacity-90"
                             >
                               {t('news.read.more')}

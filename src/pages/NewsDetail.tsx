@@ -103,7 +103,7 @@ export const NewsDetail = () => {
               {t('news.detail.notfound.description')}
             </p>
             <div className="flex justify-center">
-              <Link to="/news" className="px-5 py-2 bg-[#0EA5FF] text-white rounded-md hover:opacity-90">
+              <Link to="/blog" className="px-5 py-2 bg-[#0EA5FF] text-white rounded-md hover:opacity-90">
                 {t('news.back.to.list')}
               </Link>
             </div>
@@ -124,7 +124,7 @@ export const NewsDetail = () => {
             </li>
             <li>/</li>
             <li>
-              <Link to="/news" className="hover:text-[#0EA5FF]">{t('nav.news', 'News')}</Link>
+              <Link to="/blog" className="hover:text-[#0EA5FF]">{t('nav.news', 'News')}</Link>
             </li>
             <li>/</li>
             <li className="text-gray-700">{attrs.Title ?? attrs.title}</li>
